@@ -17,9 +17,8 @@
             },
             update : function(data){
                 return $http({
-                    method: 'POST',
-                    url: $rootScope.url +'shop',
-                    data: data,
+                    method: 'GET',
+                    url: $rootScope.url +'shop/searchShop/' + data.type,
                     ignoreLoadingBar: true
                 });
             },
