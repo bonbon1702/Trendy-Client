@@ -35,6 +35,6 @@
                 .otherwise({redirectTo: '/'});
         })
         .run(function($rootScope){
-            $rootScope.url = 'http://localhost/projects/Trendy-Server/public/api/';
+            $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
         });
 })(angular);
