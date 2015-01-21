@@ -15,19 +15,147 @@
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
             {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [{
-                    visibility: "off"
-                }]
+                "featureType":"administrative.country",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"simplified"
+                    }
+                ]
             },
             {
-                featureType: "transit",
-                elementType: "labels",
-                stylers: [{
-                    visibility: "off"
-                }]
-            }];
+                "featureType":"administrative.province",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"simplified"
+                    }
+                ]
+            },
+            {
+                "featureType":"administrative.locality",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"simplified"
+                    }
+                ]
+            },
+            {
+                "featureType":"administrative.neighborhood",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {
+                "featureType":"administrative.land_parcel",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {
+                "featureType":"landscape.natural",
+                "elementType":"geometry.fill",
+                "stylers":[
+                    {
+                        "visibility":"on"
+                    },
+                    {
+                        "color":"#e0efef"
+                    }
+                ]
+            },
+            {
+                "featureType":"poi",
+                "elementType":"geometry.fill",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    },
+                    {
+                        "hue":"#1900ff"
+                    },
+                    {
+                        "color":"#c0e8e8"
+                    }
+                ]
+            },
+            {
+                "featureType":"poi",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {
+                "featureType":"road",
+                "elementType":"all",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {
+                "featureType":"road",
+                "elementType":"geometry",
+                "stylers":[
+                    {
+                        "lightness":100
+                    },
+                    {
+                        "visibility":"simplified"
+                    }
+                ]
+            },
+            {
+                "featureType":"road",
+                "elementType":"labels",
+                "stylers":[
+                    {
+                        "visibility":"on"
+                    }
+                ]
+            },
+            {
+                "featureType":"transit",
+                "elementType":"all",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    }
+                ]
+            },
+            {
+                "featureType":"transit.line",
+                "elementType":"geometry",
+                "stylers":[
+                    {
+                        "visibility":"off"
+                    },
+                    {
+                        "lightness":700
+                    }
+                ]
+            },
+            {
+                "featureType":"water",
+                "elementType":"all",
+                "stylers":[
+                    {
+                        "color":"#7dcdcd"
+                    }
+                ]
+            }
+        ];
         var mapOptions = {
             zoom: 14,
             center: haNoiLocation,
@@ -43,7 +171,6 @@
         }
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        //map.setOptions({draggable: true, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 
         searchBox();
         homeButton();
@@ -183,8 +310,18 @@
         icon = icon || null;
         var marker = new google.maps.Marker({
             position: position,
-            icon: icon,
-            map: map
+            map: map,
+            shape:{ coords:[17,17,18],type:'circle'},
+            icon:
+            {
+                url:'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(50, 50)
+            },
+
+            optimized:false
         });
         return marker;
     }

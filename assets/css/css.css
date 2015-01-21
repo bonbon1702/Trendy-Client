@@ -375,3 +375,23 @@ ul.share-box {
     border-color: #e9eaed #dfe0e4 #d0d1d5;
     -webkit-border-radius: 3px;
 }
+
+.gmnoprint::before {
+    top: 95px;
+    left: 632px;
+    width: 86px;
+    height: 102px;
+    content: "";
+    position: absolute;
+    display: block;
+    background: url("http://lozi.vn/img/backgrounds/map-marker.png") no-repeat scroll center center transparent;
+}
+
+img[src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg"]{
+
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 72px;
+    background: #fff;
+}
