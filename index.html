@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
+    <title></title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_filetypes.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_regular.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_social.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/picto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/autocomplete.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/magiccard.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/animations.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/loading-bar.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.easy-pie-chart.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-switch.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/fileupload.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/multi-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.plupload.queue.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/blueimp-gallery.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.gritter.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.notyfy.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/notyfy.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/prettyPhoto.css">
+
+</head>
+<body>
+    <!--Header-->
+    <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController">
+        <div class=" pull-left">
+            <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
+                <i class"glyphicon glyphicon-home"></i>
+            </a>
+        </div>
+        <ul class="notifications pull-left hidden-xs">
+            <li class="dropdown notif">
+                <a href="" class="dropdown-toggle dropdown-hover"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
+                <ul class="dropdown-menu chat media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="assets/img/images/people/100/15.jpg" alt="50x50" width="50"/></a>
+                        <div class="media-body">
+                            <span class="label label-default pull-right">5 min</span>
+                            <h5 class="media-heading">Adrian D.</h5>
+                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="assets/img/images/people/100/16.jpg" alt="50x50" width="50"/></a>
+                        <div class="media-body">
+                            <span class="label label-default pull-right">2 days</span>
+                            <h5 class="media-heading">Jane B.</h5>
+                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="assets/img/images/people/100/17.jpg" alt="50x50" width="50"/></a>
+                        <div class="media-body">
+                            <span class="label label-default pull-right">3 days</span>
+                            <h5 class="media-heading">Andrew M.</h5>
+                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
+            <div class="dropdown username pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#/">
+        				<span class="media margin-none">
+        					<span class="pull-left"><img src="assets/img/images/people/35/16.jpg" alt="user" class="img-circle"></span>
+        					<span class="media-body">Bill <span class="caret"></span></span>
+        				</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a ng-href="#/" ng-click="clickConnect('facebook')">Facebook</a></li>
+                    <li><a ng-href="#/" ng-click="clickConnect('google')">Google</a></li>
+                    <li><a ng-href="#/" ng-click="clickConnect('twitter')">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="input-group hidden-xs pull-left">
+            <span class="input-group-addon"><i class="icon-search"></i></span>
+            <input type="text" class="form-control" placeholder="Search a friend"/>
+        </div>
+        <button ng-file-select ng-file-change="imageSelected($files, $event)">Attach Any File</button>
+    </div>
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <div id="main">
+
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+
+        <div ng-view></div>
+    </div>
+
+
+    <script src="assets/js/libs/jquery.js"></script>
+    <script src="assets/js/libs/jquery-ui.min.js"></script>
+    <script src="assets/js/libs/angular.js"></script>
+    <script src="assets/css/dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/libs/ngDialog.min.js"></script>
+    <script src="assets/js/googleMap.js"></script>
+    <script src="assets/js/core.init.js"></script>
+    <script src="assets/js/magiccard_ver2.js"></script>
+    <script src="assets/js/libs/accounting.min.js"></script>
+    <script src="assets/js/js.js"></script>
+    <script src="assets/js/autocomplete.js"></script>
+    <script src="assets/js/lazyloading_v2.js"></script>
+    <script src="assets/js/libs/loading-bar.min.js"></script>
+    <script src="assets/js/libs/jquery.easypiechart.min.js"></script>
+    <script src="assets/js/libs/bootstrap-select.js"></script>
+    <script src="assets/js/libs/bootstrap-switch.js"></script>
+    <script src="assets/js/libs/bootstrap-fileupload.js"></script>
+    <script src="assets/js/libs/jquery.multi-select.js"></script>
+    <script src="assets/js/libs/dropzone.min.js"></script>
+    <script src="assets/js/libs/jquery.plupload.queue.js"></script>
+    <script src="assets/js/libs/blueimp-gallery.min.js"></script>
+    <script src="assets/js/libs/blueimp-gallery-fullscreen.js"></script>
+    <script src="assets/js/libs/blueimp-gallery-indicator.js"></script>
+    <script src="assets/js/libs/blueimp-gallery-video.js"></script>
+    <script src="assets/js/libs/blueimp-helper.js"></script>
+    <script src="assets/js/libs/jquery.blueimp-gallery.min.js"></script>
+    <script src="assets/js/libs/jquery.gritter.min.js"></script>
+    <script src="assets/js/libs/jquery.notyfy.js"></script>
+    <script src="assets/js/libs/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/libs/modernizr.js"></script>
+    <script src="assets/js/libs/caman.full.min.js"></script>
+    <script src="assets/js/magicSearch.js"></script>
+    <script src="assets/js/libs/angular-route.min.js"></script>
+    <script src="assets/js/libs/angular-route.min.js.map"></script>
+    <script src="assets/js/libs/oauth.min.js"></script>
+    <script src="assets/js/libs/angular-file-upload-all.min.js"></script>
+
+
+    <!-- load angularjs file -->
+    <script src="app/app.js"></script> <!-- load our application -->
+
+    <!--home-->
+    <script src="app/home/homeController.js"></script>
+    <script src="app/home/homeService.js"></script>
+
+    <!--user-->
+    <script src="app/user/userController.js"></script>
+    <script src="app/user/userService.js"></script>
+
+    <!--shop-->
+    <script src="app/shop/shopController.js"></script>
+    <script src="app/shop/shopService.js"></script>
+
+    <!--caption-->
+    <script src="app/caption/captionController.js"></script>
+    <script src="app/caption/captionService.js"></script>
+
+    <!--editor-->
+    <script src="app/editor/editorController.js"></script>
+    <script src="app/editor/editorService.js"></script>
+
+    <!--post-->
+    <script src="app/post/postController.js"></script>
+    <script src="app/post/postService.js"></script>
+
+    <!--header-->
+    <script src="app/header/headerController.js"></script>
+    <script src="app/header/headerService.js"></script>
+</body>
+</html>

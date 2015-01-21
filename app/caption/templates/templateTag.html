@@ -1,0 +1,35 @@
+<div class="has-magiccard">
+    <img alt="Photo" style="width: 100%;cursor: {{ cursor }}" src="{{ src }}">
+
+    <div class="magiccard"
+         ng-show="show && onTag && completing"
+         style="top: {{ top }}px; left: {{ left }}px"
+         ng-mouseenter="onTyping = true;"
+         ng-mouseleave="onTyping = false;">
+        <form ng-submit="submit(top,left)">
+                    <span class="item-tag">
+                        <span class="item-tag-label">
+                            <i class="fa fa-star fa-2x"></i>
+                        </span>
+                    </span>
+
+            <div class="magiccard-content bigEntrance">
+                <input type="hidden" value="{{ imgTop }}"/>
+                <input type="hidden" value="{{ imgLeft }}"/>
+
+                <div class="form-group">
+                    <input type="text" ng-model="formData.name"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" ng-model="formData.price"/>
+                </div>
+                <div class="form-group">
+                    <autocomplete ng-model="formData.yourchoice" data="data" on-type="update" attr-placeholder="address..."></autocomplete>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
