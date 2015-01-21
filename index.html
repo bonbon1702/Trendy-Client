@@ -94,7 +94,13 @@
             <span class="input-group-addon"><i class="icon-search"></i></span>
             <input type="text" class="form-control" placeholder="Search a friend"/>
         </div>
-        <button ng-file-select ng-file-change="imageSelected($files, $event)">Attach Any File</button>
+        <div class="fileupload margin-none fileupload-exists" data-provides="fileupload">
+        <span class="btn btn-default btn-file" style="margin: 11px;background-color: #25ad9f;color: #fff">
+            <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
+                style="border: none;background-color: #25ad9f;height: 18px;width: 90px;padding: 0px 0px ;display: list-item;">
+            Upload Image</button>
+        </span>
+        </div>
     </div>
     <!-- MAIN CONTENT AND INJECTED VIEWS -->
     <div id="main">
