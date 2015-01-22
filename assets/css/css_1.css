@@ -7,7 +7,7 @@ html, body { height: 100%;}
 .img-modal .modal-dialog {
     /* An arbitrary minimum height. Feel free to modify this one as well */
     min-height: 350px;
-    height: 80%;
+    height: 100%;
 }
 
 .img-modal .modal-content, .img-modal .modal-body, .img-modal .row, .img-modal .modal-image {
