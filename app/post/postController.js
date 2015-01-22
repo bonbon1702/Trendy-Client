@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('postController', postController);
 
-    postController.$inject = ['$scope'];
+    postController.$inject = ['$scope', 'postService', 'ngDialog'];
 
-    function postController($scope) {
+    function postController($scope, postService, ngDialog) {
         $scope.image = 'http://dwaynepreed.files.wordpress.com/2014/10/beautiful-girl-3.jpg';
         $scope.points = [
             {
@@ -23,5 +23,28 @@
                 left: "312"
             }
         ];
+        $scope.postsLeft = [];
+        $scope.postsRight = [];
+        postService.list()
+            .success(function (data) {
+                for (var i=0; i < data.posts.length; i+=2){
+                    $scope.postsLeft.push(data.posts[i]);
+                    $scope.postsRight.push(data.posts[i+1]);
+                }
+            })
+            .error(function (data) {
+                console.log(data);
+            });
+        $scope.$on('ngDialog.opened', function (event, $dialog) {
+            $dialog.find('.ngdialog-content').css('width', '60%');
+        });
+        $scope.showDialog = function(id){
+            ngDialog.open({
+                template: 'app/post/templates/post.html',
+                controller: ['$scope', 'postService', '$window', function($scope, postService, $window) {
+
+                }]
+            });
+        }
     }
 })(angular);

@@ -66,19 +66,6 @@
         //    });
         //};
 
-        $scope.postsLeft = [];
-        $scope.postsRight = [];
-        homeService.list()
-            .success(function (data) {
-                for (var i=0; i < data.posts.length; i+=2){
-                    $scope.postsLeft.push(data.posts[i]);
-                    $scope.postsRight.push(data.posts[i+1]);
-                }
-            })
-            .error(function (data) {
-                console.log(data);
-            });
-
     }
 })(angular);
 

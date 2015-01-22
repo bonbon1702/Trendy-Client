@@ -32,9 +32,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-9 col-md-8">
-                <!-- <div data-toggle="gridalicious" data-gridalicious-width="380" data-gridalicious-gutter="0"> -->
+            <div class="col-md-3 col-lg-3">
                 <div class="blc-row" style="width: 282px;">
                     <!-- Main Sidebar Menu -->
                     <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary"
@@ -96,57 +94,33 @@
 
 
                                 </li>
-                                <li class="hasSubmenu">
-
-                                    <a href="#menu-cb0773c3faf550acd89398d93eb66b40">
-
-
-                                        <i class="icon-circle-chevron-down"></i>
-
-                                        <span>Quần Áo</span>
-
-
-                                    </a>
-
-
-                                </li>
-                                <li class="hasSubmenu">
-
-                                    <a href="messages.html?lang=en">
-
-
-                                        <i class="icon-circle-chevron-down"></i>
-
-                                        <span>Giày Dép</span>
-
-
-                                    </a>
-
-                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-6 col-md-6" ng-controller="postController">
+                <!-- <div data-toggle="gridalicious" data-gridalicious-width="380" data-gridalicious-gutter="0"> -->
                 <div class="blc-row">
                     <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsLeft">
-                        <div class="widget-body bg-none padding-none">
-                            <a href="#/"
+                        <div class="widget-body bg-none padding-none" ng-click="showDialog(point.id)">
+                            <a ng-href="#/"
                                data-toggle="prettyPhoto" class="thumb">
-                                <img src="{{ point.image_url_editor }}"
+                                <img ng-src="{{ point.image_url_editor }}"
                                      alt="photo"/>
                             </a>
 
                             <div class="description  meta">
                                 <div class="hover-blue">
                                     <div class="title" id="yui_3_11_0_3_1419092456557_1068">
-                                        <a data-track="photo-click" href="shop.html?lang=en"
-                                           title="London 7 - Mirror (Explored at #6)" class="title">London 7 -
-                                            Mirror (Explored at #6)</a>
+                                        <a data-track="photo-click" ng-href="#/" class="title">
+                                            {{ point.caption }}
+                                        </a>
                                     </div>
                                     <div class="attribution-block" style="height: 7px;margin-top: 6px;">
     										<span class="attribution"><span>bởi </span>
-    										<a data-track="owner" href="/photos/94437781@N05" title="Wesley Nagelmaker"
-                                               class="owner">Wesley Nagelmaker</a></span>
+    										<a data-track="owner" ng-href="#/user/{{point.user_id}}"
+                                               class="owner">{{ point.user.username }}</a></span>
                                     </div>
                                 </div>
     								<span class="inline-icons" style="font-size: 11px;">
@@ -174,23 +148,22 @@
                 </div>
                 <div class="blc-row">
                     <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsRight">
-                        <div class="widget-body bg-none padding-none">
+                        <div class="widget-body bg-none padding-none" ng-click="showDialog(point.id)">
                             <a href="#/" data-toggle="prettyPhoto" class="thumb">
-                                <img src="{{ point.image_url_editor }}" alt="photo"/>
+                                <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
                             </a>
 
                             <div class="description  meta">
                                 <div class="hover-blue">
                                     <div class="title" id="yui_3_11_0_3_1419092456557_1068">
-                                        <a data-track="photo-click"
-                                           href="/photos/94437781@N05/15417955443/in/explore-2014-12-16"
-                                           title="London 7 - Mirror (Explored at #6)" class="title">London 7 -
-                                            Mirror (Explored at #6)</a>
+                                        <a data-track="photo-click" ng-href="#/" class="title">
+                                            {{ point.caption }}
+                                        </a>
                                     </div>
                                     <div class="attribution-block" style="height: 7px;margin-top: 6px;">
     										<span class="attribution"><span>bởi </span>
-    										<a data-track="owner" href="/photos/94437781@N05" title="Wesley Nagelmaker"
-                                               class="owner">Wesley Nagelmaker</a></span>
+    										<a data-track="owner" ng-href="#/user/{{point.user_id}}"
+                                               class="owner">{{ point.user.username }}</a></span>
                                     </div>
                                 </div>
     								<span class="inline-icons" style="font-size: 11px;">
