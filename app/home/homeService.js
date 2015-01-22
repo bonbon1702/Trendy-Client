@@ -10,7 +10,7 @@
     function homeService($http, $rootScope){
         return {
             list: function(){
-                return $http.get($rootScope.url + 'post');
+
             }
         }
     }
