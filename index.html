@@ -77,18 +77,16 @@
         </ul>
 
         <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-            <div class="dropdown username pull-left">
+            <div class="dropdown username pull-left" ng-show="loginUser != null">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#/">
         				<span class="media margin-none">
-        					<span class="pull-left"><img src="assets/img/images/people/35/16.jpg" alt="user" class="img-circle"></span>
-        					<span class="media-body">Bill <span class="caret"></span></span>
+        					<span class="pull-left"><img src="{{ loginUser.picture_profile }}" alt="user" class="img-circle"></span>
+        					<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>
         				</span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a ng-href="#/" ng-click="clickConnect('facebook')">Facebook</a></li>
-                    <li><a ng-href="#/" ng-click="clickConnect('google')">Google</a></li>
-                    <li><a ng-href="#/" ng-click="clickConnect('twitter')">Twitter</a></li>
-                </ul>
+            </div>
+            <div class="dropdown username pull-left" ng-show="loginUser == null">
+                <button ng-click="openLogin()">Login</button>
             </div>
         </div>
         <div class="input-group hidden-xs pull-left">
