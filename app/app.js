@@ -34,7 +34,6 @@
                 })
                 .otherwise({redirectTo: '/'});
             ngDialogProvider.setDefaults({
-                className: 'ngdialog-theme-plain',
                 showClose: true,
                 closeByDocument: true,
                 closeByEscape: true

@@ -35,12 +35,10 @@
             .error(function (data) {
                 console.log(data);
             });
-        $scope.$on('ngDialog.opened', function (event, $dialog) {
-            $dialog.find('.ngdialog-content').css('width', '60%');
-        });
         $scope.showDialog = function(id){
             ngDialog.open({
                 template: 'app/post/templates/post.html',
+                className: 'ngdialog-theme-plain-post',
                 controller: ['$scope', 'postService', '$window', function($scope, postService, $window) {
 
                 }]

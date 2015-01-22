@@ -30,6 +30,7 @@
         $scope.openLogin = function(){
             ngDialog.open({
                 template: 'app/header/templates/login.html',
+                className: 'ngdialog-theme-plain',
                 controller: ['$scope', 'headerService', '$window', function($scope, headerService, $window) {
                     OAuth.initialize('6AVNdARblEuIVDQIlCyRr9ft_sY');
 
