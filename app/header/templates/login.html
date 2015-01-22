@@ -1,11 +1,21 @@
-<ul>
-    <li>
-        <button ng-click="clickConnect('facebook')">Facebook</button>
-    </li>
-    <li>
-        <button ng-click="clickConnect('google')">Google</button>
-    </li>
-    <li>
-        <button ng-click="clickConnect('twitter')">Twitter</button>
-    </li>
-</ul>
+<div>
+        <div style="border-bottom: 1px solid #D1CDCD ; overflow: hidden;margin-bottom: 20px;">
+            <h2>Login</h2>
+            <p style="margin-bottom: 20px;line-height: 1.6em;color: #999;">Connect with a social network</p>
+        </div>
+        <button ng-click="clickConnect('facebook')" class="btn btn-stroke btn-success btn-icon-stacked" style="margin: 0px 14px;">
+            <i class="fa fa-2x fa-facebook"></i>
+            <span>Join using your<br>Facebook Account</span>
+        </button>
+
+        <button ng-click="clickConnect('google')" class="btn btn-stroke btn-danger btn-icon-stacked" style="margin-right: 10px">
+            <i class="fa fa-2x fa-google-plus"></i>
+            <span>Join using your<br>Google Account</span>
+        </button>
+
+        <button ng-click="clickConnect('twitter')" class="btn btn-stroke btn-primary btn-icon-stacked">
+            <i class="fa fa-2x fa-twitter"></i>
+            <span>Join using your<br>Twitter Account</span>
+        </button>
+
+</div>
