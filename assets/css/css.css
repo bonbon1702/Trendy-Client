@@ -377,14 +377,15 @@ ul.share-box {
 }
 
 .gmnoprint::before {
-    top: 95px;
-    left: 632px;
+    top: 149px;
+    left: 638px;
     width: 86px;
     height: 102px;
     content: "";
-    position: absolute;
+    position: fixed;
     display: block;
     background: url("http://lozi.vn/img/backgrounds/map-marker.png") no-repeat scroll center center transparent;
+    z-index: -1;
 }
 
 img[src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg"]{
