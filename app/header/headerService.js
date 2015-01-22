@@ -24,6 +24,9 @@
                     file: data,
                     data: data
                 });
+            },
+            getUser: function(){
+                return $http.get($rootScope.url + 'user/getLoginUser');
             }
         }
     }

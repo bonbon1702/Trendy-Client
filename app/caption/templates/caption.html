@@ -3,6 +3,7 @@
         <magiccard template-url="app/caption/templates/templateTag.html" src="{{ image.image_url_editor }}" callback="callback" data="shop" update="update"></magiccard>
     </div>
     <input ng-model="caption" type="text"/>
+    <input ng-model="album" type="text" />
     <div ng-repeat="point in points track by $index">
         <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} - <a href="#" ng-click="deletepoint($index)" class="text-muted">Delete</a></h3>
     </div>

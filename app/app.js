@@ -13,7 +13,7 @@
             'ngRoute',
             'angularFileUpload'
         ])
-        .config(function ($routeProvider) {
+        .config(function ($routeProvider, ngDialogProvider) {
             $routeProvider
                 // route for the home page
                 .when('/', {
@@ -33,8 +33,14 @@
                     controller: 'userController'
                 })
                 .otherwise({redirectTo: '/'});
+            ngDialogProvider.setDefaults({
+                className: 'ngdialog-theme-plain',
+                showClose: true,
+                closeByDocument: true,
+                closeByEscape: true
+            });
         })
-        .run(function($rootScope){
+        .run(function ($rootScope) {
             $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
         });
 })(angular);

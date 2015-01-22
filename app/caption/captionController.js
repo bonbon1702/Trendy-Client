@@ -10,6 +10,7 @@
     function captionController($scope, captionService, $location, $routeParam) {
         $scope.points = [];
         $scope.caption = null;
+        $scope.album = null;
 
         captionService.get($routeParam.name)
             .success(function (data) {
@@ -83,7 +84,8 @@
             var data = {
                 caption: $scope.caption,
                 points: $scope.points,
-                uploadId: $scope.image.id
+                uploadId: $scope.image.id,
+                album: $scope.album
             };
             captionService.save(data)
                 .success(function (data) {
