@@ -87,17 +87,19 @@
                 </a>
             </div>
             <div class="dropdown username pull-left" ng-show="loginUser == null">
-                <button ng-click="openLogin()">Login</button>
+                <button ng-click="openLogin()" class="btn btn-primary">Login
+                    <i class="fa fa-fw fa-unlock-alt"></i>
+                </button>
             </div>
         </div>
         <div class="input-group hidden-xs pull-left">
             <span class="input-group-addon"><i class="icon-search"></i></span>
             <input type="text" class="form-control" placeholder="Search a friend"/>
         </div>
-        <div class="fileupload margin-none fileupload-exists" data-provides="fileupload" ng-show="loginUser != null">
-            <span class="btn btn-default btn-file" style="margin: 11px;background-color: #25ad9f;color: #fff">
-                <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
-                    style="border: none;background-color: #25ad9f;height: 18px;width: 94px;padding: 0px 0px ;display: list-item;">
+        <div  data-provides="fileupload" ng-show="loginUser != null">
+            <span class="btn btn-default btn-file" style="margin: 9px;background-color: #25ad9f;color: #fff">
+                <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary fa fa-camera"
+                    style="border: none;background-color: #25ad9f;height: 22px;width: 105px;padding: 0px 0px ;display: list-item;">
                 Upload Image</button>
             </span>
         </div>
