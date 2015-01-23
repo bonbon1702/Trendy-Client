@@ -32,6 +32,10 @@
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
+                .when('/shop/:name', {
+                    templateUrl: 'app/shop/templates/shop.html',
+                    controller: 'shopController'
+                })
                 .otherwise({redirectTo: '/'});
             ngDialogProvider.setDefaults({
                 showClose: true,

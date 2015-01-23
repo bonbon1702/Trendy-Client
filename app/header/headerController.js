@@ -7,56 +7,74 @@
 
     headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog'];
 
-    function headerController($scope, headerService, $location ,ngDialog) {
+    function headerController($scope, headerService, $location, ngDialog) {
 
-        $scope.imageSelected = function($files){
+        $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
-                .success(function(data){
+                .success(function (data) {
                     $location.path('/editor/' + data.upload.name);
                 })
-                .error(function(data){
+                .error(function (data) {
                     console.log(data);
                 });
 
         }
 
         headerService.getUser()
-            .success(function(data){
+            .success(function (data) {
                 $scope.loginUser = data.user;
             })
-            .error(function(data){
+            .error(function (data) {
                 console.log(data);
             });
-        $scope.openLogin = function(){
+        $scope.openLogin = function () {
             ngDialog.open({
                 template: 'app/header/templates/login.html',
                 className: 'ngdialog-theme-plain',
-                controller: ['$scope', 'headerService', '$window', function($scope, headerService, $window) {
-                    OAuth.initialize('6AVNdARblEuIVDQIlCyRr9ft_sY');
+                controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
+                    hello.init({
+                        facebook: '725456127540058',
+                        google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
+                        twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
+                    },{
+                        scope: 'email'
+                    });
 
-                    $scope.clickConnect = function (provider) {
+                    $scope.login = function (data) {
                         ngDialog.close();
-                        //Authorize your user to facebook
-                        OAuth.popup(provider).done(function (result) {
-                            //Get your user's personal data
-                            result.me().done(function (me) {
-                                var data = {
-                                    'sw_id': me.id,
-                                    'email': me.email,
-                                    'gender': me.gender,
-                                    'username': me.name,
-                                    'avatar': me.avatar
-                                };
+                        hello(data).login().then(function (auth) {
+                            hello(auth.network).api('/me').then(function (r) {
+                                var data = {};
+                                if (auth.network == 'facebook') {
+                                    data = {
+                                        'email': r.email,
+                                        'username': r.name,
+                                        'avatar': r.picture + '?width=100&height=100',
+                                        'sw_id': r.id,
+                                        'gender': r.gender == 'male' ? 0 : 1
+                                    };
+                                } else if (auth.network == 'google') {
+                                    data = {
+                                        'email': r.email,
+                                        'username': r.name,
+                                        'avatar': r.picture.substring(0, r.picture.length -2) + '100',
+                                        'sw_id': r.id,
+                                        'gender': r.gender == 'male' ? 0 : 1
+                                    };
+                                } else if (auth.network == 'twitter') {
+
+                                }
+                                console.log(data);
                                 headerService.save(data)
-                                    .success(function (data) {
+                                    .success(function(data){
                                         $window.location.reload();
                                     })
-                                    .error(function (data) {
+                                    .error(function(data){
                                         console.log(data);
                                     });
-                            })
-                        })
-                    };
+                            });
+                        });
+                    }
                 }]
             });
         }
