@@ -11,6 +11,7 @@
         userService.getUser($routeParams.userId)
             .success(function(data){
                 $scope.user = data.user;
+                console.log($scope.user);
             })
             .error(function(){
                 console.log(data);

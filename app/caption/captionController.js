@@ -12,9 +12,21 @@
         $scope.caption = null;
         $scope.album = null;
 
-        captionService.get($routeParam.name)
+        var data = {
+            'image' : $location.search().image,
+            'name': $location.search().title
+        };
+        captionService.upload(data)
+            .success(function(data){
+
+            })
+            .error(function(data){
+                console.log(data);
+            });
+        captionService.get(data.name)
             .success(function (data) {
                 $scope.image = data.upload;
+                console.log($scope.image);
             })
             .error(function (data) {
 
@@ -84,7 +96,7 @@
             var data = {
                 caption: $scope.caption,
                 points: $scope.points,
-                uploadId: $scope.image.id,
+                name: $scope.image.title,
                 album: $scope.album
             };
             captionService.save(data)

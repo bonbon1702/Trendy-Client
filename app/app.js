@@ -24,9 +24,10 @@
                     templateUrl: 'app/editor/templates/editor.html',
                     controller: 'editorController'
                 })
-                .when('/caption/:name', {
+                .when('/caption', {
                     templateUrl: 'app/caption/templates/caption.html',
-                    controller: 'captionController'
+                    controller: 'captionController',
+                    reloadOnSearch: false
                 })
                 .when('/user/:userId', {
                     templateUrl: 'app/user/templates/user.html',

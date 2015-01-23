@@ -24,6 +24,14 @@
             },
             get: function(data){
                 return $http.get($rootScope.url + 'upload/' + data);
+            },
+            upload: function(data){
+                console.log(data);
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'uploadEditor',
+                    data: data
+                });
             }
         }
     }
