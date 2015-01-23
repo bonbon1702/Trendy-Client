@@ -182,3 +182,6 @@
     background: #e0e0e0;
     color: #777;
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}

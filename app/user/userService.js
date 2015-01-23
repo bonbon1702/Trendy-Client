@@ -1,6 +1,17 @@
 /**
  * Created by tuan on 11/6/2014.
  */
-(function(angular) {
+(function (angular) {
     angular.module('MyApp')
+        .factory('userService', userService);
+
+    userService.$inject = ['$http', '$rootScope'];
+
+    function userService($http, $rootScope) {
+        return {
+            getUser: function (data) {
+                return $http.get($rootScope.url + 'user/getUser/' + data);
+            }
+        }
+    }
 })(angular);

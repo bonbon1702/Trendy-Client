@@ -5,10 +5,15 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog'];
+    userController.$inject = ['$scope', 'ngDialog', '$routeParams', 'userService'];
 
-    function userController($scope, ngDialog) {
-
-
+    function userController($scope, ngDialog, $routeParams, userService) {
+        userService.getUser($routeParams.userId)
+            .success(function(data){
+                $scope.user = data.user;
+            })
+            .error(function(){
+                console.log(data);
+            });
     }
 })(angular);

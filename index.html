@@ -78,7 +78,7 @@
         </ul>
 
         <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-            <div class="dropdown username pull-left" ng-show="loginUser != null">
+            <div class="dropdown username pull-left" ng-show="loginUser != null" ng-cloak>
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#/">
         				<span class="media margin-none">
         					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user" class="img-circle"></span>
@@ -86,7 +86,7 @@
         				</span>
                 </a>
             </div>
-            <div class="dropdown username pull-left" ng-show="loginUser == null">
+            <div class="dropdown username pull-left" ng-show="loginUser == null" ng-cloak>
                 <button ng-click="openLogin()" class="btn btn-primary">Login
                     <i class="fa fa-fw fa-unlock-alt"></i>
                 </button>

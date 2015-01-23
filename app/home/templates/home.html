@@ -103,8 +103,8 @@
                 <!-- <div data-toggle="gridalicious" data-gridalicious-width="380" data-gridalicious-gutter="0"> -->
                 <div class="blc-row">
                     <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsLeft">
-                        <div class="widget-body bg-none padding-none" ng-click="showDialog(point.id)">
-                            <a ng-href="#/"
+                        <div class="widget-body bg-none padding-none" >
+                            <a ng-href="#/" ng-click="showDialog(point.id)"
                                data-toggle="prettyPhoto" class="thumb">
                                 <img ng-src="{{ point.image_url_editor }}"
                                      alt="photo"/>
@@ -148,8 +148,8 @@
                 </div>
                 <div class="blc-row">
                     <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsRight">
-                        <div class="widget-body bg-none padding-none" ng-click="showDialog(point.id)">
-                            <a href="#/" data-toggle="prettyPhoto" class="thumb">
+                        <div class="widget-body bg-none padding-none">
+                            <a href="#/" data-toggle="prettyPhoto" class="thumb"  ng-click="showDialog(point.id)">
                                 <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
                             </a>
 
