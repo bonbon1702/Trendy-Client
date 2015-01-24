@@ -26,7 +26,7 @@
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
                                     </div>
                                     <div class="innerAll border-right pull-left">
-                                        <h3 class="margin-none">Adrian Demian</h3>
+                                        <h3 class="margin-none">{{ user.username }}</h3>
                                         <span>Works at MOSAICPRO</span>
                                     </div>
                                     <div class="innerAll pull-left">
@@ -34,7 +34,7 @@
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
                                                data-nav="tweets" href="following.html?leng=en" data-original-title="">
                                                 <span class="ProfileNav-label">Following</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">41</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{countFollowing}}</span>
                                             </a>
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
@@ -42,7 +42,7 @@
                                                data-nav="followers" href="follower.html?leng=en"
                                                data-original-title="2 Followers">
                                                 <span class="ProfileNav-label">Followers</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">2</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{countFollower}}</span>
                                             </a>
                                         </li>
 
@@ -67,7 +67,7 @@
                         <div class="tabsbar">
                             <ul>
                                 <li class="glyphicons camera active"><a href=""><i></i> View all photos
-                                    <strong>(43)</strong></a></li>
+                                    <strong>({{ countPhoto }})</strong></a></li>
                                 <li class="glyphicons folder_open"><a href=""><i></i> Albums <strong>(3)</strong></a>
                                 </li>
                                 <li class="glyphicons circle_plus tab-stacked"><a href=""><i></i>
@@ -83,124 +83,26 @@
                             <ul class="row">
 
                                 <!-- Gallery item -->
-                                <li class="col-md-2">
+                                <li class="col-md-2" ng-repeat="point in posts">
                                     <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
                                        data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/1.jpg" alt="photo"
+                                        <img ng-src="{{ point.image_url_editor }}" alt="photo"
                                              class="img-responsive"/>
                                     </a>
                                 </li>
                                 <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/2.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/2.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/3.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/3.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/4.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/4.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/5.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/5.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/6.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/6.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/7.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/7.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/8.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/8.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/9.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/9.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/10.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/10.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/11.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/11.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/12.jpg"
-                                       data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/12.jpg" alt="photo"
-                                             class="img-responsive"/>
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-
                             </ul>
                         </div>
                         <!-- // Gallery END -->
 
                         <!-- Pagination -->
-                        <div class="btn-group">
-                            <a class="btn disabled btn-small btn-default glyphicons standard chevron-left"><i></i></a>
-                            <a class="btn btn-small btn-default glyphicons standard chevron-right"><i></i></a>
+                        <div ng-show="{{ flagAmount }}">
+                            <div class="btn-group">
+                                <a class="btn disabled btn-small btn-default glyphicons standard chevron-left"><i></i></a>
+                                <a class="btn btn-small btn-default glyphicons standard chevron-right"><i></i></a>
+                            </div>
+                            <span class="innerLR">1-6 out of {{ countPhoto }}</span>
                         </div>
-                        <span class="innerLR">1-6 out of 43</span>
                         <!-- // Pagination END -->
 
                     </div>
