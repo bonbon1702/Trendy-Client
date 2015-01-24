@@ -12,13 +12,17 @@
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
-                    $location.path('/editor/' + data.upload.name);
+                    window.location.href =
+                        "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
+                        "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
+                        "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
+                        "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
                 })
                 .error(function (data) {
                     console.log(data);
                 });
 
-        }
+        };
 
         headerService.getUser()
             .success(function (data) {
@@ -64,7 +68,7 @@
                                 } else if (auth.network == 'twitter') {
 
                                 }
-                                console.log(data);
+
                                 headerService.save(data)
                                     .success(function(data){
                                         $window.location.reload();

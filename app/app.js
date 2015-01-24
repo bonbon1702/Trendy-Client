@@ -20,13 +20,9 @@
                     templateUrl: 'app/home/templates/home.html',
                     controller: 'homeController'
                 })
-                .when('/editor/:name', {
-                    templateUrl: 'app/editor/templates/editor.html',
-                    controller: 'editorController'
-                })
-                .when('/caption', {
-                    templateUrl: 'app/caption/templates/caption.html',
-                    controller: 'captionController',
+                .when('/post', {
+                    templateUrl: 'app/post/templates/post.html',
+                    controller: 'postController',
                     reloadOnSearch: false
                 })
                 .when('/user/:userId', {
