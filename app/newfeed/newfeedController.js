@@ -28,8 +28,12 @@
         newfeedService.list()
             .success(function (data) {
                 for (var i=0; i < data.posts.length; i+=2){
-                    $scope.postsLeft.push(data.posts[i]);
-                    $scope.postsRight.push(data.posts[i+1]);
+                    if(data.posts[i] != null ){
+                        $scope.postsLeft.push(data.posts[i]);
+                    }
+                    if(data.posts[i+1] != null){
+                        $scope.postsRight.push(data.posts[i+1]);
+                    }
                 }
             })
             .error(function (data) {
