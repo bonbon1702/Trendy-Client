@@ -9,6 +9,7 @@
 
     function newfeedController($scope, newfeedService, ngDialog) {
         $scope.image = 'http://dwaynepreed.files.wordpress.com/2014/10/beautiful-girl-3.jpg';
+        $scope.comment = null;
         $scope.points = [
             {
                 name: 'ao thoi trang',
@@ -42,11 +43,38 @@
         $scope.showDialog = function(id){
             ngDialog.open({
                 template: 'app/newfeed/templates/newfeed.html',
-                className: 'ngdialog-theme-plain-post',
-                controller: ['$scope', 'postService', '$window', function($scope, postService, $window) {
+                className: 'ngdialog-theme-plain post-dialog',
+                controller: ['$scope', 'newfeedService', '$window', function($scope, newfeedService, $window) {
+                    newfeedService.get(id)
+                        .success(function(data){
+                            $scope.post = data.post;
+                            $scope.submitComment = function(){
+                                var data = {
+                                    'content': $scope.comment,
+                                    'type_comment': 0,
+                                    'type_id': id
+                                };
+                                $scope.comment = null;
+                                newfeedService.save(data)
+                                    .success(function(data){
+                                        newfeedService.getComments(id)
+                                            .success(function(data){
+                                                $scope.post.comments = data.comment;
+                                            })
+                                            .error(function(data){
 
+                                            });
+                                    })
+                                    .error(function(data){
+
+                                    });
+                            };
+                        })
+                        .error(function(data){
+
+                        });
                 }]
             });
-        }
+        };
     }
 })(angular);
