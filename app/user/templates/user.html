@@ -44,7 +44,7 @@
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
                                                data-nav="tweets" href="following.html?leng=en" data-original-title="">
                                                 <span class="ProfileNav-label">Following</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">{{countFollowing}}</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
                                             </a>
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
@@ -52,7 +52,7 @@
                                                data-nav="followers" href="follower.html?leng=en"
                                                data-original-title="2 Followers">
                                                 <span class="ProfileNav-label">Followers</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">{{countFollower}}</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
                                             </a>
                                         </li>
 
@@ -77,7 +77,7 @@
                         <div class="tabsbar">
                             <ul>
                                 <li class="glyphicons camera active"><a href=""><i></i> View all photos
-                                    <strong>({{ countPhoto }})</strong></a></li>
+                                    <strong>({{ user.posts.length }})</strong></a></li>
                                 <li class="glyphicons folder_open"><a href=""><i></i> Albums <strong>(3)</strong></a>
                                 </li>
                                 <li class="glyphicons circle_plus tab-stacked"><a href=""><i></i>
@@ -93,10 +93,10 @@
                             <ul class="row">
 
                                 <!-- Gallery item -->
-                                <li class="col-md-2" ng-repeat="point in posts">
+                                <li class="col-md-2" ng-repeat="post in user.posts">
                                     <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
                                        data-gallery="gallery-3">
-                                        <img ng-src="{{ point.image_url_editor }}" alt="photo"
+                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                              class="img-responsive"/>
                                     </a>
                                 </li>
@@ -104,16 +104,6 @@
                             </ul>
                         </div>
                         <!-- // Gallery END -->
-
-                        <!-- Pagination -->
-                        <div ng-show="{{ flagAmount }}">
-                            <div class="btn-group">
-                                <a class="btn disabled btn-small btn-default glyphicons standard chevron-left"><i></i></a>
-                                <a class="btn btn-small btn-default glyphicons standard chevron-right"><i></i></a>
-                            </div>
-                            <span class="innerLR">1-6 out of {{ countPhoto }}</span>
-                        </div>
-                        <!-- // Pagination END -->
 
                     </div>
                 </div>
