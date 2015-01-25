@@ -166,15 +166,15 @@ a.title, .zoomer .thumb .meta a.title {
     margin: auto;
     margin-top: 20px;
 }
-a[href^="http://maps.google.com/maps"]{display:none !important}
+/*a[href^="http://maps.google.com/maps"]{display:none !important}*/
 
-.gmnoprint a, .gmnoprint span {
-    display:none;
-}
-.gmnoprint div {
-    background:none !important;
-}
-.gm-style-cc { display:none; }
+/*.gmnoprint a, .gmnoprint span {*/
+    /*display:initial;*/
+/*}*/
+/*.gmnoprint div a{*/
+    /*background:none !important;*/
+/*}*/
+/*.gm-style-cc a { display:none; }*/
 .ProfileNav-label {
     color: #66757f;
     font-size: 12px;

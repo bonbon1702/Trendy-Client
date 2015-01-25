@@ -5,10 +5,10 @@
     angular.module('MyApp')
         .controller('shopController', shopController);
 
-    shopController.$inject = ['$scope', 'ngDialog'];
+    shopController.$inject = ['$scope', 'ngDialog', 'shopService'];
 
-    function shopController($scope, ngDialog) {
-
+    function shopController($scope, ngDialog, shopService) {
+        googleMap.init();
 
     }
 })(angular);
