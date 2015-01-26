@@ -17,9 +17,12 @@
                     <div class="row row-merge" style="height: 43px;">
                         <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;" ng-click=""><i
                                 class="fa fa-fw fa-thumbs-up"></i> {{ post.liked_count }}</a>
+                        <a href="" class="innerAll text-center text-muted" ng-click="">
+                        <i class="fa fa-fw icon-star-fill"></i> {{ post.favorite_count }}</a>
                     </div>
                     <ul class="img-comment-list">
-                        <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;" ng-repeat="comment in post.comments">
+                        <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;"
+                            ng-repeat="comment in post.comments">
                             <div class="comment-img">
                                 <img ng-src="{{ comment.user.picture_profile }}">
                             </div>
@@ -34,7 +37,7 @@
                 </div>
                 <form ng-submit="submitComment()">
                     <div class="modal-meta-bottom">
-                        <input class="form-control" placeholder="Leave a commment.." type="text" ng-model="comment" />
+                        <input class="form-control" placeholder="Leave a commment.." type="text" ng-model="comment"/>
                     </div>
                 </form>
             </div>
