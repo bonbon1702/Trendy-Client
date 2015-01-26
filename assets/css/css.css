@@ -505,6 +505,10 @@ i.img {
 .info-wrapper {
     margin: 23px 13px;
 }
+.info-wrapper a:hover, .info-wrapper a:focus {
+    /*color: #fff;*/
+    text-decoration: underline;
+}
 .info {
     position: relative;
     min-height: 20px;
