@@ -24,6 +24,15 @@
             },
             getComments: function (id) {
                 return $http.get($rootScope.url + 'comment/showPost/' + id)
+            },
+            likeOrDislike: function (id) {
+                return $http.get($rootScope.url + 'like/likePost/' + id);
+            },
+            countLike: function (id) {
+                return $http.get($rootScope.url + 'like/countLikePost/' + id);
+            },
+            check: function(id){
+                return $http.get($rootScope.url + 'like/checkLikePost/' + id);
             }
         }
     }

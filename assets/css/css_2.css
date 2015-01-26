@@ -52,7 +52,6 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
-
 .post-dialog .ngdialog-content {
     width: 983px !important;
     height: 600px !important;

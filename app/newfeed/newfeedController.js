@@ -48,6 +48,7 @@
                     newfeedService.get(id)
                         .success(function(data){
                             $scope.post = data.post;
+
                             $scope.submitComment = function(){
                                 var data = {
                                     'content': $scope.comment,
@@ -69,6 +70,27 @@
 
                                     });
                             };
+
+                            $scope.likeOrDislike = function(){
+                                newfeedService.likeOrDislike(id)
+                                    .success(function(data){
+                                        newfeedService.countLike(id)
+                                            .success(function(data){
+                                                $scope.post.like = data.like;
+                                                $scope.iconLike = !$scope.iconLike;
+                                            })
+                                            .error();
+                                    })
+                                    .error(function(data){
+
+                                    });
+                            };
+
+                            newfeedService.check(id)
+                                .success(function(data){
+                                    $scope.iconLike = data.like;
+                                })
+                                .error();
                         })
                         .error(function(data){
 
