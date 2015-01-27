@@ -183,7 +183,6 @@ app.directive('hovercard', function () {
         $scope.$watch('data', function () {
             if ($scope.data) {
                 for (var i = 0; i < $scope.data.length; i++) {
-                    console.log($scope.data);
                     var point = {
                         name: $scope.data[i].name,
                         price: accounting.formatNumber($scope.data[i].price),

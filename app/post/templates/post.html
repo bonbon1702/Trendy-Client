@@ -1,45 +1,32 @@
-<div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
-    <div class="height-controller" style="height: 500px;">
-        <div class="view photo-well-media-scrappy-view" id="yui_3_16_0_1_1422362340497_1698">
+<div style="position: relative">
+    <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
+        <div class="height-controller" style="height: 500px;">
+            <div class="view photo-well-media-scrappy-view" id="yui_3_16_0_1_1422362340497_1698">
 
-            <magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image_url_editor }}"
-                       callback="callback" data="shop" update="update"></magiccard>
+                <magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image_url_editor }}"
+                           callback="callback" data="shop" update="update"></magiccard>
 
+            </div>
         </div>
     </div>
-</div>
-<!--<div id="photo">-->
-<!--<div style="width: 500px">-->
-<!--<magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image_url_editor }}"-->
-<!--callback="callback" data="shop" update="update"></magiccard>-->
-<!--</div>-->
-<!--<input ng-model="caption" type="text"/>-->
-<!--<input ng-model="album" type="text"/>-->
-
-<!--<div ng-repeat="point in points track by $index">-->
-<!--<h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} - <a href="#"-->
-<!--ng-click="deletepoint($index)"-->
-<!--class="text-muted">Delete</a>-->
-<!--</h3>-->
-<!--</div>-->
-<!--<button id="tagButton">Click to tag</button>-->
-<!--<button ng-click="submit()">Submit</button>-->
-<!--</div>-->
-<div id="image-pic">
-    <div class="under-left" style="width:50%;">
-        <img ng-src="{{ user.picture_profile }}" class="avatar-large"/>
-        <b class="word">{{ user.username }}</b>
-        <hr class="line">
-        <textarea class="text-area" placeholder="Add a caption"></textarea>
-        <input type="textbox" placeholder="Add a album" class="text-box"/>
-        <input type="submit" value="Submit" class="submit">
-    </div>
-    <div class="under-right" style="width:50%;">
-        <button id="tagButton" class="btn btn-primary">Click to tag</button>
-        <div ng-repeat="point in points track by $index">
-            <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} - <button ng-click="deletePoint($index)"
-                                                                                               class="btn btn-primary">Delete</button>
-            </h3>
+    <div id="image-pic">
+        <div class="under-left" style="width:50%;">
+            <img ng-src="{{ user.picture_profile }}" class="avatar-large"/>
+            <b class="word">{{ user.username }}</b>
+            <hr class="line">
+            <textarea class="text-area" placeholder="Add a caption"></textarea>
+            <input type="textbox" placeholder="Add a album" class="text-box"/>
+            <input type="submit" ng-click="submit()" value="Submit" class="submit">
+        </div>
+        <div class="under-right" style="width:50%;">
+            <button id="tagButton" class="btn btn-primary">Click to tag</button>
+            <div ng-repeat="point in points track by $index">
+                <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} -
+                    <button ng-click="deletePoint($index)"
+                            class="btn btn-primary">Delete
+                    </button>
+                </h3>
+            </div>
         </div>
     </div>
 </div>

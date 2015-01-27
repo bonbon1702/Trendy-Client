@@ -22,22 +22,19 @@
             'image': $location.search().image,
             'name': $location.search().title
         };
-        $scope.image = {
-            'image_url_editor': 'http://localhost:81/projects/Trendy-Server/public/assets/images/r4vuith1.jpg'
-        }  ;
-        //postService.upload(data)
-        //    .success(function (data) {
-        //        postService.get(data.upload.name)
-        //            .success(function (data) {
-        //                $scope.image = data.upload;
-        //            })
-        //            .error(function (data) {
-        //
-        //            });
-        //    })
-        //    .error(function (data) {
-        //        console.log(data);
-        //    });
+        postService.upload(data)
+            .success(function (data) {
+                postService.get(data.upload.name)
+                    .success(function (data) {
+                        $scope.image = data.upload;
+                    })
+                    .error(function (data) {
+
+                    });
+            })
+            .error(function (data) {
+                console.log(data);
+            });
 
         $scope.callback = function (point) {
             var number = $scope.points.length + 1;
