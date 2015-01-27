@@ -3,7 +3,7 @@
     padding-bottom:650px;
 }
 
-#picture{
+#pic-image{
     height:auto;
     width:1349px;
     position:absolute;
@@ -23,14 +23,6 @@
     float:left;
 }
 
-.main {
-    position:absolute;
-    margin:auto;
-    top:110px;
-    left:0;
-    right:0;
-}
-
 .avatar-large{
     position:absolute;
     width:70px;
@@ -47,7 +39,7 @@
     height:40px;
     border-radius:20px;
     left:202px;
-    margin-top:20px;
+    margin-top:35px;
     cursor:pointer;
 }
 
@@ -57,20 +49,20 @@
     height:40px;
     border-radius:20px;
     left:202px;
-    margin-top:150px;
+    margin-top:140px;
     cursor:pointer;
 }
 
-b{
+.word{
     font-family:"Arial",sans-serif;
     font-size:21px;
     color:#000000;
     margin-left:260px;
     display:inline-block;
-    margin-top:50px;
+    margin-top:57px;
 }
 
-hr {
+.line {
     margin-left:255px;
     margin-top:45px;
     width:400px;
@@ -80,21 +72,21 @@ hr {
 }
 
 .text-area {
-    padding:10px;
-    width: 365px;
+    padding:12px;
+    width: 385px;
     height: 100px;
     resize: none;
     border: 1px solid #cccccc;
-    margin-top:7px;
+    margin-top:15px;
     margin-left:260px;
     border-radius:4px;
     font-family:"Arial", sans-serif;
     font-size:95%;
 }
 
-input[type="textbox"]{
-    padding:10px;
-    width: 365px;
+.text-box{
+    padding:12px;
+    width: 385px;
     border: 1px solid #cccccc;
     margin-top:18px;
     margin-left:260px;
@@ -103,7 +95,7 @@ input[type="textbox"]{
     font-size:95%;
 }
 
-input[type="submit"]{
+.submit{
     width:100px;
     background: #176cec;
     border-color: #176cec;
@@ -123,6 +115,6 @@ input[type="submit"]{
     margin-top:20px;
 }
 
-input[type="submit"]:hover{
+.submit:hover{
     background:#184382;
 }
