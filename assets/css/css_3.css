@@ -1,0 +1,139 @@
+.upper{
+    background:#222127;
+    padding-bottom:630px;
+}
+
+#pic-image{
+    height:auto;
+    width:1349px;
+    position:absolute;
+    top:0px;
+    left:0px;
+}
+
+#image-pic{
+    height:auto;
+    width:1349px;
+    position:absolute;
+    padding-top:574px;
+    left:0px;
+}
+
+.under-left{
+    background:#f4f5f7;
+    padding-bottom:250px;
+    float:left;
+}
+
+.under-right{
+    background:#f4f5f7;
+    padding-bottom:250px;
+    float:left;
+}
+
+.avatar-large{
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:35px;
+    left:175px;
+    margin-top:30px;
+    cursor:pointer;
+}
+
+.avatar-small{
+    position:absolute;
+    width:40px;
+    height:40px;
+    border-radius:20px;
+    left:202px;
+    margin-top:35px;
+    cursor:pointer;
+}
+
+.avatar-smaller{
+    position:absolute;
+    width:40px;
+    height:40px;
+    border-radius:20px;
+    left:202px;
+    margin-top:140px;
+    cursor:pointer;
+}
+
+.word{
+    font-family:"Arial",sans-serif;
+    font-size:21px;
+    color:#000000;
+    margin-left:260px;
+    display:inline-block;
+    margin-top:57px;
+}
+
+.line {
+    margin-left:255px;
+    margin-top:45px;
+    width:400px;
+    height:1px;
+    border:0;
+    border-top: 1px solid #b2b1b1;
+}
+
+.set-image{
+    position:absolute;
+    margin:auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 60%;
+    max-height: 60%;
+}
+
+.text-area {
+    padding:12px;
+    width: 385px;
+    height: 100px;
+    resize: none;
+    border: 1px solid #cccccc;
+    margin-top:15px;
+    margin-left:260px;
+    border-radius:4px;
+    font-family:"Arial", sans-serif;
+    font-size:95%;
+}
+
+.text-box{
+    padding:12px;
+    width: 385px;
+    border: 1px solid #cccccc;
+    margin-top:18px;
+    margin-left:260px;
+    border-radius:4px;
+    font-family:"Arial", sans-serif;
+    font-size:95%;
+}
+
+.submit{
+    width:100px;
+    background: #176cec;
+    border-color: #176cec;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    margin-left:260px;
+    margin-top:20px;
+}
+
+.submit:hover{
+    background:#184382;
+}
