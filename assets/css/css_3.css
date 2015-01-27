@@ -1,6 +1,6 @@
 .upper{
     background:#222127;
-    padding-bottom:650px;
+    padding-bottom:630px;
 }
 
 #pic-image{
@@ -8,6 +8,14 @@
     width:1349px;
     position:absolute;
     top:0px;
+    left:0px;
+}
+
+#image-pic{
+    height:auto;
+    width:1349px;
+    position:absolute;
+    padding-top:574px;
     left:0px;
 }
 
@@ -69,6 +77,17 @@
     height:1px;
     border:0;
     border-top: 1px solid #b2b1b1;
+}
+
+.set-image{
+    position:absolute;
+    margin:auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 60%;
+    max-height: 60%;
 }
 
 .text-area {
