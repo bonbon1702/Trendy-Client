@@ -2,7 +2,8 @@
     <div class="modal-body" style="margin: -48px -42px;height: 109.1%;">
         <div class="row">
             <div class="col-md-8 modal-image">
-                <img class="img-responsive" ng-src="{{ post.image_url_editor }}">
+                <!--<img class="img-responsive" ng-src="{{ post.image_url_editor }}">-->
+                <hovercard src="{{ post.image_url_editor }}" data="points"></hovercard>
                 <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
                 <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
             </div>
@@ -17,24 +18,28 @@
                     <div class="info-wrapper">
                         <div class="info eatery-name">
                             <span class=" icon-home-fill-1"></span>
-                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi" style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>
+                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"
+                               style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>
 
 
                         </div>
                         <div class="info eatery-address">
                             <span class=" icon-location-fill-1"></span>
-                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi" style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>
+                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"
+                               style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>
 
                         </div>
                         <div class="info price">
                             <span class=" icon-tag-fill-1"></span>
-                            25,000 đồng/suất</div>
+                            25,000 đồng/suất
+                        </div>
                     </div>
                     <div class="row row-merge" style="height: 43px;">
-                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;" ng-click="likeOrDislike()" ng-switch="iconLike">
+                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;"
+                           ng-click="likeOrDislike()" ng-switch="iconLike">
                             <i class="fa fa-fw fa-thumbs-o-up" ng-switch-when="true"></i>
                             <i class="fa fa-fw fa-thumbs-up" style="color: blue" ng-switch-when="false"></i>
-                                {{ post.like }}</a>
+                            {{ post.like }}</a>
                         <a href="" class="innerAll text-center  text-muted" style="margin-left: 20px;" ng-click=""><i
                                 class="fa fa-fw fa-heart-o"></i></a>
                     </div>

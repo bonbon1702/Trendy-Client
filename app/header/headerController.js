@@ -12,11 +12,24 @@
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
-                    window.location.href =
-                        "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
-                        "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                        "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                        "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                    ngDialog.open({
+                        template: 'app/header/templates/confirm.html',
+                        className: 'ngdialog-theme-plain',
+                        controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
+                            $scope.close = function () {
+                                ngDialog.close();
+                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                + data.upload.image_url + '&title=' + data.upload.name;
+                            };
+                            $scope.confirm = function () {
+                                window.location.href =
+                                    "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
+                                    "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
+                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
+                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                            }
+                        }]
+                    });
                 })
                 .error(function (data) {
                     console.log(data);
@@ -40,7 +53,7 @@
                         facebook: '725456127540058',
                         google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
                         twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
-                    },{
+                    }, {
                         scope: 'email'
                     });
 
@@ -61,7 +74,7 @@
                                     data = {
                                         'email': r.email,
                                         'username': r.name,
-                                        'avatar': r.picture.substring(0, r.picture.length -2) + '100',
+                                        'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
                                         'sw_id': r.id,
                                         'gender': r.gender == 'male' ? 0 : 1
                                     };
@@ -70,10 +83,10 @@
                                 }
 
                                 headerService.save(data)
-                                    .success(function(data){
+                                    .success(function (data) {
                                         $window.location.reload();
                                     })
-                                    .error(function(data){
+                                    .error(function (data) {
                                         console.log(data);
                                     });
                             });
