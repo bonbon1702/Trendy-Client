@@ -18,17 +18,18 @@ app.directive('magiccard', function () {
             templateUrl: function (elem, attrs) {
                 return attrs.templateUrl;
             }
-        }
+        };
         function link(scope, element, attrs) {
             angular.element(element[0]).on('click', function (e) {
                 if (scope.onTyping == false) {
                     var position = scope.findPos(e, element[0]);
+
                     var positionDialog = {
                         top: position.PosY - 20,
                         left: position.PosX - 40,
                         imgTop: position.ImgPosY,
                         imgLeft: position.ImgPosX
-                    }
+                    };
                     scope.setPos(positionDialog.top, positionDialog.left, positionDialog.imgTop, positionDialog.imgLeft);
                 }
             });
@@ -37,12 +38,12 @@ app.directive('magiccard', function () {
                 scope.tagSwitch();
             });
 
-            scope.submit = function (top, left) {
+            scope.submit = function () {
                 var data = {
-                    top: top,
-                    left: left,
+                    top: scope.imgTop,
+                    left: scope.imgLeft,
                     info: scope.formData
-                }
+                };
                 if (scope.callback) {
                     scope.callback(data);
                 }
@@ -87,7 +88,7 @@ app.directive('magiccard', function () {
                 else {
                     return [oElement.x, oElement.y];
                 }
-            }
+            };
             $scope.findPosImg = this.findPosImg;
 
             this.findPos = function (e, ele) {
@@ -114,7 +115,7 @@ app.directive('magiccard', function () {
                     ImgPosY: PosY - ImgPos[1]
                 };
                 return position;
-            }
+            };
 
             $scope.findPos = this.findPos;
 
@@ -165,7 +166,7 @@ app.directive('hovercard', function () {
                                 <i class="mpcth-price">{{ point.price }}</i>\
                     </span>\
                 </span>\
-                <div class="magiccard-content bigEntrance" ng-show="show">\
+                <div class="magiccard-content" ng-show="show">\
                     <h3>{{point.name}}</h3>\
                     <h3>{{point.shop_name}}</h3>\
                     <h3>{{ point.shop_address }}</h3>\

@@ -1,12 +1,12 @@
 <div class="has-magiccard">
-    <img alt="Photo" style="width: 100%;cursor: {{ cursor }}" ng-src="{{ src }}">
+    <img alt="Photo" style="cursor: {{ cursor }}" ng-src="{{ src }}">
 
     <div class="magiccard"
          ng-show="show && onTag && completing"
-         style="top: {{ top }}px; left: {{ left }}px"
+         style="top: {{ imgTop }}px; left: {{ imgLeft }}px"
          ng-mouseenter="onTyping = true;"
          ng-mouseleave="onTyping = false;">
-        <form ng-submit="submit(top,left)">
+        <form ng-submit="submit()">
                     <span class="item-tag">
                         <span class="item-tag-label">
                             <i class="fa fa-star fa-2x"></i>
@@ -24,7 +24,8 @@
                     <input type="text" ng-model="formData.price"/>
                 </div>
                 <div class="form-group">
-                    <autocomplete ng-model="formData.yourchoice" data="data" on-type="update" attr-placeholder="address..."></autocomplete>
+                    <autocomplete ng-model="formData.yourchoice" data="data" on-type="update"
+                                  attr-placeholder="address..."></autocomplete>
                 </div>
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary">Submit</button>

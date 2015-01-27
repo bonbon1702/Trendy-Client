@@ -27,7 +27,7 @@
 
 .under-right{
     background:#f4f5f7;
-    padding-bottom:250px;
+    padding-top: 52px;
     float:left;
 }
 
@@ -79,7 +79,7 @@
     border-top: 1px solid #b2b1b1;
 }
 
-.set-image{
+#pic-image .upper img{
     position:absolute;
     margin:auto;
     left: 0;
@@ -87,7 +87,7 @@
     top: 0;
     bottom: 0;
     max-width: 60%;
-    max-height: 60%;
+    max-height: 70%;
 }
 
 .text-area {
@@ -193,9 +193,9 @@ body {
     z-index: 102;
 }
 
-
-
-
+.photo-well-scrappy-view img{
+    max-height: 456px;
+}
 
 
 

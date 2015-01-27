@@ -5,30 +5,39 @@
     angular.module('MyApp')
         .controller('postController', postController);
 
-    postController.$inject = ['$scope', 'postService', '$location', '$routeParams'];
+    postController.$inject = ['$scope', 'postService', '$location', '$routeParams', 'headerService'];
 
-    function postController($scope, postService, $location, $routeParam) {
+    function postController($scope, postService, $location, $routeParam, headerService) {
         $scope.points = [];
         $scope.caption = null;
         $scope.album = null;
+        headerService.getUser()
+            .success(function(data){
+                $scope.user = data.user;
+            })
+            .error(function(data){
 
+            });
         var data = {
             'image': $location.search().image,
             'name': $location.search().title
         };
-        postService.upload(data)
-            .success(function (data) {
-                postService.get(data.upload.name)
-                    .success(function (data) {
-                        $scope.image = data.upload;
-                    })
-                    .error(function (data) {
-
-                    });
-            })
-            .error(function (data) {
-                console.log(data);
-            });
+        $scope.image = {
+            'image_url_editor': 'http://localhost:81/projects/Trendy-Server/public/assets/images/r4vuith1.jpg'
+        }  ;
+        //postService.upload(data)
+        //    .success(function (data) {
+        //        postService.get(data.upload.name)
+        //            .success(function (data) {
+        //                $scope.image = data.upload;
+        //            })
+        //            .error(function (data) {
+        //
+        //            });
+        //    })
+        //    .error(function (data) {
+        //        console.log(data);
+        //    });
 
         $scope.callback = function (point) {
             var number = $scope.points.length + 1;
@@ -53,14 +62,14 @@
             angular.element(document).find('.has-magiccard').append(point.css(position));
 
         };
-        $scope.deletepoint = function (no) {
+        $scope.deletePoint = function (no) {
             $scope.points.splice(no, 1);
             var number = no + 1;
             angular.element(document).find('.magiccard').each(function () {
-                var id = $(this).attr('id');
+                var id = $(this).id;
                 if (id > number) {
-                    $(this).find('.item-tag-label').text($(this).find('.item-tag-label').text() - 1);
-                    $(this).attr('id', id - 1);
+                    angular.element($(this)).find('.item-tag-label').text(angular.element($(this)).find('.item-tag-label').text() - 1);
+                    angular.element($(this)).attr('id', id - 1);
                 }
             });
 

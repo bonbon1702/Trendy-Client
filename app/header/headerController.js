@@ -22,7 +22,8 @@
                                 + data.upload.image_url + '&title=' + data.upload.name;
                             };
                             $scope.confirm = function () {
-                                window.location.href =
+                                ngDialog.close();
+                                $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
                                     "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
