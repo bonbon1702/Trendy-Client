@@ -1,12 +1,29 @@
-<div id="photo">
-    <div style="width: 500px">
-        <magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image_url_editor }}" callback="callback" data="shop" update="update"></magiccard>
-    </div>
-    <input ng-model="caption" type="text"/>
-    <input ng-model="album" type="text" />
-    <div ng-repeat="point in points track by $index">
-        <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} - <a href="#" ng-click="deletepoint($index)" class="text-muted">Delete</a></h3>
-    </div>
-    <button id="tagButton">Click to tag</button>
-    <button ng-click="submit()">Submit</button>
+<!--<div id="photo">-->
+    <!--<div style="width: 500px">-->
+        <!--<magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image_url_editor }}" callback="callback" data="shop" update="update"></magiccard>-->
+    <!--</div>-->
+    <!--<input ng-model="caption" type="text"/>-->
+    <!--<input ng-model="album" type="text" />-->
+    <!--<div ng-repeat="point in points track by $index">-->
+        <!--<h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} - <a href="#" ng-click="deletepoint($index)" class="text-muted">Delete</a></h3>-->
+    <!--</div>-->
+    <!--<button id="tagButton">Click to tag</button>-->
+    <!--<button ng-click="submit()">Submit</button>-->
+<!--</div>-->
+<div id="picture">
+    <form class="upper">
+        <img src="" class="main"/>
+    </form>
+    <form class="under-left" style="width:50%;">
+        <img src="" class="avatar-large"/>
+        <b></b>
+        <hr>
+        <img src="" class="avatar-small"/>
+        <textarea class="text-area" placeholder="Add a caption"></textarea>
+        <img src="" class="avatar-smaller"/><br>
+        <input type="text" placeholder="Add a album"/>
+        <input type="submit" value="Submit">
+    </form>
+    <form class="under-right" style="width:50%;">
+    </form>
 </div>
