@@ -148,14 +148,14 @@ app.directive('hovercard', function () {
     return {
         restrict: 'E',
         scope: {
-            src: '=src',
+            src: '@src',
             callback: '=callback',
             data: '=data'
         },
         link: link,
         controller: controller,
         template: '<div class="has-magiccard">\
-            <img alt="Photo" style="width: 100%" src="{{ src }}">\
+            <img alt="Photo" class="img-responsive" ng-src="{{ src }}">\
         <div ng-repeat="point in points">\
             <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px"\
             ng-mouseenter="show=true"\
@@ -167,9 +167,11 @@ app.directive('hovercard', function () {
                 </span>\
                 <div class="magiccard-content bigEntrance" ng-show="show">\
                     <h3>{{point.name}}</h3>\
+                    <h3>{{point.shop_name}}</h3>\
+                    <h3>{{ point.shop_address }}</h3>\
                 </div>\
         </div></div>'
-    }
+    };
     function link(scope, element, attrs) {
 
     }
@@ -177,15 +179,22 @@ app.directive('hovercard', function () {
     function controller($scope, $http) {
         $scope.show = false;
         $scope.points = [];
-
-        for (var i = 0; i < $scope.data.length; i++) {
-            var point = {
-                name: $scope.data[i].name,
-                price: accounting.formatNumber($scope.data[i].price),
-                top: parseInt($scope.data[i].top) + 31,
-                left: parseInt($scope.data[i].left)
+        $scope.$watch('data', function () {
+            if ($scope.data) {
+                for (var i = 0; i < $scope.data.length; i++) {
+                    console.log($scope.data);
+                    var point = {
+                        name: $scope.data[i].name,
+                        price: accounting.formatNumber($scope.data[i].price),
+                        top: parseInt($scope.data[i].top) + 31,
+                        left: parseInt($scope.data[i].left) + 70,
+                        shop_name: $scope.data[i].shop.name,
+                        shop_address: $scope.data[i].shop.address
+                    };
+                    $scope.points.push(point);
+                }
             }
-            $scope.points.push(point);
-        }
+        });
+
     }
 });
