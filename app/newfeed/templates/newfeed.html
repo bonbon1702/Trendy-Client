@@ -14,12 +14,31 @@
                             }}</a></strong>
                         <span>12 minutes ago</span>
                     </div>
+                    <div class="info-wrapper">
+                        <div class="info eatery-name">
+                            <span class=" icon-home-fill-1"></span>
+                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi" style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>
+
+
+                        </div>
+                        <div class="info eatery-address">
+                            <span class=" icon-location-fill-1"></span>
+                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi" style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>
+
+                        </div>
+                        <div class="info price">
+                            <span class=" icon-tag-fill-1"></span>
+                            25,000 đồng/suất</div>
+                    </div>
                     <div class="row row-merge" style="height: 43px;">
-                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;" ng-click=""><i
-                                class="fa fa-fw fa-thumbs-up"></i> {{ post.liked_count }}</a>
+                        <a href="" class="innerAll text-center  text-muted badge badge-default" style="margin-left: 2px;" ng-click=""><i
+                                class="fa fa-fw fa-thumbs-up"></i> {{ post.liked_count }} 12</a>
+                        <a href="" class="innerAll text-center text-muted badge badge-default" ng-click="">
+                        <i class="fa fa-fw icon-star-fill"></i> {{ post.favorite_count }} 12</a>
                     </div>
                     <ul class="img-comment-list">
-                        <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;" ng-repeat="comment in post.comments">
+                        <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;"
+                            ng-repeat="comment in post.comments">
                             <div class="comment-img">
                                 <img ng-src="{{ comment.user.picture_profile }}">
                             </div>
@@ -34,7 +53,7 @@
                 </div>
                 <form ng-submit="submitComment()">
                     <div class="modal-meta-bottom">
-                        <input class="form-control" placeholder="Leave a commment.." type="text" ng-model="comment" />
+                        <input class="form-control" placeholder="Leave a commment.." type="text" ng-model="comment"/>
                     </div>
                 </form>
             </div>
