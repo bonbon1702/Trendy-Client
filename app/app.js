@@ -11,7 +11,7 @@
             'lazyloading',
             'angular-loading-bar',
             'ngRoute',
-            'angularFileUpload'
+            'angularFileUpload',
         ])
         .config(function ($routeProvider, ngDialogProvider) {
             $routeProvider
@@ -26,6 +26,22 @@
                     reloadOnSearch: false
                 })
                 .when('/user/:userId', {
+                    templateUrl: 'app/user/templates/user.html',
+                    controller: 'userController'
+                })
+                .when('/#tab1-3', {
+                    templateUrl: 'app/user/templates/user.html',
+                    controller: 'userController'
+                })
+                .when('/#tab2-3', {
+                    templateUrl: 'app/user/templates/user.html',
+                    controller: 'userController'
+                })
+                .when('/#tab3-3', {
+                    templateUrl: 'app/user/templates/user.html',
+                    controller: 'userController'
+                })
+                .when('/#tab4-3', {
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
