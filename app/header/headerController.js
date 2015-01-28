@@ -9,6 +9,13 @@
 
     function headerController($scope, headerService, $location, ngDialog) {
 
+        hello.init({
+            facebook: '725456127540058',
+            google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
+            twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
+        }, {
+            scope: 'email'
+        });
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
@@ -19,7 +26,7 @@
                             $scope.close = function () {
                                 ngDialog.close();
                                 $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
-                                + data.upload.image_url + '&title=' + data.upload.name;
+                                + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
                                 ngDialog.close();
@@ -50,13 +57,6 @@
                 template: 'app/header/templates/login.html',
                 className: 'ngdialog-theme-plain',
                 controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
-                    hello.init({
-                        facebook: '725456127540058',
-                        google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
-                        twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
-                    }, {
-                        scope: 'email'
-                    });
 
                     $scope.login = function (data) {
                         ngDialog.close();

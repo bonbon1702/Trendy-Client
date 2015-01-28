@@ -5,36 +5,37 @@
     angular.module('MyApp')
         .controller('postController', postController);
 
-    postController.$inject = ['$scope', 'postService', '$location', '$routeParams', 'headerService'];
+    postController.$inject = ['$scope', 'postService', '$location', '$routeParams', 'headerService', '$window'];
 
-    function postController($scope, postService, $location, $routeParam, headerService) {
+    function postController($scope, postService, $location, $routeParam, headerService, $window) {
         $scope.points = [];
         $scope.caption = null;
         $scope.album = null;
         headerService.getUser()
-            .success(function(data){
+            .success(function (data) {
                 $scope.user = data.user;
             })
-            .error(function(data){
-
-            });
-        var data = {
-            'image': $location.search().image,
-            'name': $location.search().title
-        };
-        postService.upload(data)
-            .success(function (data) {
-                postService.get(data.upload.name)
-                    .success(function (data) {
-                        $scope.image = data.upload;
-                    })
-                    .error(function (data) {
-
-                    });
-            })
             .error(function (data) {
-                console.log(data);
+
             });
+        $scope.image = {
+            'image': $location.search().image,
+            'name': $location.search().title,
+            'editor' : $location.search().editor
+        };
+        //postService.upload(data)
+        //    .success(function (data) {
+        //        postService.get(data.upload.name)
+        //            .success(function (data) {
+        //                $scope.image = data.upload;
+        //            })
+        //            .error(function (data) {
+        //
+        //            });
+        //    })
+        //    .error(function (data) {
+        //        console.log(data);
+        //    });
 
         $scope.callback = function (point) {
             var number = $scope.points.length + 1;
@@ -97,15 +98,27 @@
             }
         };
         $scope.submit = function () {
-            var data = {
-                caption: $scope.caption,
-                points: $scope.points,
-                name: $scope.image.name,
-                album: $scope.album
-            };
+            var data;
+            if ($scope.image.editor != 'false') {
+                data = {
+                    caption: $scope.caption,
+                    points: $scope.points,
+                    name: $scope.image.name,
+                    album: $scope.album,
+                    url: $scope.image.image
+                };
+            } else {
+                data = {
+                    caption: $scope.caption,
+                    points: $scope.points,
+                    name: $scope.image.name,
+                    album: $scope.album,
+                    url: null
+                };
+            }
             postService.save(data)
                 .success(function (data) {
-                    $location.path('/');
+                    $window.location.href = 'http://localhost:81/projects/Trendy-Client/#/';
                 })
                 .error(function (data) {
                     console.log(data);

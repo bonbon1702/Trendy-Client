@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 modal-image">
                 <!--<img class="img-responsive" ng-src="{{ post.image_url_editor }}">-->
-                <hovercard src="{{ post.image_url_editor }}" data="points"></hovercard>
+                <hovercard src="{{ post.image_url_editor | trusted }}" data="points"></hovercard>
                 <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
                 <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
             </div>
