@@ -112,7 +112,7 @@
 
                             <div class="description  meta">
                                 <div class="hover-blue">
-                                    <div class="title" id="yui_3_11_0_3_1419092456557_1068">
+                                    <div class="title">
                                         <a data-track="photo-click" ng-href="#/" class="title">
                                             {{ point.caption }}
                                         </a>
@@ -126,7 +126,7 @@
     								<span class="inline-icons" style="font-size: 11px;">
     									<img width="12" height="12" alt="[★]"
                                              src="https://s.yimg.com/pw/images/spaceball.gif"
-                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1;width: 15px;height: 15px;">
+                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
     									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
                                            onMouseOver="this.style.color='white'"
                                            onMouseOut="this.style.color='white'"
@@ -138,7 +138,7 @@
                                            class="rapidnofollow comments-icon comments-inline-btn"
                                            onMouseOver="this.style.color='white'"
                                            onMouseOut="this.style.color='white'">
-                                            <span class="comment-count count">99+</span>
+                                            <span class="comment-count count">{{ post.like }}</span>
                                         </a>
     								</span>
                             </div>
@@ -169,11 +169,10 @@
     								<span class="inline-icons" style="font-size: 11px;">
     									<img width="12" height="12" alt="[★]"
                                              src="https://s.yimg.com/pw/images/spaceball.gif"
-                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1;width: 15px;height: 15px;">
+                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
     									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
                                            onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'"
-                                           title="Thêm ảnh này vào ảnh yêu thích của bạn?">
+                                           onMouseOut="this.style.color='white'">
                                             <span class="fave-count count" style="margin-right: 3px;">99+</span>
                                         </a>
     									<i class="fa fa-smile-o" style="color: white;"></i>
@@ -181,7 +180,7 @@
                                            class="rapidnofollow comments-icon comments-inline-btn"
                                            onMouseOver="this.style.color='white'"
                                            onMouseOut="this.style.color='white'">
-                                            <span class="comment-count count">99+</span>
+                                            <span class="comment-count count">{{ post.like }}</span>
                                         </a>
     								</span>
                             </div>

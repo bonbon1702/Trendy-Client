@@ -1,5 +1,11 @@
 <div class="dialog-contents">
-    Editor?
-    <button ng-click="close()">No</button>
-    <button ng-click="confirm()">Yes</button>
+    <!--<div class="modal-content">-->
+        <div class="modal-body">
+            <div class="bootbox-body">Do you want to editor image?</div>
+        </div>
+        <div class="modal-footer">
+            <button data-bb-handler="cancel" type="button" class="btn btn-primary" ng-click="close()">No</button>
+            <button data-bb-handler="confirm" type="button" class="btn btn-primary" ng-click="confirm()">Yes</button>
+        </div>
+    <!--</div>-->
 </div>

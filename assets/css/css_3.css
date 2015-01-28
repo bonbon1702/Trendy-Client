@@ -201,3 +201,15 @@ body {
 
 
 
+.view:hover .description {
+    opacity: 1;
+}
+
+.view .description {
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+    opacity: 0;
+    width: 151%;
+    bottom: 28px;
+    margin: 0px -229px;
+}

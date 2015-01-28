@@ -14,22 +14,32 @@
                     </span>
 
             <div class="magiccard-content bigEntrance">
-                <input type="hidden" value="{{ imgTop }}"/>
-                <input type="hidden" value="{{ imgLeft }}"/>
-
+                <div style="padding-top: 6px;">
                 <div class="form-group">
-                    <input type="text" ng-model="formData.name"/>
+                    <label class="col-sm-2 control-label">Name:</label>
+                    <div class="col-sm-10" style="padding: 0px 0px 14px 28px;">
+                        <input type="text" class="form-control" ng-model="formData.name">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" ng-model="formData.price"/>
+                    <label class="col-sm-2 control-label">Price:</label>
+                    <div class="col-sm-10" style="padding: 0px 0px 14px 28px;">
+                        <input type="text" class="form-control"   ng-model="formData.price">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <autocomplete ng-model="formData.yourchoice" data="data" on-type="update"
-                                  attr-placeholder="address..."></autocomplete>
+                    <label class="col-sm-2 control-label">Address:</label>
+                    <div class="col-sm-10" style="padding: 0px 0px 14px 28px;">
+                        <autocomplete  class="form-control" ng-model="formData.yourchoice" data="data" on-type="update"
+                                      attr-placeholder="Address..."></autocomplete>
+                    </div>
                 </div>
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+                </div>
+                <input type="hidden" value="{{ imgTop }}"/>
+                <input type="hidden" value="{{ imgLeft }}"/>
             </div>
         </form>
     </div>

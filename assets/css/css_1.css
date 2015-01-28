@@ -29,9 +29,9 @@ html, body { height: 100%;}
 }
 
 .modal-image img {
-    margin-left: 71px;
+    margin-left: 125px;
     max-height: 100%;
-    max-width: 78%;
+    max-width: 61%;
 
     position: relative;
     top: 50%;
