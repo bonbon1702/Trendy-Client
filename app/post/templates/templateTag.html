@@ -1,5 +1,5 @@
 <div class="has-magiccard">
-    <img alt="Photo" style="cursor: {{ cursor }}" ng-src="{{ src }}">
+    <img alt="Photo" style="cursor: {{ cursor }}" ng-src="{{ src | trusted }}">
 
     <div class="magiccard"
          ng-show="show && onTag && completing"

@@ -132,7 +132,7 @@ app.directive('magiccard', function () {
                     $scope.completing = true;
                 }
                 $scope.$apply();
-            }
+            };
         }
     }
 );
@@ -198,3 +198,9 @@ app.directive('hovercard', function () {
 
     }
 });
+
+app.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}]);
