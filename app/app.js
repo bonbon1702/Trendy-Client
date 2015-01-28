@@ -12,6 +12,7 @@
             'angular-loading-bar',
             'ngRoute',
             'angularFileUpload',
+            'infinite-scroll'
         ])
         .config(function ($routeProvider, ngDialogProvider) {
             $routeProvider

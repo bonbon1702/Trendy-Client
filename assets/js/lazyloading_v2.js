@@ -7,7 +7,7 @@ app.directive('lazyloading', function () {
     return {
         restrict: 'A',
         link: link
-    }
+    };
 
     function link(scope, element, attrs) {
         var poll, delay = 250, offset = 0;

@@ -31,8 +31,11 @@
             countLike: function (id) {
                 return $http.get($rootScope.url + 'like/countLikePost/' + id);
             },
-            check: function(id){
+            check: function (id) {
                 return $http.get($rootScope.url + 'like/checkLikePost/' + id);
+            },
+            getPost: function (id) {
+                return $http.get($rootScope.url + 'post/getPost/' + id);
             }
         }
     }

@@ -101,9 +101,9 @@
             </div>
             <div class="col-lg-6 col-md-6" ng-controller="newfeedController">
                 <!-- <div data-toggle="gridalicious" data-gridalicious-width="380" data-gridalicious-gutter="0"> -->
-                <div class="blc-row">
+                <div class="blc-row" infinite-scroll='loadMore()' infinite-scroll-disabled='busy'>
                     <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsLeft">
-                        <div class="widget-body bg-none padding-none" >
+                        <div class="widget-body bg-none padding-none">
                             <a ng-href="#/" ng-click="showDialog(point.id)"
                                data-toggle="prettyPhoto" class="thumb">
                                 <img ng-src="{{ point.image_url_editor }}"
@@ -149,7 +149,7 @@
                 <div class="blc-row">
                     <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsRight">
                         <div class="widget-body bg-none padding-none">
-                            <a href="#/" data-toggle="prettyPhoto" class="thumb"  ng-click="showDialog(point.id)">
+                            <a href="#/" data-toggle="prettyPhoto" class="thumb" ng-click="showDialog(point.id)">
                                 <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
                             </a>
 
@@ -187,6 +187,7 @@
                         </div>
                     </div>
                 </div>
+                <p class="text-center" ng-show="busy"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>s
             </div>
             <div class="col-md-4 col-lg-3">
 
