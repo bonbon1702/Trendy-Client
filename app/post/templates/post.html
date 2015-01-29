@@ -7,7 +7,8 @@
                            callback="callback" data="shop" update="update"></magiccard>
                 <div class="description  meta">
                     <div class="hover-blue">
-                        <button id="tagButton" style="margin-left: 667px;" class=" btn btn-primary" >Click to tag</button>
+                        <button id="tagButton" style="margin-left: 667px;" class=" btn btn-primary">Click to tag
+                        </button>
                     </div>
 
                 </div>
@@ -24,19 +25,22 @@
             <input type="submit" ng-click="submit()" value="Submit" class="submit">
         </div>
         <div class="under-right" style="width:50%;">
+            <div style="width: 300px;">
+                <tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>
+            </div>
             <!--<button id="tagButton" class="btn btn-primary">Click to tag</button>-->
             <div ng-repeat="point in points track by $index">
                 <!--<ol id="item-tag-list" class="item_tags topspaced" style="width:560px;">-->
-                    <!--<li id="show_item_tag_0" class="standard more_linespaced" itemscope="" itemtype="http://schema.org/Product" style="background-color: transparent;">-->
-                        <!--<div>-->
-                            <!--<h2 class="standard cap strong uppercase inline force_wrap" itemprop="name" title="name">Coat</h2>,-->
-                            <!--<span class="uppercase" itemprop="url" title="url"><a href="http://rstyle.me/n/wansgwp2w" class="item-tag-link" data-brand-track=" | 7054100 | outbound url | 17982860" data-track="look item tag | outbound url click | rstyle.me" target="_blank" sl-processed="1">rstyle.me/n/wansgwp2w…</a></span>,-->
-                            <!--in-->
-                            <!--<span class="uppercase">-->
-                            <!--<a href="http://lookbook.nu/search?q=Outerwear" data-track="look item tag | category click | outerwear" target="_blank" sl-processed="1">Outerwear</a>-->
-                            <!--</span>-->
-                        <!--</div>-->
-                    <!--</li>-->
+                <!--<li id="show_item_tag_0" class="standard more_linespaced" itemscope="" itemtype="http://schema.org/Product" style="background-color: transparent;">-->
+                <!--<div>-->
+                <!--<h2 class="standard cap strong uppercase inline force_wrap" itemprop="name" title="name">Coat</h2>,-->
+                <!--<span class="uppercase" itemprop="url" title="url"><a href="http://rstyle.me/n/wansgwp2w" class="item-tag-link" data-brand-track=" | 7054100 | outbound url | 17982860" data-track="look item tag | outbound url click | rstyle.me" target="_blank" sl-processed="1">rstyle.me/n/wansgwp2w…</a></span>,-->
+                <!--in-->
+                <!--<span class="uppercase">-->
+                <!--<a href="http://lookbook.nu/search?q=Outerwear" data-track="look item tag | category click | outerwear" target="_blank" sl-processed="1">Outerwear</a>-->
+                <!--</span>-->
+                <!--</div>-->
+                <!--</li>-->
                 <!--</ol>-->
                 <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} -
                     <button ng-click="deletePoint($index)"

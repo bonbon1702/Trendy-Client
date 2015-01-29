@@ -11,6 +11,13 @@
         $scope.points = [];
         $scope.caption = null;
         $scope.album = null;
+
+        $scope.tags = [];
+
+        $scope.tagChanged = function () {
+
+        };
+
         headerService.getUser()
             .success(function (data) {
                 $scope.user = data.user;
@@ -21,7 +28,7 @@
         $scope.image = {
             'image': $location.search().image,
             'name': $location.search().title,
-            'editor' : $location.search().editor
+            'editor': $location.search().editor
         };
         //postService.upload(data)
         //    .success(function (data) {
@@ -105,7 +112,8 @@
                     points: $scope.points,
                     name: $scope.image.name,
                     album: $scope.album,
-                    url: $scope.image.image
+                    url: $scope.image.image,
+                    tags: $scope.tags
                 };
             } else {
                 data = {
@@ -113,7 +121,8 @@
                     points: $scope.points,
                     name: $scope.image.name,
                     album: $scope.album,
-                    url: null
+                    url: null,
+                    tags: $scope.tags
                 };
             }
             postService.save(data)
