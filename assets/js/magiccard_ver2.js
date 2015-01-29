@@ -158,19 +158,12 @@ app.directive('hovercard', function () {
         template: '<div class="has-magiccard">\
             <img alt="Photo" class="img-responsive" ng-src="{{ src }}">\
         <div ng-repeat="point in points">\
-            <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px"\
-            ng-mouseenter="show=true"\
-            ng-mouseleave="show=fale">\
-                <span class="item-tag">\
+            <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px">\
+                <span class="item-tag-1">\
                     <span class="item-tag-label">\
-                                <i class="mpcth-price">{{ point.price }}</i>\
+                                {{ $index +1 }}\
                     </span>\
                 </span>\
-                <div class="magiccard-content" ng-show="show">\
-                    <h3>{{point.name}}</h3>\
-                    <h3>{{point.shop_name}}</h3>\
-                    <h3>{{ point.shop_address }}</h3>\
-                </div>\
         </div></div>'
     };
     function link(scope, element, attrs) {
@@ -178,18 +171,13 @@ app.directive('hovercard', function () {
     }
 
     function controller($scope, $http) {
-        $scope.show = false;
         $scope.points = [];
         $scope.$watch('data', function () {
             if ($scope.data) {
                 for (var i = 0; i < $scope.data.length; i++) {
                     var point = {
-                        name: $scope.data[i].name,
-                        price: accounting.formatNumber($scope.data[i].price),
                         top: parseInt($scope.data[i].top) + 31,
                         left: parseInt($scope.data[i].left) + 70,
-                        shop_name: $scope.data[i].shop.name,
-                        shop_address: $scope.data[i].shop.address
                     };
                     $scope.points.push(point);
                 }

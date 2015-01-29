@@ -1,16 +1,11 @@
 <div class="has-magiccard">
     <img alt="Photo" style="width: 100%" src="{{ src }}">
     <div ng-repeat="point in points">
-        <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px"
-        ng-mouseenter="show=true"
-        ng-mouseleave="show=fale">
-                <span class="item-tag">
+        <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px">
+                <span class="item-tag-1">
                     <span class="item-tag-label">
-                                <i class="mpcth-price">{{ point.price }}</i>
+                        {{ $index +1 }}
                     </span>
                 </span>
-        <div class="magiccard-content bigEntrance" ng-show="show">
-            <h3>{{point.name}}</h3>
-        </div>
     </div>
 </div>

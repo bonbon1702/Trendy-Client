@@ -15,7 +15,7 @@
             'infinite-scroll',
             'ngTagsInput'
         ])
-        .config(function ($routeProvider, ngDialogProvider) {
+        .config(function ($routeProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
                 // route for the home page
                 .when('/', {
@@ -47,7 +47,7 @@
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
-                .when('/shop/:name', {
+                .when('/shop/:shopId', {
                     templateUrl: 'app/shop/templates/shop.html',
                     controller: 'shopController'
                 })

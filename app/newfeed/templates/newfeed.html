@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 modal-image">
                 <!--<img class="img-responsive" ng-src="{{ post.image_url_editor }}">-->
-                <hovercard src="{{ post.image_url_editor | trusted }}" data="points"></hovercard>
+                <hovercard src="{{ post.image_url_editor | trusted }}" data="post.tag_picture"></hovercard>
                 <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
                 <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
             </div>
@@ -16,23 +16,29 @@
                         <span>12 minutes ago</span>
                     </div>
                     <div class="info-wrapper">
-                        <div class="info eatery-name">
-                            <span class=" icon-home-fill-1"></span>
-                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"
-                               style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>
+                        <!--<div class="info eatery-name">-->
+                            <!--<span class=" icon-home-fill-1"></span>-->
+                            <!--<a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"-->
+                               <!--style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>-->
 
 
-                        </div>
-                        <div class="info eatery-address">
-                            <span class=" icon-location-fill-1"></span>
-                            <a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"
-                               style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>
+                        <!--</div>-->
+                        <!--<div class="info eatery-address">-->
+                            <!--<span class=" icon-location-fill-1"></span>-->
+                            <!--<a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"-->
+                               <!--style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>-->
 
+                        <!--</div>-->
+                        <!--<div class="info price">-->
+                            <!--<span class=" icon-tag-fill-1"></span>-->
+                            <!--25,000 đồng/suất-->
+                        <!--</div>-->
+                        <div ng-repeat="point in post.tag_picture">
+                            <div ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)">
+                                {{ $index+1 }}-{{ point.name }} - {{ point.price }} - <a style="color: #000000" ng-href="#/shop/{{point.shop.id}}">{{point.shop.address}}</a>
+                            </div>
                         </div>
-                        <div class="info price">
-                            <span class=" icon-tag-fill-1"></span>
-                            25,000 đồng/suất
-                        </div>
+                        <tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>
                     </div>
                     <div class="row row-merge" style="height: 43px;">
                         <!--<a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;" ng-click=""><i-->

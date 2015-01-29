@@ -65,7 +65,31 @@
                     newfeedService.get(id)
                         .success(function (data) {
                             $scope.post = data.post;
-                            $scope.points = $scope.post.tag_picture;
+
+                            $scope.tags = [];
+                            for (var i = 0;i < $scope.post.tag.length;i++){
+                                $scope.tags.push({
+                                    'text' : $scope.post.tag[i].tag_content.content
+                                });
+                            }
+
+                            $scope.hoverPoint = function(index){
+                                angular.element(document).find('div .magiccard span .item-tag-label').each(function(){
+                                    var ele = angular.element($(this));
+                                    if (ele.html() == index){
+                                        ele.parent().addClass('bounce');
+                                    }
+                                })
+                            };
+
+                            $scope.leavePoint = function(index){
+                                angular.element(document).find('div .magiccard span .item-tag-label').each(function(){
+                                    var ele = angular.element($(this));
+                                    if (ele.html() == index){
+                                        ele.parent().removeClass('bounce');
+                                    }
+                                })
+                            };
 
                             $scope.submitComment = function () {
                                 var data = {
