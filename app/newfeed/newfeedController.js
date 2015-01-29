@@ -21,15 +21,19 @@
             $scope.busy = true;
             newfeedService.getPost(length)
                 .success(function(data){
-                    for (var i = 0; i < data.posts.length; i += 2) {
-                        if (data.posts[i] != null) {
-                            $scope.postsLeft.push(data.posts[i]);
+                    if (data.posts.length != 0) {
+                        for (var i = 0; i < data.posts.length; i += 2) {
+                            if (data.posts[i] != null) {
+                                $scope.postsLeft.push(data.posts[i]);
+                            }
+                            if (data.posts[i + 1] != null) {
+                                $scope.postsRight.push(data.posts[i + 1]);
+                            }
                         }
-                        if (data.posts[i + 1] != null) {
-                            $scope.postsRight.push(data.posts[i + 1]);
-                        }
+                        $scope.busy = false;
+                    } else {
+                        $scope.busy = true;
                     }
-                    $scope.busy = false;
                 })
                 .error(function(data){
                     console.log(data);
