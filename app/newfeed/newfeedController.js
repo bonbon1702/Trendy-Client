@@ -84,13 +84,7 @@
                                 $scope.comment = null;
                                 newfeedService.save(data)
                                     .success(function (data) {
-                                        newfeedService.getComments(id)
-                                            .success(function (data) {
-                                                $scope.post.comments = data.comment;
-                                            })
-                                            .error(function (data) {
-
-                                            });
+                                        $scope.post.comments.push(data.comment);
                                     })
                                     .error(function (data) {
 
@@ -100,12 +94,20 @@
                             $scope.likeOrDislike = function () {
                                 newfeedService.likeOrDislike(id)
                                     .success(function (data) {
-                                        newfeedService.countLike(id)
-                                            .success(function (data) {
-                                                $scope.post.like = data.like;
-                                                $scope.iconLike = !$scope.iconLike;
-                                            })
-                                            .error();
+                                        //newfeedService.countLike(id)
+                                        //    .success(function (data) {
+                                        //        $scope.post.like = data.like;
+                                        //        $scope.iconLike = !$scope.iconLike;
+                                        //    })
+                                        //    .error();
+                                        if ($scope.iconLike == true){
+                                            $scope.post.like++;
+                                            $scope.iconLike = false;
+                                        }else{
+                                            $scope.post.like--;
+                                            $scope.iconLike = true;
+                                        }
+
                                     })
                                     .error(function (data) {
 
