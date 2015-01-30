@@ -15,7 +15,7 @@
 
         angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
 
-        $scope.loadMore = function(){
+        $scope.nextPage = function(){
             var length = $scope.postsLeft.length + $scope.postsRight.length;
             if ($scope.busy) return;
             $scope.busy = true;
@@ -39,22 +39,6 @@
                     console.log(data);
                 });
         };
-
-        newfeedService.getPost(0)
-            .success(function(data){
-                for (var i = 0; i < data.posts.length; i += 2) {
-                    if (data.posts[i] != null) {
-                        $scope.postsLeft.push(data.posts[i]);
-                    }
-                    if (data.posts[i + 1] != null) {
-                        $scope.postsRight.push(data.posts[i + 1]);
-                    }
-                }
-            })
-            .error(function(data){
-
-            });
-
 
         $scope.showDialog = function (id) {
             ngDialog.open({
