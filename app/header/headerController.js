@@ -10,7 +10,7 @@
     function headerController($scope, headerService, $location, ngDialog) {
 
         hello.init({
-            facebook: '725456127540058',
+            facebook: '513861542088702',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -93,8 +93,22 @@
                             });
                         });
                     }
+
                 }]
             });
+        }
+        $scope.logout=function(){
+            //window.location.href = "https://mail.google.com/mail/u/0/?logout&hl=en";
+
+            //var data=$log
+            headerService.logoutUser(data)
+                .success(function (data) {
+                    window.location.href = "http://localhost:81/projects/Trendy-Client/#";
+                })
+                .error(function (data) {
+                    console.log(data);
+                });
+            $scope.loginUser = null;
         }
     }
 })(angular);
