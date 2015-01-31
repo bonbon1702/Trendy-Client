@@ -209,7 +209,7 @@ body {
     background: rgba(0,0,0,0.6);
     position: absolute;
     opacity: 0;
-    width: 151%;
+    width: auto;
     bottom: 28px;
-    margin: 0px -229px;
+    margin: 0px -487px
 }

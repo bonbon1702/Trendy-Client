@@ -11,7 +11,7 @@
                 <div class="modal-meta-top">
                     <div class="img-poster clearfix">
                         <a href=""><img class="img-circle" ng-src="{{ post.user.picture_profile }}"></a>
-                        <strong><a ng-href="#/user/{{ post.user.id }}" style="color: #0B0B0B;">{{ post.user.username
+                        <strong><a ng-href="#/user/{{ post.user.id }}"  ng-click="closeThisDialog()" style="color: #0B0B0B;">{{ post.user.username
                             }}</a></strong>
                         <span>12 minutes ago</span>
                     </div>
@@ -60,7 +60,7 @@
                                 <img ng-src="{{ comment.user.picture_profile }}">
                             </div>
                             <div class="comment-text">
-                                <strong><a href="" style="color: #0B0B0B;">{{ comment.user.username }}</a></strong>
+                                <strong><a ng-href="#/user/{{ comment.user.id }}" style="color: #0B0B0B;" ng-click="closeThisDialog()">{{ comment.user.username }}</a></strong>
 
                                 <p>{{ comment.content }}</p> <span
                                     class="date sub-text">{{ comment.created_at}}</span>
