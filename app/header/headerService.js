@@ -30,6 +30,9 @@
             },
             loginUser: function (data) {
                 return $http.get($rootScope.url + 'user/loginUser/' + data);
+            },
+            logoutUser:function(data){
+                return $http.get($rootScope.url + 'user/deleteLogoutUser/' +data);
             }
         }
     }
