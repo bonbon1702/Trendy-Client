@@ -45,9 +45,13 @@
 
         };
 
-        headerService.getUser()
+        var fb = hello( "facebook" ).getAuthResponse();
+
+        headerService.getUser(fb.access_token)
             .success(function (data) {
-                $scope.loginUser = data.user;
+                if (data.user) {
+                    $scope.loginUser = data.user;
+                }
             })
             .error(function (data) {
                 console.log(data);
@@ -63,13 +67,15 @@
                         hello(data).login().then(function (auth) {
                             hello(auth.network).api('/me').then(function (r) {
                                 var data = {};
+                                var fb = hello( "facebook" ).getAuthResponse();
                                 if (auth.network == 'facebook') {
                                     data = {
                                         'email': r.email,
                                         'username': r.name,
                                         'avatar': r.picture + '?width=100&height=100',
                                         'sw_id': r.id,
-                                        'gender': r.gender == 'male' ? 0 : 1
+                                        'gender': r.gender == 'male' ? 0 : 1,
+                                        'remember_token': fb.access_token
                                     };
                                 } else if (auth.network == 'google') {
                                     data = {
@@ -77,7 +83,8 @@
                                         'username': r.name,
                                         'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
                                         'sw_id': r.id,
-                                        'gender': r.gender == 'male' ? 0 : 1
+                                        'gender': r.gender == 'male' ? 0 : 1,
+                                        'remember_token': fb.access_token
                                     };
                                 } else if (auth.network == 'twitter') {
 

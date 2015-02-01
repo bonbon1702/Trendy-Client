@@ -25,8 +25,14 @@
                     data: data
                 });
             },
-            getUser: function () {
-                return $http.get($rootScope.url + 'user/getLoginUser');
+            getUser: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'user/getLoginUser',
+                    data: {
+                        remember_token: data
+                    }
+                });
             },
             loginUser: function (data) {
                 return $http.get($rootScope.url + 'user/loginUser/' + data);
