@@ -47,9 +47,9 @@
                             <!--<i class="fa fa-fw icon-star-fill"></i> {{ post.favorite_count }}</a>-->
                         <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;"
                            ng-click="likeOrDislike()" ng-switch="iconLike">
-                            <i class="fa fa-fw fa-thumbs-o-up" ng-switch-when="true"></i>
-                            <i class="fa fa-fw fa-thumbs-up" style="color: blue" ng-switch-when="false"></i>
-                            {{ post.like }}</a>
+                            <i class="fa fa-fw fa-thumbs-o-up" ng-switch-when="false"></i>
+                            <i class="fa fa-fw fa-thumbs-up" style="color: blue" ng-switch-when="true"></i>
+                            {{ post.like.length }}</a>
                         <a href="" class="innerAll text-center  text-muted" style="margin-left: 20px;" ng-click=""><i
                                 class="fa fa-fw fa-heart-o"></i></a>
                     </div>

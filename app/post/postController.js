@@ -18,7 +18,7 @@
 
         };
 
-        headerService.getUser()
+        headerService.loginUser()
             .success(function (data) {
                 $scope.user = data.user;
             })
@@ -30,19 +30,6 @@
             'name': $location.search().title,
             'editor': $location.search().editor
         };
-        //postService.upload(data)
-        //    .success(function (data) {
-        //        postService.get(data.upload.name)
-        //            .success(function (data) {
-        //                $scope.image = data.upload;
-        //            })
-        //            .error(function (data) {
-        //
-        //            });
-        //    })
-        //    .error(function (data) {
-        //        console.log(data);
-        //    });
 
         $scope.callback = function (point) {
             var number = $scope.points.length + 1;
@@ -113,7 +100,8 @@
                     name: $scope.image.name,
                     album: $scope.album,
                     url: $scope.image.image,
-                    tags: $scope.tags
+                    tags: $scope.tags,
+                    user_id: $scope.user.id
                 };
             } else {
                 data = {
@@ -122,7 +110,8 @@
                     name: $scope.image.name,
                     album: $scope.album,
                     url: null,
-                    tags: $scope.tags
+                    tags: $scope.tags,
+                    user_id: $scope.user.id
                 };
             }
             postService.save(data)

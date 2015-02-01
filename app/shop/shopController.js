@@ -9,6 +9,5 @@
 
     function shopController($scope, ngDialog, shopService) {
         googleMap.init();
-
     }
 })(angular);

@@ -25,8 +25,8 @@
             getComments: function (id) {
                 return $http.get($rootScope.url + 'comment/showPost/' + id)
             },
-            likeOrDislike: function (id) {
-                return $http.get($rootScope.url + 'like/likePost/' + id);
+            likeOrDislike: function (data) {
+                return $http.get($rootScope.url + 'like/likePost/' + data.id+ '/type/' +data.type+ '/user/'+data.user);
             },
             countLike: function (id) {
                 return $http.get($rootScope.url + 'like/countLikePost/' + id);

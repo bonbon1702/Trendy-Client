@@ -16,6 +16,14 @@
         }, {
             scope: 'email'
         });
+
+        $scope.checkLogin = function(){
+            if (!$scope.loginUser){
+                headerService.openLogin();
+                event.stopPropagation();
+                event.preventDefault();
+            }
+        };
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
@@ -45,65 +53,18 @@
 
         };
 
-        var fb = hello( "facebook" ).getAuthResponse();
-
-        headerService.getUser(fb.access_token)
-            .success(function (data) {
-                if (data.user) {
-                    $scope.loginUser = data.user;
-                }
+        headerService.loginUser()
+            .success(function(data){
+                $scope.loginUser = data.user;
             })
-            .error(function (data) {
+            .error(function(data){
                 console.log(data);
             });
-        $scope.openLogin = function () {
-            ngDialog.open({
-                template: 'app/header/templates/login.html',
-                className: 'ngdialog-theme-plain',
-                controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
 
-                    $scope.login = function (data) {
-                        ngDialog.close();
-                        hello(data).login().then(function (auth) {
-                            hello(auth.network).api('/me').then(function (r) {
-                                var data = {};
-                                var fb = hello( "facebook" ).getAuthResponse();
-                                if (auth.network == 'facebook') {
-                                    data = {
-                                        'email': r.email,
-                                        'username': r.name,
-                                        'avatar': r.picture + '?width=100&height=100',
-                                        'sw_id': r.id,
-                                        'gender': r.gender == 'male' ? 0 : 1,
-                                        'remember_token': fb.access_token
-                                    };
-                                } else if (auth.network == 'google') {
-                                    data = {
-                                        'email': r.email,
-                                        'username': r.name,
-                                        'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
-                                        'sw_id': r.id,
-                                        'gender': r.gender == 'male' ? 0 : 1,
-                                        'remember_token': fb.access_token
-                                    };
-                                } else if (auth.network == 'twitter') {
+        $scope.openLogin = function(){
+              headerService.openLogin();
+        };
 
-                                }
-
-                                headerService.save(data)
-                                    .success(function (data) {
-                                        $window.location.reload();
-                                    })
-                                    .error(function (data) {
-                                        console.log(data);
-                                    });
-                            });
-                        });
-                    }
-
-                }]
-            });
-        }
         $scope.logout=function(){
             //window.location.href = "https://mail.google.com/mail/u/0/?logout&hl=en";
 
