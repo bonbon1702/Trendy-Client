@@ -148,7 +148,7 @@
                                     }
                                 }
                             }
-                            console.log($scope.post.like, $scope.loginUser.id)
+                            console.log($scope.loginUser, $scope.post.like);
 
                         })
                         .error(function (data) {
