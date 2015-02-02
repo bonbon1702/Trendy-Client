@@ -56,7 +56,7 @@
                     headerService.loginUser()
                         .success(function (data) {
                             $scope.loginUser = data.user;
-                            console.log(data.user)
+                            console.log($scope.loginUser)
                         })
                         .error();
 
