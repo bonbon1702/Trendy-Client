@@ -53,15 +53,17 @@
                 controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
                     $scope.iconLike = false;
 
-                    headerService.loginUser()
-                        .success(function (data) {
-                            $scope.loginUser = data.user;
-                        })
-                        .error();
+
 
                     newfeedService.get(id)
                         .success(function (data) {
                             $scope.post = data.post;
+
+                            headerService.loginUser()
+                                .success(function (data) {
+                                    $scope.loginUser = data.user;
+                                })
+                                .error();
 
                             $scope.tags = [];
                             for (var i = 0; i < $scope.post.tag.length; i++) {
