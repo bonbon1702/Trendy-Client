@@ -137,7 +137,7 @@
                                         });
                                 }
                             };
-                            console.log($scope.loginUser);
+
                             if ($scope.loginUser) {
                                 for (var i = 0; i < $scope.post.like.length; i++) {
                                     console.log($scope.post.like[i].user_id, $scope.loginUser.id, $scope.post.like[i].user_id == $scope.loginUser.id)

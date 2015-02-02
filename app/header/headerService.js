@@ -27,6 +27,7 @@
             },
             loginUser: function () {
                 var fb = hello("facebook").getAuthResponse();
+                console.log(fb);
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'user/getLoginUser',
