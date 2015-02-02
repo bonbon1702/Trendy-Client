@@ -142,14 +142,13 @@
                                 for (var i = 0; i < $scope.post.like.length; i++) {
 
                                     if ($scope.post.like[i].user_id == $scope.loginUser.id) {
+                                        console.log(123)
                                         $scope.iconLike = true;
                                     } else {
                                         $scope.iconLike = false;
                                     }
                                 }
                             }
-                            console.log($scope.loginUser, $scope.post.like);
-
                         })
                         .error(function (data) {
 
