@@ -10,7 +10,7 @@
     function headerController($scope, headerService, $location, ngDialog) {
 
         hello.init({
-            facebook: '513861542088702',
+            facebook: '725456127540058',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
