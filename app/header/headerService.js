@@ -31,7 +31,7 @@
                     method: 'POST',
                     url: $rootScope.url + 'user/getLoginUser',
                     data: {
-                        remember_token: fb.access_token ? fb.access_token : ''
+                        remember_token: fb ? fb.access_token : ''
                     }
                 });
             },
