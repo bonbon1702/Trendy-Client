@@ -75,7 +75,7 @@
                                     }
                                 })
                                 .error();
-                            console.log($scope.loginUser)
+
                             $scope.tags = [];
                             for (var i = 0; i < $scope.post.tag.length; i++) {
                                 $scope.tags.push({
