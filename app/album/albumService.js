@@ -11,8 +11,8 @@
         return {
             getAlbumUser: function (data) {
                 return $http({
-                    method: 'POST',
-                    url: $rootScope.url + 'user',
+                    method: 'Get',
+                    url: $rootScope.url + 'album',
                     data: data
                 });
             },
