@@ -13,14 +13,14 @@
                                 </div>
                                 <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector" data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
                                     <!--<a class="_30vy fbTimelineEditCoverButton _p"  aria-haspopup="true"-->
-                                       <!--aria-expanded="false" role="button" id="u_jsonp_3_7" aria-owns="u_16_3">-->
+                                    <!--aria-expanded="false" role="button" id="u_jsonp_3_7" aria-owns="u_16_3">-->
                                     <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
                                             <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b"><span class="fileupload-new"></span>
                                                 <input type="file" class="margin-none "></span>
                                         <!--<i class="_30vz img sp_qcED-f6xcm7 sx_80b32b"></i>-->
                                     </div>
-                                        <!--<input type="file" class="margin-none">-->
-                                        <!--<div class="_30v-"><span class="_30w0 _50f7">Update Cover Photo</span></div>-->
+                                    <!--<input type="file" class="margin-none">-->
+                                    <!--<div class="_30v-"><span class="_30w0 _50f7">Update Cover Photo</span></div>-->
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
@@ -42,7 +42,7 @@
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets"  ng-href="#/following/{{user.id}}" data-original-title="" style="color: #0084B4;">
+                                               data-nav="tweets" ng-href="#/following/{{user.id}}" data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
                                             </a>
@@ -55,83 +55,49 @@
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
                                             </a>
                                         </li>
-
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
 
 
-                <div class="widget widget-gallery" data-toggle="collapse-widget">
-                    <div class="widget-head"><h4 class="heading">Photo Gallery</h4></div>
-                    <div class="widget-body">
+                <div class="input-group innerB">
+                    <input type="text" class="form-control " placeholder="Search contacts">
+                    <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
+                </div>
+                <div class="row row-merge" >
 
-                        <!-- Tabs -->
-                        <div class="tabsbar">
-                            <ul>
-                                <li class="glyphicons camera active">
-                                    <a href="/#tab1-3" data-toggle="tab"><i></i> View all photos <strong>({{ user.posts.length }})</strong></a>
-                                </li>
-                                <li class="glyphicons folder_open">
-                                    <a href="/#tab2-3" data-toggle="tab"><i></i> Albums <strong>(3)</strong></a>
-                                </li>
-                                <li class="glyphicons circle_plus tab-stacked">
-                                    <a href="/#tab3-3" data-toggle="tab"><i></i> <span>Add Photos</span></a>
-                                </li>
-                                <li class="glyphicons folder_plus tab-stacked">
-                                    <a href="/#tab4-3" data-toggle="tab"><i></i> <span>Create Album</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- // Tabs END -->
+                    <div class="col-md-12 col-lg-6 bg-white border-bottom"  ng-repeat="flwer in follower">
+                        <div class="row">
 
-                        <div class="tab-content">
-
-                            <div class="tab-pane active" id="tab1-3">
-                                <!-- Gallery -->
-                                <div class="gallery">
-                                    <ul class="row">
-
-                                        <!-- Gallery item -->
-                                        <li class="col-md-2" ng-repeat="post in user.posts">
-                                            <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                               data-gallery="gallery-3">
-                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                     class="img-responsive"/>
-                                            </a>
-                                        </li>
-                                        <!-- // Gallery item END -->
-                                    </ul>
+                            <div class="col-sm-9">
+                                <div class="media">
+                                    <a class="pull-left margin-none" href="#">
+                                        <img class="img-clean" ng-src="{{ flwer.picture_profile }}" alt="...">
+                                    </a>
+                                    <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                        <h4 class="media-heading"><a ng-href="#/user/{{flwer.user_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
+                                        <p>
+                                            <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
+                                            <i class="fa fa-fw fa-map-marker text-muted"></i> Living in Missouri, USA</p>
+                                    </div>
                                 </div>
-                                <!-- // Gallery END -->
                             </div>
+                            <div class="col-sm-3">
+                                <div class="innerAll text-right">
+                                    <div class="btn-group-vertical btn-group-sm">
+                                        <a href="" class="btn btn-primary"><i  class="fa fa-user"></i> Follow</a>
 
-                            <div class="tab-pane" id="tab2-3">
-                                <h4>Second tab</h4>
-                                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="tab-pane" id="tab3-3">
-                                <h4>Third tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum. Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus magna.</p>
-                            </div>
-
-                            <div class="tab-pane" id="tab4-3">
-                                <h4>Fourth tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum. Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus magna.</p>
-                            </div>
-
                         </div>
-
 
                     </div>
+
                 </div>
 
             </div>

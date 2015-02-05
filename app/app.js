@@ -47,6 +47,14 @@
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
+                .when('/following/:userId', {
+                    templateUrl: 'app/user/templates/following.html',
+                    controller: 'userController'
+                })
+                .when('/follower/:userId', {
+                    templateUrl: 'app/user/templates/follower.html',
+                    controller: 'userController'
+                })
                 .when('/shop/:shopId', {
                     templateUrl: 'app/shop/templates/shop.html',
                     controller: 'shopController'
