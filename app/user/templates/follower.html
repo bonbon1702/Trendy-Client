@@ -24,7 +24,7 @@
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li class="active"><a href="user.html?lang=en"><i class="fa fa-fw fa-clock-o"></i>
+                                    <li class="active"><a ng-href="#/user/{{user.id}}"><i class="fa fa-fw fa-clock-o"></i>
                                         <span>Timeline</span></a></li>
                                     <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
                                     </li>
@@ -47,7 +47,7 @@
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
                                             </a>
                                         </li>
-                                        <li class="ProfileNav-item ProfileNav-item--followers">
+                                        <li class="ProfileNav-item ProfileNav-item--followers is-active">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
                                                data-nav="followers" ng-href="#/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
@@ -81,7 +81,6 @@
                                     <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                         <h4 class="media-heading"><a ng-href="#/user/{{flwer.user_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
                                         <p>
-                                            <!-- <span class="text-success strong"><i class="fa fa-check"></i> Friend</span> &nbsp;  -->
                                             <i class="fa fa-fw fa-map-marker text-muted"></i> Living in Missouri, USA</p>
                                     </div>
                                 </div>
@@ -89,7 +88,11 @@
                             <div class="col-sm-3">
                                 <div class="innerAll text-right">
                                     <div class="btn-group-vertical btn-group-sm">
-                                        <a href="" class="btn btn-primary"><i  class="fa fa-user"></i> Follow</a>
+                                        <button ng-click="addFollow(flwer)" ng-switch="flBtn" class="btn btn-primary" style="display: inline-flex;">
+                                            <i  class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>
+                                        <div  ng-switch-when="false">Follow</div>
+                                        <div  ng-switch-when="true">Following</div>
+                                        </button>
 
                                     </div>
                                 </div>
