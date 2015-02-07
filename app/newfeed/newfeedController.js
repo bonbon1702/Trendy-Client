@@ -25,6 +25,11 @@
             var length = $scope.postsLeft.length + $scope.postsRight.length;
             if ($scope.busy) return;
             $scope.busy = true;
+
+            $scope.sideBar = function(type){
+
+            };
+
             newfeedService.getPost(length)
                 .success(function (data) {
                     if (data.posts.length != 0) {
@@ -45,6 +50,8 @@
                     console.log(data);
                 });
         };
+
+
 
         $scope.showDialog = function (id) {
             ngDialog.open({
