@@ -1,157 +1,159 @@
 /**
  * Created by tuan on 12/11/2014.
  */
-(function(root, factory){
+(function (root, factory) {
     root.googleMap = factory(root);
-})(this, function(root){
+})(this, function (root) {
 
     'use strict';
 
     var googleMap = {};
 
-    var map, markers=[];
+    var map, markers = [];
 
-    googleMap.init = function(){
+    googleMap.init = function (data) {
+
+        console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
             {
-                "featureType":"administrative.country",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "administrative.country",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"simplified"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
-                "featureType":"administrative.province",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "administrative.province",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"simplified"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
-                "featureType":"administrative.locality",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "administrative.locality",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"simplified"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
-                "featureType":"administrative.neighborhood",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "administrative.neighborhood",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType":"administrative.land_parcel",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType":"landscape.natural",
-                "elementType":"geometry.fill",
-                "stylers":[
+                "featureType": "landscape.natural",
+                "elementType": "geometry.fill",
+                "stylers": [
                     {
-                        "visibility":"on"
+                        "visibility": "on"
                     },
                     {
-                        "color":"#e0efef"
+                        "color": "#e0efef"
                     }
                 ]
             },
             {
-                "featureType":"poi",
-                "elementType":"geometry.fill",
-                "stylers":[
+                "featureType": "poi",
+                "elementType": "geometry.fill",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     },
                     {
-                        "hue":"#1900ff"
+                        "hue": "#1900ff"
                     },
                     {
-                        "color":"#c0e8e8"
+                        "color": "#c0e8e8"
                     }
                 ]
             },
             {
-                "featureType":"poi",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "poi",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType":"road",
-                "elementType":"all",
-                "stylers":[
+                "featureType": "road",
+                "elementType": "all",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType":"road",
-                "elementType":"geometry",
-                "stylers":[
+                "featureType": "road",
+                "elementType": "geometry",
+                "stylers": [
                     {
-                        "lightness":100
+                        "lightness": 100
                     },
                     {
-                        "visibility":"simplified"
+                        "visibility": "simplified"
                     }
                 ]
             },
             {
-                "featureType":"road",
-                "elementType":"labels",
-                "stylers":[
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [
                     {
-                        "visibility":"on"
+                        "visibility": "on"
                     }
                 ]
             },
             {
-                "featureType":"transit",
-                "elementType":"all",
-                "stylers":[
+                "featureType": "transit",
+                "elementType": "all",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType":"transit.line",
-                "elementType":"geometry",
-                "stylers":[
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [
                     {
-                        "visibility":"off"
+                        "visibility": "off"
                     },
                     {
-                        "lightness":700
+                        "lightness": 700
                     }
                 ]
             },
             {
-                "featureType":"water",
-                "elementType":"all",
-                "stylers":[
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": [
                     {
-                        "color":"#7dcdcd"
+                        "color": "#7dcdcd"
                     }
                 ]
             }
@@ -172,11 +174,23 @@
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+        for (var i = 0; i < data; i++) {
+            var image = {
+                url: data[i].image_url,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+            var marker = createMarker(map, image, new google.maps.LatLng(data[i].lat, data[i].lang));
+            markers.push(marker);
+        }
+        map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
         searchBox();
         homeButton();
     }
 
-    var searchBox = function(){
+    var searchBox = function () {
         var input = /** @type {HTMLInputElement} */ (
             document.getElementById('pac-input'));
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -185,7 +199,7 @@
             (input));
         // Listen for the event fired when the user selects an item from the
         // pick list. Retrieve the matching places for that item.
-        google.maps.event.addListener(searchBox, 'places_changed', function() {
+        google.maps.event.addListener(searchBox, 'places_changed', function () {
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
@@ -219,13 +233,13 @@
 
         // Bias the SearchBox results towards places that are within the bounds of the
         // current map's viewport.
-        google.maps.event.addListener(map, 'bounds_changed', function() {
+        google.maps.event.addListener(map, 'bounds_changed', function () {
             var bounds = map.getBounds();
             searchBox.setBounds(bounds);
         });
     }
 
-    var homeButton = function(){
+    var homeButton = function () {
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
 
@@ -263,10 +277,10 @@
             map.panTo(myLatlng);
             map.setZoom(15);
 
-            google.maps.event.addListener(marker, 'mouseover', function() {
+            google.maps.event.addListener(marker, 'mouseover', function () {
                 infowindow.open(map, marker);
             });
-            google.maps.event.addListener(marker, 'mouseout', function() {
+            google.maps.event.addListener(marker, 'mouseout', function () {
                 infowindow.close();
             });
         }
@@ -300,28 +314,27 @@
             controlUI.appendChild(controlText);
 
             // Setup the click event listeners: simply set the map to
-            google.maps.event.addDomListener(controlUI, 'click', function() {
+            google.maps.event.addDomListener(controlUI, 'click', function () {
                 getLocation();
             });
         }
     }
 
-    var createMarker = function(map, icon, position){
+    var createMarker = function (map, icon, position) {
         icon = icon || null;
         var marker = new google.maps.Marker({
             position: position,
             map: map,
-            shape:{ coords:[17,17,18],type:'circle'},
-            icon:
-            {
-                url:'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
+            shape: {coords: [17, 17, 18], type: 'circle'},
+            icon: {
+                url: 'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
                 size: new google.maps.Size(71, 71),
                 origin: new google.maps.Point(0, 0),
                 anchor: new google.maps.Point(17, 34),
                 scaledSize: new google.maps.Size(50, 50)
             },
 
-            optimized:false
+            optimized: false
         });
         return marker;
     }
