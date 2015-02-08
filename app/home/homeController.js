@@ -8,7 +8,28 @@
     homeController.$inject = ['$scope', 'ngDialog', 'homeService'];
 
     function homeController($scope, ngDialog, homeService) {
-        googleMap.init();
+
+        homeService.map()
+            .success(function (data) {
+                var map = [];
+                for (var i = 0; i < data.posts.length; i++) {
+                    if (data.posts[i] != null) {
+                        var item = {
+                            'caption': data.posts[i],
+                            'image_url': data.posts[i].image_url,
+                            'lat': data.posts[i].lat,
+                            'lang': data.posts[i].lang,
+                            'address': data.posts[i].address
+                        };
+                        map.push(item);
+                    }
+                }
+                googleMap.init(map);
+            })
+            .error(function (data) {
+                console.log(data);
+            });
+
     }
 })(angular);
 

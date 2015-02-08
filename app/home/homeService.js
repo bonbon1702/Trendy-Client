@@ -9,8 +9,8 @@
 
     function homeService($http, $rootScope){
         return {
-            list: function(){
-
+            map: function(){
+                return $http.get($rootScope.url + 'post');
             }
         }
     }
