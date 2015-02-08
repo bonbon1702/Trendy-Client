@@ -186,6 +186,7 @@
         //    //markers.push(marker);
         //}
         //map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
+
         searchBox();
         homeButton();
     }
