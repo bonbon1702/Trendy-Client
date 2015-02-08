@@ -138,15 +138,6 @@
     background:#184382;
 }
 
-
-
-
-
-
-
-
-
-
 .photo-well-scrappy-view .height-controller {
     display: -webkit-box;
     display: -moz-box;
@@ -171,7 +162,7 @@
     display: -moz-flex;
     display: -webkit-flex;
     display: flex;
-    position: relative;
+    position: initial;
     margin: auto;
     padding: 20px 40px 50px;
     -webkit-box-align: center;
@@ -197,19 +188,11 @@ body {
     max-height: 456px;
 }
 
-
-
-
-
 .view:hover .description {
     opacity: 1;
 }
 
 .view .description {
     background: rgba(0,0,0,0.6);
-    position: absolute;
     opacity: 0;
-    width: auto;
-    bottom: 28px;
-    margin: 0px -487px
 }

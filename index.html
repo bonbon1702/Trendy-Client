@@ -57,7 +57,7 @@
                 </a>
                 <ul class="dropdown-menu" ng-show="loginUser != null">
                     <li><a href="about.html?lang=en" >About</a></li>
-                    <li><a data-track="owner" ng-href="#/user/{{point.user_id}}">Profile</a></li>
+                    <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>
                     <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
                 </ul>
             </div>

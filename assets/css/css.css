@@ -376,16 +376,16 @@ ul.share-box {
     -webkit-border-radius: 3px;
 }
 
-.gmnoprint::before {
-    top: 149px;
-    left: 638px;
+img[src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg"]::before {
+    top: -24px;
+    left: -14px;
     width: 86px;
     height: 102px;
     content: "";
-    position: fixed;
+    position: absolute;
     display: block;
     background: url("http://lozi.vn/img/backgrounds/map-marker.png") no-repeat scroll center center transparent;
-    z-index: -1;
+    /*z-index: -1;*/
 }
 
 img[src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg"]{

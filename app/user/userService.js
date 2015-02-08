@@ -11,6 +11,13 @@
         return {
             getUser: function (data) {
                 return $http.get($rootScope.url + 'user/getUser/' + data);
+            },
+            addFollow: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'follow',
+                    data: data
+                });
             }
         }
     }

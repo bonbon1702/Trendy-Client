@@ -24,7 +24,7 @@
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li class="active"><a href="user.html?lang=en"><i class="fa fa-fw fa-clock-o"></i>
+                                    <li class="active"><a ng-href="#/user/{{user.id}}"><i class="fa fa-fw fa-clock-o"></i>
                                         <span>Timeline</span></a></li>
                                     <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
                                     </li>
@@ -40,7 +40,7 @@
                                         <span>Works at MOSAICPRO</span>
                                     </div>
                                     <div class="innerAll pull-left">
-                                        <li class="ProfileNav-item ProfileNav-item--following">
+                                        <li class="ProfileNav-item ProfileNav-item--following is-active">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
                                                data-nav="tweets" ng-href="#/following/{{user.id}}" data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
