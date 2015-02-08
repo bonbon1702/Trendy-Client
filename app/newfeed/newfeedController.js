@@ -12,6 +12,7 @@
         $scope.postsLeft = [];
         $scope.postsRight = [];
         $scope.busy = false;
+        $scope.newFeedType = 'trend';
 
         headerService.loginUser()
             .success(function (data) {
@@ -21,21 +22,17 @@
 
         angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
 
-        $scope.nextPage = function () {
+        var loadPage = function(){
             var length = $scope.postsLeft.length + $scope.postsRight.length;
             if ($scope.busy) return;
             $scope.busy = true;
-
-            $scope.sideBar = function(type){
-
-            };
             var data = {
-                'order' : 'trend',
+                'order' : $scope.newFeedType,
                 'id': length
             };
+            console.log(data);
             newfeedService.getPost(data)
                 .success(function (data) {
-                    console.log(data)
                     if (data.posts.length != 0) {
                         for (var i = 0; i < data.posts.length; i += 2) {
                             if (data.posts[i] != null) {
@@ -53,6 +50,18 @@
                 .error(function (data) {
                     console.log(data);
                 });
+        }
+
+        $scope.sideBar = function(type){
+            $scope.newFeedType = type;
+            $scope.postsLeft = [];
+            $scope.postsRight = [];
+            $scope.busy = false;
+            loadPage();
+        };
+
+        $scope.nextPage = function () {
+            loadPage();
         };
 
 

@@ -40,9 +40,9 @@
                              style="position: absolute;height: 380px;background: #F9F3F3;">
                             <div id="sidebar-social-wrapper">
                                 <ul class="menu list-unstyled" style="background: #FDFAFA;">
-                                    <li class="hasSubmenu active" ng-click="sideBar('trendy')">
+                                    <li class="hasSubmenu" ng-class="{ active: newFeedType == 'trend' }" ng-click="sideBar('trend')">
 
-                                        <a href="#menu-4c92ef26818fe5b83682c306e8efc065">
+                                        <a href="#/">
 
 
                                             <i class="icon-worldwide"></i>
@@ -53,9 +53,9 @@
                                         </a>
 
                                     </li>
-                                    <li class="hasSubmenu" ng-click="sideBar('new')">
+                                    <li class="hasSubmenu" ng-class="{ active: newFeedType == 'new' }" ng-click="sideBar('new')">
 
-                                        <a href="#menu-45924cbfa0258264ff1cf22a3e571833">
+                                        <a href="#/">
 
 
                                             <i class="icon-fire"></i>
@@ -69,7 +69,7 @@
                                     </li>
                                     <li class="hasSubmenu">
 
-                                        <a href="#menu-ed789274112713f5e5f0b5773b88ac06">
+                                        <a href="#/">
 
 
                                             <i class="icon-star"></i>
@@ -83,7 +83,7 @@
                                     </li>
                                     <li class="hasSubmenu">
 
-                                        <a href="#menu-c46c57fea3f9344d1e2c167218808e69">
+                                        <a href="#/">
 
 
                                             <i class="icon-location-1"></i>
