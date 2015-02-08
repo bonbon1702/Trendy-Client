@@ -30,7 +30,6 @@
                 'order' : $scope.newFeedType,
                 'id': length
             };
-            console.log(data);
             newfeedService.getPost(data)
                 .success(function (data) {
                     if (data.posts.length != 0) {
