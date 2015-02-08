@@ -29,9 +29,13 @@
             $scope.sideBar = function(type){
 
             };
-
-            newfeedService.getPost(length)
+            var data = {
+                'order' : 'trend',
+                'id': length
+            };
+            newfeedService.getPost(data)
                 .success(function (data) {
+                    console.log(data)
                     if (data.posts.length != 0) {
                         for (var i = 0; i < data.posts.length; i += 2) {
                             if (data.posts[i] != null) {
