@@ -34,7 +34,7 @@
                             <!--25,000 đồng/suất-->
                         <!--</div>-->
                         <div ng-repeat="point in post.tag_picture">
-                            <div ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)">
+                            <div ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)" ng-click="closeDialog()">
                                 {{ $index+1 }}-{{ point.name }} - {{ point.price }} - <a style="color: #000000" ng-href="#/shop/{{point.shop.id}}">{{point.shop.address}}</a>
                             </div>
                         </div>

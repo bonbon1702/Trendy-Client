@@ -168,6 +168,10 @@
                                         });
                                 }
                             };
+
+                            $scope.closeDialog = function(){
+                                ngDialog.close();
+                            }
                         })
                         .error(function (data) {
 

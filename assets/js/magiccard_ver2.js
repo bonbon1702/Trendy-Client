@@ -23,14 +23,13 @@ app.directive('magiccard', function () {
             angular.element(element[0]).on('click', function (e) {
                 if (scope.onTyping == false) {
                     var position = scope.findPos(e, element[0]);
-
                     var positionDialog = {
-                        top: position.PosY - 20,
-                        left: position.PosX - 40,
+                        top: position.PosY,
+                        left: position.PosX,
                         imgTop: position.ImgPosY,
                         imgLeft: position.ImgPosX
                     };
-                    scope.setPos(positionDialog.top, positionDialog.left, positionDialog.imgTop, positionDialog.imgLeft);
+                    scope.setPos(positionDialog.imgTop, positionDialog.imgLeft, positionDialog.imgTop, positionDialog.imgLeft);
                 }
             });
 
@@ -159,7 +158,7 @@ app.directive('hovercard', function () {
             <img alt="Photo" class="img-responsive" ng-src="{{ src }}">\
         <div ng-repeat="point in points">\
             <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px">\
-                <span class="item-tag-1">\
+                <span class="item-tag-1" style="margin-left: 0px">\
                     <span class="item-tag-label">\
                                 {{ $index +1 }}\
                     </span>\
@@ -167,22 +166,25 @@ app.directive('hovercard', function () {
         </div></div>'
     };
     function link(scope, element, attrs) {
+        scope.$watch('data', function () {
+            if (scope.data) {
+                var img = angular.element(document.querySelector('.has-magiccard')).find('img');
+                var margin_left = parseInt(img.css('margin-left').substring(0,img.css('margin-left').length -2 ));
 
+                for (var i = 0; i < scope.data.length; i++) {
+                    var point = {
+                        top: parseInt(scope.data[i].top) + 50,
+                        left: parseInt(scope.data[i].left) + margin_left
+                    };
+                    scope.points.push(point);
+                }
+            }
+        });
     }
 
     function controller($scope, $http) {
         $scope.points = [];
-        $scope.$watch('data', function () {
-            if ($scope.data) {
-                for (var i = 0; i < $scope.data.length; i++) {
-                    var point = {
-                        top: parseInt($scope.data[i].top) + 31,
-                        left: parseInt($scope.data[i].left) + 70,
-                    };
-                    $scope.points.push(point);
-                }
-            }
-        });
+
 
     }
 });
