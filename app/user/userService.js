@@ -18,6 +18,22 @@
                     url: $rootScope.url + 'follow',
                     data: data
                 });
+            },
+            removeFollow: function (data) {
+                return $http({
+                    method: 'DELETE',
+                    url: $rootScope.url + 'following/delete',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': '*'
+                    },
+                    params: {
+                        user_id:data['user_id'],
+                        follower_id:data['follower_id']
+                    }
+                });
             }
         }
     }

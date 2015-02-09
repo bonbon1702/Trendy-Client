@@ -89,7 +89,9 @@
                             <div class="col-sm-3">
                                 <div class="innerAll text-right">
                                     <div class="btn-group-vertical btn-group-sm">
-                                        <a href="" class="btn btn-primary"><i  class="fa fa-user"></i> Following</a>
+                                        <button ng-click="followingBtnClick(flw)"  class="btn btn-primary">
+                                            <i  class="fa fa-user"></i> {{ flw.status }}
+                                        </button>
 
                                     </div>
                                 </div>
