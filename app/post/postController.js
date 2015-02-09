@@ -48,8 +48,8 @@
                 '<span class="item-tag-label">' + number + '</span>' +
                 '</div></div>');
             var position = {
-                top: po.top,
-                left: po.left
+                top: po.top - 30,
+                left: po.left -45
             };
             angular.element(document).find('.has-magiccard').append(point.css(position));
 
@@ -116,7 +116,7 @@
             }
             postService.save(data)
                 .success(function (data) {
-                    $window.location.href = 'http://localhost:81/projects/Trendy-Client/#/';
+                    $location.path("/");
                 })
                 .error(function (data) {
                     console.log(data);

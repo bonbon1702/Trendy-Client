@@ -3,7 +3,7 @@
 
     <div class="magiccard"
          ng-show="show && onTag && completing"
-         style="top: {{ imgTop }}px; left: {{ imgLeft }}px"
+         style="top: {{ top - 30 }}px; left: {{ left - 45 }}px"
          ng-mouseenter="onTyping = true;"
          ng-mouseleave="onTyping = false;">
         <form ng-submit="submit()">

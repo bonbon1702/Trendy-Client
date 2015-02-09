@@ -93,6 +93,7 @@
 }
 .has-magiccard{
     height: 100%;
+    position: relative;
 }
 
 .form-horizontal .form-group {
