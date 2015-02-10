@@ -65,12 +65,12 @@
 
 
                 <div class="input-group innerB">
-                    <input type="text" class="form-control " placeholder="Search contacts">
+                    <input type="text" class="form-control" ng-model="q" placeholder="Search contacts">
                     <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
                 </div>
                 <div class="row row-merge" >
 
-                    <div class="col-md-12 col-lg-6 bg-white border-bottom"  ng-repeat="flwer in follower">
+                    <div class="col-md-12 col-lg-6 bg-white border-bottom"  ng-repeat="flwer in follower | filter:q">
                         <div class="row">
 
                             <div class="col-sm-9">
@@ -88,17 +88,14 @@
                             <div class="col-sm-3">
                                 <div class="innerAll text-right">
                                     <div class="btn-group-vertical btn-group-sm">
-                                        <button ng-click="addFollow(flwer)" ng-switch="flBtn" class="btn btn-primary" style="display: inline-flex;">
-                                            <i  class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>
-                                        <div  ng-switch-when="false">Follow</div>
-                                        <div  ng-switch-when="true">Following</div>
+                                        <button ng-click="followBtnClick(flwer)"  class="btn btn-primary" style="display: inline-flex;">
+                                            <i  class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>{{ flwer.status }}
                                         </button>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
