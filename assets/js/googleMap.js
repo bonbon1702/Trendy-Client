@@ -173,7 +173,10 @@
         }
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
+        var pos = new google.maps.LatLng(20.9875830,105.8316770);
+        createMarker(map,null,pos,'dinh cong');
+        createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi');
+        //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
         //for (var i = 0; i < data; i++) {
         //    var image = {
         //        url: data[i].image_url,
@@ -182,7 +185,7 @@
         //        anchor: new google.maps.Point(17, 34),
         //        scaledSize: new google.maps.Size(25, 25)
         //    };
-        //    //var marker = createMarker(map, image, new google.maps.LatLng(data[i].lat, data[i].lang));
+        //    createMarker(map, image, new google.maps.LatLng(data[i].lat, data[i].lang));
         //    //markers.push(marker);
         //}
         //map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
@@ -320,22 +323,25 @@
             });
         }
     }
-
-    var createMarker = function (map, icon, position) {
+    // Hàm đánh dấu lên bản đồ từ 1 đối tượng địa điểm place
+    var createMarker = function (map, icon, position,content) {
         icon = icon || null;
         var marker = new google.maps.Marker({
             position: position,
             map: map,
             shape: {coords: [17, 17, 18], type: 'circle'},
-            icon: {
-                url: 'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(50, 50)
-            },
+            icon: icon,
 
             optimized: false
+        });
+        var infowindow = new google.maps.InfoWindow({
+            content: content
+        });
+        google.maps.event.addListener(marker, 'mouseover', function () {
+            infowindow.open(map, this);
+        });
+        google.maps.event.addListener(marker, 'mouseout', function () {
+            infowindow.close();
         });
         return marker;
     }
