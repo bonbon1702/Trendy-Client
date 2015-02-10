@@ -70,7 +70,7 @@
         };
 
         $scope.update = function (type) {
-            if (type != null) {
+            if (type.length > 1) {
                 var data = {
                     type: type
                 };

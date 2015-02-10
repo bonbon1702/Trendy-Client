@@ -67,12 +67,14 @@
                 </button>
             </div>
         </div>
-        <div class="input-group hidden-xs pull-left">
-            <span class="input-group-addon"><i class="icon-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search a friend"/>
+        <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
+            <autocomplete ng-model="type" data="data" on-type="update"
+                           attr-placeholder="Search friend or shop..."
+                           template-url="app/header/templates/searchBar.html">
+                           </autocomplete>
         </div>
         <div  data-provides="fileupload">
-            <span class="btn btn-default btn-file " style="margin: 9px;background-color: #176CED;color: #fff" ng-click="checkLogin()">
+            <span class="btn btn-default btn-file " style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
                 <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                     style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
                     <span class="fa fa-camera"></span>

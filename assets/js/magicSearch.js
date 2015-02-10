@@ -194,7 +194,7 @@ app.directive('magicsearch', function () {
             placeholder="{{ attrs.placeholder }}"\
             class="{{ attrs.inputclass }}"\
             id="{{ attrs.inputid }}"/>\
-          <ul ng-show="completing && suggestions.length>0">\
+          <ul ng-show="completing && suggestions.length>0" style="margin-left: 45px">\
           <a\
           ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:\'toString()\' track by $index"\
           ng-href="{{ suggestion.link}}" style=\"text-decoration: none;color: #000000\" \

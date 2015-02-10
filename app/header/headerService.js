@@ -38,8 +38,8 @@
             getUser: function (data) {
                 return $http.get($rootScope.url + 'user/getUser/' + data);
             },
-            logoutUser: function (data) {
-                return $http.get($rootScope.url + 'user/deleteLogoutUser/' + data);
+            search: function(data){
+                return $http.get($rootScope.url + 'searchAllPage/' + data);
             },
             openLogin: function () {
                 return ngDialog.open({

@@ -14,6 +14,9 @@ app.directive('autocomplete', function() {
             onType: '=onType',
             onSelect: '=onSelect'
         },
+        templateUrl: function (elem, attrs) {
+            return attrs.templateUrl;
+        },
         controller: ['$scope', function($scope){
             // the index of the suggestions that's currently selected
             $scope.selectedIndex = -1;
@@ -82,6 +85,7 @@ app.directive('autocomplete', function() {
 
             // selecting a suggestion with RIGHT ARROW or ENTER
             $scope.select = function(suggestion){
+                console.log(suggestion);
                 if(suggestion){
                     $scope.searchParam = suggestion;
                     $scope.searchFilter = suggestion;
@@ -93,8 +97,6 @@ app.directive('autocomplete', function() {
                 setTimeout(function(){watching = true;},1000);
                 $scope.setIndex(-1);
             };
-
-
         }],
         link: function(scope, element, attrs){
 
@@ -249,27 +251,7 @@ app.directive('autocomplete', function() {
                 }
 
             });
-        },
-        template: '\
-        <div class="autocomplete {{ attrs.class }}" id="{{ attrs.id }}">\
-          <input\
-            type="text"\
-            ng-model="searchParam"\
-            placeholder="{{ attrs.placeholder }}"\
-            class="{{ attrs.inputclass }}"\
-            id="{{ attrs.inputid }}"/>\
-          <ul ng-show="completing && suggestions.length>0">\
-            <li\
-              suggestion\
-              ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:\'toString()\' track by $index"\
-              index="{{ $index }}"\
-              ng-class="{ active: ($index === selectedIndex) }"\
-              ng-click="select(suggestion.address)">\
-                  <span>{{ suggestion.name }}</span>\
-                  <span ng-bind-html="suggestion.address | highlight:searchParam : suggestion.address" id="address"></span>\
-              </li>\
-          </ul>\
-        </div>'
+        }
     };
 });
 
