@@ -95,13 +95,43 @@
                                     <ul class="row">
 
                                         <!-- Gallery item -->
-                                        <li class="col-md-2" ng-repeat="post in user.posts">
-                                            <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                               data-gallery="gallery-3">
-                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                     class="img-responsive"/>
-                                            </a>
-                                        </li>
+                                        <div class="blc-row" style="width: 214px;" >
+                                            <li ng-repeat="post in arrPost1">
+                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                   data-gallery="gallery-3">
+                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                         class="img-responsive"/>
+                                                </a>
+                                            </li>
+                                        </div>
+                                        <div class="blc-row" style="width: 214px;" >
+                                            <li ng-repeat="post in arrPost2">
+                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                   data-gallery="gallery-3">
+                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                         class="img-responsive"/>
+                                                </a>
+                                            </li>
+                                        </div>
+                                        <div class="blc-row" style="width: 214px;" >
+                                            <li ng-repeat="post in arrPost3">
+                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                   data-gallery="gallery-3">
+                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                         class="img-responsive"/>
+                                                </a>
+                                            </li>
+                                        </div>
+                                        <div class="blc-row" style="width: 214px;" >
+                                            <li ng-repeat="post in arrPost4">
+                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                   data-gallery="gallery-3">
+                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                         class="img-responsive"/>
+                                                </a>
+                                            </li>
+                                        </div>
+
                                         <!-- // Gallery item END -->
                                     </ul>
                                 </div>
