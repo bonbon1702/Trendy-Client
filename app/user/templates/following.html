@@ -65,12 +65,12 @@
 
 
             <div class="input-group innerB">
-                <input type="text" class="form-control " placeholder="Search contacts">
+                <input type="text" class="form-control " ng-model="q" placeholder="Search contacts">
                 <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
             </div>
             <div class="row row-merge" >
 
-                    <div class="col-md-12 col-lg-6 bg-white border-bottom"  ng-repeat="flw in following">
+                    <div class="col-md-12 col-lg-6 bg-white border-bottom"  ng-repeat="flw in following | filter:q">
                         <div class="row">
 
                             <div class="col-sm-9">

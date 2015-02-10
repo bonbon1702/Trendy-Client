@@ -20,7 +20,7 @@
                     for (var j = 0; j < data.user.following.length; j += 1) {
                         if ($scope.following.length < data.user.following.length && data.user.following[j] != null) {
                             $scope.following.push(data.user.following[j]);
-                            $scope.following[j].status ='Following';
+                            $scope.following[j].status = 'Following';
                         }
                         if ($scope.follower[i].follower_id == $scope.following[j].user_id) {
                             $scope.follower[i].status = 'Following';
@@ -28,6 +28,21 @@
                     }
                 }
 
+                $scope.arrPost1 = [], $scope.arrPost2 = [], $scope.arrPost3 = [], $scope.arrPost4 = [];
+                for (var i = 0; i < $scope.user.posts.length; i = i + 4) {
+                    if ($scope.user.posts[i] != null) {
+                        $scope.arrPost1.push($scope.user.posts[i]);
+                    }
+                    if ($scope.user.posts[i + 1] != null) {
+                        $scope.arrPost2.push($scope.user.posts[i + 1]);
+                    }
+                    if ($scope.user.posts[i + 2] != null) {
+                        $scope.arrPost3.push($scope.user.posts[i + 2]);
+                    }
+                    if ($scope.user.posts[i + 3] != null) {
+                        $scope.arrPost4.push($scope.user.posts[i + 3]);
+                    }
+                }
             })
             .error(function (data) {
                 console.log(data);
@@ -69,7 +84,7 @@
                     })
             }
         }
-        $scope.followingBtnClick= function (user) {
+        $scope.followingBtnClick = function (user) {
 
             if (user.status == 'Follow') {
                 data = {
@@ -97,7 +112,6 @@
                     .success(function () {
                         user.status = 'Follow';
                         var flwing = user;
-                        //$scope.user.following.splice(flwing);
                         $scope.user.following.length--;
                         console.log($scope.following);
                     })
@@ -106,6 +120,8 @@
                     })
             }
         }
+
+
 
     }
 })(angular);
