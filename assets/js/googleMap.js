@@ -175,8 +175,7 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         var pos = new google.maps.LatLng(20.9875830,105.8316770);
         createMarker(map,null,pos,'dinh cong');
-        alert('0');
-        alert(data.length);
+
         //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi');
         //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
         for (var i = 0; i < data.length; i++) {

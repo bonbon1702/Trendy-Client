@@ -29,7 +29,7 @@
 //            .error(function (data) {
 //                console.log(data);
 //            });
-        googleMap.init();
+//        googleMap.init();
 
     }
 })(angular);
