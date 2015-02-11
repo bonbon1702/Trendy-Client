@@ -40,12 +40,15 @@
     list-style: none;
     width: 100%;
     padding: 0.4em;
-    background-color: #fff;
+    background-color: #EEEEEE;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #cbcfe2 #c8cee7 #c4c7d7;
+    border-bottom: 0px;
 }
 
 .autocomplete li.active {
-    width: 100%;
-    background-color: #6aacae;
+    background-color: #338cdf;
 }
 
 .autocomplete .highlight {

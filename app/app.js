@@ -71,7 +71,7 @@
             });
         })
         .run(function ($rootScope) {
-            $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
+            $rootScope.url = 'http://trendy-server.dev/api/';
             //$rootScope.url = 'http://104.43.9.177/api/';
         });
 })(angular);

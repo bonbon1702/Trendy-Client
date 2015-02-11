@@ -260,7 +260,6 @@ body {
 
 .search .results li {
     display: block;
-    background-color: #EEEEEE;
 }
 
 .search .results li:first-child { margin-top: -1px }
@@ -294,12 +293,11 @@ body {
     display: block;
     position: relative;
     margin: 0 -1px;
-    /*padding: 6px 40px 6px 10px;*/
-    color: #808394;
-    font-weight: 500;
-    text-shadow: 0 1px #fff;
+    padding: 6px 40px 6px 10px;
     border: 1px solid transparent;
     border-radius: 3px;
+    color: #000000;
+
 }
 
 .search .results a span { font-weight: 200 }
@@ -313,11 +311,4 @@ body {
     right: 10px;
     margin-top: -9px;
     background: url("http://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
-}
-.search .results a:hover {
-    text-decoration: none;
-    color: #fff;
-    text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
-    border-color: #2380dd #2179d5 #1a60aa;
-    background-color: #338cdf;
 }

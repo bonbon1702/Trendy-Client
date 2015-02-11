@@ -12,9 +12,8 @@
                 ng-class="{ active: ($index === selectedIndex) }" ng-click="select(suggestion.name)">
             <a ng-href="#/{{ suggestion.url }}">
                 <img style="position: absolute;top: 0px;left: 10px;width: 40px;height: 40px;" ng-src="{{ suggestion.image }}">
-                <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px" ng-bind-html="suggestion.name | highlight:searchParam : suggestion.name"></span>
-                <br/>
-                <span style="padding-left: 60px">{{ suggestion.sub }}</span>
+                <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px"><b>{{ suggestion.name }}</b></span>
+                <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px">{{ suggestion.sub }}</span>
             </a>
         </li>
     </ul>
