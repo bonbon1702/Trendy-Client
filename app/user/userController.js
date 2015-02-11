@@ -13,7 +13,8 @@
                 $scope.following = [];
                 $scope.follower = [];
                 $scope.user = data.user;
-
+                $scope.show = true;
+                $scope.albDetail = [];
                 for (var i = 0; i < data.user.follower.length; i += 1) {
                     $scope.follower.push(data.user.follower[i]);
                     $scope.follower[i].status = 'Follow';
@@ -28,25 +29,26 @@
                     }
                 }
 
-                $scope.arrPost1 = [], $scope.arrPost2 = [], $scope.arrPost3 = [], $scope.arrPost4 = [];
-                for (var i = 0; i < $scope.user.posts.length; i = i + 4) {
-                    if ($scope.user.posts[i] != null) {
-                        $scope.arrPost1.push($scope.user.posts[i]);
-                    }
-                    if ($scope.user.posts[i + 1] != null) {
-                        $scope.arrPost2.push($scope.user.posts[i + 1]);
-                    }
-                    if ($scope.user.posts[i + 2] != null) {
-                        $scope.arrPost3.push($scope.user.posts[i + 2]);
-                    }
-                    if ($scope.user.posts[i + 3] != null) {
-                        $scope.arrPost4.push($scope.user.posts[i + 3]);
-                    }
-                }
             })
             .error(function (data) {
                 console.log(data);
+
             });
+
+        $scope.showTabAlbum = function (data) {
+            $scope.show = false;
+            $scope.index = data;
+            for (var i = 0; i < $scope.user.album[data].length; i++) {
+                $scope.albDetail.push($scope.user.album[data].album_detail[i]);
+            }
+            $scope.status = false;
+            console.log($scope.show);
+        }
+
+        $scope.setShowInitValue = function () {
+            $scope.show = true;
+            console.log($scope.show);
+        }
 
         $scope.followBtnClick = function (user) {
             var data;
@@ -120,7 +122,6 @@
                     })
             }
         }
-
 
 
     }

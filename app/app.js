@@ -39,6 +39,10 @@
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
+                .when('/#tab2-3-1/:index', {
+                    templateUrl: 'app/user/templates/user.html',
+                    controller: 'userController'
+                })
                 .when('/#tab3-3', {
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'

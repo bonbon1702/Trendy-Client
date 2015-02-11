@@ -11,9 +11,11 @@
                                     <img src="assets/img/images/photodune-2755655-party-time-s.jpg"
                                          class="img-responsive"/>
                                 </div>
-                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector" data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
+                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"
+                                     data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
                                     <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
-                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b"><span class="fileupload-new"></span>
+                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b"><span
+                                                    class="fileupload-new"></span>
                                                 <input type="file" class="margin-none "></span>
                                     </div>
                                     </a>
@@ -37,7 +39,8 @@
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets"  ng-href="#/following/{{user.id}}" data-original-title="" style="color: #0084B4;">
+                                               data-nav="tweets" ng-href="#/following/{{user.id}}"
+                                               data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
                                             </a>
@@ -72,16 +75,18 @@
                         <div class="tabsbar">
                             <ul>
                                 <li class="glyphicons camera active">
-                                    <a href="/#tab1-3" data-toggle="tab"><i></i> View all photos <strong>({{ user.posts.length }})</strong></a>
+                                    <a href="/#tab1-3" ng-click="setShowInitValue()" data-toggle="tab"><i></i> View all photos <strong>({{
+                                        user.posts.length }})</strong></a>
                                 </li>
-                                <li class="glyphicons folder_open">
-                                    <a href="/#tab2-3" data-toggle="tab"><i></i> Albums <strong>(3)</strong></a>
+                                <li class="glyphicons folder_open" ng-class="{'active': status}">
+                                    <a href="/#tab2-3"  data-toggle="tab"><i></i> Albums <strong>({{ user.album.length
+                                        }})</strong></a>
                                 </li>
                                 <li class="glyphicons circle_plus tab-stacked">
-                                    <a href="/#tab3-3" data-toggle="tab"><i></i> <span>Add Photos</span></a>
+                                    <a href="/#tab3-3" ng-click="setShowInitValue()" data-toggle="tab"><i></i> <span>Add Photos</span></a>
                                 </li>
                                 <li class="glyphicons folder_plus tab-stacked">
-                                    <a href="/#tab4-3" data-toggle="tab"><i></i> <span>Create Album</span></a>
+                                    <a href="/#tab4-3" ng-click="setShowInitValue()" data-toggle="tab"><i></i> <span>Create Album</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -95,40 +100,48 @@
                                     <ul class="row">
 
                                         <!-- Gallery item -->
-                                        <div class="blc-row" style="width: 214px;" >
-                                            <li ng-repeat="post in arrPost1">
-                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                                   data-gallery="gallery-3">
-                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                         class="img-responsive"/>
-                                                </a>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.posts">
+                                                <div ng-if="$index % 4 == 0">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
                                             </li>
                                         </div>
-                                        <div class="blc-row" style="width: 214px;" >
-                                            <li ng-repeat="post in arrPost2">
-                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                                   data-gallery="gallery-3">
-                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                         class="img-responsive"/>
-                                                </a>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.posts">
+                                                <div ng-if="$index % 4 == 1">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
                                             </li>
                                         </div>
-                                        <div class="blc-row" style="width: 214px;" >
-                                            <li ng-repeat="post in arrPost3">
-                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                                   data-gallery="gallery-3">
-                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                         class="img-responsive"/>
-                                                </a>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.posts">
+                                                <div ng-if="$index % 4 == 2">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
                                             </li>
                                         </div>
-                                        <div class="blc-row" style="width: 214px;" >
-                                            <li ng-repeat="post in arrPost4">
-                                                <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
-                                                   data-gallery="gallery-3">
-                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                         class="img-responsive"/>
-                                                </a>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.posts">
+                                                <div ng-if="$index % 4 == 3">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
                                             </li>
                                         </div>
 
@@ -140,61 +153,111 @@
 
                             <div class="tab-pane" id="tab2-3">
                                 <div class="row">
+                                    <div class="col-md-3" ng-repeat="album in user.album ">
+                                        <div class="thumbnail widget-thumbnail" ng-show="show">
+                                            <a href="/#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
+                                                <div class=" holderjs-fluid"
+                                                     style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">
+                                                    <img ng-src="{{ album.album_detail[0].image_url_editor }}"
+                                                         style="width: 201px;height: 197px;">
+                                                </div>
+                                            </a>
 
-                                    <div class="col-md-3">
-                                        <div class="thumbnail widget-thumbnail">
-                                            <img data-src="holder.js/100%x200" alt="100%x200 Image Holder" style="width: 0px; height: 0px;"><div class=" holderjs-fluid"  style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">341x200</div>
                                             <div class="caption">
-                                                <h4>Thumbnail heading</h4>
-                                                <a href="#" class="btn btn-primary">Action</a>
-                                                <a href="#" class="btn btn-inverse">Action</a>
+                                                <a><h5 style="font-weight: bold;color: #3b5998;">{{ album.album_name
+                                                    }}</h5></a>
+
+                                                <div style="font-size: 12px;color: #9197a3;">{{
+                                                    album.album_detail.length }} posts
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-3">
-                                        <div class="thumbnail widget-thumbnail">
-                                            <img data-src="holder.js/100%x200" alt="100%x200 Image Holder" style="width: 0px; height: 0px;"><div class=" holderjs-fluid"  style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">341x200</div>
-                                            <div class="caption">
-                                                <h4>Thumbnail heading</h4>
-                                                <a href="#" class="btn btn-primary">Action</a>
-                                                <a href="#" class="btn btn-inverse">Action</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="thumbnail widget-thumbnail">
-                                            <img data-src="holder.js/100%x200" alt="100%x200 Image Holder" style="width: 0px; height: 0px;"><div class=" holderjs-fluid"  style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">341x200</div>
-                                            <div class="caption">
-                                                <h4>Thumbnail heading</h4>
-                                                <a href="#" class="btn btn-primary">Action</a>
-                                                <a href="#" class="btn btn-inverse">Action</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="thumbnail widget-thumbnail">
-                                            <img data-src="holder.js/100%x200" alt="100%x200 Image Holder" style="width: 0px; height: 0px;"><div class=" holderjs-fluid"  style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">341x200</div>
-                                            <div class="caption">
-                                                <h4>Thumbnail heading</h4>
-                                                <a href="#" class="btn btn-primary">Action</a>
-                                                <a href="#" class="btn btn-inverse">Action</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane" id="tab2-3-1"  ng-hide="show">
+                                <a href="/#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4  style="color: #0084B4;margin-left: 18px;">Back</h4></a>
+                                <h3 style="text-align: center;margin-bottom: 30px;">{{ user.album[index].album_name }}</h3>
+                                <!-- Gallery -->
+                                <div class="gallery">
+                                    <ul class="row">
 
+                                        <!-- Gallery item -->
+
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.album[index].album_detail">
+                                                <div ng-if="$index % 4 == 0">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </div>
+
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.album[index].album_detail">
+                                                <div ng-if="$index % 4 == 1">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.album[index].album_detail">
+                                                <div ng-if="$index % 4 == 2">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </div>
+                                        <div class="blc-row" style="width: 214px;">
+                                            <li ng-repeat="post in user.album[index].album_detail">
+                                                <div ng-if="$index % 4 == 3">
+                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                       data-gallery="gallery-3">
+                                                        <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                             class="img-responsive"/>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </div>
+
+                                        <!-- // Gallery item END -->
+                                    </ul>
+                                </div>
+                                <!-- // Gallery END -->
+                            </div>
                             <div class="tab-pane" id="tab3-3">
                                 <h4>Third tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum. Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus magna.</p>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel
+                                    massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum.
+                                    Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend
+                                    nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget
+                                    gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur
+                                    ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus
+                                    magna.</p>
                             </div>
 
                             <div class="tab-pane" id="tab4-3">
                                 <h4>Fourth tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum. Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus magna.</p>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel
+                                    massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum.
+                                    Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend
+                                    nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget
+                                    gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur
+                                    ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus
+                                    magna.</p>
                             </div>
 
                         </div>
