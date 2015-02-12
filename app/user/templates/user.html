@@ -106,7 +106,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.posts">
                                                 <div ng-if="$index % 4 == 0">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify"  ng-click="showDialog(post.id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -117,7 +117,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.posts">
                                                 <div ng-if="$index % 4 == 1">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify"  ng-click="showDialog(post.id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -128,7 +128,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.posts">
                                                 <div ng-if="$index % 4 == 2">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -139,7 +139,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.posts">
                                                 <div ng-if="$index % 4 == 3">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify"  ng-click="showDialog(post.id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -191,7 +191,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 0">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -203,7 +203,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 1">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -214,7 +214,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 2">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
@@ -225,7 +225,7 @@
                                         <div class="blc-row" style="width: 214px;">
                                             <li ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 3">
-                                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg"
+                                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
                                                        data-gallery="gallery-3">
                                                         <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                              class="img-responsive"/>
