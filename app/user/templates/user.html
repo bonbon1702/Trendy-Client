@@ -21,7 +21,7 @@
                                     </a>
                                 </div>
                                 <ul class="list-unstyled">
-                                    <li class="active"><a href="user.html?lang=en"><i class="fa fa-fw fa-clock-o"></i>
+                                    <li class="active"><a ng-href="#/user/{{user.id}}"><i class="fa fa-fw fa-clock-o"></i>
                                         <span>Timeline</span></a></li>
                                     <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
                                     </li>
@@ -55,6 +55,9 @@
                                         </li>
 
                                     </div>
+                                    <button ng-click="flwBtnClick()" ng-hide="flwBtnStatus" class="btn btn-primary ng-binding" style="margin: 23px 41px;float: right;">
+                                        <i class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>{{flwBtnLbl}}
+                                    </button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -78,7 +81,7 @@
                                     <a href="/#tab1-3" ng-click="setShowInitValue()" data-toggle="tab"><i></i> View all photos <strong>({{
                                         user.posts.length }})</strong></a>
                                 </li>
-                                <li class="glyphicons folder_open" ng-class="{'active': status}">
+                                <li class="glyphicons folder_open" ng-class="{'active': statusTab}">
                                     <a href="/#tab2-3"  data-toggle="tab"><i></i> Albums <strong>({{ user.album.length
                                         }})</strong></a>
                                 </li>
