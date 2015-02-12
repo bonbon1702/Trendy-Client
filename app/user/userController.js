@@ -82,23 +82,22 @@
                     userService.addFollow(data)
                         .success(function () {
                             $scope.flwBtnLbl = 'Following';
-                            $scope.following.push($scope.user);
-                            $scope.user.following.length++;
+                            $scope.follower.push($scope.user);
+                            $scope.user.follower.length++;
                         })
                         .error(function (data) {
                             console.log(data);
                         })
                 } else if ($scope.flwBtnLbl == 'Following') {
                     data = {
-                        user_id: $routeParams.userId,
-                        follower_id: $scope.loginUserId
+                        user_id: $scope.loginUserId,
+                        follower_id: $routeParams.userId
                     };
                     userService.removeFollow(data)
                         .success(function () {
                             $scope.flwBtnLbl = 'Follow';
-                            $scope.following.splice($scope.user);
-                            $scope.user.following.length--;
-                            console.log($scope.user.following.length);
+                            $scope.follower.splice($scope.user);
+                            $scope.user.follower.length--;
                         })
                         .error(function () {
                             console.log(data);

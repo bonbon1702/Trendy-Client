@@ -6,7 +6,6 @@
         .controller('headerController', headerController);
 
     headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog'];
-
     function headerController($scope, headerService, $location, ngDialog) {
         $scope.update = function (type) {
             if (type.length > 1) {
