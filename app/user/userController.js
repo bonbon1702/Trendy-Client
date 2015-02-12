@@ -46,51 +46,64 @@
 
         headerService.loginUser()
             .success(function (data) {
+                $scope.flwBtnStatus = false;
                 $scope.loginUserId = data.user.id;
-                headerService.getUser($scope.loginUserId)
-                    .success(function (data) {
-                        $scope.flwBtnStatus = false;
-                        for (var j = 0; j < data.user.following.length; j += 1) {
-                            if (data.user.following[j].user_id == $routeParams.userId || $scope.loginUserId == $routeParams.userId) {
-                                $scope.flwBtnStatus = true;
+                if (data.user != null) {
+                    headerService.getUser($scope.loginUserId)
+                        .success(function (data) {
+                            for (var j = 0; j < data.user.following.length; j += 1) {
+                                if (data.user.following[j].user_id == $routeParams.userId || $scope.loginUserId == $routeParams.userId) {
+                                    $scope.flwBtnStatus = true;
+                                }
                             }
-                        }
-                    })
-                    .error(function (data) {
-                        console.log(data);
+                        })
+                        .error(function (data) {
+                            console.log(data);
 
-                    });
+                        });
+                }
             })
             .error(function (data) {
                 console.log(data);
             });
 
-        $scope.flwBtnClick=function(){
+        $scope.flwBtnClick = function () {
             var data;
-            if ($scope.flwBtnLbl == 'Follow') {
-                data = {
-                    user_id: $routeParams.userId,
-                    follower_id: $scope.loginUserId
-                };
-                userService.addFollow(data)
-                    .success(function () {
-                        $scope.flwBtnLbl = 'Following';
-                    })
-                    .error(function (data) {
-                        console.log(data);
-                    })
-            } else if ($scope.flwBtnLbl == 'Following') {
-                data = {
-                    user_id: $routeParams.userId,
-                    follower_id: $scope.loginUserId
-                };
-                userService.removeFollow(data)
-                    .success(function () {
-                        $scope.flwBtnLbl= 'Follow';
-                    })
-                    .error(function () {
-                        console.log(data);
-                    })
+            if (!$scope.loginUserId) {
+                headerService.openLogin();
+                event.stopPropagation();
+                event.preventDefault();
+            } else {
+                if ($scope.flwBtnLbl == 'Follow') {
+                    data = {
+                        user_id: $routeParams.userId,
+                        follower_id: $scope.loginUserId
+                    };
+                    userService.addFollow(data)
+                        .success(function () {
+                            $scope.flwBtnLbl = 'Following';
+                            $scope.following.push($scope.user);
+                            $scope.user.following.length++;
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        })
+                } else if ($scope.flwBtnLbl == 'Following') {
+                    data = {
+                        user_id: $routeParams.userId,
+                        follower_id: $scope.loginUserId
+                    };
+                    userService.removeFollow(data)
+                        .success(function () {
+                            $scope.flwBtnLbl = 'Follow';
+                            $scope.following.splice($scope.user);
+                            $scope.user.following.length--;
+                            console.log($scope.user.following.length);
+                        })
+                        .error(function () {
+                            console.log(data);
+                        })
+                }
             }
         }
 
@@ -183,7 +196,6 @@
                 className: 'ngdialog-theme-plain post-dialog',
                 controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
                     $scope.iconLike = false;
-
 
 
                     newfeedService.get(id)
@@ -281,7 +293,7 @@
                                 }
                             };
 
-                            $scope.closeDialog = function(){
+                            $scope.closeDialog = function () {
                                 ngDialog.close();
                             }
                         })
