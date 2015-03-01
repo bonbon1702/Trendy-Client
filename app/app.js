@@ -13,9 +13,10 @@
             'ngRoute',
             'angularFileUpload',
             'infinite-scroll',
-            'ngTagsInput'
+            'ngTagsInput',
+            'ui.router'
         ])
-        .config(function ($routeProvider, ngDialogProvider, $locationProvider) {
+        .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
                 // route for the home page
                 .when('/', {
@@ -31,26 +32,26 @@
                     templateUrl: 'app/user/templates/user.html',
                     controller: 'userController'
                 })
-                .when('/#tab1-3', {
-                    templateUrl: 'app/user/templates/user.html',
-                    controller: 'userController'
-                })
-                .when('/#tab2-3', {
-                    templateUrl: 'app/user/templates/user.html',
-                    controller: 'userController'
-                })
-                .when('/#tab2-3-1/:index', {
-                    templateUrl: 'app/user/templates/user.html',
-                    controller: 'userController'
-                })
-                .when('/#tab3-3', {
-                    templateUrl: 'app/user/templates/user.html',
-                    controller: 'userController'
-                })
-                .when('/#tab4-3', {
-                    templateUrl: 'app/user/templates/user.html',
-                    controller: 'userController'
-                })
+                //.when('/#tab1-3', {
+                //    templateUrl: 'app/user/templates/user.html',
+                //    controller: 'userController'
+                //})
+                //.when('/#tab2-3', {
+                //    templateUrl: 'app/user/templates/user.html',
+                //    controller: 'userController'
+                //})
+                //.when('/#tab2-3-1', {
+                //    templateUrl: 'app/user/templates/user.html',
+                //    controller: 'userController'
+                //})
+                //.when('/#tab3-3', {
+                //    templateUrl: 'app/user/templates/user.html',
+                //    controller: 'userController'
+                //})
+                //.when('/#tab4-3', {
+                //    templateUrl: 'app/user/templates/user.html',
+                //    controller: 'userController'
+                //})
                 .when('/following/:userId', {
                     templateUrl: 'app/user/templates/following.html',
                     controller: 'userController'
@@ -64,6 +65,33 @@
                     controller: 'shopController'
                 })
                 .otherwise({redirectTo: '/'});
+            //$stateProvider
+            //    .state('tab1-3', {
+            //        url: '/tab1-3',
+            //        templateUrl: "", // First template.
+            //        controller: "userController"
+            //    })
+            //
+            //    .state('tab2-3', {
+            //        url: '/tab2-3',
+            //        templateUrl: "", // Second template.
+            //        controller: "userController"
+            //    })
+            //    .state('tab2-3-1', {
+            //        url: '/tab2-3-1',
+            //        templateUrl: "", // Second template.
+            //        controller: "userController"
+            //    })
+            //    .state('tab3-3', {
+            //        url: '/tab3-3',
+            //        templateUrl: "", // Third template.
+            //        controller: "userController"
+            //    })
+            //    .state('tab4-3', {
+            //        url: '/tab4-3',
+            //        templateUrl: "", // Second template.
+            //        controller: "userController"
+            //    });
             ngDialogProvider.setDefaults({
                 showClose: true,
                 closeByDocument: true,

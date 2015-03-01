@@ -13,7 +13,7 @@
 
     googleMap.init = function (data) {
 
-        console.log(data);
+        //console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
             {

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
     <title></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
@@ -39,6 +40,33 @@
     <link rel="stylesheet" type="text/css" href="assets/css/css_3.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
+
+
+    <!--<script>-->
+
+        <!--$(function()-->
+        <!--{-->
+            <!--$('a[data-toggle="tab"]').on('shown', function () {-->
+                <!--//save the latest tab; use cookies if you like 'em better:-->
+                <!--localStorage.setItem('lastTab', $(this).attr('data-target'));-->
+                <!--console.log(localStorage.getItem('lastTab'));-->
+            <!--});-->
+
+            <!--//go to the latest tab, if it exists:-->
+            <!--//var lastTab = "#sectionB";-->
+            <!--var lastTab=localStorage.getItem('lastTab');-->
+            <!--if (lastTab) {-->
+                <!--$('a[data-target=' + lastTab + ']').tab('show');-->
+                <!--console.log("loz me");-->
+            <!--}-->
+            <!--else-->
+            <!--{-->
+                <!--// Set the first tab if cookie do not exist-->
+                <!--$('a[data-toggle="tab"]:last').tab('show');-->
+                <!--console.log("dkm");-->
+            <!--}-->
+        <!--});-->
+    <!--</script>-->
 </head>
 <body>
     <!--Header-->
@@ -99,6 +127,8 @@
     <script src="assets/js/libs/ngDialog.min.js"></script>
     <script src="assets/js/googleMap.js"></script>
     <script src="assets/js/core.init.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <script src="assets/js/loadTabs.js"></script>
     <script src="assets/js/magiccard_ver2.js"></script>
     <script src="assets/js/libs/accounting.min.js"></script>
     <script src="assets/js/main_marker.js"></script>
@@ -125,6 +155,7 @@
     <script src="assets/js/libs/caman.full.min.js"></script>
     <script src="assets/js/magicSearch.js"></script>
     <script src="assets/js/libs/angular-route.js"></script>
+    <script src="assets/js/libs/angular-ui-router.min.js"></script>
     <script src="assets/js/libs/angular-route.min.js"></script>
     <script src="assets/js/libs/angular-route.min.js.map"></script>
     <script src="assets/js/libs/oauth.min.js"></script>

@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$routeParams', 'userService', 'headerService'];
+    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route','$stateParams','userService', 'headerService', 'postService'];
 
-    function userController($scope, ngDialog, $routeParams, userService, headerService) {
+    function userController($scope, ngDialog, $routeParams,$route,$stateParams, userService, headerService,postService) {
         $scope.flwBtnLbl = 'Follow';
         userService.getUser($routeParams.userId)
             .success(function (data) {
@@ -187,6 +187,59 @@
                         console.log(data);
                     })
             }
+        }
+
+        $scope.deletePost =function(post){
+            data ={
+                'id':post.id
+            }
+            ngDialog.open({
+                template: 'app/post/templates/confirmDeletePost.html',
+                className: 'ngdialog-theme-plain',
+                controller: ['$scope', function ($scope) {
+                    $scope.close = function () {
+                        ngDialog.close();
+                    };
+                    $scope.confirm = function () {
+                        ngDialog.close();
+                        postService.delete(data)
+                            .success(function(data){
+                                window.location.reload(true);
+                            })
+                            .error(function(data){
+                                console.log(data);
+                            });
+                    }
+                }]
+            });
+
+        }
+
+        $scope.deletePostInAlbumDetail =function(post){
+            data ={
+                'id':post.post_id
+            }
+            ngDialog.open({
+                template: 'app/post/templates/confirmDeletePost.html',
+                className: 'ngdialog-theme-plain',
+                controller: ['$scope', function ($scope) {
+                    $scope.close = function () {
+                        ngDialog.close();
+                    };
+                    $scope.confirm = function () {
+                        ngDialog.close();
+                        postService.delete(data)
+                            .success(function(data){
+                                //document.getElementById("tab2-3-1").innerHTML=data;
+                                $route.reload();
+                            })
+                            .error(function(data){
+                                console.log(data);
+                            });
+                    }
+                }]
+            });
+
         }
 
         $scope.showDialog = function (id) {
