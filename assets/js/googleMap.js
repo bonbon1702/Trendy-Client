@@ -366,7 +366,7 @@
 
             div = this.div = document.createElement('div');
 
-            div.className = 'heart';
+            div.className = 'marker';
 
             div.style.position = 'absolute';
             div.style.cursor = 'pointer';
@@ -402,8 +402,8 @@
     var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
     if (point) {
-        div.style.left = (point.x -50) + 'px';
-        div.style.top = (point.y -80) + 'px';
+        div.style.left = (point.x -36) + 'px';
+        div.style.top = (point.y -86) + 'px';
 		
         div1.style.left = (point.x+5) + 'px';
         div1.style.top = (point.y-12) + 'px';

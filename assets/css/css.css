@@ -995,3 +995,91 @@ white-space: nowrap;
 	opacity: 1;
 	transition: opacity 1s linear;
 }
+
+
+
+
+
+
+.marker {
+z-index:2;
+position: absolute;
+width: 72px;
+height: 72px;
+z-index: 2;
+cursor: pointer;
+-webkit-animation-name: bounce;
+  -moz-animation-name: bounce;
+  -o-animation-name: bounce;
+  -ms-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.marker:before {
+z-index:2;
+display: block;
+position: absolute;
+top: -7px;
+left: -7px;
+width: 86px;
+height: 102px;
+content: '';
+background: url(http://lozi.vn/img/backgrounds/map-marker.png) center no-repeat;
+}
+.marker .img-marker {
+z-index:3;
+}
+
+.marker .marker-hover {
+display: none;
+position: absolute;
+top: -8px;
+left: -8px;
+width: 260px;
+height: 88px;
+padding: 0 16px;
+padding-left: 100px;
+border-radius: 88px;
+color: #FFF;
+background-color: #1c2025;
+font-size: 12px;
+z-index: 1;
+}
+.marker .bg-dark {
+background-color: #1c2025;
+color: #e5e5e5;
+}
+
+.marker .marker-hover [role=product] {
+margin-top: 15px;
+display: block;
+font-weight: 700;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.marker .marker-hover [role=shop] {
+display: block;
+color: #a1a1a1;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
+.marker:hover .marker-hover{
+	display:block;
+	visibility: visible;
+	opacity: 1;
+	transition: opacity 1s linear;
+}
