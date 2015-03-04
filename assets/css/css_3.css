@@ -312,3 +312,17 @@ body {
     margin-top: -9px;
     background: url("http://cssdeck.com/uploads/media/items/7/7BNkBjd.png") 0 0 no-repeat;
 }
+.numberCircle {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    top: 0px;
+    left: 15px;
+    background: #F00;
+    color: white;
+    text-align: center;
+    position:absolute;
+    z-index: 999;
+    font: 11px Arial, sans-serif;
+}

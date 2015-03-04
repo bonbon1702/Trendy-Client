@@ -73,7 +73,6 @@
                     $scope.iconLike = false;
 
 
-
                     newfeedService.get(id)
                         .success(function (data) {
                             $scope.post = data.post;
@@ -118,7 +117,6 @@
                                     }
                                 })
                             };
-
                             $scope.submitComment = function () {
                                 if (!$scope.loginUser) {
                                     event.preventDefault();
@@ -131,9 +129,17 @@
                                         'user_id': $scope.loginUser.id
                                     };
                                     $scope.comment = null;
+                                    $scope.post.comments.push({
+                                        'content': data.content,
+                                        'created_at': 'now',
+                                        'user':{
+                                            'username': $scope.loginUser.username,
+                                            'id':$scope.loginUser.id,
+                                            'picture_profile': $scope.loginUser.picture_profile
+                                        }
+                                    });
                                     newfeedService.save(data)
                                         .success(function (data) {
-                                            $scope.post.comments.push(data.comment);
                                         })
                                         .error(function (data) {
 
@@ -152,15 +158,17 @@
                                         user: $scope.loginUser.id
                                     };
 
+                                    if ($scope.iconLike == true) {
+                                        $scope.post.like.length--;
+                                        $scope.iconLike = false;
+                                    } else {
+                                        $scope.post.like.length++;
+                                        $scope.iconLike = true;
+                                    }
+
                                     newfeedService.likeOrDislike(data)
                                         .success(function (data) {
-                                            if ($scope.iconLike == true) {
-                                                $scope.post.like.length--;
-                                                $scope.iconLike = false;
-                                            } else {
-                                                $scope.post.like.length++;
-                                                $scope.iconLike = true;
-                                            }
+
 
                                         })
                                         .error(function (data) {

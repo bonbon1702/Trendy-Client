@@ -14,7 +14,8 @@
             'angularFileUpload',
             'infinite-scroll',
             'ngTagsInput',
-            'ui.router'
+            'ui.router',
+            'pusher-angular'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
@@ -99,7 +100,8 @@
             });
         })
         .run(function ($rootScope) {
-            $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
+//            $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
             //$rootScope.url = 'http://104.43.9.177/api/';
+            $rootScope.url = 'http://trendy-server.dev/api/';
         });
 })(angular);
