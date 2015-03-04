@@ -174,9 +174,13 @@
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
         var pos = new google.maps.LatLng(20.9875830,105.8316770);
-        createMarker(map,null,pos,'dinh cong');
-
-        //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi');
+		var pos2 = new google.maps.LatLng(21.0249399, 105.8457613);
+		new CustomMarker(pos,map,{marker_id:'123',product:'shirt',shop:'123 ha noi xxxxxxxxxxxxxxxxxxxxxxxxxxxx'});
+		new CustomMarker(pos2,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
+        //new CustomMarker.prototype.remove();
+        createMarker(map,null,pos);
+        //alert(data.length);
+        //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi','dep');
         //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
         //for (var i = 0; i < data.length; i++) {
         //    var image = {
@@ -325,27 +329,96 @@
             });
         }
     }
-    // Hàm đánh dấu lên bản đồ từ 1 đối tượng địa điểm place
-    var createMarker = function (map, icon, position,content) {
+	var createMarker = function (map, icon, position) {
         icon = icon || null;
         var marker = new google.maps.Marker({
             position: position,
             map: map,
             shape: {coords: [17, 17, 18], type: 'circle'},
-            icon: icon,
+            //icon: {
+            //   url: 'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
+            //    size: new google.maps.Size(71, 71),
+            //   origin: new google.maps.Point(0, 0),
+            //    anchor: new google.maps.Point(17, 34),
+            //   scaledSize: new google.maps.Size(50, 50)
+            //},
 
             optimized: false
         });
-        var infowindow = new google.maps.InfoWindow({
-            content: content
-        });
-        google.maps.event.addListener(marker, 'mouseover', function () {
-            infowindow.open(map, this);
-        });
-        google.maps.event.addListener(marker, 'mouseout', function () {
-            infowindow.close();
-        });
         return marker;
     }
+    // Hàm đánh dấu lên bản đồ từ 1 đối tượng địa điểm place
+    function CustomMarker(latlng, map, args) {
+    this.latlng = latlng;
+    this.args = args;
+    this.setMap(map);
+}
+
+    CustomMarker.prototype = new google.maps.OverlayView();
+
+    CustomMarker.prototype.draw = function() {
+
+        var self = this;
+
+        var div = this.div;
+        var div1 = this.div;
+        if (!div) {
+
+            div = this.div = document.createElement('div');
+
+            div.className = 'marker';
+
+            div.style.position = 'absolute';
+            div.style.cursor = 'pointer';
+            //div.id='heart';
+            div.innerHTML ='<img class="img-marker" '
+                            +'src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg">'
+							+'<div class="marker-hover bg-dark">'    
+							+'<a href="/mon-an/lau-buffet" role="product">'
+							+	self.args.product
+							+'</a>'       
+							+'<a href="/nha-hang/gyu-jin-vincom-a-171-dong-khoi-p-ben-nghe-quan-1-tp-hcm-15" role="shop">'+self.args.shop+'</a></div>';
+            div1 = this.div = document.createElement('div');
+
+            div1.className = 'pulse';
+
+            div1.style.position = 'absolute';
+            div1.style.cursor = 'pointer';
+            if (typeof(self.args.marker_id) !== 'undefined') {
+                div.dataset.marker_id = self.args.marker_id;
+                div1.dataset.marker_id = self.args.marker_id;
+            }
+
+            google.maps.event.addDomListener(div, "click", function(event) {
+                alert('You clicked on a custom marker!');
+                google.maps.event.trigger(self, "click");
+            });
+            var panes = this.getPanes();
+            panes.overlayImage.appendChild(div);
+            panes.overlayImage.appendChild(div1);
+            //panes.overlayImage.appendChild('<div class="pulse"></div>');
+        }
+
+    var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+
+    if (point) {
+        div.style.left = (point.x -36) + 'px';
+        div.style.top = (point.y -86) + 'px';
+		
+        div1.style.left = (point.x+5) + 'px';
+        div1.style.top = (point.y-12) + 'px';
+    }
+    };
+
+    CustomMarker.prototype.remove = function() {
+        if (this.div) {
+            this.div.parentNode.removeChild(this.div);
+            this.div = null;
+        }
+    };
+
+    CustomMarker.prototype.getPosition = function() {
+        return this.latlng;
+    };
     return googleMap;
 });
