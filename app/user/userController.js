@@ -51,6 +51,9 @@
                 if (data.user != null) {
                     headerService.getUser($scope.loginUserId)
                         .success(function (data) {
+                            if($scope.loginUserId == $routeParams.userId){
+                                $scope.flwBtnStatus = true;
+                            }
                             for (var j = 0; j < data.user.following.length; j += 1) {
                                 if (data.user.following[j].user_id == $routeParams.userId || $scope.loginUserId == $routeParams.userId) {
                                     $scope.flwBtnStatus = true;
