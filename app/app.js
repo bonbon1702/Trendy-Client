@@ -16,8 +16,7 @@
             'ngTagsInput',
             'ui.router',
             'pusher-angular',
-            'ui.router',
-            'ngStorage'
+            'ui.router'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
