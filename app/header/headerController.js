@@ -54,7 +54,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                $window.location.href = "http://trendyplus.dev/#/post?image="
                                     + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -62,8 +62,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                         "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                        "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                        "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                        "target:'http://trendyplus.dev/#/post', " +
+                                        "exit:'http://trendyplus.dev/#/'});"
                             }
                         }]
                     });
@@ -77,27 +77,29 @@
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
-                headerService.getNotification($scope.loginUser.id)
-                    .success(function (data) {
-                        if (data) {
-                            data.notification.notification.sort(function (a, b) {
-                                return b.id - a.id;
-                            });
+                if ($scope.loginUser) {
+                    headerService.getNotification($scope.loginUser.id)
+                        .success(function (data) {
+                            if (data) {
+                                data.notification.notification.sort(function (a, b) {
+                                    return b.id - a.id;
+                                });
 
-                            for (var i = 0; i < data.notification.notification.length; i++) {
-                                var noti = data.notification.notification[i];
-                                if (noti.id_of_user_effected !== $scope.loginUser.id) {
-                                    $scope.notification.push(noti);
+                                for (var i = 0; i < data.notification.notification.length; i++) {
+                                    var noti = data.notification.notification[i];
+                                    if (noti.id_of_user_effected !== $scope.loginUser.id) {
+                                        $scope.notification.push(noti);
+                                    }
+                                }
+                                for (var i = 0; i < data.notification.notification_unread.length; i++) {
+                                    var noti = data.notification.notification_unread[i];
+                                    if (noti.id_of_user_effected !== $scope.loginUser.id) {
+                                        $scope.notification_unread.push(noti);
+                                    }
                                 }
                             }
-                            for (var i = 0; i < data.notification.notification_unread.length; i++) {
-                                var noti = data.notification.notification_unread[i];
-                                if (noti.id_of_user_effected !== $scope.loginUser.id) {
-                                    $scope.notification_unread.push(noti);
-                                }
-                            }
-                        }
-                    });
+                        });
+                }
             })
             .error(function (data) {
                 console.log(data);
@@ -119,7 +121,7 @@
         my_channel.bind('comment',
             function (data) {
                 $scope.notification_unread.push(data);
-                $scope.notification.push(data.notification);
+                $scope.notification.unshift(data.notification);
             }
         );
         $scope.reader_notification = function () {
