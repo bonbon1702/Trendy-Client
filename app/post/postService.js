@@ -37,6 +37,27 @@
                     method: 'DELETE',
                     url: $rootScope.url + 'post/delete/'+data.id
                 });
+            },
+            deleteAlbum: function (data) {
+                return $http({
+                    method: 'DELETE',
+                    url: $rootScope.url + 'album/delete/'+data.albName
+                });
+            },
+            editAlbumName: function(data){
+                return $http({
+                    method: 'PUT',
+                    url: $rootScope.url + 'album/' +data.id,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': '*'
+                    },
+                    params: {
+                        album_name:data['album_name']
+                    }
+                });
             }
         }
     }

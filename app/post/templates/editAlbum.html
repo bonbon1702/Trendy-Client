@@ -1,0 +1,20 @@
+<div class="dialog-contents">
+    <div class="form-container bg-dark">
+        <figure class="avatar">
+            <img ng-src="{{ albPicture }}" style="width: 100%;height: inherit;">
+        </figure>
+        <div style="margin-left: -15px;">
+            Album name
+            <input type="text" name="name" ng-model="updtAlbName"
+                   class="text-box ng-pristine ng-valid" style="margin: -27px 100px;border-color: #a8acbc #babdcc #c0c3d2;" />
+        </div>
+        <a  class="btn btn-primary" ng-click="editAlbumName()"
+                style="width: 72px;height: 32px;margin-top: 72px;padding: 5px;float: right;display: inline;margin-right: -52px;">
+            <i class="fa fa-check" style="font-size: 13px;width: 11px;"></i>
+            Save
+        </a>
+        <div class="delete-btn-wrapper">
+            <a class="btn btn-link" role="delete" ng-click="deleteAlbum()">Xóa bộ sưu tập</a>
+        </div>
+    </div>
+</div>

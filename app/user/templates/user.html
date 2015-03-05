@@ -217,17 +217,17 @@
                                             </a>
                                             <div class="description  meta" style="background: none;top: 160px;left: 18px;">
                                                 <div class="hover-blue">
-                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="">
+                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album)">
                                                         <i class="fa fa-edit" style="color: #626366;"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="caption">
-                                                <a><h5 style="font-weight: bold;color: #3b5998;">{{ album.album_name
-                                                    }}</h5></a>
+                                                <a><h5 style="font-weight: bold;color: #3b5998;">{{ album.album_name}}</h5></a>
 
-                                                <div style="font-size: 12px;color: #9197a3;">{{
-                                                    album.album_detail.length }} posts
+                                                <div style="font-size: 12px;color: #9197a3;display: inline-flex;">{{album.album_detail.length }}
+                                                    <div ng-if="album.album_detail.length > 1" style="margin: 0px 1px;"> posts</div>
+                                                    <div ng-if="album.album_detail.length == 1" style="margin: 0px 1px;"> post</div>
                                                 </div>
                                             </div>
                                         </div>

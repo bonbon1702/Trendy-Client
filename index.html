@@ -17,6 +17,9 @@
     <link rel="stylesheet" type="text/css" href="assets/css/css.css">
     <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-editAlbum.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-congratulation.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/autocomplete.css">
     <link rel="stylesheet" type="text/css" href="assets/css/magiccard.css">
     <link rel="stylesheet" type="text/css" href="assets/css/libs/animations.css">
@@ -40,33 +43,31 @@
     <link rel="stylesheet" type="text/css" href="assets/css/css_3.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
+    <script>
+        $.noConflict();
+        jQuery( document ).ready(function( $ ) {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+                //save the latest tab; use cookies if you like 'em better:
+                localStorage.setItem('lastTab', $(this).attr('data-target'));
+                console.log(localStorage.getItem('lastTab'));
+            });
 
-    <!--<script>-->
-
-        <!--$(function()-->
-        <!--{-->
-            <!--$('a[data-toggle="tab"]').on('shown', function () {-->
-                <!--//save the latest tab; use cookies if you like 'em better:-->
-                <!--localStorage.setItem('lastTab', $(this).attr('data-target'));-->
-                <!--console.log(localStorage.getItem('lastTab'));-->
-            <!--});-->
-
-            <!--//go to the latest tab, if it exists:-->
-            <!--//var lastTab = "#sectionB";-->
-            <!--var lastTab=localStorage.getItem('lastTab');-->
-            <!--if (lastTab) {-->
-                <!--$('a[data-target=' + lastTab + ']').tab('show');-->
-                <!--console.log("loz me");-->
-            <!--}-->
-            <!--else-->
-            <!--{-->
-                <!--// Set the first tab if cookie do not exist-->
-                <!--$('a[data-toggle="tab"]:last').tab('show');-->
-                <!--console.log("dkm");-->
-            <!--}-->
-        <!--});-->
-    <!--</script>-->
+            //go to the latest tab, if it exists:
+            var lastTab=localStorage.getItem('lastTab');
+            if (lastTab) {
+                $('a[data-target=' + lastTab + ']').tab('show');
+                console.log("loz me");
+            }
+            else
+            {
+                // Set the first tab if cookie do not exist
+                $('a[data-toggle="tab"]:first').tab('show');
+                console.log("dkm");
+            }
+        });
+    </script>
 </head>
 <body>
     <!--Header-->
@@ -80,7 +81,7 @@
                 <a href="" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
                 <ul class="dropdown-menu chat media-list">
                     <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="../assets/images/people/100/15.jpg" alt="50x50" width="50"/></a>
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
                         <div class="media-body">
                             <span class="label label-default pull-right">5 min</span>
                             <h5 class="media-heading">Adrian D.</h5>
@@ -88,7 +89,7 @@
                         </div>
                     </li>
                     <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="../assets/images/people/100/16.jpg" alt="50x50" width="50"/></a>
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
                         <div class="media-body">
                             <span class="label label-default pull-right">2 days</span>
                             <h5 class="media-heading">Jane B.</h5>
@@ -96,7 +97,7 @@
                         </div>
                     </li>
                     <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="../assets/images/people/100/17.jpg" alt="50x50" width="50"/></a>
+                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
                         <div class="media-body">
                             <span class="label label-default pull-right">3 days</span>
                             <h5 class="media-heading">Andrew M.</h5>
@@ -195,6 +196,7 @@
     <script src="assets/js/libs/pixlr.js"></script>
     <script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
 
 
 

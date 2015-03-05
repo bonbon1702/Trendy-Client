@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route','$stateParams','userService', 'headerService', 'postService'];
+    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route','$localStorage','userService', 'headerService', 'postService'];
 
-    function userController($scope, ngDialog, $routeParams,$route,$stateParams, userService, headerService,postService) {
+    function userController($scope, ngDialog, $routeParams,$route,$localStorage, userService, headerService,postService) {
         $scope.flwBtnLbl = 'Follow';
         userService.getUser($routeParams.userId)
             .success(function (data) {
@@ -195,7 +195,8 @@
             }
             ngDialog.open({
                 template: 'app/post/templates/confirmDeletePost.html',
-                className: 'ngdialog-theme-plain',
+                className: 'ngdialog-theme-plain-custom',
+
                 controller: ['$scope', function ($scope) {
                     $scope.close = function () {
                         ngDialog.close();
@@ -221,7 +222,7 @@
             }
             ngDialog.open({
                 template: 'app/post/templates/confirmDeletePost.html',
-                className: 'ngdialog-theme-plain',
+                className: 'ngdialog-theme-plain-custom',
                 controller: ['$scope', function ($scope) {
                     $scope.close = function () {
                         ngDialog.close();
@@ -232,6 +233,87 @@
                             .success(function(data){
                                 //document.getElementById("tab2-3-1").innerHTML=data;
                                 $route.reload();
+                                localStorage.setItem('lastTab', "#tab2-3-1");
+                                //$scope.$on('$viewContentLoaded', addCrudControls);
+                                //angular.element($('a[data-target=' + localStorage.getItem('lastTab') + ']').tab('show'));
+                            })
+                            .error(function(data){
+                                console.log(data);
+                            });
+                    }
+                }]
+            });
+
+        }
+
+        $scope.editAlbum =function(album){
+            ngDialog.open({
+                template: 'app/post/templates/editAlbum.html',
+                className: 'ngdialog-theme-plain-custom-editAlbum',
+                controller: ['$scope', function ($scope) {
+                    $scope.albPicture=album.album_detail[0].image_url_editor;
+                    $scope.updtAlbName = album.album_name;
+                    $scope.close = function () {
+                        ngDialog.close();
+                    };
+                    $scope.confirm = function () {
+                        ngDialog.close();
+                        postService.delete(data)
+                            .success(function(data){
+                                //document.getElementById("tab2-3-1").innerHTML=data;
+                                $route.reload();
+                                localStorage.setItem('lastTab', "#tab2-3-1");
+                                //$scope.$on('$viewContentLoaded', addCrudControls);
+                                //angular.element($('a[data-target=' + localStorage.getItem('lastTab') + ']').tab('show'));
+                            })
+                            .error(function(data){
+                                console.log(data);
+                            });
+                    };
+                    $scope.deleteAlbum = function(){
+                        data ={
+                            'albName' : album.album_name
+                        }
+                        ngDialog.open({
+                            template: 'app/post/templates/confirmDeletePost.html',
+                            className: 'ngdialog-theme-plain-custom',
+                            controller: ['$scope', function ($scope) {
+                                $scope.close = function () {
+                                    ngDialog.close();
+                                };
+                                $scope.confirm = function () {
+                                    ngDialog.close();
+                                    postService.deleteAlbum(data)
+                                        .success(function(data){
+                                            ngDialog.close();
+                                            $route.reload();
+                                        })
+                                        .error(function(data){
+                                            console.log(data);
+                                        });
+                                };
+                            }]
+                        });
+                    }
+
+                    $scope.editAlbumName = function(){
+
+                        data ={
+                            'id' : album.id,
+                            'album_name':$scope.updtAlbName
+                        }
+                        postService.editAlbumName(data)
+                            .success(function(data){
+                                ngDialog.open({
+                                    template: 'app/post/templates/congratulation.html',
+                                    className: 'ngdialog-theme-plain-custom-congratulation',
+                                    controller: ['$scope', function ($scope) {
+                                        $scope.confirm = function () {
+                                            ngDialog.close();
+                                            $route.reload();
+                                        };
+                                    }]
+                                });
                             })
                             .error(function(data){
                                 console.log(data);
