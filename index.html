@@ -41,116 +41,165 @@
     <link rel="stylesheet" type="text/css" href="assets/css/css_1.css">
     <link rel="stylesheet" type="text/css" href="assets/css/css_2.css">
     <link rel="stylesheet" type="text/css" href="assets/css/css_3.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
 
-    <script>
-        $.noConflict();
-        jQuery( document ).ready(function( $ ) {
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
-                //save the latest tab; use cookies if you like 'em better:
-                localStorage.setItem('lastTab', $(this).attr('data-target'));
-                console.log(localStorage.getItem('lastTab'));
-            });
 
-            //go to the latest tab, if it exists:
-            var lastTab=localStorage.getItem('lastTab');
-            if (lastTab) {
-                $('a[data-target=' + lastTab + ']').tab('show');
-                console.log("loz me");
-            }
-            else
-            {
-                // Set the first tab if cookie do not exist
-                $('a[data-toggle="tab"]:first').tab('show');
-                console.log("dkm");
-            }
-        });
-    </script>
+    <!--<script>-->
+
+        <!--$(function()-->
+        <!--{-->
+            <!--$('a[data-toggle="tab"]').on('shown', function () {-->
+                <!--//save the latest tab; use cookies if you like 'em better:-->
+                <!--localStorage.setItem('lastTab', $(this).attr('data-target'));-->
+                <!--console.log(localStorage.getItem('lastTab'));-->
+            <!--});-->
+
+            <!--//go to the latest tab, if it exists:-->
+            <!--//var lastTab = "#sectionB";-->
+            <!--var lastTab=localStorage.getItem('lastTab');-->
+            <!--if (lastTab) {-->
+                <!--$('a[data-target=' + lastTab + ']').tab('show');-->
+                <!--console.log("loz me");-->
+            <!--}-->
+            <!--else-->
+            <!--{-->
+                <!--// Set the first tab if cookie do not exist-->
+                <!--$('a[data-toggle="tab"]:last').tab('show');-->
+                <!--console.log("dkm");-->
+            <!--}-->
+        <!--});-->
+    <!--</script>-->
 </head>
 <body>
-    <!--Header-->
-    <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController">
-        <div class=" pull-left">
-            <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
+<!--Header-->
+<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController">
+    <div class=" pull-left">
+        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
+        </a>
+    </div>
+    <ul class="notifications pull-left hidden-xs">
+        <li class="dropdown notif">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-click="reader_notification()">
+                <i class="notif-block icon-envelope-1" style="position: relative;">
+                    <div class="numberCircle">
+                        {{ notification_unread.length }}
+                    </div>
+                </i>
             </a>
-        </div>
-        <ul class="notifications pull-left hidden-xs">
-            <li class="dropdown notif">
-                <a href="" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
-                <ul class="dropdown-menu chat media-list">
-                    <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
-                        <div class="media-body">
-                            <span class="label label-default pull-right">5 min</span>
-                            <h5 class="media-heading">Adrian D.</h5>
-                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
-                        <div class="media-body">
-                            <span class="label label-default pull-right">2 days</span>
-                            <h5 class="media-heading">Jane B.</h5>
-                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <a class="pull-left" href="#"><img class="media-object thumb" src="" alt="50x50" width="50"/></a>
-                        <div class="media-body">
-                            <span class="label label-default pull-right">3 days</span>
-                            <h5 class="media-heading">Andrew M.</h5>
-                            <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-            <div class="dropdown username pull-left" ng-show="loginUser != null" ng-cloak>
-                <a class="dropdown-toggle" data-toggle="dropdown">
+            <ul class="dropdown-menu chat media-list">
+                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse">
+                    <a class="pull-left" href="#"><img class="media-object thumb"
+                                                       ng-src="{{ noti.avatar_of_user_effected }}" alt="50x50"
+                                                       width="50"/></a>
+
+                    <div class="media-body">
+                        <span class="label label-default pull-right">{{ noti.created_at }}</span>
+                        <h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>
+
+                        <p class="margin-none" ng-if="noti.action == 'comment'">{{ noti.name_of_user_effected }} comment in
+                            your post</p>
+
+                        <p class="margin-none" ng-if="noti.action == 'like'">{{ noti.name_of_user_effected }} like in your
+                            post</p>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
+        <div class="dropdown username pull-left" ng-show="loginUser != null" ng-cloak>
+            <a class="dropdown-toggle" data-toggle="dropdown">
         				<span class="media margin-none">
-        					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user" class="img-circle"></span>
+        					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"
+                                                         class="img-circle"></span>
         					<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>
         				</span>
-                </a>
-                <ul class="dropdown-menu" ng-show="loginUser != null">
-                    <li><a href="about.html?lang=en" >About</a></li>
-                    <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>
-                    <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
-                </ul>
-            </div>
-            <div class="dropdown username pull-left" ng-show="loginUser == null" ng-cloak>
-                <button ng-click="openLogin()" class="btn btn-primary">Login
-                    <i class="fa fa-fw fa-unlock-alt"></i>
-                </button>
-            </div>
+            </a>
+            <ul class="dropdown-menu" ng-show="loginUser != null">
+                <li><a href="about.html?lang=en">About</a></li>
+                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>
+                <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
+            </ul>
         </div>
-        <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
-            <autocomplete ng-model="type" data="data" on-type="update"
-                           attr-placeholder="Search friend or shop..."
-                           template-url="app/header/templates/searchBar.html">
-                           </autocomplete>
+        <div class="dropdown username pull-left" ng-show="loginUser == null" ng-cloak>
+            <button ng-click="openLogin()" class="btn btn-primary">Login
+                <i class="fa fa-fw fa-unlock-alt"></i>
+            </button>
         </div>
-        <div  data-provides="fileupload">
-            <span class="btn btn-default btn-file " style="margin: 11px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
+    </div>
+    <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
+        <autocomplete ng-model="type" data="data" on-type="update"
+                      attr-placeholder="Search friend or shop..."
+                      template-url="app/header/templates/searchBar.html">
+        </autocomplete>
+    </div>
+    <div data-provides="fileupload">
+            <span class="btn btn-default btn-file "
+                  style="margin: 11px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
                 <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
-                    style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
+                        style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
                     <span class="fa fa-camera"></span>
-                Upload Image</button>
+                    Upload Image
+                </button>
             </span>
-        </div>
     </div>
-    <!-- MAIN CONTENT AND INJECTED VIEWS -->
-    <div id="main">
+</div>
+<!-- MAIN CONTENT AND INJECTED VIEWS -->
+<div id="main">
+    <!-- angular templating -->
+    <!-- this is where content will be injected -->
 
-        <!-- angular templating -->
-        <!-- this is where content will be injected -->
+    <div ng-view></div>
+</div>
 
-        <div ng-view></div>
-    </div>
 
+<script src="assets/js/libs/jquery.js"></script>
+<script src="assets/js/libs/jquery-ui.min.js"></script>
+<script src="assets/js/libs/angular.js"></script>
+<script src="assets/css/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/libs/ngDialog.min.js"></script>
+<script src="assets/js/googleMap.js"></script>
+<script src="assets/js/core.init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="assets/js/loadTabs.js"></script>
+<script src="assets/js/magiccard_ver2.js"></script>
+<script src="assets/js/libs/accounting.min.js"></script>
+<script src="assets/js/main_marker.js"></script>
+<script src="assets/js/autocomplete.js"></script>
+<script src="assets/js/lazyloading_v2.js"></script>
+<script src="assets/js/libs/loading-bar.min.js"></script>
+<script src="assets/js/libs/jquery.easypiechart.min.js"></script>
+<script src="assets/js/libs/bootstrap-select.js"></script>
+<script src="assets/js/libs/bootstrap-switch.js"></script>
+<script src="assets/js/libs/bootstrap-fileupload.js"></script>
+<script src="assets/js/libs/jquery.multi-select.js"></script>
+<script src="assets/js/libs/dropzone.min.js"></script>
+<script src="assets/js/libs/jquery.plupload.queue.js"></script>
+<script src="assets/js/libs/blueimp-gallery.min.js"></script>
+<script src="assets/js/libs/blueimp-gallery-fullscreen.js"></script>
+<script src="assets/js/libs/blueimp-gallery-indicator.js"></script>
+<script src="assets/js/libs/blueimp-gallery-video.js"></script>
+<script src="assets/js/libs/blueimp-helper.js"></script>
+<script src="assets/js/libs/jquery.blueimp-gallery.min.js"></script>
+<script src="assets/js/libs/jquery.gritter.min.js"></script>
+<script src="assets/js/libs/jquery.notyfy.js"></script>
+<script src="assets/js/libs/jquery.prettyPhoto.js"></script>
+<script src="assets/js/libs/modernizr.js"></script>
+<script src="assets/js/libs/caman.full.min.js"></script>
+<script src="assets/js/magicSearch.js"></script>
+<script src="assets/js/libs/angular-route.js"></script>
+<script src="assets/js/libs/angular-ui-router.min.js"></script>
+<script src="assets/js/libs/angular-route.min.js"></script>
+<script src="assets/js/libs/angular-route.min.js.map"></script>
+<script src="assets/js/libs/oauth.min.js"></script>
+<script src="assets/js/libs/angular-file-upload-all.min.js"></script>
+<script src="assets/js/libs/hello.min.js"></script>
+<script src="assets/js/libs/pixlr.js"></script>
+<script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
 
     <script src="assets/js/libs/jquery.js"></script>
     <script src="assets/js/libs/jquery-ui.min.js"></script>
@@ -196,36 +245,37 @@
     <script src="assets/js/libs/pixlr.js"></script>
     <script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
-    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
 
+<!-- pusher-angular -->
+<script src="//cdn.jsdelivr.net/angular.pusher/latest/pusher-angular.min.js"></script>
 
+<!-- load angularjs file -->
+<script src="app/app.js"></script>
+<!-- load our application -->
 
-    <!-- load angularjs file -->
-    <script src="app/app.js"></script> <!-- load our application -->
+<!--home-->
+<script src="app/home/homeController.js"></script>
+<script src="app/home/homeService.js"></script>
 
-    <!--home-->
-    <script src="app/home/homeController.js"></script>
-    <script src="app/home/homeService.js"></script>
+<!--user-->
+<script src="app/user/userController.js"></script>
+<script src="app/user/userService.js"></script>
 
-    <!--user-->
-    <script src="app/user/userController.js"></script>
-    <script src="app/user/userService.js"></script>
+<!--shop-->
+<script src="app/shop/shopController.js"></script>
+<script src="app/shop/shopService.js"></script>
 
-    <!--shop-->
-    <script src="app/shop/shopController.js"></script>
-    <script src="app/shop/shopService.js"></script>
+<!--post-->
+<script src="app/post/postController.js"></script>
+<script src="app/post/postService.js"></script>
 
-    <!--post-->
-    <script src="app/post/postController.js"></script>
-    <script src="app/post/postService.js"></script>
+<!--newfeed-->
+<script src="app/newfeed/newfeedController.js"></script>
+<script src="app/newfeed/newfeedService.js"></script>
 
-    <!--newfeed-->
-    <script src="app/newfeed/newfeedController.js"></script>
-    <script src="app/newfeed/newfeedService.js"></script>
-
-    <!--header-->
-    <script src="app/header/headerController.js"></script>
-    <script src="app/header/headerService.js"></script>
+<!--header-->
+<script src="app/header/headerController.js"></script>
+<script src="app/header/headerService.js"></script>
 </body>
 </html>
 
