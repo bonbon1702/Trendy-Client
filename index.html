@@ -84,7 +84,7 @@
         <li class="dropdown notif">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-click="reader_notification()">
                 <i class="notif-block icon-envelope-1" style="position: relative;">
-                    <div class="numberCircle">
+                    <div class="numberCircle" ng-if="notification_unread.length > 0">
                         {{ notification_unread.length }}
                     </div>
                 </i>

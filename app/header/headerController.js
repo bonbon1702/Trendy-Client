@@ -9,7 +9,6 @@
     function headerController($scope, headerService, $location, ngDialog, $pusher) {
         $scope.notification = [];
         $scope.notification_unread = [];
-
         $scope.update = function (type) {
             if (type.length > 1) {
                 headerService.search(type)
@@ -120,6 +119,13 @@
         var my_channel = pusher.subscribe('notification');
         my_channel.bind('comment',
             function (data) {
+                $scope.notification_unread.push(data);
+                $scope.notification.unshift(data.notification);
+            }
+        );
+
+        my_channel.bind('like',
+            function(data){
                 $scope.notification_unread.push(data);
                 $scope.notification.unshift(data.notification);
             }
