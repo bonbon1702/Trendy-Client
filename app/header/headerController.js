@@ -30,7 +30,7 @@
             }
         };
         hello.init({
-            facebook: '849978158393821',
+            facebook: '513861542088702',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -53,7 +53,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://trendyplus.dev/#/post?image="
+                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
                                     + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -61,8 +61,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                         "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                        "target:'http://trendyplus.dev/#/post', " +
-                                        "exit:'http://trendyplus.dev/#/'});"
+                                        "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
+                                        "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
                             }
                         }]
                     });
