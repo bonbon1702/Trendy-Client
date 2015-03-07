@@ -95,10 +95,8 @@
             watchedNotification: function(data){
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'user/getLoginUser',
-                    data: {
-                        remember_token: fb ? fb.access_token : ''
-                    }
+                    url: $rootScope.url + 'notification/watchedNotification',
+                    data: data
                 });
             }
         }

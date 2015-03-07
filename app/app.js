@@ -16,7 +16,8 @@
             'ngTagsInput',
             'ui.router',
             'pusher-angular',
-            'ui.router'
+            'ui.router',
+            'ngAudio'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider

@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher'];
-    function headerController($scope, headerService, $location, ngDialog, $pusher) {
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio'];
+    function headerController($scope, headerService, $location, ngDialog, $pusher, ngAudio) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.update = function (type) {
@@ -121,6 +121,8 @@
             function (data) {
                 $scope.notification_unread.push(data);
                 $scope.notification.unshift(data.notification);
+                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                $scope.sound.play();
             }
         );
 
@@ -128,13 +130,28 @@
             function(data){
                 $scope.notification_unread.push(data);
                 $scope.notification.unshift(data.notification);
+                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                $scope.sound.play();
             }
         );
         $scope.reader_notification = function () {
-            var data = {
-                'user_id': $scope.loginUser.id,
-                'notification_id': $scope.notification.id
+            var notifications = [];
+            var user_login_id = $scope.loginUser.id;
+
+            for (var i = 0; i < $scope.notification.length; i++) {
+                var noti = $scope.notification[i];
+                notifications.push({
+                    'notification_id': noti.id,
+                    'user_id': user_login_id
+                })
             }
+            headerService.watchedNotification(notifications)
+                .success(function(data){
+                    $scope.notification_unread = [];
+                })
+                .error(function(data){
+                    console.log(data);
+                });
 
         }
     }
