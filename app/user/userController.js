@@ -256,23 +256,6 @@
                 controller: ['$scope', function ($scope) {
                     $scope.albPicture=album.album_detail[0].image_url_editor;
                     $scope.updtAlbName = album.album_name;
-                    $scope.close = function () {
-                        ngDialog.close();
-                    };
-                    $scope.confirm = function () {
-                        ngDialog.close();
-                        postService.delete(data)
-                            .success(function(data){
-                                //document.getElementById("tab2-3-1").innerHTML=data;
-                                $route.reload();
-                                localStorage.setItem('lastTab', "#tab2-3-1");
-                                //$scope.$on('$viewContentLoaded', addCrudControls);
-                                //angular.element($('a[data-target=' + localStorage.getItem('lastTab') + ']').tab('show'));
-                            })
-                            .error(function(data){
-                                console.log(data);
-                            });
-                    };
                     $scope.deleteAlbum = function(){
                         data ={
                             'albName' : album.album_name
@@ -281,9 +264,6 @@
                             template: 'app/post/templates/confirmDeletePost.html',
                             className: 'ngdialog-theme-plain-custom',
                             controller: ['$scope', function ($scope) {
-                                $scope.close = function () {
-                                    ngDialog.close();
-                                };
                                 $scope.confirm = function () {
                                     ngDialog.close();
                                     postService.deleteAlbum(data)
