@@ -88,6 +88,16 @@
 
                     }]
                 });
+            },
+            getNotification: function(user_id){
+                return $http.get($rootScope.url + 'notification/' + user_id);
+            },
+            watchedNotification: function(data){
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'notification/watchedNotification',
+                    data: data
+                });
             }
         }
     }

@@ -49,7 +49,7 @@
                 '</div></div>');
             var position = {
                 top: po.top - 30,
-                left: po.left -45
+                left: po.left - 45
             };
             angular.element(document).find('.has-magiccard').append(point.css(position));
 
@@ -98,7 +98,7 @@
                     caption: $scope.caption,
                     points: $scope.points,
                     name: $scope.image.name,
-                    album: $scope.album,
+                    album: $scope.album != null ? $scope.album : "Untitled Album",
                     url: $scope.image.image,
                     tags: $scope.tags,
                     user_id: $scope.user.id
@@ -108,7 +108,7 @@
                     caption: $scope.caption,
                     points: $scope.points,
                     name: $scope.image.name,
-                    album: $scope.album,
+                    album: $scope.album != null ? $scope.album : "Untitled Album",
                     url: null,
                     tags: $scope.tags,
                     user_id: $scope.user.id

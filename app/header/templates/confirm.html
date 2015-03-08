@@ -1,11 +1,15 @@
 <div class="dialog-contents">
-    <!--<div class="modal-content">-->
         <div class="modal-body">
             <div class="bootbox-body">Do you want to editor image?</div>
         </div>
         <div class="modal-footer">
-            <button data-bb-handler="cancel" type="button" class="btn btn-primary" ng-click="close()">No</button>
-            <button data-bb-handler="confirm" type="button" class="btn btn-primary" ng-click="confirm()">Yes</button>
+            <a data-bb-handler="cancel" type="button" class="btn btn-primary" ng-click="close()">
+                <i class="fa fa-times" style="font-size: 13px;width: 11px;"></i>
+                No
+            </a>
+            <a data-bb-handler="confirm" type="button" class="btn btn-primary" ng-click="confirm()">
+                <i class="fa fa-check" style="font-size: 13px;width: 11px;"></i>
+                Yes
+            </a>
         </div>
-    <!--</div>-->
 </div>

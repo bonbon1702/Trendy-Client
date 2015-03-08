@@ -176,3 +176,40 @@ html, body { height: 100%;}
     outline: 0;
     margin-left: -49px;
 }
+.form-container {
+    border-radius: 5px;
+    padding: 85px;
+    padding-top: 30px;
+    padding-left: 150px;
+}
+.avatar {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.form-container [type=text]{
+    display: block;
+    width: auto;
+    min-height: 40px;
+    border-radius: 5px;
+    padding: 6px 12px;
+    color: #1c2025;
+    font-size: 12px;
+}
+.delete-btn-wrapper {
+    position: absolute;
+    top: 170px;
+    left: 10px;
+    width: 130px;
+}
+.form-container>.delete-btn-wrapper>[role=delete] {
+    display: block;
+    margin: auto;
+    font-weight: 400;
+    font-size: 12px;
+}
