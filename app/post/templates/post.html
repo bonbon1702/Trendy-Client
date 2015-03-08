@@ -1,52 +1,167 @@
-<div style="position: relative">
-    <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
-        <div class="height-controller" style="height: 500px;">
-            <div class="view photo-well-media-scrappy-view" id="yui_3_16_0_1_1422362340497_1698">
+<div class="col-lg-9 col-md-8">
+    <div style="position: relative">
+        <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
+            <div class="height-controller" style="height: 500px;">
+                <div class="view photo-well-media-scrappy-view" id="yui_3_16_0_1_1422362340497_1698">
 
-                <magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image | trusted }}"
-                           callback="callback" data="shop" update="update"></magiccard>
-                <div class="description  meta">
-                    <div class="hover-blue">
-                        <button id="tagButton" style="margin-left: 419px;" class=" btn btn-primary">Click to tag
-                        </button>
+                    <magiccard template-url="app/post/templates/templateTag.html" src="{{ image.image | trusted }}"
+                               callback="callback" data="shop" update="update"></magiccard>
+                    <div class="description  meta">
+                        <div class="hover-blue">
+                            <button id="tagButton" style="margin-left: 419px;" class=" btn btn-primary">Click to tag
+                            </button>
+                        </div>
+
                     </div>
-
+                </div>
+            </div>
+        </div>
+        <div id="image-pic">
+            <div class="under-left" style="width:50%;">
+                <img ng-src="{{ user.picture_profile }}" class="avatar-large"/>
+                <b class="word">{{ user.username }}</b>
+                <hr class="line">
+                <textarea ng-model="caption" class="text-area" placeholder="Add a caption"></textarea>
+                <input ng-model="album" type="textbox" placeholder="Add a album" class="text-box"/>
+                <input type="submit" ng-click="submit()" value="Submit" class="submit">
+            </div>
+            <div class="under-right" style="width:50%;">
+                <div style="width: 292px;">
+                    <tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>
+                </div>
+                <!--<button id="tagButton" class="btn btn-primary">Click to tag</button>-->
+                <div ng-repeat="point in points track by $index">
+                    <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} -
+                        <button ng-click="deletePoint($index)"
+                                class="btn btn-primary">Delete
+                        </button>
+                    </h3>
                 </div>
             </div>
         </div>
     </div>
-    <div id="image-pic">
-        <div class="under-left" style="width:50%;">
-            <img ng-src="{{ user.picture_profile }}" class="avatar-large"/>
-            <b class="word">{{ user.username }}</b>
-            <hr class="line">
-            <textarea ng-model="caption" class="text-area" placeholder="Add a caption"></textarea>
-            <input ng-model="album" type="textbox" placeholder="Add a album" class="text-box"/>
-            <input type="submit" ng-click="submit()" value="Submit" class="submit">
+</div>
+<div class="col-md-4 col-lg-3">
+    <div class="widget">
+        <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY KNOW</h5>
+
+        <div class="widget-body padding-none">
+            <ul class="list-group list-group-1 borders-none margin-none">
+                <li class="list-group-item">
+                    <div class="media border-bottom innerAll margin-none">
+                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
+                             style="height: 44px;"/>
+
+                        <div class="media-body">
+                            <h5 class="margin-none">
+                                <a href="" class="text-inverse"
+                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
+                            </h5>
+
+                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
+                                <a href="" class="btn btn-primary"
+                                   style="width: 71px;height: 28px;margin-top: -24px;">
+                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
+                                    Follow
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="media border-bottom innerAll margin-none">
+                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
+                             style="height: 44px;"/>
+
+                        <div class="media-body">
+                            <h5 class="margin-none">
+                                <a href="" class="text-inverse"
+                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
+                            </h5>
+
+                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
+                                <a href="" class="btn btn-primary"
+                                   style="width: 71px;height: 28px;margin-top: -24px;">
+                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
+                                    Follow
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="media border-bottom innerAll margin-none">
+                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
+                             style="height: 44px;"/>
+
+                        <div class="media-body">
+                            <h5 class="margin-none">
+                                <a href="" class="text-inverse"
+                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
+                            </h5>
+
+                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
+                                <a href="" class="btn btn-primary"
+                                   style="width: 71px;height: 28px;margin-top: -24px;">
+                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
+                                    Follow
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="under-right" style="width:50%;">
-            <div style="width: 292px;">
-                <tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>
+    </div>
+
+
+    <div class="widget">
+        <h5 class="innerAll margin-none bg-primary">Recent News</h5>
+
+        <div class="widget-body padding-none">
+            <div class="media border-bottom innerAll margin-none">
+                <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
+
+                <div class="media-body">
+                    <a href="" class="pull-right text-muted innerT half">
+                        <i class="fa fa-comments"></i> 4
+                    </a>
+                    <h5 class="margin-none"><a href="" class="text-inverse">Social Admin Released</a></h5>
+                    <small>on February 2nd, 2014</small>
+                </div>
             </div>
-            <!--<button id="tagButton" class="btn btn-primary">Click to tag</button>-->
-            <div ng-repeat="point in points track by $index">
-                <!--<ol id="item-tag-list" class="item_tags topspaced" style="width:560px;">-->
-                <!--<li id="show_item_tag_0" class="standard more_linespaced" itemscope="" itemtype="http://schema.org/Product" style="background-color: transparent;">-->
-                <!--<div>-->
-                <!--<h2 class="standard cap strong uppercase inline force_wrap" itemprop="name" title="name">Coat</h2>,-->
-                <!--<span class="uppercase" itemprop="url" title="url"><a href="http://rstyle.me/n/wansgwp2w" class="item-tag-link" data-brand-track=" | 7054100 | outbound url | 17982860" data-track="look item tag | outbound url click | rstyle.me" target="_blank" sl-processed="1">rstyle.me/n/wansgwp2w…</a></span>,-->
-                <!--in-->
-                <!--<span class="uppercase">-->
-                <!--<a href="http://lookbook.nu/search?q=Outerwear" data-track="look item tag | category click | outerwear" target="_blank" sl-processed="1">Outerwear</a>-->
-                <!--</span>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--</ol>-->
-                <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} -
-                    <button ng-click="deletePoint($index)"
-                            class="btn btn-primary">Delete
-                    </button>
-                </h3>
+            <div class="media border-bottom innerAll margin-none">
+                <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
+
+                <div class="media-body">
+                    <a href="" class="pull-right text-muted innerT half">
+                        <i class="fa fa-comments"></i> 4
+                    </a>
+                    <h5 class="margin-none"><a href="" class="text-inverse">Timeline Cover Page</a></h5>
+                    <small>on February 2nd, 2014</small>
+                </div>
+            </div>
+            <div class="media border-bottom innerAll margin-none">
+                <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
+
+                <div class="media-body">
+                    <a href="" class="pull-right text-muted innerT half">
+                        <i class="fa fa-comments"></i> 4
+                    </a>
+                    <h5 class="margin-none"><a href="" class="text-inverse">1000+ Sales</a></h5>
+                    <small>on February 2nd, 2014</small>
+                </div>
+            </div>
+            <div class="media border-bottom innerAll margin-none">
+                <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
+
+                <div class="media-body">
+                    <a href="" class="pull-right text-muted innerT half">
+                        <i class="fa fa-comments"></i> 4
+                    </a>
+                    <h5 class="margin-none"><a href="" class="text-inverse">On-Page Optimization</a></h5>
+                    <small>on February 2nd, 2014</small>
+                </div>
             </div>
         </div>
     </div>
