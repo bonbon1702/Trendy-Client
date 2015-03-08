@@ -92,6 +92,9 @@
             getNotification: function(user_id){
                 return $http.get($rootScope.url + 'notification/' + user_id);
             },
+            getShopDetail: function(){
+                return $http.get($rootScope.url + 'shop' );
+            },
             watchedNotification: function(data){
                 return $http({
                     method: 'POST',

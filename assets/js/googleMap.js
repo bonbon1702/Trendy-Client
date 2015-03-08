@@ -162,7 +162,7 @@
             zoom: 15,
             center: haNoiLocation,
             panControl: false,
-            zoomControl: false,
+            zoomControl: true,
             scaleControl: false,
             streetViewControl: false,
             scrollwheel: false,
@@ -201,44 +201,53 @@
     }
 
     var searchBox = function () {
-        var input = /** @type {HTMLInputElement} */ (
-            document.getElementById('pac-input'));
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        var searchBox = new google.maps.places.SearchBox(
-            /** @type {HTMLInputElement} */
-            (input));
-        // Listen for the event fired when the user selects an item from the
-        // pick list. Retrieve the matching places for that item.
-        google.maps.event.addListener(searchBox, 'places_changed', function () {
-            var places = searchBox.getPlaces();
+				// Create the search box and link it to the UI element.
+		  var input = /** @type {HTMLInputElement} */(
+			  document.getElementById('pac-input'));
+		  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-            if (places.length == 0) {
-                return;
-            }
-            for (var i = 0, marker; marker = markers[i]; i++) {
-                marker.setMap(null);
-            }
+		  var searchBox = new google.maps.places.SearchBox(
+			/** @type {HTMLInputElement} */(input));
 
-            // For each place, get the icon, place name, and location.
-            markers = [];
-            var bounds = new google.maps.LatLngBounds();
-            for (var i = 0, place; place = places[i]; i++) {
-                var image = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
+		  // Listen for the event fired when the user selects an item from the
+		  // pick list. Retrieve the matching places for that item.
+		  google.maps.event.addListener(searchBox, 'places_changed', function() {
+			var places = searchBox.getPlaces();
 
-                var marker = createMarker(map, image, place.geometry.location);
-                markers.push(marker);
+			if (places.length == 0) {
+			  return;
+			}
+			for (var i = 0, marker; marker = markers[i]; i++) {
+			  marker.setMap(null);
+			}
 
-                bounds.extend(place.geometry.location);
-            }
+			// For each place, get the icon, place name, and location.
+			markers = [];
+			var bounds = new google.maps.LatLngBounds();
+			for (var i = 0, place; place = places[i]; i++) {
+			  var image = {
+				url: place.icon,
+				size: new google.maps.Size(71, 71),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(17, 34),
+				scaledSize: new google.maps.Size(25, 25)
+			  };
 
-            map.fitBounds(bounds);
-            map.setZoom(18);
+			  // Create a marker for each place.
+			  /*var marker = new google.maps.Marker({
+				map: map,
+				icon: image,
+				title: place.name,
+				position: place.geometry.location
+			  });*/
+			
+			  //markers.push(marker);
+				//new CustomMarker(place.geometry.location,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
+			  bounds.extend(place.geometry.location);
+			}
+
+			map.fitBounds(bounds);
+            map.setZoom(15);
         });
 
         // Bias the SearchBox results towards places that are within the bounds of the
@@ -275,7 +284,7 @@
             }
 
             // For each place, get the icon, place name, and location.
-            markers = [];
+            // markers = [];
 
             var marker = createMarker(map, null, myLatlng);
 
@@ -283,10 +292,11 @@
                 content: "It is your location"
             });
 
-            markers.push(marker);
-            map.panTo(myLatlng);
-            map.setZoom(15);
-
+            //markers.push(marker);
+            map.setCenter(myLatlng);
+            //map.setZoom(15);
+			
+			
             google.maps.event.addListener(marker, 'mouseover', function () {
                 infowindow.open(map, marker);
             });
@@ -352,7 +362,7 @@
     this.latlng = latlng;
     this.args = args;
     this.setMap(map);
-}
+	}
 
     CustomMarker.prototype = new google.maps.OverlayView();
 
@@ -366,22 +376,29 @@
 
             div = this.div = document.createElement('div');
 
-            div.className = 'marker';
+            div.className = 'map-marker';
 
             div.style.position = 'absolute';
             div.style.cursor = 'pointer';
             //div.id='heart';
-            div.innerHTML ='<img class="img-marker" '
-                            +'src="http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg">'
+			var img = "";
+			var product = "";
+			var shop = "";
+			if (self.args.img != null && self.args.img != '') img = self.args.img;
+			if (self.args.product != null && self.args.product != '') product = self.args.product;
+			if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
+            div.innerHTML ='<div class="marker"><img class="img-marker" '
+                            +'src="'+img+'">'
 							+'<div class="marker-hover bg-dark">'    
-							+'<a href="/mon-an/lau-buffet" role="product">'
-							+	self.args.product
+							+'<a href="" role="product">'
+							+	product
 							+'</a>'       
-							+'<a href="/nha-hang/gyu-jin-vincom-a-171-dong-khoi-p-ben-nghe-quan-1-tp-hcm-15" role="shop">'+self.args.shop+'</a></div>';
-            div1 = this.div = document.createElement('div');
+							+'<a href="" role="shop">'+shop+'</a></div></div>';
+            div1 = document.createElement('div');
 
             div1.className = 'pulse';
-
+			div1.style.top = '72px'
+			div1.style.left = '47px'
             div1.style.position = 'absolute';
             div1.style.cursor = 'pointer';
             if (typeof(self.args.marker_id) !== 'undefined') {
@@ -390,23 +407,24 @@
             }
 
             google.maps.event.addDomListener(div, "click", function(event) {
-                alert('You clicked on a custom marker!');
+                alert('You clicked on a shop!');
                 google.maps.event.trigger(self, "click");
             });
             var panes = this.getPanes();
+            //panes.overlayImage.appendChild(div1);
+			div.appendChild(div1);
             panes.overlayImage.appendChild(div);
-            panes.overlayImage.appendChild(div1);
             //panes.overlayImage.appendChild('<div class="pulse"></div>');
         }
 
     var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
     if (point) {
-        div.style.left = (point.x -36) + 'px';
+        div.style.left = (point.x -42) + 'px';
         div.style.top = (point.y -86) + 'px';
 		
-        div1.style.left = (point.x+5) + 'px';
-        div1.style.top = (point.y-12) + 'px';
+        //div1.style.left = (point.x+5) + 'px';
+        //div1.style.top = (point.y-12) + 'px';
     }
     };
 
@@ -414,6 +432,10 @@
         if (this.div) {
             this.div.parentNode.removeChild(this.div);
             this.div = null;
+        }
+		if (this.div1) {
+            this.div1.parentNode.removeChild(this.div1);
+            this.div1 = null;
         }
     };
 

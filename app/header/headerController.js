@@ -154,5 +154,8 @@
                 });
 
         }
+        $scope.getShopDetail= function () {
+
+        }
     }
 })(angular);
