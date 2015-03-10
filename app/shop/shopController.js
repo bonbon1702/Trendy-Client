@@ -10,7 +10,12 @@
     function shopController($scope, ngDialog, $routeParams, shopService, headerService) {
         googleMap.init();
         $scope.comment = null;
-
+        $scope.pagingShop=[];
+        $scope.countShop=[];
+        $scope.offSet=0;
+        $scope.disableLbl=true;
+        $scope.from=1;
+        $scope.to=12;
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
@@ -20,6 +25,12 @@
         shopService.get($routeParams.shopId)
             .success(function (data) {
                 $scope.shop = data.shop;
+                for(var i =0; i< data.shop.posts.length; i++){
+                    if(i<12){
+                        $scope.pagingShop.push(data.shop.posts[i]);
+                    }
+                    $scope.countShop.push(data.shop.posts[i]);
+                }
                 for (var i = 0; i < $scope.shop.like.length; i++) {
                     if ($scope.loginUser.id == $scope.shop.like[i].user_id) {
                         $scope.likeBtnStatus = "Liked";
@@ -89,6 +100,37 @@
                     });
             }
         };
+
+        $scope.getShop=function(offSet){
+            var data = {
+                'shopId': $routeParams.shopId,
+                'offSet': offSet
+            };
+            shopService.getShop(data)
+                .success(function(data){
+                    $scope.pagingShop=[];
+                    for(var i =0; i< data.shops.length; i++){
+
+                        $scope.disableLbl=false;
+                        if(offSet<12){
+                            $scope.disableLbl=true;
+                            $scope.from=1;
+                        }else
+                        {
+                            $scope.from=offSet;
+                        }
+                        if($scope.to<$scope.countShop){
+                            $scope.to=offSet+11;
+                        }else{
+                            $scope.to=$scope.countShop.length;
+                        }
+                        $scope.pagingShop.push(data.shops[i]);
+                    }
+                })
+                .error(function () {
+                   console.log(data);
+                });
+        }
 
         $scope.showDialog = function (id) {
             ngDialog.open({

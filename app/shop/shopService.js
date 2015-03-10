@@ -29,6 +29,9 @@
             },
             countLike: function(id) {
                 return $http.get($rootScope.url + 'like/countLikeShop/' + id);
+            },
+            getShop: function (data) {
+                return $http.get($rootScope.url + 'shop/getShop/'+data.shopId+'/paging/' + data.offSet);
             }
         }
     }
