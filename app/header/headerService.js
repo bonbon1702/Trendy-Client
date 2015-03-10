@@ -99,7 +99,8 @@
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'notification/watchedNotification',
-                    data: data
+                    data: data,
+                    ignoreLoadingBar: true
                 });
             }
         }
