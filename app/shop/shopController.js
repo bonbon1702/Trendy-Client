@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('shopController', shopController);
 
-    shopController.$inject = ['$scope', 'ngDialog', 'shopService'];
+    shopController.$inject = ['$scope', 'ngDialog', '$routeParams', 'shopService', 'headerService'];
 
-    function shopController($scope, ngDialog, shopService, headerService) {
+    function shopController($scope, ngDialog, $routeParams, shopService, headerService) {
         googleMap.init();
         $scope.comment = null;
 
@@ -17,6 +17,50 @@
             })
             .error();
 
+        shopService.get($routeParams.shopId)
+            .success(function (data) {
+                $scope.shop = data.shop;
+                for (var i = 0; i < $scope.shop.like.length; i++) {
+                    if ($scope.loginUser.id == $scope.shop.like[i].user_id) {
+                        console.log($scope.loginUser.id);
+                        $scope.likeBtnStatus = "Liked";
+                    } else
+                        $scope.likeBtnStatus = "Like";
+                }
+                $scope.likeOrDislike = function () {
+                    if (!$scope.loginUser) {
+                        event.preventDefault();
+                        headerService.openLogin();
+                    } else {
+                        var data = {
+                            id: $routeParams.shopId,
+                            type: $scope.likeBtnStatus == "Like" ? 1 : 0,
+                            user: $scope.loginUser.id
+                        };
+
+                        if ($scope.likeBtnStatus == "Like") {
+                            $scope.shop.like.length++;
+                            $scope.likeBtnStatus = "Liked";
+                        } else {
+                            $scope.shop.like.length--;
+                            $scope.likeBtnStatus = "Like";
+                        }
+
+                        shopService.likeOrDislike(data)
+                            .success(function (data) {
+
+
+                            })
+                            .error(function (data) {
+
+                            });
+                    }
+                };
+            })
+            .error(function (data) {
+                console.log(data);
+            });
+
         $scope.showDialog = function (id) {
             ngDialog.open({
                 template: 'app/shop/templates/shop.html',
@@ -24,14 +68,14 @@
                     $scope.iconLike = false;
 
                     shopService.get(id)
-                        .success(function(data){
+                        .success(function (data) {
                             $scope.shop = data.shop;
 
                             headerService.loginUser()
-                                .success(function(data){
+                                .success(function (data) {
                                     $scope.loginUser = data.user;
                                     if ($scope.loginUser) {
-                                        for(var i = 0; i < $scope.shop.like.length; i++) {
+                                        for (var i = 0; i < $scope.shop.like.length; i++) {
                                             if ($scope.shop.like[i].user_id == $scope.loginUser.id) {
                                                 $scope.iconLike = true;
                                                 break;
@@ -44,7 +88,7 @@
                                 .error();
 
                             $scope.submitComment = function () {
-                                if(!$scope.loginUser) {
+                                if (!$scope.loginUser) {
                                     event.preventDefault();
                                     headerService.openLogin();
                                 } else {
@@ -56,17 +100,17 @@
                                     };
                                     $scope.comment = null;
                                     shopService.save(data)
-                                        .success(function(data){
+                                        .success(function (data) {
                                             $scope.shop.comment.push(data.comment);
                                         })
-                                        .error(function(data){
+                                        .error(function (data) {
 
                                         });
                                 }
                             };
 
-                            $scope.likeOrDislike = function() {
-                                if(!$scope.loginUser) {
+                            $scope.likeOrDislike = function () {
+                                if (!$scope.loginUser) {
                                     event.preventDefault();
                                     headerService.openLogin();
                                 } else {
@@ -86,17 +130,17 @@
                                                 $scope.iconLike = true;
                                             }
                                         })
-                                        .error(function(data){
+                                        .error(function (data) {
 
                                         });
                                 }
                             };
 
-                            $scope.closeDialog = function(){
+                            $scope.closeDialog = function () {
                                 ngDialog.close();
                             }
                         })
-                        .error(function(data){
+                        .error(function (data) {
 
                         });
                 }]

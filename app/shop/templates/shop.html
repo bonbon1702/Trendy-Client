@@ -14,18 +14,18 @@
                             <div class="widget cover image" style="margin-top: -61px;">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
-                                        <img src="assets/img/images/people/100/22.jpg" class="img-circle" style="margin: 59px 0px -6px;"/>
+                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 9px;">
-                                        <h3 class="margin-none">{{ shop.address }}</h3>
+                                        <h3 class="margin-none">{{ shop.name }}</h3>
                                         <br/>
                                         <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary" style="width: 64px;height: 28px;margin-top: -24px;">
+                                            <a ng-click="likeOrDislike()" class="btn btn-primary" style="width: 64px;height: 28px;margin-top: -24px;">
                                                 <i  class="fa fa-fw fa-thumbs-up" style="font-size: 13px;width: 11px;"></i>
-                                                Like
+                                                {{ likeBtnStatus }}
                                             </a>
                                         </div>
-                                        <span class="yt-subscription-button-subscriber-count-branded-horizontal" title="974" tabindex="0">974</span>
+                                        <span class="yt-subscription-button-subscriber-count-branded-horizontal" tabindex="0">{{ shop.like.length }}</span>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -34,12 +34,12 @@
 
                         <div class="info-wrapper" style="margin-left: 22px;">
                             <ul class="share-box">
-                                <li class="fb-like-wrapper" style="display: inline-block;">
-                                    <div class="fb-like fb_iframe_widget" data-width="135" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=600859170003466&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135"><span style="vertical-align: bottom; width: 123px; height: 20px;"><iframe name="f313ddcd9c" width="135px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=600859170003466&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F7r8gQb8MIqE.js%3Fversion%3D41%23cb%3Df1a5025a18%26domain%3Dlozi.vn%26origin%3Dhttp%253A%252F%252Flozi.vn%252Ff337c71048%26relation%3Dparent.parent&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135" style="border: none; visibility: visible; width: 123px; height: 20px;" class=""></iframe></span></div>
-                                </li>
-                                <li class="g-plusone-wrapper" style="display: inline-block;">
-                                    <div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1419420875747" name="I0_1419420875747" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Flozi.vn&amp;url=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.DyIrs0WwupM.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCO5fZ6t2zIj8KbzeYuUVfSYsYTtlQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1419420875747&amp;parent=http%3A%2F%2Flozi.vn&amp;pfname=&amp;rpctoken=37899160" data-gapiattached="true" title="+1"></iframe></div>
-                                </li>
+                                <!--<li class="fb-like-wrapper" style="display: inline-block;">-->
+                                    <!--<div class="fb-like fb_iframe_widget" data-width="135" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=600859170003466&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135"><span style="vertical-align: bottom; width: 123px; height: 20px;"><iframe name="f313ddcd9c" width="135px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=600859170003466&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F7r8gQb8MIqE.js%3Fversion%3D41%23cb%3Df1a5025a18%26domain%3Dlozi.vn%26origin%3Dhttp%253A%252F%252Flozi.vn%252Ff337c71048%26relation%3Dparent.parent&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135" style="border: none; visibility: visible; width: 123px; height: 20px;" class=""></iframe></span></div>-->
+                                <!--</li>-->
+                                <!--<li class="g-plusone-wrapper" style="display: inline-block;">-->
+                                    <!--<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1419420875747" name="I0_1419420875747" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Flozi.vn&amp;url=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.DyIrs0WwupM.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCO5fZ6t2zIj8KbzeYuUVfSYsYTtlQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1419420875747&amp;parent=http%3A%2F%2Flozi.vn&amp;pfname=&amp;rpctoken=37899160" data-gapiattached="true" title="+1"></iframe></div>-->
+                                <!--</li>-->
                             </ul>
 
                             <div class="info edit-links">
@@ -49,11 +49,7 @@
 
                             <div class="info address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                                 <span class=" icon-location-fill-1"></span>
-                                <span itemprop="streetAddress">Số 60 Hàng Trống</span>
-                                ,
-                                Hàng Trống,
-                                <a href="/t/ha-noi/nha-hang-tai-khu-vuc-quan-hoan-kiem" itemprop="addressLocality">Quận Hoàn Kiếm</a>,
-                                <a href="/t/ha-noi/nha-hang-tai-khu-vuc-ha-noi" itemprop="addressRegion">Hà Nội</a>
+                                <span itemprop="streetAddress">{{ shop.address }}</span>
                             </div>
 
                             <div itemprop="telephone">
@@ -249,9 +245,9 @@
                 <div class="widget border-top padding-none margin-none">
 
                     <!--  Message -->
-                    <div class="media margin-none innerAll">
+                    <div class="media margin-none innerAll" ng-repeat="comment in shop.comments">
                         <a href="" class="pull-left hidden-xs">
-                            <img src="assets/img//images/people/100/16.jpg" width="60" class="media-object">
+                            <img ng-src="{{ comment.user.picture_profile }}" width="60" class="media-object">
                         </a>
                         <div class="media-body innerTB">
                             <div class="row">
@@ -259,136 +255,11 @@
                                     <div class="innerT half">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">Mr. Awesome</a>
+                                                <a href="" class="strong text-inverse ">{{ comment.user.username }}</a>
                                                 <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
                                             </div>
                                             <div class="media-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 hidden-xs">
-                                    <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-        										<span class="pull-right innerR innerT text-right  text-muted">
-        										Jan 15th, 2014
-        										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!--  Message -->
-                    <div class="media margin-none bg-gray border-top innerAll">
-                        <a href="" class="pull-left hidden-xs">
-                            <img src="assets/img//images/people/100/13.jpg" width="60" class="media-object">
-                        </a>
-                        <div class="media-body innerTB">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="innerT half">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                            </div>
-                                            <div class="media-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, in.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 hidden-xs">
-                                    <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-        										<span class="pull-right innerR innerT text-right  text-muted">
-        										Jan 15th, 2014
-        										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!--  Message -->
-                    <div class="media margin-none border-top innerAll">
-                        <a href="" class="pull-left hidden-xs">
-                            <img src="assets/img//images/people/100/16.jpg" width="60" class="media-object">
-                        </a>
-                        <div class="media-body innerTB">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="innerT half">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">Mr. Awesome</a>
-                                                <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                            </div>
-                                            <div class="media-body">
-                                                Hello World!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 hidden-xs">
-                                    <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-        										<span class="pull-right innerR innerT text-right  text-muted">
-        										Jan 15th, 2014
-        										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <!--  Message -->
-                    <div class="media margin-none bg-gray border-top innerAll">
-                        <a href="" class="pull-left hidden-xs">
-                            <img src="assets/img//images/people/100/13.jpg" width="60" class="media-object">
-                        </a>
-                        <div class="media-body innerTB">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="innerT half">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                            </div>
-                                            <div class="media-body">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, in.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 hidden-xs">
-                                    <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-        										<span class="pull-right innerR innerT text-right  text-muted">
-        										Jan 15th, 2014
-        										</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!--  Message -->
-                    <div class="media margin-none border-top innerAll">
-                        <a href="" class="pull-left hidden-xs">
-                            <img src="assets/img//images/people/100/16.jpg" width="60" class="media-object">
-                        </a>
-                        <div class="media-body innerTB">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="innerT half">
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                            </div>
-                                            <div class="media-body">
-                                                Hello World!
+                                                {{comment.content}}
                                             </div>
                                         </div>
                                     </div>
