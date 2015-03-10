@@ -49,7 +49,7 @@
                 .error(function (data) {
                     console.log(data);
                 });
-        }
+        };
 
         $scope.sideBar = function(type){
             $scope.newFeedType = type;
@@ -69,13 +69,24 @@
             ngDialog.open({
                 template: 'app/newfeed/templates/newfeed.html',
                 className: 'ngdialog-theme-plain post-dialog',
-                controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
+                controller: ['$scope', 'newfeedService', '$window', 'headerService','$pusher', function ($scope, newfeedService, $window, headerService,$pusher) {
                     $scope.iconLike = false;
 
 
                     newfeedService.get(id)
                         .success(function (data) {
                             $scope.post = data.post;
+
+                            var client = new Pusher('4c33474dc0a36d3a912d');
+                            var pusher = $pusher(client);
+                            var my_channel = pusher.subscribe('real-time');
+                            my_channel.bind('comment-post',
+                                function (data) {
+                                    if (data.comment.user_id != $scope.loginUser.id){
+                                        $scope.post.comments.push(data.comment);
+                                    }
+                                }
+                            );
 
                             headerService.loginUser()
                                 .success(function (data) {
@@ -131,7 +142,7 @@
                                     $scope.comment = null;
                                     $scope.post.comments.push({
                                         'content': data.content,
-                                        'created_at': 'now',
+                                        'created_at': 'Just now',
                                         'user':{
                                             'username': $scope.loginUser.username,
                                             'id':$scope.loginUser.id,

@@ -54,15 +54,14 @@
                             $scope.close = function () {
                                 ngDialog.close();
                                 $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
-                                    + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
+                                + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
                                 ngDialog.close();
                                 $window.location.href =
-                                    "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
-                                        "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                        "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                        "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                    "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
+                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
+                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
                             }
                         }]
                     });
@@ -116,24 +115,20 @@
 
         var client = new Pusher('4c33474dc0a36d3a912d');
         var pusher = $pusher(client);
-        var my_channel = pusher.subscribe('notification');
-        my_channel.bind('comment',
+        var my_channel = pusher.subscribe('real-time');
+        my_channel.bind('notification',
             function (data) {
-                $scope.notification_unread.push(data);
-                $scope.notification.unshift(data.notification);
-                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                $scope.sound.play();
+                for (var i = 0; i < data.user_effected_id.length; i++) {
+                    if ($scope.loginUser.id == data.user_effected_id[i].id_of_user_effected) {
+                        $scope.notification_unread.push(data);
+                        $scope.notification.unshift(data.notification);
+                        $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                        $scope.sound.play();
+                    }
+                }
             }
         );
 
-        my_channel.bind('like',
-            function(data){
-                $scope.notification_unread.push(data);
-                $scope.notification.unshift(data.notification);
-                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                $scope.sound.play();
-            }
-        );
         $scope.reader_notification = function () {
             var notifications = [];
             var user_login_id = $scope.loginUser.id;
@@ -146,16 +141,19 @@
                 })
             }
             headerService.watchedNotification(notifications)
-                .success(function(data){
+                .success(function (data) {
                     $scope.notification_unread = [];
                 })
-                .error(function(data){
+                .error(function (data) {
                     console.log(data);
                 });
 
-        }
-        $scope.getShopDetail= function () {
+        };
+        $scope.getShopDetail = function () {
 
         }
+
     }
+
 })(angular);
+
