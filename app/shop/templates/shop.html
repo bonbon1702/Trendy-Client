@@ -1,7 +1,7 @@
 <div id="content">
     <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div class="innerAll">
-        <div id="map" style="position: absolute;left: 0px;top: 0px;overflow: hidden;width: 71%;height: 20%;z-index: 0;
+        <div id="map" style="position: absolute;left: 0px;top: 0px;overflow: hidden;width: 71%;height: 25%;z-index: 0;
         				transform: translateZ(0px) translateZ(0px);background-color: rgb(229, 227, 223);margin: 0px 34px 0px 33px;"></div>
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
 
@@ -11,7 +11,7 @@
                     <div class="widget border-bottom">
 
                         <div class="timeline-cover">
-                            <div class="widget cover image" style="margin-top: -61px;">
+                            <div class="widget cover image" style="margin-top: -66px;">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
                                         <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;"/>
@@ -133,92 +133,16 @@
 
                         <!-- Gallery -->
                         <div class="gallery">
-                            <ul class="row">
+                            <ul class="row" >
 
                                 <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/1.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/1.jpg" alt="photo" class="img-responsive" />
+                                <li class="col-md-2" ng-repeat="post in shop.posts">
+                                    <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)" data-gallery="gallery-3">
+                                        <img ng-src="{{ post.image_url_editor }}" alt="photo" class="img-responsive" style="height: 174px;"/>
                                     </a>
                                 </li>
                                 <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/2.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/2.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/3.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/3.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/4.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/4.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/5.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/5.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/6.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/6.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/7.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/7.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/8.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/8.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/9.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/9.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/10.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/10.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/11.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/11.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
-                                <!-- Gallery item -->
-                                <li class="col-md-2">
-                                    <a class="thumb no-ajaxify" href="assets/img/images/gallery-2/12.jpg" data-gallery="gallery-3">
-                                        <img src="assets/img/images/gallery-2/12.jpg" alt="photo" class="img-responsive" />
-                                    </a>
-                                </li>
-                                <!-- // Gallery item END -->
+
 
                             </ul>
                         </div>
@@ -229,7 +153,7 @@
                             <a class="btn disabled btn-small btn-default glyphicons standard chevron-left"><i></i></a>
                             <a class="btn btn-small btn-default glyphicons standard chevron-right"><i></i></a>
                         </div>
-                        <span class="innerLR">1-6 out of 43</span>
+                        <span class="innerLR">1-6 out of {{ shop.posts.length }}</span>
                         <!-- // Pagination END -->
 
                     </div>
@@ -237,9 +161,12 @@
 
                 <div id="type" class="border-top collapse in" style="height: 65px;">
                     <a href="" class="pull-left">
-                        <img src="assets/img//images/people/100/13.jpg" width="65" class="media-object">
+                        <img ng-src="{{ loginUser.picture_profile }}" width="65" class="media-object">
                     </a>
-                    <textarea type="text" style="width: 93%;height: 100%;" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
+                    <form ng-submit="submitComment()" style="height: 23px;">
+                        <input type="text" style="width: 93%;height: 277%;" class="form-control rounded-none border-none"
+                                  placeholder="Write your messages..." ng-model="comment"/>
+                    </form>
                 </div>
 
                 <div class="widget border-top padding-none margin-none">
@@ -256,7 +183,7 @@
                                         <div class="media">
                                             <div class="pull-left">
                                                 <a href="" class="strong text-inverse ">{{ comment.user.username }}</a>
-                                                <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
+                                                <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
                                             <div class="media-body">
                                                 {{comment.content}}
@@ -267,7 +194,7 @@
                                 <div class="col-sm-6 hidden-xs">
                                     <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
         										<span class="pull-right innerR innerT text-right  text-muted">
-        										Jan 15th, 2014
+        										{{ comment.created_at }}
         										</span>
                                 </div>
                             </div>
@@ -359,15 +286,4 @@
             </div>
         </div>
     </div>
-    <!-- Blueimp Gallery -->
-    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-        <div class="slides"></div>
-        <h3 class="title"></h3>
-        <a class="prev no-ajaxify">‹</a>
-        <a class="next no-ajaxify">›</a>
-        <a class="close no-ajaxify">×</a>
-        <a class="play-pause no-ajaxify"></a>
-        <ol class="indicator"></ol>
-    </div>
-    <!-- // Blueimp Gallery END -->
 </div>

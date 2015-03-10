@@ -142,7 +142,7 @@
                                     $scope.comment = null;
                                     $scope.post.comments.push({
                                         'content': data.content,
-                                        'created_at': 'now',
+                                        'created_at': 'Just now',
                                         'user':{
                                             'username': $scope.loginUser.username,
                                             'id':$scope.loginUser.id,

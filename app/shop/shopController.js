@@ -22,7 +22,6 @@
                 $scope.shop = data.shop;
                 for (var i = 0; i < $scope.shop.like.length; i++) {
                     if ($scope.loginUser.id == $scope.shop.like[i].user_id) {
-                        console.log($scope.loginUser.id);
                         $scope.likeBtnStatus = "Liked";
                     } else
                         $scope.likeBtnStatus = "Like";
@@ -61,22 +60,54 @@
                 console.log(data);
             });
 
+        $scope.submitComment = function () {
+            if (!$scope.loginUser) {
+                event.preventDefault();
+                headerService.openLogin();
+            } else {
+                var data = {
+                    'content': $scope.comment,
+                    'type_comment': 1,
+                    'type_id': $routeParams.shopId,
+                    'user_id': $scope.loginUser.id
+                };
+                $scope.comment = null;
+                $scope.shop.comments.push({
+                    'content': data.content,
+                    'created_at': 'Just now',
+                    'user':{
+                        'username': $scope.loginUser.username,
+                        'id':$scope.loginUser.id,
+                        'picture_profile': $scope.loginUser.picture_profile
+                    }
+                });
+                shopService.save(data)
+                    .success(function (data) {
+                    })
+                    .error(function (data) {
+
+                    });
+            }
+        };
+
         $scope.showDialog = function (id) {
             ngDialog.open({
-                template: 'app/shop/templates/shop.html',
-                controller: ['$scope', 'shopService', 'window', 'headerService', function ($scope, shopService, $window, headerService) {
+                template: 'app/newfeed/templates/newfeed.html',
+                className: 'ngdialog-theme-plain post-dialog',
+                controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
                     $scope.iconLike = false;
 
-                    shopService.get(id)
+
+                    newfeedService.get(id)
                         .success(function (data) {
-                            $scope.shop = data.shop;
+                            $scope.post = data.post;
 
                             headerService.loginUser()
                                 .success(function (data) {
                                     $scope.loginUser = data.user;
                                     if ($scope.loginUser) {
-                                        for (var i = 0; i < $scope.shop.like.length; i++) {
-                                            if ($scope.shop.like[i].user_id == $scope.loginUser.id) {
+                                        for (var i = 0; i < $scope.post.like.length; i++) {
+                                            if ($scope.post.like[i].user_id == $scope.loginUser.id) {
                                                 $scope.iconLike = true;
                                                 break;
                                             } else {
@@ -87,6 +118,31 @@
                                 })
                                 .error();
 
+                            $scope.tags = [];
+                            for (var i = 0; i < $scope.post.tag.length; i++) {
+                                $scope.tags.push({
+                                    'text': $scope.post.tag[i].tag_content.content
+                                });
+                            }
+
+                            $scope.hoverPoint = function (index) {
+                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
+                                    var ele = angular.element($(this));
+                                    if (ele.html() == index) {
+                                        ele.parent().addClass('bounce');
+                                    }
+                                })
+                            };
+
+                            $scope.leavePoint = function (index) {
+                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
+                                    var ele = angular.element($(this));
+                                    if (ele.html() == index) {
+                                        ele.parent().removeClass('bounce');
+                                    }
+                                })
+                            };
+
                             $scope.submitComment = function () {
                                 if (!$scope.loginUser) {
                                     event.preventDefault();
@@ -94,14 +150,14 @@
                                 } else {
                                     var data = {
                                         'content': $scope.comment,
-                                        'type_comment': 1,
+                                        'type_comment': 0,
                                         'type_id': id,
                                         'user_id': $scope.loginUser.id
                                     };
                                     $scope.comment = null;
-                                    shopService.save(data)
+                                    newfeedService.save(data)
                                         .success(function (data) {
-                                            $scope.shop.comment.push(data.comment);
+                                            $scope.post.comments.push(data.comment);
                                         })
                                         .error(function (data) {
 
@@ -115,20 +171,21 @@
                                     headerService.openLogin();
                                 } else {
                                     var data = {
-                                        'id': id,
+                                        id: id,
                                         type: $scope.iconLike == true ? 0 : 1,
                                         user: $scope.loginUser.id
                                     };
 
-                                    shopService.likeOrDislike(data)
+                                    newfeedService.likeOrDislike(data)
                                         .success(function (data) {
                                             if ($scope.iconLike == true) {
-                                                $scope.shop.like.length--;
+                                                $scope.post.like.length--;
                                                 $scope.iconLike = false;
                                             } else {
-                                                $scope.shop.like.length++;
+                                                $scope.post.like.length++;
                                                 $scope.iconLike = true;
                                             }
+
                                         })
                                         .error(function (data) {
 
@@ -144,7 +201,7 @@
 
                         });
                 }]
-            })
-        }
+            });
+        };
     }
 })(angular);
