@@ -19,7 +19,8 @@
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'comment',
-                    data: data
+                    data: data,
+                    ignoreLoadingBar: true
                 });
             },
             getComments: function (id) {
