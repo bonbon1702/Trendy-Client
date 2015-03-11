@@ -151,8 +151,8 @@
                         <!-- Pagination -->
                         <div ng-if="countShop.length > 12">
                             <div class="btn-group">
-                                <a class="btn btn-small btn-default glyphicons standard chevron-left " ng-class=" disableLbl==true ? 'disabled' : '' " ng-click="getShop(offSet-24)"><i></i></a>
-                                <a class="btn btn-small btn-default glyphicons standard chevron-right" ng-click="getShop(offSet+12)"><i></i></a>
+                                <a class="btn btn-small btn-default glyphicons standard chevron-left " ng-class=" disableLblFrom==true ? 'disabled' : '' " ng-click="getShop(offSet-12)"><i></i></a>
+                                <a class="btn btn-small btn-default glyphicons standard chevron-right" ng-class=" disableLblTo==true ? 'disabled' : '' " ng-click="getShop(offSet+12)"><i></i></a>
                             </div>
 
                             <span class="innerLR">{{from}}-{{to}} out of {{ countShop.length }}</span>
