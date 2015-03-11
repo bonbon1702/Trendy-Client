@@ -17,6 +17,9 @@
         $scope.disableLblTo = false;
         $scope.from = 1;
         $scope.to = 12;
+        $scope.infoOpen=false;
+        $scope.serviceOpen = false;
+        $scope.contactOpen =  false;
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
@@ -144,6 +147,31 @@
                 .error(function () {
                     console.log(data);
                 });
+        }
+
+        $scope.infoShop =function(){
+            ngDialog.open({
+                template: 'app/shop/templates/inforshop.html',
+                className: 'ngdialog-theme-plain-custom-editAlbum',
+                controller: ['$scope', function ($scope) {
+                    $scope.infoShopToggle = function(){
+                        $scope.infoOpen= true;
+                        $scope.serviceOpen = false;
+                        $scope.contactOpen =  false;
+                    }
+                    $scope.serviceShopToggle = function() {
+                        $scope.infoOpen= false;
+                        $scope.serviceOpen = true;
+                        $scope.contactOpen =  false;
+                    }
+                    $scope.contactShopToggle = function () {
+                        $scope.infoOpen= false;
+                        $scope.serviceOpen = false;
+                        $scope.contactOpen =  true;
+                    }
+                }]
+            });
+
         }
 
         $scope.showDialog = function (id) {

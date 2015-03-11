@@ -37,27 +37,24 @@
 
 .para{
     font-family:"Arial", sans-serif;
-    font-size:80%;
+    font-size:88%;
     color:#000;
-    margin-left:10px;
+    margin-left:5px;
 }
 
 .a{
     font-family:"Arial", sans-serif;
-    font-size:84%;
+    font-size:100%;
     color:#176CED;
     font-weight:bold;
     text-decoration: none;
-    margin-left:85%;
+    margin-left:83%;
 }
 
 .a:hover{
-    font-family:"Arial", sans-serif;
-    font-size:84%;
     color:#4e97bb;
     text-decoration: underline;
-    font-weight:bold;
-    margin-left:85%;
+
 }
 
 .guide{
@@ -94,10 +91,10 @@
 }
 
 .two{
-    width:98.9%;
-    height:60px;
-    margin-left:10px;
-    padding-left:2%;
+    width: 100%;
+    height: 60px;
+    margin-left: 7px;
+    padding-left: 2%;
 }
 
 .three{
@@ -136,25 +133,25 @@
 
 .infor{
     margin-top:12px;
-    background:url(../img/home.png) no-repeat 10px center;
+    background:url(http://lozi.vn/img/icons/home-white.png) no-repeat 10px center;
 }
 
 .service{
-    background:url(../img/service.png) no-repeat 10px center;
+    background:url(http://lozi.vn/img/icons/service.png) no-repeat 10px center;
 }
 
 .contact{
-    background:url(../img/contact.png) no-repeat 10px center;
+    background:url(http://lozi.vn/img/icons/phone-white-large.png) no-repeat 10px center;
 }
 .tabt{
-    width:101.5%;
-    font-family:"Arial", sans-serif;
-    font-weight:bold;
-    text-align:left;
-    margin-left:10px;
-    cursor:pointer;
-    padding-top:4.7%;
-    padding-bottom:4.7%;
+    width: 100%;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 5px;
+    cursor: pointer;
+    padding-top: 4.7%;
+    padding-bottom: 5.7%;
     padding-top:4.7%;
     border:0px solid rgb(0,102,153);
     background-color:#176CED;
@@ -164,20 +161,9 @@
 }
 
 .tabt:hover{
-    width:101.5%;
-    font-family:"Arial", sans-serif;
-    font-weight:bold;
-    text-align:left;
-    margin-left:10px;
-    cursor:pointer;
-    padding-top:4.7%;
-    padding-bottom:4.7%;
-    padding-top:4.7%;
     border:0px solid rgb(0,102,153);
     background-color:#3399cc;
-    border-radius:5px;
-    color:#fff;
-    padding-left:15%;
+
 }
 
 .container {
@@ -227,10 +213,10 @@
     -moz-transition: 0.15s ease-out;
     -o-transition: 0.15s ease-out;
     transition: 0.15s ease-out;
-    -webkit-transition-property: opacity background;
-    -moz-transition-property: opacity background;
-    -o-transition-property: opacity background;
-    transition-property: opacity background;
+    -webkit-transition-property: opacity ;
+    -moz-transition-property: opacity ;
+    -o-transition-property: opacity ;
+    transition-property: opacity ;
 }
 .switch-label:before, .switch-label:after {
     position: absolute;
@@ -303,12 +289,47 @@
     background-image: linear-gradient(to bottom, #eeeeee, white);
 }
 .switch-input:checked ~ .switch-handle {
-    left: 40px;
+    left: 35px;
     box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .switch-green > .switch-input:checked ~ .switch-label {
     background: #4fb845;
 }
+.input-group1.open>[role=toggle] {
+    display: none;
+}
+.input-group1.open>.fieldset {
+    display: block;
+}
+.input-group1{
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    color: #fff;
+    text-align: left;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+
+}
+.fieldset{
+    display: none;
+    position: relative;
+    border-radius: 5px;
+    background: #f1f1f1;
+    color: #1c2025;
+    padding: 13px;
+    padding-bottom: 18px;
+    margin: 6px;
+    width: 100%;
+}
 
 
+.labelinfo{
+    color: #fff;
+    text-align: left;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+}
