@@ -11,6 +11,9 @@
         return {
             map: function(){
                 return $http.get($rootScope.url + 'post');
+            },
+            getShopList: function(){
+                return $http.get($rootScope.url + 'getShopList' );
             }
         }
     }
