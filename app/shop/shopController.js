@@ -10,12 +10,13 @@
     function shopController($scope, ngDialog, $routeParams, shopService, headerService) {
         googleMap.init();
         $scope.comment = null;
-        $scope.pagingShop=[];
-        $scope.countShop=[];
-        $scope.offSet=0;
-        $scope.disableLbl=true;
-        $scope.from=1;
-        $scope.to=12;
+        $scope.pagingShop = [];
+        $scope.countShop = [];
+        $scope.offSet = 0;
+        $scope.disableLblFrom = true;
+        $scope.disableLblTo = false;
+        $scope.from = 1;
+        $scope.to = 12;
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
@@ -25,8 +26,8 @@
         shopService.get($routeParams.shopId)
             .success(function (data) {
                 $scope.shop = data.shop;
-                for(var i =0; i< data.shop.posts.length; i++){
-                    if(i<12){
+                for (var i = 0; i < data.shop.posts.length; i++) {
+                    if (i < 12) {
                         $scope.pagingShop.push(data.shop.posts[i]);
                     }
                     $scope.countShop.push(data.shop.posts[i]);
@@ -86,9 +87,9 @@
                 $scope.shop.comments.push({
                     'content': data.content,
                     'created_at': 'Just now',
-                    'user':{
+                    'user': {
                         'username': $scope.loginUser.username,
-                        'id':$scope.loginUser.id,
+                        'id': $scope.loginUser.id,
                         'picture_profile': $scope.loginUser.picture_profile
                     }
                 });
@@ -101,34 +102,47 @@
             }
         };
 
-        $scope.getShop=function(offSet){
+        $scope.getShop = function (offSet) {
             var data = {
                 'shopId': $routeParams.shopId,
                 'offSet': offSet
             };
             shopService.getShop(data)
-                .success(function(data){
-                    $scope.pagingShop=[];
-                    for(var i =0; i< data.shops.length; i++){
+                .success(function (data) {
+                    $scope.pagingShop = [];
+                    if($scope.offSet<offSet){
+                        $scope.from=$scope.from+11;
+                        $scope.to=$scope.to+11;
 
-                        $scope.disableLbl=false;
-                        if(offSet<12){
-                            $scope.disableLbl=true;
-                            $scope.from=1;
-                        }else
-                        {
-                            $scope.from=offSet;
-                        }
-                        if($scope.to<$scope.countShop){
-                            $scope.to=offSet+11;
-                        }else{
-                            $scope.to=$scope.countShop.length;
-                        }
+                    }
+                    if($scope.offSet>offSet){
+                        $scope.from=$scope.from-11;
+                        $scope.to=$scope.to-11;
+                    }
+
+                    $scope.disableLblTo=false;
+
+                    $scope.offSet=offSet;
+                    if ($scope.to > $scope.countShop.length) {
+                        $scope.to = $scope.countShop.length;
+                        $scope.disableLblTo=true;
+                    }
+
+                    $scope.disableLblFrom = false;
+                    if ($scope.offSet < 12) {
+                        $scope.disableLblFrom = true;
+                        $scope.from = 1;
+                        $scope.to =12;
+                        $scope.disableLblTo=false;
+                    } else {
+                        $scope.from = offSet;
+                    }
+                    for (var i = 0; i < data.shops.length; i++) {
                         $scope.pagingShop.push(data.shops[i]);
                     }
                 })
                 .error(function () {
-                   console.log(data);
+                    console.log(data);
                 });
         }
 
