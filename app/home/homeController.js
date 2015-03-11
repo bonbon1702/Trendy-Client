@@ -30,7 +30,12 @@
 //                console.log(data);
 //            });
         googleMap.init();
-
+        homeService.getShopList().success(function (data) {
+            googleMap.createMarker(data);
+        })
+            .error(function (data) {
+                console.log(data);
+            });
     }
 })(angular);
 

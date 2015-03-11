@@ -6,13 +6,12 @@
 })(this, function (root) {
 
     'use strict';
-
+	var markerHome;
     var googleMap = {};
 
     var map, markers = [];
 
-    googleMap.init = function (data) {
-
+    googleMap.init = function (dataShop) {
         //console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
@@ -69,7 +68,7 @@
                         "visibility": "on"
                     },
                     {
-                        "color": "#e0efef"
+                        "color": "#F4ECF3"
                     }
                 ]
             },
@@ -153,7 +152,7 @@
                 "elementType": "all",
                 "stylers": [
                     {
-                        "color": "#7dcdcd"
+                        "color": "#9298C7"
                     }
                 ]
             }
@@ -173,12 +172,12 @@
         }
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        var pos = new google.maps.LatLng(20.9875830,105.8316770);
-		var pos2 = new google.maps.LatLng(21.0249399, 105.8457613);
-		new CustomMarker(pos,map,{marker_id:'123',product:'shirt',shop:'123 ha noi xxxxxxxxxxxxxxxxxxxxxxxxxxxx'});
-		new CustomMarker(pos2,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
+        //var pos = new google.maps.LatLng(20.9875830,105.8316770);
+		//var pos2 = new google.maps.LatLng(21.0249399, 105.8457613);
+		//new CustomMarker(pos,map,{marker_id:'123',product:'shirt',shop:'123 ha noi xxxxxxxxxxxxxxxxxxxxxxxxxxxx',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
+		//new CustomMarker(pos2,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
         //new CustomMarker.prototype.remove();
-        createMarker(map,null,pos);
+        //createMarker(map,null,pos);
         //alert(data.length);
         //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi','dep');
         //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
@@ -234,14 +233,14 @@
 			  };
 
 			  // Create a marker for each place.
-			  /*var marker = new google.maps.Marker({
+			  var marker = new google.maps.Marker({
 				map: map,
 				icon: image,
 				title: place.name,
 				position: place.geometry.location
-			  });*/
+			  });
 			
-			  //markers.push(marker);
+			  markers.push(marker);
 				//new CustomMarker(place.geometry.location,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
 			  bounds.extend(place.geometry.location);
 			}
@@ -285,13 +284,15 @@
 
             // For each place, get the icon, place name, and location.
             // markers = [];
-
-            var marker = createMarker(map, null, myLatlng);
-
-            var infowindow = new google.maps.InfoWindow({
-                content: "It is your location"
-            });
-
+			if (markerHome!= null)
+			markerHome.setMap(null);
+            //var marker = createMarker(map, null, myLatlng);
+			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
+			markerHome.setMap(map);
+            //var infowindow = new google.maps.InfoWindow({
+            //    content: "It is your location"
+            //});
+			
             //markers.push(marker);
             map.setCenter(myLatlng);
             //map.setZoom(15);
@@ -339,29 +340,40 @@
             });
         }
     }
-	var createMarker = function (map, icon, position) {
-        icon = icon || null;
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            shape: {coords: [17, 17, 18], type: 'circle'},
-            //icon: {
-            //   url: 'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
-            //    size: new google.maps.Size(71, 71),
-            //   origin: new google.maps.Point(0, 0),
-            //    anchor: new google.maps.Point(17, 34),
-            //   scaledSize: new google.maps.Size(50, 50)
-            //},
-
-            optimized: false
-        });
-        return marker;
-    }
+	googleMap.createMarker = function (data) {
+        //icon = icon || null;
+        //var marker = new google.maps.Marker({
+        //    position: position,
+        //    map: map,
+        //    shape: {coords: [17, 17, 18], type: 'circle'},
+        //    //icon: {
+        //    //   url: 'http://latte.lozi.vn/upload/images/1vtAFiOXC8vCwMtgrwSZO5kyOHcD3i5n-s-120.jpg',
+        //    //    size: new google.maps.Size(71, 71),
+        //    //   origin: new google.maps.Point(0, 0),
+        //    //    anchor: new google.maps.Point(17, 34),
+        //    //   scaledSize: new google.maps.Size(50, 50)
+        //    //},
+        //
+        //    optimized: false
+        //});
+		var shop = data.data;
+		for (var i = 0, marker; marker = shop[i]; i++) {
+        //var marker = 
+		new CustomMarker(
+						new google.maps.LatLng(data.data[i].lat, data.data[i].long),
+						map,
+						{	marker_id:data.data[i].id,
+							product:data.data[i].name,
+							shop:data.data[i].address,
+							img:data.data[i].image_url_resize
+						});
+		}
+    };
     // Hàm đánh dấu lên bản đồ từ 1 đối tượng địa điểm place
     function CustomMarker(latlng, map, args) {
-    this.latlng = latlng;
-    this.args = args;
-    this.setMap(map);
+        this.latlng = latlng;
+        this.args = args;
+        this.setMap(map);
 	}
 
     CustomMarker.prototype = new google.maps.OverlayView();
@@ -389,7 +401,7 @@
 			if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
             div.innerHTML ='<div class="marker"><img class="img-marker" '
                             +'src="'+img+'">'
-							+'<div class="marker-hover bg-dark">'    
+							+'<div class="marker-hover">'    
 							+'<a href="" role="product">'
 							+	product
 							+'</a>'       
