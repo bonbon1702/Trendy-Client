@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio'];
-    function headerController($scope, headerService, $location, ngDialog, $pusher, ngAudio) {
+    headerController.$inject = ['$scope', 'headerService', '$route', 'ngDialog', '$pusher', 'ngAudio'];
+    function headerController($scope, headerService, $route, ngDialog, $pusher, ngAudio) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.update = function (type) {
@@ -110,7 +110,7 @@
         $scope.logout = function () {
             hello("facebook").logout();
             hello("google").logout();
-            $window.location.reload();
+            window.location.reload();
         }
 
         var client = new Pusher('4c33474dc0a36d3a912d');
