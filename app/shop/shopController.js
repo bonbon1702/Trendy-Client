@@ -22,6 +22,9 @@
         $scope.contactOpen =  false;
         headerService.loginUser()
             .success(function (data) {
+                if(data.user == null){
+                    $scope.likeBtnStatus="Like";
+                }
                 $scope.loginUser = data.user;
             })
             .error();
@@ -36,13 +39,14 @@
                     $scope.countShop.push(data.shop.posts[i]);
                 }
                 for (var i = 0; i < $scope.shop.like.length; i++) {
-                    if ($scope.loginUser.id == $scope.shop.like[i].user_id) {
+                    if ($scope.loginUser!= null &&  $scope.loginUser.id == $scope.shop.like[i].user_id) {
                         $scope.likeBtnStatus = "Liked";
                     } else
                         $scope.likeBtnStatus = "Like";
                 }
                 $scope.likeOrDislike = function () {
                     if (!$scope.loginUser) {
+                        $scope.likeBtnStatus="Like";
                         event.preventDefault();
                         headerService.openLogin();
                     } else {
@@ -150,6 +154,7 @@
         }
 
         $scope.infoShop =function(){
+            infoShopMap.init();
             ngDialog.open({
                 template: 'app/shop/templates/inforshop.html',
 
@@ -160,7 +165,7 @@
                         $scope.serviceOpen = false;
                         $scope.contactOpen =  false;
                     }
-                    $scope.serviceShopToggle = function() {
+                    $scope.serviceShopToggle = function(){
                         $scope.infoOpen= false;
                         $scope.serviceOpen = true;
                         $scope.contactOpen =  false;
@@ -172,7 +177,6 @@
                     }
                 }]
             });
-            ngDialog.scroll;
 
         }
 

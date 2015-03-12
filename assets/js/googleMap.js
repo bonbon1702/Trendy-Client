@@ -68,7 +68,7 @@
                         "visibility": "on"
                     },
                     {
-                        "color": "#F4ECF3"
+                        "color": "#e0efef"
                     }
                 ]
             },
@@ -152,7 +152,7 @@
                 "elementType": "all",
                 "stylers": [
                     {
-                        "color": "#9298C7"
+                        "color": "#7dcdcd"
                     }
                 ]
             }
