@@ -152,7 +152,8 @@
         $scope.infoShop =function(){
             ngDialog.open({
                 template: 'app/shop/templates/inforshop.html',
-                className: 'ngdialog-theme-plain-custom-editAlbum',
+
+                className: 'ngdialog-theme-plain-infoShop',
                 controller: ['$scope', function ($scope) {
                     $scope.infoShopToggle = function(){
                         $scope.infoOpen= true;
@@ -171,6 +172,7 @@
                     }
                 }]
             });
+            ngDialog.scroll;
 
         }
 

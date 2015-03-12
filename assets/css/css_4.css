@@ -93,7 +93,7 @@
 .two{
     width: 100%;
     height: 60px;
-    margin-left: 7px;
+    margin: -5px 6px 7px;
     padding-left: 2%;
 }
 
@@ -133,15 +133,15 @@
 
 .infor{
     margin-top:12px;
-    background:url(http://lozi.vn/img/icons/home-white.png) no-repeat 10px center;
+    background:url('../img/images/home.png') no-repeat 10px center;
 }
 
 .service{
-    background:url(http://lozi.vn/img/icons/service.png) no-repeat 10px center;
+    background:url('../img/images/service.png') no-repeat 10px center;
 }
 
 .contact{
-    background:url(http://lozi.vn/img/icons/phone-white-large.png) no-repeat 10px center;
+    background:url('../img/images/contact.png') no-repeat 10px center;
 }
 .tabt{
     width: 100%;
@@ -158,6 +158,7 @@
     border-radius:5px;
     color:#fff;
     padding-left:15%;
+    height: 50px;
 }
 
 .tabt:hover{
@@ -206,7 +207,7 @@
     height: inherit;
     font-size: 10px;
     text-transform: uppercase;
-    background: #eceeef;
+    background: #176CED;
     border-radius: inherit;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
     -webkit-transition: 0.15s ease-out;
@@ -231,7 +232,7 @@
 .switch-label:before {
     content: attr(data-off);
     right: 11px;
-    color: #aaa;
+    color: #FFF;
     font-family:"Arial", sans-serif;
     text-shadow: 0 1px rgba(255, 255, 255, 0.5);
 }
@@ -244,7 +245,7 @@
     opacity: 0;
 }
 .switch-input:checked ~ .switch-label {
-    background: #176CED;
+    background: #ED172F;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
 .switch-input:checked ~ .switch-label:before {
@@ -311,7 +312,8 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 12px;
-
+    top: -5px;
+    margin: 0px 0px 5px;
 }
 .fieldset{
     display: none;
@@ -321,7 +323,7 @@
     color: #1c2025;
     padding: 13px;
     padding-bottom: 18px;
-    margin: 6px;
+    margin: 3px 5px 5px;
     width: 100%;
 }
 
@@ -332,4 +334,5 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 12px;
+    margin-top: -7px;
 }
