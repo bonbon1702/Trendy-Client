@@ -1,19 +1,21 @@
 /**
+ * Created by Nam on 13/3/2015.
+ */
+/**
  * Created by tuan on 12/11/2014.
  */
 (function (root, factory) {
-    root.googleMap = factory(root);
+    root.shopMap = factory(root);
 })(this, function (root) {
 
     'use strict';
-	var markerHome;
-    var googleMap = {};
+    var markerHome;
+    var shopMap = {};
 
     var map, markers = [];
 
-    googleMap.init = function (dataShop) {
-        //console.log(data);
-        var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
+    shopMap.init = function (dataShop) {
+        var shopLocation = new google.maps.LatLng(dataShop.shop.shop_detail[0].lat, dataShop.shop.shop_detail[0].long);
         var myStyles = [
             {
                 "featureType": "administrative.country",
@@ -159,7 +161,7 @@
         ];
         var mapOptions = {
             zoom: 15,
-            center: haNoiLocation,
+            center: shopLocation ,
             panControl: false,
             zoomControl: true,
             scaleControl: false,
@@ -172,80 +174,58 @@
         }
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        //var pos = new google.maps.LatLng(20.9875830,105.8316770);
-		//var pos2 = new google.maps.LatLng(21.0249399, 105.8457613);
-		//new CustomMarker(pos,map,{marker_id:'123',product:'shirt',shop:'123 ha noi xxxxxxxxxxxxxxxxxxxxxxxxxxxx',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
-		//new CustomMarker(pos2,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
-        //new CustomMarker.prototype.remove();
-        //createMarker(map,null,pos);
-        //alert(data.length);
-        //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi','dep');
-        //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
-        //for (var i = 0; i < data.length; i++) {
-        //    var image = {
-        //        url: data[i].image_url,
-        //        size: new google.maps.Size(71, 71),
-        //        origin: new google.maps.Point(0, 0),
-        //        anchor: new google.maps.Point(17, 34),
-        //        scaledSize: new google.maps.Size(25, 25)
-        //    };
-        //    alert(data[i].name);
-        //    createMarker(map, null, new google.maps.LatLng(data[i].lat , data[i].long),data[i].name);
-        //    //markers.push(marker);
-        //}
-        //map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
 
         searchBox();
         homeButton();
     }
 
     var searchBox = function () {
-				// Create the search box and link it to the UI element.
-		  var input = /** @type {HTMLInputElement} */(
-			  document.getElementById('pac-input'));
-		  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Create the search box and link it to the UI element.
+        var input = /** @type {HTMLInputElement} */(
+            document.getElementById('pac-input'));
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-		  var searchBox = new google.maps.places.SearchBox(
-			/** @type {HTMLInputElement} */(input));
+        var searchBox = new google.maps.places.SearchBox(
+            /** @type {HTMLInputElement} */(input));
 
-		  // Listen for the event fired when the user selects an item from the
-		  // pick list. Retrieve the matching places for that item.
-		  google.maps.event.addListener(searchBox, 'places_changed', function() {
-			var places = searchBox.getPlaces();
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        google.maps.event.addListener(searchBox, 'places_changed', function() {
+            var places = searchBox.getPlaces();
 
-			if (places.length == 0) {
-			  return;
-			}
-			for (var i = 0, marker; marker = markers[i]; i++) {
-			  marker.setMap(null);
-			}
+            if (places.length == 0) {
+                return;
+            }
+            for (var i = 0, marker; marker = markers[i]; i++) {
+                marker.setMap(null);
+            }
 
-			// For each place, get the icon, place name, and location.
-			markers = [];
-			var bounds = new google.maps.LatLngBounds();
-			for (var i = 0, place; place = places[i]; i++) {
-			  var image = {
-				url: place.icon,
-				size: new google.maps.Size(71, 71),
-				origin: new google.maps.Point(0, 0),
-				anchor: new google.maps.Point(17, 34),
-				scaledSize: new google.maps.Size(25, 25)
-			  };
+            // For each place, get the icon, place name, and location.
+            markers = [];
+            var bounds = new google.maps.LatLngBounds();
+            for (var i = 0, place; place = places[i]; i++) {
+                var image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
 
-			  // Create a marker for each place.
-			  var marker = new google.maps.Marker({
-				map: map,
-				icon: image,
-				title: place.name,
-				position: place.geometry.location
-			  });
-			
-			  markers.push(marker);
-				//new CustomMarker(place.geometry.location,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
-			  bounds.extend(place.geometry.location);
-			}
+                // Create a marker for each place.
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: image,
+                    title: place.name,
+                    position: place.geometry.location
+                });
 
-			map.fitBounds(bounds);
+                markers.push(marker);
+                //new CustomMarker(place.geometry.location,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz'});
+                bounds.extend(place.geometry.location);
+            }
+
+            map.fitBounds(bounds);
             map.setZoom(15);
         });
 
@@ -284,20 +264,20 @@
 
             // For each place, get the icon, place name, and location.
             // markers = [];
-			if (markerHome!= null)
-			markerHome.setMap(null);
+            if (markerHome!= null)
+                markerHome.setMap(null);
             //var marker = createMarker(map, null, myLatlng);
-			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
-			markerHome.setMap(map);
+            markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
+            markerHome.setMap(map);
             //var infowindow = new google.maps.InfoWindow({
             //    content: "It is your location"
             //});
-			
+
             //markers.push(marker);
             map.setCenter(myLatlng);
             //map.setZoom(15);
-			
-			
+
+
             google.maps.event.addListener(marker, 'mouseover', function () {
                 infowindow.open(map, marker);
             });
@@ -340,26 +320,22 @@
             });
         }
     }
-	googleMap.createMarker = function (data) {
-		var shop = data.data;
-		for (var i = 0, marker; marker = shop[i]; i++) {
-        //var marker = 
-		new CustomMarker(
-						new google.maps.LatLng(data.data[i].lat, data.data[i].long),
-						map,
-						{	marker_id:data.data[i].id,
-							product:data.data[i].name,
-							shop:data.data[i].address,
-							img:data.data[i].image_url
-						});
-		}
+    shopMap.createMarker = function (data) {
+        var shop = data.data;
+            new CustomMarker(
+                new google.maps.LatLng(data.shop.shop_detail[0].lat, data.shop.shop_detail[0].long),
+                map,
+                {	marker_id:data.shop.id,
+                    product:data.shop.name,
+                    shop:data.shop.shop_detail[0].street+", "+data.shop.shop_detail[0].district+", "+data.shop.shop_detail[0].city,
+                    img:data.shop.image_url
+                });
     };
-    // Hàm đánh dấu lên bản đồ từ 1 đối tượng địa điểm place
     function CustomMarker(latlng, map, args) {
         this.latlng = latlng;
         this.args = args;
         this.setMap(map);
-	}
+    }
 
     CustomMarker.prototype = new google.maps.OverlayView();
 
@@ -377,25 +353,24 @@
 
             div.style.position = 'absolute';
             div.style.cursor = 'pointer';
-            //div.id='heart';
-			var img = "";
-			var product = "";
-			var shop = "";
-			if (self.args.img != null && self.args.img != '') img = self.args.img;
-			if (self.args.product != null && self.args.product != '') product = self.args.product;
-			if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
+            var img = "";
+            var product = "";
+            var shop = "";
+            if (self.args.img != null && self.args.img != '') img = self.args.img;
+            if (self.args.product != null && self.args.product != '') product = self.args.product;
+            if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
             div.innerHTML ='<div class="marker"><img class="img-marker" '
-                            +'src="'+img+'">'
-							+'<div class="marker-hover">'    
-							+'<a href="" role="product">'
-							+	product
-							+'</a>'       
-							+'<a href="" role="shop">'+shop+'</a></div></div>';
+            +'src="'+img+'">'
+            +'<div class="marker-hover">'
+            +'<a href="" role="product">'
+            +	product
+            +'</a>'
+            +'<a href="" role="shop">'+shop+'</a></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
-			div1.style.top = '72px'
-			div1.style.left = '47px'
+            div1.style.top = '72px'
+            div1.style.left = '47px'
             div1.style.position = 'absolute';
             div1.style.cursor = 'pointer';
             if (typeof(self.args.marker_id) !== 'undefined') {
@@ -408,21 +383,16 @@
                 google.maps.event.trigger(self, "click");
             });
             var panes = this.getPanes();
-            //panes.overlayImage.appendChild(div1);
-			div.appendChild(div1);
+            div.appendChild(div1);
             panes.overlayImage.appendChild(div);
-            //panes.overlayImage.appendChild('<div class="pulse"></div>');
         }
 
-    var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+        var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
-    if (point) {
-        div.style.left = (point.x -42) + 'px';
-        div.style.top = (point.y -86) + 'px';
-		
-        //div1.style.left = (point.x+5) + 'px';
-        //div1.style.top = (point.y-12) + 'px';
-    }
+        if (point) {
+            div.style.left = (point.x -42) + 'px';
+            div.style.top = (point.y -86) + 'px';
+        }
     };
 
     CustomMarker.prototype.remove = function() {
@@ -430,7 +400,7 @@
             this.div.parentNode.removeChild(this.div);
             this.div = null;
         }
-		if (this.div1) {
+        if (this.div1) {
             this.div1.parentNode.removeChild(this.div1);
             this.div1 = null;
         }
@@ -439,5 +409,5 @@
     CustomMarker.prototype.getPosition = function() {
         return this.latlng;
     };
-    return googleMap;
+    return shopMap;
 });

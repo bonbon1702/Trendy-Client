@@ -5,101 +5,95 @@
     <table width="105%" style="margin-bottom: 15px;">
         <tr>
             <td width="50%">
-                <h1 class="h1">Đường</h1>
-                <input type="textbox" class="one text"/>
+                <h1 class="h1">Street</h1>
+                <input type="textbox" class="one text" ng-model="street"/>
             </td>
             <td>
-                <h1 class="h1">Quận/Huyện</h1>
-                <input type="textbox" class="one text"/>
+                <h1 class="h1">District</h1>
+                <input type="textbox" class="one text" ng-model="district"/>
             </td>
         </tr>
         <tr>
             <td>
-                <h1 class="h1">Tỉnh/Thành Phố</h1>
-                <input type="textbox" class="one text"/>
+                <h1 class="h1">City</h1>
+                <input type="textbox" class="one text" ng-model="city"/>
             </td>
             <td>
-                <h1 class="h1">Khu vực</h1>
-                <input type="textbox" class="one text"/>
+                <h1 class="h1">Place</h1>
+                <input type="textbox" class="one text" ng-model="near_place"/>
             </td>
         </tr>
     </table>
-    <p class="guide para">Chỉ đường</p>
-    <input type="textbox" class="two text"/>
+    <p class="guide para">Way Direction</p>
+    <input type="textbox" class="two text" ng-model="way_direction"/>
     <div class="input-group1" ng-class="infoOpen == true ? 'open': '' ">
         <div class="infor tabt" role="toggle" ng-click="infoShopToggle()">
-            <div class="labelinfo">Thông tin cơ bản</div>
+            <div class="labelinfo">Basic Information</div>
             <div class="value">
+                <!--<p ng-if="shop.shop_detail[0].name != null">-->
+                    <!--Shop name:-->
+                    <!--<span class="normal-weight">{{ shop.shop_detail[0].name }}</span>-->
+                    <!--<br>-->
+                <!--</p>-->
             </div>
         </div>
         <!--<input type="button" value="Thông tin cơ bản" class="infor tabt"/>-->
         <div class="fieldset">
-            <p class="guide para">Tên shop</p>
-            <input type="textbox" class="five text"/>
-            <p class="guide para">Thời gian mở cửa</p>
-            <p class="guide para">Từ <span><input type="textbox" class="four text"/></span>Đến<input type="textbox" class="four text"/></p>
-            <a href="" class="a">Hoàn thành</a>
+            <p class="guide para">Shop name</p>
+            <input type="textbox" class="five text" ng-model="shop_name"/>
+            <p class="guide para" style="margin-top: 15px;">Time open</p>
+            <p class="guide para">
+                From
+                <span>
+                    <input type="textbox" class="four text"  ng-model="time_open"/>
+                </span>
+                To
+                    <input type="textbox" class="four text"  ng-model="time_close"/>
+            </p>
+            <p class="guide para">Price Amount</p>
+            <p class="guide para">
+                From
+                <span>
+                    <input type="textbox" class="four text" style="width: 50px;"  ng-model="price_from"/>.000đ&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+                To
+                    <input type="textbox" class="four text" style="width: 50px;" ng-model="price_to" />.000đ
+            </p>
+            <a href="" ng-click="saveInfoShop()" class="a">Save</a>
         </div>
     </div>
 
     <div class="input-group1" ng-class="serviceOpen == true ? 'open': '' ">
         <div class="service tabt" role="toggle" ng-click="serviceShopToggle()">
-            <div class="labelinfo">Thông tin dịch vụ</div>
+            <div class="labelinfo">Service Information</div>
             <div class="value">
             </div>
         </div>
-        <!--<input type="button" value="Thông tin dịch vụ" class="service tabt"/>-->
         <div class="fieldset">
         <table width="100%" style="margin: -8px -23px;">
             <tr>
-                <td><p class="pos-service para" style="font-size: 110%;">Phục vụ</p></td>
+                <td><p class="pos-service para" style="font-size: 110%;">Servicing time</p></td>
             </tr>
             <tr>
-                <td width="20%">
-                    <p class="pos-service-one para">Buổi sáng</p>
+                <td width="10%" style="padding-left: 10px;">
+                    <p class="pos-service-one para">Morning</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="morning">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
                 </td>
-                <td width="20%">
-                    <p class="pos-service-one para">Buổi trưa</p>
+                <td width="10%" style="padding-left: 10px;">
+                    <p class="pos-service-one para">Midday</p>
                 </td>
                 <td>
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="pos-service-one para">Buổi chiều</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <p class="pos-service-one para">Buổi tối</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="midday">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
@@ -107,54 +101,25 @@
                 </td>
             </tr>
             <tr>
-                <td><p class="pos-service para" style="font-size: 110%;">Tiện ích</p></td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="pos-service-one para">Dịch vụ vận chuyển</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Afternoon</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="afternoon">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
                 </td>
-                <td>
-                    <p class="pos-service-one para">Thanh toán bằng thẻ</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Night</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="pos-service-one para">Điều hòa</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <p class="pos-service-one para">Phục vụ tận tình</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"   ng-model="evening">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
@@ -162,54 +127,28 @@
                 </td>
             </tr>
             <tr>
-                <td><p class="pos-service para" style="font-size: 110%;">Đối tượng</p></td>
+                <td><p class="pos-service para" style="font-size: 110%;">Service</p></td>
             </tr>
             <tr>
-                <td>
-                    <p class="pos-service-one para">Trẻ nhỏ</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Shipping service</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="shipping">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
                 </td>
-                <td>
-                    <p class="pos-service-one para">Thanh - Thiếu niên</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Payment by card</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="pos-service-one para">Trung niên</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
-                            <span class="switch-label" data-on="Yes" data-off="No"></span>
-                            <span class="switch-handle"></span>
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <p class="pos-service-one para">Người già</p>
-                </td>
-                <td width="10%">
-                    <div class="container">
-                        <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="credit_card">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
@@ -217,25 +156,106 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    <p class="pos-service-one para">Đồ nam</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Air conditioning</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="cooler">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
                     </div>
                 </td>
-                <td>
-                    <p class="pos-service-one para">Đồ nữ</p>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Parking service</p>
                 </td>
                 <td width="10%">
                     <div class="container">
                         <label class="switch">
-                            <input type="checkbox" class="switch-input">
+                            <input type="checkbox" class="switch-input"  ng-model="parking">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="pos-service para" style="font-size: 110%;">People</p></td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Children</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="children">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Teenage</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="teen">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Middle-aged</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="middleaged">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Oldster</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="oldster">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Men</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="men">
+                            <span class="switch-label" data-on="Yes" data-off="No"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </td>
+                <td style="padding-left: 10px;">
+                    <p class="pos-service-one para">Women</p>
+                </td>
+                <td width="10%">
+                    <div class="container">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input"  ng-model="women">
                             <span class="switch-label" data-on="Yes" data-off="No"></span>
                             <span class="switch-handle"></span>
                         </label>
@@ -243,25 +263,25 @@
                 </td>
             </tr>
         </table>
-        <a href="" class="a">Hoàn thành</a>
+        <br/>
+        <a href="" ng-click="saveServiceShop()" class="a">Save</a>
         </div>
     </div>
 
     <div class="input-group1" ng-class="contactOpen == true ? 'open': '' ">
         <div class="contact tabt" role="toggle" ng-click="contactShopToggle()">
-            <div class="labelinfo">Thông tin liên lạc</div>
+            <div class="labelinfo">Contact Information</div>
             <div class="value">
             </div>
         </div>
-        <!--<input type="button" value="Thông tin liên lạc" class="contact tabt"/>-->
         <div class="fieldset">
-            <p class="pos para">Điện thoại<span><input type="textbox" class="six text"/></span></p>
-            <p class="pos para">Website&nbsp;&nbsp;&nbsp;<span><input type="textbox" class="six text"/></span></p>
-            <p class="pos para">Facebook<span><input type="textbox" class="six text"/></span></p>
-            <a href="" class="a">Hoàn thành</a>
+            <p class="pos para">Telephone<span><input type="textbox" class="six text" ng-model="phone"/></span></p>
+            <p class="pos para">Website&nbsp;&nbsp;&nbsp;<span><input type="textbox" class="six text" ng-model="website"/></span></p>
+            <p class="pos para">Facebook<span><input type="textbox" class="six text" ng-model="facebook_page"/></span></p>
+            <a href="" ng-click="saveContactShop()" class="a">Save</a>
         </div>
     </div>
-    <a type="button" class="btn btn-primary" ng-click="" style="margin-left: 430px;">
+    <a type="button" class="btn btn-primary" ng-click="saveShopDetail()" style="margin-left: 430px;">
         <i class="fa fa-check" style="font-size: 13px;width: 11px;"></i>
         Save
     </a>

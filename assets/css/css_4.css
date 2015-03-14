@@ -37,7 +37,7 @@
 
 .para{
     font-family:"Arial", sans-serif;
-    font-size:88%;
+    font-size:95%;
     color:#000;
     margin-left:5px;
 }
@@ -48,7 +48,7 @@
     color:#176CED;
     font-weight:bold;
     text-decoration: none;
-    margin-left:83%;
+    margin-left:90%;
 }
 
 .a:hover{
@@ -127,7 +127,7 @@
     background:#fff;
     border:1px solid #ccc;
     font-family:"Arial", sans-serif;
-    font-size:80%;
+    font-size:100%;
     border-radius:5px;
 }
 
@@ -207,7 +207,7 @@
     height: inherit;
     font-size: 10px;
     text-transform: uppercase;
-    background: #176CED;
+    background: #ED172F;
     border-radius: inherit;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
     -webkit-transition: 0.15s ease-out;
@@ -245,7 +245,7 @@
     opacity: 0;
 }
 .switch-input:checked ~ .switch-label {
-    background: #ED172F;
+    background: #176CED ;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
 .switch-input:checked ~ .switch-label:before {
@@ -335,4 +335,12 @@
     font-weight: 700;
     font-size: 12px;
     margin-top: -7px;
+}
+
+.value {
+    display: inline-block;
+    width: 70%;
+    float: right;
+    white-space: normal;
+    color: #1c2025;
 }

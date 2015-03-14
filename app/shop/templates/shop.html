@@ -43,74 +43,97 @@
                             </ul>
 
                             <div class="info edit-links">
-                                <a ng-click="infoShop()" role="show-edit-popup" class="btn btn-link" style="float: right;">Đề xuất thông tin nhà hàng</a>
+                                <a ng-click="infoShop(shop)" role="show-edit-popup" class="btn btn-link" style="float: right;">Đề xuất thông tin nhà hàng</a>
                             </div>
 
 
                             <div class="info address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                                 <span class=" icon-location-fill-1"></span>
-                                <span itemprop="streetAddress">{{ shop.address }}</span>
+                                <span itemprop="streetAddress">
+                                    <div ng-if="shop.shop_detail[0].street != null" style="display: inline;">{{ shop.shop_detail[0].street }}, </div>
+                                    <div ng-if="shop.shop_detail[0].district != null" style="display: inline;">{{ shop.shop_detail[0].district }}, </div>
+                                    <div ng-if="shop.shop_detail[0].city != null" style="display: inline;">{{ shop.shop_detail[0].city }}</div>
+                                </span>
                             </div>
 
-                            <div itemprop="telephone">
+                            <div class="info telephone">
                                 <span class=" fa fa-phone"></span>
-                                0905 545 448</div>
+                                {{ shop.shop_detail[0].tel }}
+                            </div>
 
-
-                            <div class="info price-range" itemprop="priceRange">
+                            <div class="info price-range">
                                 <span class="icon-tag-1"></span>
-                                28.000 đ
+                                <div ng-if="shop.shop_detail[0].price_from != null" style="display: inline;">{{ shop.shop_detail[0].price_from }}.000 đ - </div>
+                                <div ng-if=" shop.shop_detail[0].price_to >0" style="display: inline;">{{ shop.shop_detail[0].price_to }}.000 đ</div>
                             </div>
                         </div>
 
                         <div class="collapse" id="comments-collapse" style="height: auto;">
                             <!-- Second Comment -->
                             <dl class="details" style="margin: 23px;">
-                                <dt>Khu vực</dt>
-                                <dd>Vòng Xoay Ngã Sáu</dd>
+                                <div ng-if="shop.shop_detail[0].near_place != null">
+                                    <dt>Khu vực</dt>
+                                    <dd>{{ shop.shop_detail[0].near_place }}</dd>
+                                </div>
                                 <br>
-                                <dt>Ở gần</dt>
-                                <dd>Trường TH Tân Lập 2</dd>
-                                <br>
-                                <dt>Chỉ đường</dt>
-                                <dd>Quán nằm gần ngã 4 Bạch Đằng - Ngô Gia Tự</dd>
+                                <div ng-if="shop.shop_detail[0].way_direction != null">
+                                    <dt>Chỉ đường</dt>
+                                    <dd>{{ shop.shop_detail[0].way_direction  }}</dd>
+                                </div>
                                 <br>
 
-                                <dt>Khoảng giá</dt>
-                                <dd>0 đ ~ 28.000 đ</dd>
+                                <div ng-if="shop.shop_detail[0].price_from != null && shop.shop_detail[0].price_to != null">
+                                    <dt>Khoảng giá</dt>
+                                    <dd>{{ shop.shop_detail[0].price_from  }}0 đ <div ng-if="shop.shop_detail[0].price_to != null" style="display: inline">~ {{ shop.shop_detail[0].price_to }}.000 đ</div></dd>
+                                </div>
                                 <br>
                                 <dt>Thời gian phục vụ</dt>
                                 <dd>
                                 <span itemprop="openingHoursSpecification" itemscope="" itemtype="http://schema.org/OpeningHoursSpecification">
                                     <span itemprop="dayOfWeek" itemscope="" itemtype="http://schema.org/DayOfWeek">
-                                        07:00 AM - 10:00 PM
+                                       <div ng-if="shop.shop_detail[0].time_open != null" style="display: inline">{{ shop.shop_detail[0].time_open }} -</div> {{ shop.shop_detail[0].time_close }}
                                     </span>
                                 </span>
                                 </dd>
                                 <br>
                                 <dt>Phục vụ</dt>
-                                <dd><a href="/t/ha-noi/nha-hang-phuc-vu-vao-buoi-sang">Buổi sáng</a>, <a href="/t/ha-noi/nha-hang-phuc-vu-vao-buoi-trua">Buổi trưa</a>, <a href="/t/ha-noi/nha-hang-phuc-vu-vao-buoi-chieu">Buổi chiều</a>, <a href="/t/ha-noi/nha-hang-phuc-vu-vao-buoi-toi">Buổi tối</a></dd>
+                                <dd>
+                                    <div ng-if="shop.shop_detail[0].morning == 1" style="display: inline">Buổi sáng  </div>
+                                    <div ng-if="shop.shop_detail[0].midday == 1" style="display: inline">Buổi trưa  </div>
+                                    <div ng-if="shop.shop_detail[0].afternoon == 1" style="display: inline">Buổi chiều  </div>
+                                    <div ng-if="shop.shop_detail[0].evening == 1" style="display: inline">Buổi tối </div>
+                                </dd>
                                 <br>
                                 <dt>Tiện nghi</dt>
-                                <dd><a href="/t/ha-noi/nha-hang-co-cho-mua-ve">Cho mua về</a>, <a href="/t/ha-noi/nha-hang-co-phuc-vu-wifi">Có wifi</a>, <a href="/t/ha-noi/nha-hang-co-ban-ngoai-troi-san-vuon">Có bàn ngoài trời</a>, <a href="/t/ha-noi/nha-hang-co-cho-giu-xe-may-mien-phi">Giữ xe máy miễn phí</a></dd>
+                                <dd>
+                                    <div ng-if="shop.shop_detail[0].shipping == 1" style="display: inline">Dịch vụ vận chuyển, </div>
+                                    <div ng-if="shop.shop_detail[0].credit_card == 1" style="display: inline">Thanh toán bằng thẻ, </div>
+                                    <div ng-if="shop.shop_detail[0].cooler == 1" style="display: inline">Điều hòa, </div>
+                                    <div ng-if="shop.shop_detail[0].parking == 1" style="display: inline">Phục vụ trông xe</div>
+                                </dd>
                                 <br>
-                                <dt>Thể loại nhà hàng</dt>
-                                <dd><a href="/t/ha-noi/nha-hang-cafe-kem">Café/Kem</a></dd>
+                                <dt>Đối tượng</dt>
+                                <dd>
+                                    <div ng-if="shop.shop_detail[0].children == 1" style="display: inline">Trẻ nhỏ, </div>
+                                    <div ng-if="shop.shop_detail[0].teen == 1" style="display: inline">Thanh-Thiếu niên, </div>
+                                    <div ng-if="shop.shop_detail[0].middleaged == 1" style="display: inline">Trung niên, </div>
+                                    <div ng-if="shop.shop_detail[0].oldster == 1" style="display: inline">Người già, </div>
+                                    <div ng-if="shop.shop_detail[0].men == 1" style="display: inline">Đồ Nam, </div>
+                                    <div ng-if="shop.shop_detail[0].women == 1" style="display: inline">Đồ Nữ</div>
+                                </dd>
                                 <br>
-                                <dt>Thích hợp</dt>
-                                <dd><a href="/t/ha-noi/nha-hang-phu-hop-di-voi-nguoi-yeu">Đi với người yêu</a>, <a href="/t/ha-noi/nha-hang-phu-hop-di-voi-nhom-ban-be">Đi với nhóm - bạn bè</a>, <a href="/t/ha-noi/nha-hang-thich-hop-thu-gian">Thư giãn</a>, <a href="/t/ha-noi/nha-hang-takeway-cho-mang-ve">Takeaway - Mang về</a></dd>
-                                <br>
-                                <dt>Món ăn nổi bật</dt>
-                                <dd>Café - Kem, Sinh tố - Nước ép</dd>
-                                <br>
-                                <dt>Nổi trội</dt>
-                                <dd>Quán có không gian nhỏ, thoáng mát., Chuyên phục vụ cafe, sinh tố, nước giải khát., Nhân viên phục vụ nhanh nhẹn chu đáo.</dd>
-                                <br>
-                                <dt>Phong cách ẩm thực</dt>
-                                <dd itemprop="servesCuisine"><a href="/t/ha-noi/nha-hang-am-thuc-viet-nam">Việt Nam</a></dd>
-                                <br>
-                                <dt>Sức chứa</dt>
-                                <dd>30 người lớn</dd>
+                                <div ng-if="shop.shop_detail[0].website != null" style="display: inline">
+                                <dt>Web site</dt>
+                                <dd>
+                                    {{ shop.shop_detail[0].website }}
+                                </dd>
+                                </div>
+                                <div ng-if="shop.shop_detail[0].facebook_page != null" style="display: inline">
+                                    <dt>Facebook</dt>
+                                    <dd>
+                                        <a href="{{ shop.shop_detail[0].facebook_page }}" style="color: #2a6496;">{{ shop.shop_detail[0].facebook_page }}</a>
+                                    </dd>
+                                </div>
                                 <br>
 
                             </dl>

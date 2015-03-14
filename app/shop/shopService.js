@@ -21,17 +21,18 @@
                     data: data
                 })
             },
-            getComments: function(id) {
-                return $http.get($rootScope.url + 'comment/showShop/' + id);
-            },
             likeOrDislike: function(data) {
                 return $http.get($rootScope.url + 'like/likeShop/' + data.id + '/type/' + data.type + '/user/' + data.user);
             },
-            countLike: function(id) {
-                return $http.get($rootScope.url + 'like/countLikeShop/' + id);
-            },
             getShop: function (data) {
                 return $http.get($rootScope.url + 'shop/getShop/'+data.shopId+'/paging/' + data.offSet);
+            },
+            saveShopDetail: function(data){
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'shop_detail',
+                    data: data
+                })
             }
         }
     }
