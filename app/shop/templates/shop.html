@@ -143,13 +143,6 @@
                     </div>
                 </div>
 
-                <!-- 		<div class="widget widget-gallery" data-toggle="collapse-widget" style="z-index:1">
-                                <div class="widget-body">
-
-
-                                </div>
-                            </div> -->
-
                 <div class="widget widget-gallery" data-toggle="collapse-widget">
                     <div class="widget-head"><h4 class="heading">Photo Gallery</h4></div>
                     <div class="widget-body">
@@ -199,7 +192,7 @@
 
                     <!--  Message -->
                     <div class="media margin-none innerAll" ng-repeat="comment in shop.comments">
-                        <a href="" class="pull-left hidden-xs">
+                        <a ng-href="#/user/{{comment.user_id}}" class="pull-left hidden-xs">
                             <img ng-src="{{ comment.user.picture_profile }}" width="60" class="media-object">
                         </a>
                         <div class="media-body innerTB">
@@ -208,7 +201,7 @@
                                     <div class="innerT half">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <a href="" class="strong text-inverse ">{{ comment.user.username }}</a>
+                                                <a ng-href="#/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
                                                 <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
                                             <div class="media-body">

@@ -46,9 +46,9 @@
 
         headerService.loginUser()
             .success(function (data) {
-                $scope.flwBtnStatus = false;
-                $scope.loginUserId = data.user.id;
                 if (data.user != null) {
+                    $scope.flwBtnStatus = false;
+                    $scope.loginUserId = data.user.id;
                     headerService.getUser($scope.loginUserId)
                         .success(function (data) {
                             if($scope.loginUserId == $routeParams.userId){
