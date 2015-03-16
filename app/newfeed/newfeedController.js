@@ -22,36 +22,51 @@
 
         angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
 
-        var loadPage = function(){
-            var length = $scope.postsLeft.length + $scope.postsRight.length;
-            if ($scope.busy) return;
-            $scope.busy = true;
-            var data = {
-                'order' : $scope.newFeedType,
-                'id': length
-            };
-            newfeedService.getPost(data)
+        var loadPage = function () {
+            headerService.loginUser()
                 .success(function (data) {
-                    if (data.posts.length != 0) {
-                        for (var i = 0; i < data.posts.length; i += 2) {
-                            if (data.posts[i] != null) {
-                                $scope.postsLeft.push(data.posts[i]);
-                            }
-                            if (data.posts[i + 1] != null) {
-                                $scope.postsRight.push(data.posts[i + 1]);
-                            }
-                        }
-                        $scope.busy = false;
+                    var length = $scope.postsLeft.length + $scope.postsRight.length;
+                    if (data.user) {
+                        var data = {
+                            'order': $scope.newFeedType,
+                            'id': length,
+                            'user_id': data.user.id
+                        };
                     } else {
-                        $scope.busy = true;
+                        var data = {
+                            'order': $scope.newFeedType,
+                            'id': length,
+                            'user_id': 'none'
+                        };
                     }
+
+                    if ($scope.busy) return;
+                    $scope.busy = true;
+
+                    newfeedService.getPost(data)
+                        .success(function (data) {
+                            if (data.posts.length != 0) {
+                                for (var i = 0; i < data.posts.length; i += 2) {
+                                    if (data.posts[i] != null) {
+                                        $scope.postsLeft.push(data.posts[i]);
+                                    }
+                                    if (data.posts[i + 1] != null) {
+                                        $scope.postsRight.push(data.posts[i + 1]);
+                                    }
+                                }
+                                $scope.busy = false;
+                            } else {
+                                $scope.busy = true;
+                            }
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
                 })
-                .error(function (data) {
-                    console.log(data);
-                });
+                .error();
         };
 
-        $scope.sideBar = function(type){
+        $scope.sideBar = function (type) {
             $scope.newFeedType = type;
             $scope.postsLeft = [];
             $scope.postsRight = [];
@@ -63,13 +78,11 @@
             loadPage();
         };
 
-
-
         $scope.showDialog = function (id) {
             ngDialog.open({
                 template: 'app/newfeed/templates/newfeed.html',
                 className: 'ngdialog-theme-plain post-dialog',
-                controller: ['$scope', 'newfeedService', '$window', 'headerService','$pusher', function ($scope, newfeedService, $window, headerService,$pusher) {
+                controller: ['$scope', 'newfeedService', '$window', 'headerService', '$pusher', function ($scope, newfeedService, $window, headerService, $pusher) {
                     $scope.iconLike = false;
 
 
@@ -82,7 +95,7 @@
                             var my_channel = pusher.subscribe('real-time');
                             my_channel.bind('comment-post',
                                 function (data) {
-                                    if (data.comment.user_id != $scope.loginUser.id){
+                                    if (data.comment.user_id != $scope.loginUser.id) {
                                         $scope.post.comments.push(data.comment);
                                     }
                                 }
@@ -143,9 +156,9 @@
                                     $scope.post.comments.push({
                                         'content': data.content,
                                         'created_at': 'Just now',
-                                        'user':{
+                                        'user': {
                                             'username': $scope.loginUser.username,
-                                            'id':$scope.loginUser.id,
+                                            'id': $scope.loginUser.id,
                                             'picture_profile': $scope.loginUser.picture_profile
                                         }
                                     });
@@ -188,7 +201,7 @@
                                 }
                             };
 
-                            $scope.closeDialog = function(){
+                            $scope.closeDialog = function () {
                                 ngDialog.close();
                             }
                         })

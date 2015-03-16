@@ -36,7 +36,7 @@
                 return $http.get($rootScope.url + 'like/checkLikePost/' + id);
             },
             getPost: function (data) {
-                return $http.get($rootScope.url + 'post/getPost/order/' + data.order + '/paging/' + data.id);
+                return $http.get($rootScope.url + 'post/getPost/order/' + data.order + '/paging/' + data.id + '/userId/'+ data.user_id);
             }
         }
     }

@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('homeController', homeController);
 
-    homeController.$inject = ['$scope', 'ngDialog', 'homeService', 'headerService'];
+    homeController.$inject = ['$scope', 'ngDialog', 'homeService', 'headerService', 'userService'];
 
-    function homeController($scope, ngDialog, homeService, headerService) {
+    function homeController($scope, ngDialog, homeService, headerService, userService) {
 
         headerService.loginUser()
             .success(function (data) {
