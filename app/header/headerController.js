@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$route', 'ngDialog', '$pusher', 'ngAudio'];
-    function headerController($scope, headerService, $route, ngDialog, $pusher, ngAudio) {
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio','$window'];
+    function headerController($scope, headerService, $location, ngDialog, $pusher, ngAudio, $window) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.update = function (type) {
@@ -30,7 +30,7 @@
             }
         };
         hello.init({
-            facebook: '513861542088702',
+            facebook: '849978158393821',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -53,15 +53,16 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                $window.location.href = "http://trendyplus.dev/#/post?image="
                                 + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
                                 ngDialog.close();
                                 $window.location.href =
+                                    "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                    "target:'http://trendyplus.dev/#/post', " +
+                                    "exit:'http://trendyplys.dev/#/'});"
                             }
                         }]
                     });
@@ -110,8 +111,8 @@
         $scope.logout = function () {
             hello("facebook").logout();
             hello("google").logout();
-            window.location.reload();
-        }
+            $window.location.reload();
+        };
 
         var client = new Pusher('4c33474dc0a36d3a912d');
         var pusher = $pusher(client);

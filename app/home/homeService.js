@@ -12,6 +12,9 @@
             map: function(){
                 return $http.get($rootScope.url + 'post');
             },
+            followSuggestion: function(id,type,user_id){
+                return $http.get($rootScope.url + 'follow/suggestionFollow/'+ id +'/type/' + type + '/userId/'+ user_id);
+            },
             getShopList: function(){
                 return $http.get($rootScope.url + 'getShopList' );
             }

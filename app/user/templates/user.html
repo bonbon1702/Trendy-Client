@@ -371,66 +371,24 @@
             <div class="col-md-4 col-lg-3">
 
                 <div class="widget">
-                    <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY KNOW</h5>
+                    <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY WANT TO FOLLOW</h5>
 
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
-                            <li class="list-group-item">
+                            <li class="list-group-item" ng-repeat="user in itemToItemFollow">
                                 <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
+                                    <img ng-src="{{ user.picture_profile }}" class="pull-left media-object"
                                          style="height: 44px;"/>
 
                                     <div class="media-body">
                                         <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
+                                            <a ng-href="#/user/{{user.id}}" class="text-inverse"
+                                               style="margin-top: -10px;margin-left: -16px;">{{ user.username }}</a>
                                         </h5>
 
                                         <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
                                             <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                                         style="height: 44px;"/>
-
-                                    <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                                        </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                                         style="height: 44px;"/>
-
-                                    <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                                        </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
+                                               style="width: 71px;height: 28px;margin-top: -24px;" ng-click="following(user.id)">
                                                 <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
                                                 Follow
                                             </a>

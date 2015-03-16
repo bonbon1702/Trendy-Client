@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route','userService', 'headerService', 'postService'];
+    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route','userService', 'headerService', 'postService', 'homeService'];
 
-    function userController($scope, ngDialog, $routeParams,$route, userService, headerService,postService) {
+    function userController($scope, ngDialog, $routeParams,$route, userService, headerService,postService, homeService) {
         $scope.flwBtnLbl = 'Follow';
         userService.getUser($routeParams.userId)
             .success(function (data) {
@@ -46,9 +46,9 @@
 
         headerService.loginUser()
             .success(function (data) {
+                $scope.flwBtnStatus = false;
+                $scope.loginUserId = data.user.id;
                 if (data.user != null) {
-                    $scope.flwBtnStatus = false;
-                    $scope.loginUserId = data.user.id;
                     headerService.getUser($scope.loginUserId)
                         .success(function (data) {
                             if($scope.loginUserId == $routeParams.userId){
