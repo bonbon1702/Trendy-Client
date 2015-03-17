@@ -402,11 +402,13 @@
                 div.dataset.marker_id = self.args.marker_id;
                 div1.dataset.marker_id = self.args.marker_id;
             }
-
+            if (self.args.product != null && self.args.product != '') {
             google.maps.event.addDomListener(div, "click", function(event) {
-                alert('You clicked on a shop!');
+                //alert('You clicked on a shop!');
+                //'http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id
+                window.location='http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id;
                 google.maps.event.trigger(self, "click");
-            });
+            });}
             var panes = this.getPanes();
             //panes.overlayImage.appendChild(div1);
 			div.appendChild(div1);
