@@ -11,6 +11,9 @@
         $scope.comment = null;
         $scope.postsLeft = [];
         $scope.postsRight = [];
+        $scope.postsThirdRow = [];
+        $scope.postsFourthRow= [];
+        $scope.postsFifthRow=[];
         $scope.busy = false;
         $scope.newFeedType = 'trend';
 
@@ -46,14 +49,24 @@
                     newfeedService.getPost(data)
                         .success(function (data) {
                             if (data.posts.length != 0) {
-                                for (var i = 0; i < data.posts.length; i += 2) {
+                                for (var i = 0; i < data.posts.length; i += 5) {
                                     if (data.posts[i] != null) {
                                         $scope.postsLeft.push(data.posts[i]);
                                     }
                                     if (data.posts[i + 1] != null) {
                                         $scope.postsRight.push(data.posts[i + 1]);
                                     }
+                                    if (data.posts[i + 2] != null) {
+                                        $scope.postsThirdRow.push(data.posts[i + 2]);
+                                    }
+                                    if (data.posts[i + 3] != null) {
+                                        $scope.postsFourthRow.push(data.posts[i + 3]);
+                                    }
+                                    if (data.posts[i + 4] != null) {
+                                        $scope.postsFifthRow.push(data.posts[i + 4]);
+                                    }
                                 }
+
                                 $scope.busy = false;
                             } else {
                                 $scope.busy = true;
@@ -70,6 +83,9 @@
             $scope.newFeedType = type;
             $scope.postsLeft = [];
             $scope.postsRight = [];
+            $scope.postsThirdRow=[];
+            $scope.postsFourthRow=[];
+            $scope.postsFifthRow=[];
             $scope.busy = false;
             loadPage();
         };

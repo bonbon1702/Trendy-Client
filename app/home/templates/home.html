@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" style="background: rgb(233, 233, 233);">
     <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
 
     <div class="innerAll">
@@ -33,13 +33,13 @@
                 </div>
             </div>
             <div ng-controller="newfeedController">
-                <div class="col-md-3 col-lg-3">
+                <div class="col-md-2 col-lg-2" style="width: 238px;">
                     <div class="blc-row" style="width: 282px;">
                         <!-- Main Sidebar Menu -->
                         <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary"
-                             style="position: absolute;height: 380px;background: #F9F3F3;">
-                            <div id="sidebar-social-wrapper">
-                                <ul class="menu list-unstyled" style="background: #FDFAFA;">
+                             style="position: absolute;height: 190px;background: #E9E9E9;width: 236px;">
+                            <div id="sidebar-social-wrapper" style="border-radius: 5px 5px 5px 5px;">
+                                <ul class="menu list-unstyled" style="background: white;">
                                     <li class="hasSubmenu" ng-class="{ active: newFeedType == 'trend' }" ng-click="sideBar('trend')">
 
                                         <a href="#/">
@@ -48,7 +48,7 @@
                                             <i class="icon-worldwide"></i>
 
                                             <span>Xu Hướng</span>
-
+                                            <i class=" icon-chevron-right-thick" style="float: right;margin-right: -2px;"></i>
 
                                         </a>
 
@@ -61,7 +61,7 @@
                                             <i class="icon-fire"></i>
 
                                             <span>Đang Diễn Ra</span>
-
+                                            <i class=" icon-chevron-right-thick" style="float: right;margin-right: -2px;"></i>
 
                                         </a>
 
@@ -75,7 +75,7 @@
                                             <i class="icon-star"></i>
 
                                             <span>Quan Tâm Của Bạn</span>
-
+                                            <i class=" icon-chevron-right-thick" style="float: right;margin-right: -2px;"></i>
 
                                         </a>
 
@@ -89,7 +89,7 @@
                                             <i class="icon-location-1"></i>
 
                                             <span>Xung Quanh Đây</span>
-
+                                            <i class=" icon-chevron-right-thick" style="float: right;margin-right: -2px;"></i>
 
                                         </a>
 
@@ -98,13 +98,88 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="widget" style="top: 210px;width: 236px;margin: 0px;border-radius: 5px 5px 0 0;" ng-if="popuparFollow.length>0">
+                            <h5 class="innerAll margin-none" style="border-radius: 5px 5px 0 0;">PEOPLE YOU MAY WANT TO FOLLOW</h5>
+
+                            <div class="widget-body padding-none">
+                                <ul class="list-group list-group-1 borders-none margin-none">
+                                    <li class="list-group-item" ng-repeat="user in popuparFollow">
+                                        <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 234px;">
+                                            <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
+                                                 style="height: 36px;margin: 5px 4px;"/>
+
+                                            <div class="media-body">
+                                                <h5>
+                                                    <a ng-href="#/user/{{user.id}}" class="text-inverse"
+                                                       style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
+                                                </h5>
+
+                                                <!--<div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">-->
+                                                    <a href=""
+                                                       style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;"
+                                                       ng-click="following(user.id)">
+                                                        <!--<i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>-->
+                                                        Follow
+                                                    </a>
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="display: inline-block;margin: 2px;width: 234px;top: 227px;position: relative;">
+                            <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsFifthRow" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                                <div class="widget-body bg-none padding-none" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                                    <a ng-href="#/" ng-click="showDialog(point.id)"
+                                       data-toggle="prettyPhoto" class="thumb">
+                                        <img ng-src="{{ point.image_url_editor }}"
+                                             alt="photo"/>
+                                    </a>
+
+                                    <div class="description  meta">
+                                        <div class="hover-blue">
+                                            <div class="title">
+                                                <a data-track="photo-click" ng-href="#/" class="title">
+                                                    {{ point.caption }}
+                                                </a>
+                                            </div>
+                                            <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+    										<span class="attribution"><span>bởi </span>
+    										<a data-track="owner" ng-href="#/user/{{point.user_id}}"
+                                               class="owner">{{ point.user.username }}</a></span>
+                                            </div>
+                                        </div>
+    								<span class="inline-icons" style="font-size: 11px;">
+    									<img width="12" height="12" alt="[★]"
+                                             src="https://s.yimg.com/pw/images/spaceball.gif"
+                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
+    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'"
+                                           title="Thêm ảnh này vào ảnh yêu thích của bạn?">
+                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
+                                        </a>
+    									<i class="fa fa-smile-o" style="color: white;"></i>
+    									<a title="Lời bình" href="#"
+                                           class="rapidnofollow comments-icon comments-inline-btn"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'">
+                                            <span class="comment-count count">{{ post.like.length }}</span>
+                                        </a>
+    								</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6" >
+                <div class="col-lg-10 col-md-10" style="width: 1024px;margin-left: 27px;">
                     <!-- <div data-toggle="gridalicious" data-gridalicious-width="380" data-gridalicious-gutter="0"> -->
                     <div class="blc-row" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
-                        <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsLeft">
-                            <div class="widget-body bg-none padding-none">
+                        <div class="widget border-none bg-none widget-pinterest active" ng-repeat="point in postsLeft" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                            <div class="widget-body bg-none padding-none" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
                                 <a ng-href="#/" ng-click="showDialog(point.id)"
                                    data-toggle="prettyPhoto" class="thumb">
                                     <img ng-src="{{ point.image_url_editor }}"
@@ -148,15 +223,97 @@
 
                     </div>
                     <div class="blc-row">
-                        <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsRight">
-                            <div class="widget-body bg-none padding-none">
+                        <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsRight" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                            <div class="widget-body bg-none padding-none" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
                                 <a href="#/" data-toggle="prettyPhoto" class="thumb" ng-click="showDialog(point.id)">
                                     <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
                                 </a>
 
                                 <div class="description  meta">
                                     <div class="hover-blue">
-                                        <div class="title" id="yui_3_11_0_3_1419092456557_1068">
+                                        <div class="title">
+                                            <a data-track="photo-click" ng-href="#/" class="title">
+                                                {{ point.caption }}
+                                            </a>
+                                        </div>
+                                        <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+    										<span class="attribution"><span>bởi </span>
+    										<a data-track="owner" ng-href="#/user/{{point.user_id}}"
+                                               class="owner">{{ point.user.username }}</a></span>
+                                        </div>
+                                    </div>
+    								<span class="inline-icons" style="font-size: 11px;">
+    									<img width="12" height="12" alt="[★]"
+                                             src="https://s.yimg.com/pw/images/spaceball.gif"
+                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
+    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'">
+                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
+                                        </a>
+    									<i class="fa fa-smile-o" style="color: white;"></i>
+    									<a title="Lời bình" href="#"
+                                           class="rapidnofollow comments-icon comments-inline-btn"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'">
+                                            <span class="comment-count count">{{ post.like }}</span>
+                                        </a>
+    								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blc-row">
+                        <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsThirdRow" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                            <div class="widget-body bg-none padding-none" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                                <a href="#/" data-toggle="prettyPhoto" class="thumb" ng-click="showDialog(point.id)">
+                                    <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
+                                </a>
+
+                                <div class="description  meta">
+                                    <div class="hover-blue">
+                                        <div class="title">
+                                            <a data-track="photo-click" ng-href="#/" class="title">
+                                                {{ point.caption }}
+                                            </a>
+                                        </div>
+                                        <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+    										<span class="attribution"><span>bởi </span>
+    										<a data-track="owner" ng-href="#/user/{{point.user_id}}"
+                                               class="owner">{{ point.user.username }}</a></span>
+                                        </div>
+                                    </div>
+    								<span class="inline-icons" style="font-size: 11px;">
+    									<img width="12" height="12" alt="[★]"
+                                             src="https://s.yimg.com/pw/images/spaceball.gif"
+                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
+    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'">
+                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
+                                        </a>
+    									<i class="fa fa-smile-o" style="color: white;"></i>
+    									<a title="Lời bình" href="#"
+                                           class="rapidnofollow comments-icon comments-inline-btn"
+                                           onMouseOver="this.style.color='white'"
+                                           onMouseOut="this.style.color='white'">
+                                            <span class="comment-count count">{{ post.like }}</span>
+                                        </a>
+    								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blc-row">
+                        <div class="widget border-none bg-none widget-pinterest" ng-repeat="point in postsFourthRow" style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                            <div class="widget-body bg-none padding-none " style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                                <a href="#/" data-toggle="prettyPhoto" class="thumb" ng-click="showDialog(point.id)">
+                                    <img ng-src="{{ point.image_url_editor }}" alt="photo"/>
+                                </a>
+
+                                <div class="description  meta">
+                                    <div class="hover-blue">
+                                        <div class="title" >
                                             <a data-track="photo-click" ng-href="#/" class="title">
                                                 {{ point.caption }}
                                             </a>
@@ -189,102 +346,6 @@
                         </div>
                     </div>
                     <p class="text-center" ng-show="busy"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-3">
-
-                <!--<div class="widget">-->
-                    <!--<h5 class="innerAll margin-none bg-primary">Recent News</h5>-->
-
-                    <!--<div class="widget-body padding-none">-->
-                        <!--<div class="media border-bottom innerAll margin-none">-->
-                            <!--<img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>-->
-
-                            <!--<div class="media-body">-->
-                                <!--<a href="" class="pull-right text-muted innerT half">-->
-                                    <!--<i class="fa fa-comments"></i> 4-->
-                                <!--</a>-->
-                                <!--<h5 class="margin-none"><a href="" class="text-inverse">Trendy +</a></h5>-->
-                                <!--<small>on February 2nd, 2014</small>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="media border-bottom innerAll margin-none">-->
-                            <!--<img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>-->
-
-                            <!--<div class="media-body">-->
-                                <!--<a href="" class="pull-right text-muted innerT half">-->
-                                    <!--<i class="fa fa-comments"></i> 4-->
-                                <!--</a>-->
-                                <!--<h5 class="margin-none"><a href="" class="text-inverse">Timeline Cover Page</a>-->
-                                <!--</h5>-->
-                                <!--<small>on February 2nd, 2014</small>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="media border-bottom innerAll margin-none">-->
-                            <!--<img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>-->
-
-                            <!--<div class="media-body">-->
-                                <!--<a href="" class="pull-right text-muted innerT half">-->
-                                    <!--<i class="fa fa-comments"></i> 4-->
-                                <!--</a>-->
-                                <!--<h5 class="margin-none"><a href="" class="text-inverse">1000+ Sales</a></h5>-->
-                                <!--<small>on February 2nd, 2014</small>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="media border-bottom innerAll margin-none">-->
-                            <!--<img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>-->
-
-                            <!--<div class="media-body">-->
-                                <!--<a href="" class="pull-right text-muted innerT half">-->
-                                    <!--<i class="fa fa-comments"></i> 4-->
-                                <!--</a>-->
-                                <!--<h5 class="margin-none"><a href="" class="text-inverse">On-Page Optimization</a>-->
-                                <!--</h5>-->
-                                <!--<small>on February 2nd, 2014</small>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="media border-bottom innerAll margin-none">-->
-                            <!--<img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>-->
-
-                            <!--<div class="media-body">-->
-                                <!--<a href="" class="pull-right text-muted innerT half">-->
-                                    <!--<i class="fa fa-comments"></i> 4-->
-                                <!--</a>-->
-                                <!--<h5 class="margin-none"><a href="" class="text-inverse">14th Admin Template</a>-->
-                                <!--</h5>-->
-                                <!--<small>on February 2nd, 2014</small>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="widget">
-                    <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY WANT TO FOLLOW</h5>
-
-                    <div class="widget-body padding-none">
-                        <ul class="list-group list-group-1 borders-none margin-none">
-                            <li class="list-group-item" ng-repeat="user in popuparFollow">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img ng-src="{{ user.picture_profile }}" class="pull-left media-object"
-                                         style="height: 44px;"/>
-
-                                    <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a ng-href="#/user/{{user.id}}" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -14px;">{{ user.username }}</a>
-                                        </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;" ng-click="following(user.id)">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

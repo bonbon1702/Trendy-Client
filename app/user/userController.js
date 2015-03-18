@@ -9,8 +9,10 @@
 
     function userController($scope, ngDialog, $routeParams, $route, userService, headerService, postService, homeService) {
         $scope.flwBtnLbl = 'Follow';
+        $scope.loginUserId;
         userService.getUser($routeParams.userId)
             .success(function (data) {
+                $scope.loginUserId == $routeParams.userId;
                 $scope.following = [];
                 $scope.follower = [];
                 $scope.user = data.user;
