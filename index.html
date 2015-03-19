@@ -51,7 +51,7 @@
 </head>
 <body>
 <!--Header-->
-<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController">
+<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;">
     <div class=" pull-left">
         <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
         </a>
@@ -88,7 +88,7 @@
         </li>
     </ul>
     <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-        <div class="dropdown username pull-left" ng-show="loginUser != null" ng-cloak>
+        <div class="dropdown username pull-left" ng-show="loginUser != null">
             <a class="dropdown-toggle" data-toggle="dropdown">
         				<span class="media margin-none">
         					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"
@@ -102,7 +102,7 @@
                 <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
-        <div class="dropdown username pull-left" ng-show="loginUser == null" ng-cloak>
+        <div class="dropdown username pull-left" ng-show="loginUser == null" style="margin: -2px;">
             <button ng-click="openLogin()" class="btn btn-primary">Login
                 <i class="fa fa-fw fa-unlock-alt"></i>
             </button>
@@ -116,7 +116,7 @@
     </div>
     <div data-provides="fileupload">
             <span class="btn btn-default btn-file "
-                  style="margin: 11px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
                 <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
                     <span class="fa fa-camera"></span>
