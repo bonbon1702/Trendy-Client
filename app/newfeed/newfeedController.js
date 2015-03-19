@@ -100,7 +100,7 @@
                 className: 'ngdialog-theme-plain post-dialog',
                 controller: ['$scope', 'newfeedService', '$window', 'headerService', '$pusher', function ($scope, newfeedService, $window, headerService, $pusher) {
                     $scope.iconLike = false;
-
+                    $scope.iconFavorite = false;
 
                     newfeedService.get(id)
                         .success(function (data) {
@@ -127,6 +127,14 @@
                                                 break;
                                             } else {
                                                 $scope.iconLike = false;
+                                            }
+                                        }
+                                        for (var i = 0; i< $scope.post.favorite.length; i++){
+                                            if ($scope.post.favorite[i].user_id == $scope.loginUser.id){
+                                                $scope.iconFavorite = true;
+                                                break;
+                                            } else {
+                                                $scope.iconFavorite = false;
                                             }
                                         }
                                     }
@@ -213,6 +221,33 @@
                                         })
                                         .error(function (data) {
 
+                                        });
+                                }
+                            };
+
+                            $scope.favorite = function(){
+                                if (!$scope.loginUser) {
+                                    event.preventDefault();
+                                    headerService.openLogin();
+                                } else {
+                                    var data = {
+                                        post_id: id,
+                                        type: $scope.iconFavorite == true ? 'unFavorite' : 'favorite',
+                                        user_id: $scope.loginUser.id
+                                    };
+
+                                    if ($scope.iconFavorite == true) {
+                                        $scope.iconFavorite = false;
+                                    } else {
+                                        $scope.iconFavorite = true;
+                                    }
+
+                                    newfeedService.favoritePost(data)
+                                        .success(function (data) {
+
+                                        })
+                                        .error(function (data) {
+                                            console.log(data);
                                         });
                                 }
                             };
