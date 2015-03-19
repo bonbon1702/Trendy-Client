@@ -75,13 +75,9 @@
                         <span class="label label-default pull-right">{{ noti.created_at }}</span>
                         <h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>
 
-                        <p class="margin-none" ng-if="noti.action == 'comment'">{{ noti.name_of_user_effected }} comment
+                        <p class="margin-none">{{ noti.name_of_user_effected }} {{ noti.action }}
                             in
                             your post</p>
-
-                        <p class="margin-none" ng-if="noti.action == 'like'">{{ noti.name_of_user_effected }} like in
-                            your
-                            post</p>
                     </div>
                 </li>
             </ul>

@@ -235,7 +235,7 @@
                                         type: $scope.iconFavorite == true ? 'unFavorite' : 'favorite',
                                         user_id: $scope.loginUser.id
                                     };
-                                    console.log(data);
+
                                     if ($scope.iconFavorite == true) {
                                         $scope.iconFavorite = false;
                                     } else {
@@ -247,7 +247,7 @@
 
                                         })
                                         .error(function (data) {
-
+                                            console.log(data);
                                         });
                                 }
                             };

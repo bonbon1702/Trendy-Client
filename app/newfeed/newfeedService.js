@@ -39,7 +39,7 @@
                 return $http.get($rootScope.url + 'post/getPost/order/' + data.order + '/paging/' + data.id + '/userId/'+ data.user_id);
             },
             favoritePost: function(data){
-                return $http.get($rootScope.url + 'post/favorite/userId/'+ data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
+                return $http.get($rootScope.url + 'favorite/userId/'+ data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
             }
         }
     }

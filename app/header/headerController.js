@@ -5,7 +5,7 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio','$window'];
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio', '$window'];
     function headerController($scope, headerService, $location, ngDialog, $pusher, ngAudio, $window) {
         $scope.notification = [];
         $scope.notification_unread = [];
@@ -30,7 +30,7 @@
             }
         };
         hello.init({
-            facebook: '513861542088702',
+            facebook: '849978158393821',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -53,7 +53,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                $window.location.href = "http://trendyplus.dev/#/post?image="
                                 + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -61,8 +61,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                    "target:'http://trendyplus.dev/#/post', " +
+                                    "exit:'http://trendyplus.dev/#/'});"
                             }
                         }]
                     });
@@ -87,15 +87,25 @@
                                 for (var i = 0; i < data.notification.notification.length; i++) {
                                     var noti = data.notification.notification[i];
                                     if (noti.id_of_user_effected !== $scope.loginUser.id) {
-                                        $scope.notification.push(noti);
+                                        if (noti.user_id != $scope.loginUser.id && noti.action == 'like') {
+
+                                        } else {
+                                            $scope.notification.push(noti);
+                                        }
                                     }
                                 }
                                 for (var i = 0; i < data.notification.notification_unread.length; i++) {
                                     var noti = data.notification.notification_unread[i];
                                     if (noti.id_of_user_effected !== $scope.loginUser.id) {
-                                        $scope.notification_unread.push(noti);
+                                        if (noti.user_id != $scope.loginUser.id && noti.action == 'like') {
+
+                                        } else {
+                                            $scope.notification_unread.push(noti);
+                                        }
+
                                     }
                                 }
+                                console.log($scope.notification);
                             }
                         });
                 }
@@ -113,22 +123,6 @@
             hello("google").logout();
             $window.location.reload();
         };
-
-        //var client = new Pusher('4c33474dc0a36d3a912d');
-        //var pusher = $pusher(client);
-        //var my_channel = pusher.subscribe('real-time');
-        //my_channel.bind('notification',
-        //    function (data) {
-        //        for (var i = 0; i < data.user_effected_id.length; i++) {
-        //            if ($scope.loginUser.id == data.user_effected_id[i].id_of_user_effected) {
-        //                $scope.notification_unread.push(data);
-        //                $scope.notification.unshift(data.notification);
-        //                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-        //                $scope.sound.play();
-        //            }
-        //        }
-        //    }
-        //);
 
         $scope.reader_notification = function () {
             var notifications = [];
@@ -157,10 +151,14 @@
             //Do something with data
             var results = JSON.parse(data);
             if ($scope.loginUser.id != results.id_of_user_effected) {
-                $scope.notification_unread.push(results);
-                $scope.notification.unshift(results);
-                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                $scope.sound.play();
+                if (results.user_id != $scope.loginUser.id && results.action == 'like') {
+
+                } else {
+                    $scope.notification_unread.push(results);
+                    $scope.notification.unshift(results);
+                    $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                    $scope.sound.play();
+                }
             }
         });
 
