@@ -344,3 +344,14 @@
     white-space: normal;
     color: #1c2025;
 }
+
+.cover-img{
+    border: none;
+    height: 22px;
+    width: 31px;
+    padding: 0px;
+    display: list-item;
+    overflow: hidden;
+    background-color: transparent;
+    margin: -1px -12px;
+}
