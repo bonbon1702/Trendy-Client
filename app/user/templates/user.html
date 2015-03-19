@@ -1,7 +1,7 @@
 <div id="content">
     <div class="innerAll">
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
-            <div class="col-lg-9 col-md-8">
+            <div class="col-lg-9 col-md-8" style="top:42px;">
 
                 <div class="timeline-cover">
                     <div class="widget border-bottom">
@@ -373,31 +373,27 @@
                 </div>
 
             </div>
-            <div class="col-md-4 col-lg-3">
+            <div class="col-md-4 col-lg-3"  style="top:42px;">
 
                 <div class="widget">
-                    <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY WANT TO FOLLOW</h5>
+                    <h5 class="innerAll margin-none">PEOPLE YOU MAY WANT TO FOLLOW</h5>
 
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
                             <li class="list-group-item" ng-repeat="user in itemToItemFollow">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img ng-src="{{ user.picture_profile }}" class="pull-left media-object"
-                                         style="height: 44px;"/>
+                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 234px;">
+                                    <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
+                                         style="height: 36px;margin: 5px 4px;"/>
 
                                     <div class="media-body">
-                                        <h5 class="margin-none">
+                                        <h5>
                                             <a ng-href="#/user/{{user.id}}" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">{{ user.username }}</a>
+                                               style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;" ng-click="following(user.id)">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
+                                        <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
+                                           ng-click="following(user.id)">
+                                            Follow
+                                        </a>
                                     </div>
                                 </div>
                             </li>

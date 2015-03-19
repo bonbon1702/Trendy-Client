@@ -3,33 +3,10 @@
 
     <div class="innerAll">
         <div class="row" style="margin-left: 17px;margin-right: 23px;">
-			<div class="div-map">
-				<div id="map"
-					 style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 308px; z-index: 0; transform: translateZ(0px); background-color: rgb(229, 227, 223);"></div>
-				<div onclick="resizeMap()"  id="hideMapDiv" style="margin: 290px 0px 40px;width:100%;z-index: 1;"><a class="div-hide-map"><i class="fa fa-chevron-circle-up"></i><span>Hide map</span></a></div>
-				<script>
-					function resizeMap() {
-						var hideMapDiv = document.getElementById('hideMapDiv');
-						var map = document.getElementById('map');
-						if (hideMapDiv.innerHTML.indexOf("Hide map")>-1) {
-						hideMapDiv.style.marginTop = '40px';
-						map.style.height = '58px';
-						map.classList.add('transitionHideMap');
-						hideMapDiv.classList.add('transitionHideMap');
-						
-						hideMapDiv.innerHTML = '<a class="div-hide-map"><i class="fa fa-chevron-circle-down"></i><span>Show map</span></a>';
-						}
-						else {
-						map.style.height = '308px';
-						hideMapDiv.style.marginTop = '290px';
-						hideMapDiv.innerHTML = '<a class="div-hide-map"><i class="fa fa-chevron-circle-up"></i><span>Hide map</span></a>';
-						}
-					}
-				</script>
-			</div>
+            <div id="map"
+                 style="position: absolute; left: 0px; top: 52px; overflow: hidden; width: 100%; height: 308px; z-index: 0; transform: translateZ(0px); background-color: rgb(229, 227, 223);"></div>
             <div class="timeline-cover">
-                <div class="widget" style="background: none;border: none;">
-				
+                <div class="widget" style="margin: 388px 0px 40px;background: none;border: none;">
                     <div class="widget-body padding-none margin-none">
                         <div class="container-1">
                                <div style="font-size: 30px;font-family: 'Proxima Nova','helvetica neue',helvetica,arial,sans-serif;margin: 20px"><b>Khám phá xu hướng thời trang xung quanh ta</b></div>
