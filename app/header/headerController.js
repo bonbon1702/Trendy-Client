@@ -114,21 +114,21 @@
             $window.location.reload();
         };
 
-        var client = new Pusher('4c33474dc0a36d3a912d');
-        var pusher = $pusher(client);
-        var my_channel = pusher.subscribe('real-time');
-        my_channel.bind('notification',
-            function (data) {
-                for (var i = 0; i < data.user_effected_id.length; i++) {
-                    if ($scope.loginUser.id == data.user_effected_id[i].id_of_user_effected) {
-                        $scope.notification_unread.push(data);
-                        $scope.notification.unshift(data.notification);
-                        $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                        $scope.sound.play();
-                    }
-                }
-            }
-        );
+        //var client = new Pusher('4c33474dc0a36d3a912d');
+        //var pusher = $pusher(client);
+        //var my_channel = pusher.subscribe('real-time');
+        //my_channel.bind('notification',
+        //    function (data) {
+        //        for (var i = 0; i < data.user_effected_id.length; i++) {
+        //            if ($scope.loginUser.id == data.user_effected_id[i].id_of_user_effected) {
+        //                $scope.notification_unread.push(data);
+        //                $scope.notification.unshift(data.notification);
+        //                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+        //                $scope.sound.play();
+        //            }
+        //        }
+        //    }
+        //);
 
         $scope.reader_notification = function () {
             var notifications = [];
@@ -150,6 +150,20 @@
                 });
 
         };
+
+        var socket = io.connect('http://127.0.0.1:3000/');
+
+        socket.on('realTime.notification', function (data) {
+            //Do something with data
+            var results = JSON.parse(data);
+            if ($scope.loginUser.id != results.id_of_user_effected) {
+                $scope.notification_unread.push(results);
+                $scope.notification.unshift(results);
+                $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                $scope.sound.play();
+            }
+        });
+
         $scope.getShopDetail = function () {
 
         }

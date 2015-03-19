@@ -49,9 +49,12 @@
                            ng-click="likeOrDislike()" ng-switch="iconLike">
                             <i class="fa fa-fw fa-thumbs-o-up" ng-switch-when="false"></i>
                             <i class="fa fa-fw fa-thumbs-up" style="color: blue" ng-switch-when="true"></i>
-                            {{ post.like.length }}</a>
-                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 20px;" ng-click=""><i
-                                class="fa fa-fw fa-heart-o"></i></a>
+                            {{ post.like.length }}
+                        </a>
+                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 20px;" ng-click="favorite()" ng-switch="iconFavorite">
+                            <i class="fa fa-fw fa-heart-o" ng-switch-when="false"></i>
+                            <i class="fa fa-fw fa-heart" style="color: red" ng-switch-when="true"></i>
+                        </a>
                     </div>
                     <ul class="img-comment-list">
                         <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;"
