@@ -1104,3 +1104,52 @@ white-space: nowrap;
 .marker:hover:before{
 	z-index:1002 !important;
 }
+/*********************************************************************************/
+.div-hide-map {
+display: inline-block;
+width: 100%;
+color: #fff;
+background: #7cba00;
+border: 1px solid #7cba00;
+padding: 8px 16px;
+margin: 10px 0;
+display: inline-block;
+font-weight: bold;
+text-align: center;
+cursor: pointer;
+outline: none;
+border: none;
+}
+.div-hide-map:hover {
+color: #7cba00;
+background: #ffffff;
+text-decoration: none;
+-webkit-transition: all 0.2s ease-in-out;
+-o-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out;
+outline: 0;
+} 
+.fa {
+margin-right: 5px;
+display: inline-block;
+font: normal normal normal 14px/1 FontAwesome;
+font-size: inherit;
+text-rendering: auto;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.fa-chevron-circle-up:before {
+content: "\f139";
+}
+.fa-chevron-circle-down:before {
+content: "\f13a";
+}
+.transitionHideMap {
+
+-webkit-transition: all 0.2s linear;
+-o-transition: all 0.2s linear;
+transition: all 0.2s linear;
+}
+
+
+/*********************************************************************************/
