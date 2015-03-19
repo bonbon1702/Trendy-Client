@@ -10,8 +10,8 @@
     var googleMap = {};
 
     var map, markers = [];
-
-    googleMap.init = function (dataShop) {
+    //------------------------------------------Map init--------------------------------------------------------------
+    googleMap.init = function () {
         //console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
@@ -197,8 +197,11 @@
 
         searchBox();
         homeButton();
+		//hideMap();
     }
+    //----------------------------------------------------------------------------------------------------------------
 
+    //--------------------------------------Search Button ----------------------------------------------------------
     var searchBox = function () {
 				// Create the search box and link it to the UI element.
 		  var input = /** @type {HTMLInputElement} */(
@@ -256,7 +259,10 @@
             searchBox.setBounds(bounds);
         });
     }
+    //----------------------------------------------------------------------------------------------------------------
 
+
+    //--------------------------------------------Home Button---------------------------------------------------------
     var homeButton = function () {
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
@@ -298,12 +304,12 @@
             //map.setZoom(15);
 			
 			
-            google.maps.event.addListener(marker, 'mouseover', function () {
-                infowindow.open(map, marker);
-            });
-            google.maps.event.addListener(marker, 'mouseout', function () {
-                infowindow.close();
-            });
+            //google.maps.event.addListener(marker, 'mouseover', function () {
+            //    infowindow.open(map, marker);
+            //});
+            //google.maps.event.addListener(marker, 'mouseout', function () {
+            //    infowindow.close();
+            //});
         }
 
         function HomeControl(controlDiv, map) {
@@ -340,6 +346,10 @@
             });
         }
     }
+    //----------------------------------------------------------------------------------------------------------------
+
+
+	//-----------------------------------------------Create Marker shop on map----------------------------------------
 	googleMap.createMarker = function (data) {
 		var shop = data.data;
 		for (var i = 0, marker; marker = shop[i]; i++) {
@@ -406,7 +416,7 @@
             google.maps.event.addDomListener(div, "click", function(event) {
                 //alert('You clicked on a shop!');
                 //'http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id
-                window.location='http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id;
+                window.location=document.URL+'shop/'+self.args.marker_id;
                 google.maps.event.trigger(self, "click");
             });}
             var panes = this.getPanes();
@@ -437,9 +447,12 @@
             this.div1 = null;
         }
     };
-
+	
     CustomMarker.prototype.getPosition = function() {
         return this.latlng;
     };
+    //----------------------------------------------------------------------------------------------------------------
+
+
     return googleMap;
 });
