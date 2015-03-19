@@ -1109,11 +1109,9 @@ white-space: nowrap;
 display: inline-block;
 width: 100%;
 color: #fff;
-background: #7cba00;
-border: 1px solid #7cba00;
+background: #176CED;
 padding: 8px 16px;
 margin: 10px 0;
-display: inline-block;
 font-weight: bold;
 text-align: center;
 cursor: pointer;
@@ -1121,8 +1119,8 @@ outline: none;
 border: none;
 }
 .div-hide-map:hover {
-color: #7cba00;
-background: #ffffff;
+color: #fff;
+background: #40555c;
 text-decoration: none;
 -webkit-transition: all 0.2s ease-in-out;
 -o-transition: all 0.2s ease-in-out;
@@ -1153,3 +1151,25 @@ transition: all 0.2s linear;
 
 
 /*********************************************************************************/
+
+.btn-home {
+display: inline-block;
+color: #fff;
+height:32px;
+background: #176CED;
+border: 1px solid #176CED;
+font-weight: bold;
+text-align: center;
+cursor: pointer;
+outline: none;
+}
+
+.btn-home:hover {
+color: #fff;
+background: #40555c;
+text-decoration: none;
+-webkit-transition: all 0.2s ease-in-out;
+-o-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out;
+outline: 0;
+} 

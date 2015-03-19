@@ -321,12 +321,13 @@
 
             // Set CSS for the control border
             var controlUI = document.createElement('div');
-            controlUI.style.backgroundColor = 'white';
-            controlUI.style.borderStyle = 'solid';
-            controlUI.style.borderWidth = '1px';
-            controlUI.style.cursor = 'pointer';
-            controlUI.style.textAlign = 'center';
-            controlUI.style.height = '32px';
+			controlUI.className = "btn-home";
+            //controlUI.style.backgroundColor = 'white';
+            //controlUI.style.borderStyle = 'solid';
+            //controlUI.style.borderWidth = '1px';
+            //controlUI.style.cursor = 'pointer';
+            //controlUI.style.textAlign = 'center';
+            //controlUI.style.height = '32px';
             controlUI.title = 'Click to set the map to Home';
             controlDiv.appendChild(controlUI);
 
@@ -397,10 +398,10 @@
             div.innerHTML ='<div class="marker"><img class="img-marker" '
                             +'src="'+img+'">'
 							+'<div class="marker-hover">'    
-							+'<a href="" role="product">'
+							+'<a role="product">'
 							+	product
 							+'</a>'       
-							+'<a href="" role="shop">'+shop+'</a></div></div>';
+							+'<a role="shop">'+shop+'</a></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
