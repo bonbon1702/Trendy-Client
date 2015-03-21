@@ -293,6 +293,10 @@
 			if (markerHome!= null)
 			markerHome.setMap(null);
             //var marker = createMarker(map, null, myLatlng);
+			var img_user= $('[alt="user"]')[0].src;
+			if (img_user != undefined)
+			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:img_user});
+			else
 			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
 			markerHome.setMap(map);
             //var infowindow = new google.maps.InfoWindow({
@@ -348,6 +352,38 @@
         }
     }
     //----------------------------------------------------------------------------------------------------------------
+
+
+
+	//-----------------------------------------------Marker drawable----------------------------------------
+	var markerDrawable;
+	googleMap.addMyMarker = function () { 
+			if (markerDrawable != null)  markerDrawable.setMap(null);
+			//function that will add markers on button click
+            markerDrawable = new google.maps.Marker({
+				height: '30px',
+                position:map.getCenter(),
+                map: map,
+                draggable:true,
+                animation: google.maps.Animation.DROP,
+                title:"Center of search fashion",
+				zIndex:9999999,
+				icon: "assets/img/images/marker/marker1.png",
+            });
+			markerDrawable.setMap(map);
+			markerDrawable.setZIndex(google.maps.Marker.MAX_ZINDEX + 9);
+        }
+	googleMap.getPos = function () {
+		return markerDrawable.getPosition();	
+	}
+	
+	
+	
+	
+	//----------------------------------------------------------------------------------------------------------------
+
+
+
 
 
 	//-----------------------------------------------Create Marker shop on map----------------------------------------
