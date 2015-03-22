@@ -1036,7 +1036,7 @@ width: 86px;
 height: 102px;
 content: '';
 margin-left: 5.8px;
-background: url(http://lozi.vn/img/backgrounds/map-marker.png) center no-repeat;
+background: url(assets/img/images/marker/map-marker.png) center no-repeat;
 }
 .marker .img-marker {
 position: relative;
@@ -1106,17 +1106,18 @@ white-space: nowrap;
 }
 /*********************************************************************************/
 .div-hide-map {
-display: inline-block;
-width: 100%;
+display: block;
+width: 40%;
 color: #fff;
 background: #176CED;
 padding: 8px 16px;
-margin: 10px 0;
+margin: 0 auto;
 font-weight: bold;
 text-align: center;
 cursor: pointer;
 outline: none;
 border: none;
+border-radius: 0 0 100px 100px;
 }
 .div-hide-map:hover {
 color: #fff;
