@@ -53,7 +53,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://trendyplus.dev/#/post?image="
+                                $window.location.href = "http://trendyplus.org/#/post?image="
                                 + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -61,8 +61,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://trendyplus.dev/#/post', " +
-                                    "exit:'http://trendyplus.dev/#/'});"
+                                    "target:'http://trendyplus.org/#/post', " +
+                                    "exit:'http://trendyplus.org/#/'});"
                             }
                         }]
                     });
