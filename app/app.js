@@ -100,7 +100,7 @@
         })
         .run(function ($rootScope) {
             //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
-            $rootScope.url = 'http://api.dev/api/';
+            $rootScope.url = 'http://103.7.40.222:8080/api/';
             //$rootScope.url = 'http://trendy-server.dev/api/';
         });
 })(angular);
