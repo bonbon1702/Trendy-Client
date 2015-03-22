@@ -10,7 +10,7 @@
     function favoriteService($http, $rootScope){
         return {
             getPostFavorite: function (data) {
-                return $http.get($rootScope.url + 'post/getPostFavorite/paging/' + data.id);
+                return $http.get($rootScope.url + 'post/getPostFavorite/paging/' + data.id + '/userId/'+data.user_id);
             }
         }
     }

@@ -98,104 +98,29 @@
                                 <!-- Gallery -->
                                 <div class="gallery">
                                     <ul class="row">
+                                        <div masonry='{ "columnWidth": 215 , "itemSelector" : ".item102"}' style="width: 868px;margin: auto;margin-top: 10px;">
 
-                                        <!-- Gallery item -->
-                                        <div class="blc-row" style="width: 22%;">
-                                            <div ng-repeat="post in user.posts">
-                                                <div ng-if="$index % 4 == 0">
-                                                    <div class="widget border-none bg-none widget-pinterest active">
-                                                        <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.id)"
-                                                               data-gallery="gallery-3" >
-                                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                                     class="img-responsive"/>
-                                                            </a>
+                                                <div masonry-tile ng-repeat="post in user.posts" class="item102">
+                                                        <div class="widget border-none bg-none widget-pinterest active" style="margin-right: 10px">
+                                                            <div class="widget-body bg-none padding-none">
+                                                                <a class="thumb no-ajaxify" ng-click="openPostUser(post.id)"
+                                                                   data-gallery="gallery-3" >
+                                                                    <img ng-src="{{ post.image_url_editor }}" alt="photo"
+                                                                         class="img-responsive"/>
+                                                                </a>
 
-                                                            <div class="description  meta" style="background: none;">
-                                                                <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
-                                                                        <i class="fa fa-trash-o" style="color: #626366;"></i>
-                                                                    </button>
+                                                                <div class="description  meta" style="background: none;">
+                                                                    <div class="hover-blue">
+                                                                        <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
+                                                                            <i class="fa fa-trash-o" style="color: #626366;"></i>
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div class="blc-row" style="width: 22%;">
-                                            <div ng-repeat="post in user.posts">
-                                                <div ng-if="$index % 4 == 1">
-                                                    <div class="widget border-none bg-none widget-pinterest active">
-                                                        <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.id)"
-                                                               data-gallery="gallery-3" >
-                                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                                     class="img-responsive"/>
-                                                            </a>
 
-                                                            <div class="description  meta" style="background: none;">
-                                                                <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
-                                                                        <i class="fa fa-trash-o" style="color: #626366;"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="blc-row" style="width: 22%;">
-                                            <div ng-repeat="post in user.posts">
-                                                <div ng-if="$index % 4 == 2">
-                                                    <div class="widget border-none bg-none widget-pinterest active">
-                                                        <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.id)"
-                                                               data-gallery="gallery-3" >
-                                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                                     class="img-responsive"/>
-                                                            </a>
-
-                                                            <div class="description  meta" style="background: none;">
-                                                                <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
-                                                                        <i class="fa fa-trash-o" style="color: #626366;"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="blc-row" style="width: 22%;">
-                                            <div ng-repeat="post in user.posts">
-                                                <div ng-if="$index % 4 == 3">
-                                                    <div class="widget border-none bg-none widget-pinterest active">
-                                                        <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.id)"
-                                                               data-gallery="gallery-3" >
-                                                                <img ng-src="{{ post.image_url_editor }}" alt="photo"
-                                                                     class="img-responsive"/>
-                                                            </a>
-
-                                                            <div class="description  meta" style="background: none;">
-                                                                <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
-                                                                        <i class="fa fa-trash-o" style="color: #626366;"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <!-- // Gallery item END -->
                                     </ul>

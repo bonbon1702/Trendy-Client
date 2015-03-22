@@ -14,13 +14,11 @@ $(function()
     var lastTab=localStorage.getItem('lastTab');
     if (lastTab) {
         $('a[data-target=' + lastTab + ']').tab('show');
-        console.log("loz me");
     }
     else
     {
         // Set the first tab if cookie do not exist
         $('a[data-toggle="tab"]:first').tab('show');
-        console.log("dkm");
     }
 });
 
