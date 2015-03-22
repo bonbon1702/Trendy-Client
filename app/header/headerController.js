@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', '$pusher', 'ngAudio', '$window'];
-    function headerController($scope, headerService, $location, ngDialog, $pusher, ngAudio, $window) {
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', 'ngAudio', '$window'];
+    function headerController($scope, headerService, $location, ngDialog, ngAudio, $window) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.update = function (type) {
@@ -53,7 +53,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                $window.location.href = "http://trendyplus.dev/#/post?image="
                                 + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -61,8 +61,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                    "target:'http://trendyplus.dev/#/post', " +
+                                    "exit:'http://trendyplus.dev/#/'});"
                             }
                         }]
                     });
@@ -105,7 +105,6 @@
 
                                     }
                                 }
-                                console.log($scope.notification);
                             }
                         });
                 }

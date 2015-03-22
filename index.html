@@ -50,8 +50,9 @@
 
 </head>
 <body>
+<!-- MAIN CONTENT AND INJECTED VIEWS -->
 <!--Header-->
-<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;">
+<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">
     <div class=" pull-left">
         <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
         </a>
@@ -110,6 +111,20 @@
                       template-url="app/header/templates/searchBar.html">
         </autocomplete>
     </div>
+    <ul class="nav navbar-nav">
+        <li>
+            <a ng-href="#/">Trendy</a>
+        </li>
+        <li>
+            <a ng-href="#/newfeed">NewFeed</a>
+        </li>
+        <li>
+            <a ng-href="#/around">Around here</a>
+        </li>
+        <li>
+            <a ng-href="#/favorite">Favorite</a>
+        </li>
+    </ul>
     <div data-provides="fileupload">
             <span class="btn btn-default btn-file "
                   style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
@@ -121,18 +136,18 @@
             </span>
     </div>
 </div>
-<!-- MAIN CONTENT AND INJECTED VIEWS -->
-<div id="main">
+<div id="main" style="margin-top: 53px">
     <!-- angular templating -->
     <!-- this is where content will be injected -->
 
     <div ng-view></div>
 </div>
 
-
 <script src="assets/js/libs/jquery.js"></script>
 <script src="assets/js/libs/jquery-ui.min.js"></script>
 <script src="assets/js/libs/angular.js"></script>
+<script src="assets/js/libs/masonry.pkgd.min.js"></script>
+<script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 <script src="assets/css/dist/js/bootstrap.min.js"></script>
 <script src="assets/js/libs/ngDialog.min.js"></script>
@@ -178,13 +193,9 @@
 <script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
 <script src="assets/js/libs/angular.audio.js"></script>
+<script src="assets/js/libs/angular-deckgrid.js"></script>
+<script src="assets/js/libs/angular-masonry-directive.js"></script>
 
-
-<!-- pusher-js -->
-<script src="//js.pusher.com/2.2/pusher.min.js"></script>
-
-<!-- pusher-angular -->
-<script src="//cdn.jsdelivr.net/angular.pusher/latest/pusher-angular.min.js"></script>
 
 <!-- load angularjs file -->
 <script src="app/app.js"></script>
@@ -213,6 +224,19 @@
 <!--header-->
 <script src="app/header/headerController.js"></script>
 <script src="app/header/headerService.js"></script>
+
+<!--trendy-->
+<script src="app/trendy/trendyController.js"></script>
+<script src="app/trendy/trendyService.js"></script>
+
+<!--favorite-->
+<script src="app/favorite/favoriteController.js"></script>
+<script src="app/favorite/favoriteService.js"></script>
+
+<!--around-->
+<script src="app/around/aroundController.js"></script>
+<script src="app/around/aroundService.js"></script>
+
 </body>
 </html>
 

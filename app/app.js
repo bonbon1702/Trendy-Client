@@ -15,16 +15,29 @@
             'infinite-scroll',
             'ngTagsInput',
             'ui.router',
-            'pusher-angular',
             'ui.router',
-            'ngAudio'
+            'ngAudio',
+            'akoenig.deckgrid',
+            'masonry'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
                 // route for the home page
                 .when('/', {
-                    templateUrl: 'app/home/templates/home.html',
-                    controller: 'homeController'
+                    templateUrl: 'app/trendy/templates/trendy.html',
+                    controller: 'trendyController'
+                })
+                .when('/newfeed', {
+                    templateUrl: 'app/newfeed/templates/newfeed.html',
+                    controller: 'newfeedController'
+                })
+                .when('/favorite', {
+                    templateUrl: 'app/favorite/templates/favorite.html',
+                    controller: 'favoriteController'
+                })
+                .when('/around', {
+                    templateUrl: 'app/around/templates/around.html',
+                    controller: 'aroundController'
                 })
                 .when('/post', {
                     templateUrl: 'app/post/templates/post.html',
@@ -86,8 +99,8 @@
             });
         })
         .run(function ($rootScope) {
-            $rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
+            //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
             //$rootScope.url = 'http://104.43.9.177/api/';
-            //$rootScope.url = 'http://trendy-server.dev/api/';
+            $rootScope.url = 'http://trendy-server.dev/api/';
         });
 })(angular);

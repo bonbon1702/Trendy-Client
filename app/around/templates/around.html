@@ -1,3 +1,26 @@
+<div class="div-map">
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+    <div id="map" class="transitionHideMap"
+         style="position: relative; overflow: hidden; width: 100%; height: 308px; z-index: 0; transform: translateZ(0px); background-color: rgb(229, 227, 223);"></div>
+    <div onclick="resizeMap()"  id="hideMapDiv" class="transitionHideMap"><a class="div-hide-map"><i class="fa fa-chevron-circle-up"></i><span>Hide map</span></a></div>
+    <script>
+        function resizeMap() {
+            var hideMapDiv = document.getElementById('hideMapDiv');
+            var map = document.getElementById('map');
+            if (hideMapDiv.innerHTML.indexOf("Hide map")>-1) {
+                hideMapDiv.style.marginTop = '92px';
+                map.style.height = '58px';
+
+                hideMapDiv.innerHTML = '<a class="div-hide-map"><i class="fa fa-chevron-circle-down"></i><span>Show map</span></a>';
+            }
+            else {
+                map.style.height = '308px';
+                hideMapDiv.style.marginTop = '342px';
+                hideMapDiv.innerHTML = '<a class="div-hide-map"><i class="fa fa-chevron-circle-up"></i><span>Hide map</span></a>';
+            }
+        }
+    </script>
+</div>
 <div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}' style="width: 1251px;margin: auto;margin-top: 80px;"
      infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' >
     <!-- items -->

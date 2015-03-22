@@ -1,33 +1,30 @@
 /**
- * Created by tuan on 12/30/2014.
+ * Created by tuan on 11/1/2014.
  */
 (function (angular) {
     angular.module('MyApp')
-        .controller('newfeedController', newfeedController);
+        .controller('aroundController', aroundController);
 
-    newfeedController.$inject = ['$scope', 'newfeedService', 'ngDialog', 'headerService', 'postService'];
+    aroundController.$inject = ['$scope', 'ngDialog', 'aroundService', 'headerService', 'userService', 'postService'];
 
-    function newfeedController($scope, newfeedService, ngDialog, headerService, postService) {
+    function aroundController($scope, ngDialog, aroundService, headerService, userService, postService) {
         $scope.busy = false;
-
+        googleMap.init();
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
-                var data = {
-                    id: 0,
-                    'user_id': $scope.loginUser.id
-                };
-                newfeedService.getPostNewFeed(data)
-                    .success(function(data){
-                        $scope.posts = data.posts;
-                        console.log(data);
-                    })
-                    .error(function(data){
-                        console.log(data);
-                    });
             })
             .error();
-
+        var data = {
+            id: 0
+        };
+        aroundService.getPostAround(data)
+            .success(function(data){
+                $scope.posts = data.posts;
+            })
+            .error(function(data){
+                console.log(data);
+            });
 
         $scope.openPost = function(id){
             postService.openPost(id);
@@ -46,7 +43,7 @@
                 if ($scope.busy) return;
                 $scope.busy = true;
 
-                newfeedService.getPostNewFeed(data)
+                aroundService.getPostAround(data)
                     .success(function (data) {
                         if (data.posts.length != 0) {
                             for (var i =0; i < data.posts.length; i++){
@@ -65,3 +62,4 @@
         };
     }
 })(angular);
+

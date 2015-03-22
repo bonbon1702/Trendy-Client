@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .factory('postService', postService);
 
-    postService.$inject = ['$http', '$rootScope'];
-    function postService($http, $rootScope) {
+    postService.$inject = ['$http', '$rootScope', 'ngDialog'];
+    function postService($http, $rootScope, ngDialog) {
         return {
             save: function (data) {
                 return $http({
@@ -57,6 +57,180 @@
                     params: {
                         album_name:data['album_name']
                     }
+                });
+            },
+            saveComment: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: $rootScope.url + 'comment',
+                    data: data,
+                    ignoreLoadingBar: true
+                });
+            },
+            likeOrDislike: function (data) {
+                return $http.get($rootScope.url + 'like/likePost/' + data.id+ '/type/' +data.type+ '/user/'+data.user);
+            },
+            favoritePost: function(data){
+                return $http.get($rootScope.url + 'favorite/userId/'+ data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
+            },
+            getPost: function (id) {
+                return $http.get($rootScope.url + 'post/' + id);
+            },
+            openPost: function(id){
+                ngDialog.open({
+                    template: 'app/post/templates/postDetail.html',
+                    className: 'ngdialog-theme-plain post-dialog',
+                    controller: ['$scope', 'newfeedService', '$window', 'headerService','postService', function ($scope, newfeedService, $window, headerService,postService) {
+                        $scope.iconLike = false;
+                        $scope.iconFavorite = false;
+
+                        postService.getPost(id)
+                            .success(function (data) {
+                                $scope.post = data.post;
+
+                                headerService.loginUser()
+                                    .success(function (data) {
+                                        $scope.loginUser = data.user;
+                                        if ($scope.loginUser) {
+                                            for (var i = 0; i < $scope.post.like.length; i++) {
+                                                if ($scope.post.like[i].user_id == $scope.loginUser.id) {
+                                                    $scope.iconLike = true;
+                                                    break;
+                                                } else {
+                                                    $scope.iconLike = false;
+                                                }
+                                            }
+                                            for (var i = 0; i< $scope.post.favorite.length; i++){
+                                                if ($scope.post.favorite[i].user_id == $scope.loginUser.id){
+                                                    $scope.iconFavorite = true;
+                                                    break;
+                                                } else {
+                                                    $scope.iconFavorite = false;
+                                                }
+                                            }
+                                        }
+                                    })
+                                    .error();
+
+                                $scope.tags = [];
+                                for (var i = 0; i < $scope.post.tag.length; i++) {
+                                    $scope.tags.push({
+                                        'text': $scope.post.tag[i].tag_content.content
+                                    });
+                                }
+
+                                $scope.hoverPoint = function (index) {
+                                    angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
+                                        var ele = angular.element($(this));
+                                        if (ele.html() == index) {
+                                            ele.parent().addClass('bounce');
+                                        }
+                                    })
+                                };
+
+                                $scope.leavePoint = function (index) {
+                                    angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
+                                        var ele = angular.element($(this));
+                                        if (ele.html() == index) {
+                                            ele.parent().removeClass('bounce');
+                                        }
+                                    })
+                                };
+                                $scope.submitComment = function () {
+                                    if (!$scope.loginUser) {
+                                        event.preventDefault();
+                                        headerService.openLogin();
+                                    } else {
+                                        var data = {
+                                            'content': $scope.comment,
+                                            'type_comment': 0,
+                                            'type_id': id,
+                                            'user_id': $scope.loginUser.id
+                                        };
+                                        $scope.comment = null;
+                                        $scope.post.comments.push({
+                                            'content': data.content,
+                                            'created_at': 'Just now',
+                                            'user': {
+                                                'username': $scope.loginUser.username,
+                                                'id': $scope.loginUser.id,
+                                                'picture_profile': $scope.loginUser.picture_profile
+                                            }
+                                        });
+                                        postService.saveComment(data)
+                                            .success(function (data) {
+                                            })
+                                            .error(function (data) {
+
+                                            });
+                                    }
+                                };
+
+                                $scope.likeOrDislike = function () {
+                                    if (!$scope.loginUser) {
+                                        event.preventDefault();
+                                        headerService.openLogin();
+                                    } else {
+                                        var data = {
+                                            id: id,
+                                            type: $scope.iconLike == true ? 0 : 1,
+                                            user: $scope.loginUser.id
+                                        };
+
+                                        if ($scope.iconLike == true) {
+                                            $scope.post.like.length--;
+                                            $scope.iconLike = false;
+                                        } else {
+                                            $scope.post.like.length++;
+                                            $scope.iconLike = true;
+                                        }
+
+                                        postService.likeOrDislike(data)
+                                            .success(function (data) {
+
+
+                                            })
+                                            .error(function (data) {
+
+                                            });
+                                    }
+                                };
+
+                                $scope.favorite = function(){
+                                    if (!$scope.loginUser) {
+                                        event.preventDefault();
+                                        headerService.openLogin();
+                                    } else {
+                                        var data = {
+                                            post_id: id,
+                                            type: $scope.iconFavorite == true ? 'unFavorite' : 'favorite',
+                                            user_id: $scope.loginUser.id
+                                        };
+
+                                        if ($scope.iconFavorite == true) {
+                                            $scope.iconFavorite = false;
+                                        } else {
+                                            $scope.iconFavorite = true;
+                                        }
+
+                                        postService.favoritePost(data)
+                                            .success(function (data) {
+
+                                            })
+                                            .error(function (data) {
+                                                console.log(data);
+                                            });
+                                    }
+                                };
+
+                                $scope.closeDialog = function () {
+                                    ngDialog.close();
+                                }
+                            })
+                            .error(function (data) {
+
+                            });
+                    }]
                 });
             }
         }

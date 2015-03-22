@@ -1,0 +1,82 @@
+<div class="modal img-modal">
+    <div class="modal-body" style="margin: -48px -42px;height: 109.1%;">
+        <div class="row">
+            <div class="col-md-8 modal-image">
+                <!--<img class="img-responsive" ng-src="{{ post.image_url_editor }}">-->
+                <hovercard src="{{ post.image_url_editor | trusted }}" data="post.tag_picture"></hovercard>
+                <a href="" class="img-modal-btn left"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                <a href="" class="img-modal-btn right"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div>
+            <div class="col-md-4 modal-meta">
+                <div class="modal-meta-top">
+                    <div class="img-poster clearfix" style="margin: 13px 8px;">
+                        <a href=""><img class="img-circle" ng-src="{{ post.user.picture_profile }}"></a>
+                        <strong><a ng-href="#/user/{{ post.user.id }}"  ng-click="closeThisDialog()" style="color: #0B0B0B;">{{ post.user.username
+                            }}</a></strong>
+                        <span>12 minutes ago</span>
+                    </div>
+                    <div class="info-wrapper">
+                        <!--<div class="info eatery-name">-->
+                        <!--<span class=" icon-home-fill-1"></span>-->
+                        <!--<a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"-->
+                        <!--style="color: #333;" role="eatery">Phở gà trộn Khánh béo</a>-->
+
+
+                        <!--</div>-->
+                        <!--<div class="info eatery-address">-->
+                        <!--<span class=" icon-location-fill-1"></span>-->
+                        <!--<a href="/nha-hang/pho-ga-tron-khanh-beo-22-hang-hom-hang-gai-hoan-kiem-ha-noi"-->
+                        <!--style="color: #333;" role="eatery">22 Hàng Hòm, Hoàn Kiếm</a>-->
+
+                        <!--</div>-->
+                        <!--<div class="info price">-->
+                        <!--<span class=" icon-tag-fill-1"></span>-->
+                        <!--25,000 đồng/suất-->
+                        <!--</div>-->
+                        <div ng-repeat="point in post.tag_picture">
+                            <div ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)" ng-click="closeDialog()">
+                                {{ $index+1 }}-{{ point.name }} - {{ point.price }} - <a style="color: #000000" ng-href="#/shop/{{point.shop.id}}">{{point.shop.address}}</a>
+                            </div>
+                        </div>
+                        <!--<tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>-->
+                    </div>
+                    <div class="row row-merge" style="height: 43px;">
+                        <!--<a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;" ng-click=""><i-->
+                        <!--class="fa fa-fw fa-thumbs-up"></i> {{ post.liked_count }}</a>-->
+                        <!--<a href="" class="innerAll text-center text-muted" ng-click="">-->
+                        <!--<i class="fa fa-fw icon-star-fill"></i> {{ post.favorite_count }}</a>-->
+                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 80px;"
+                           ng-click="likeOrDislike()" ng-switch="iconLike">
+                            <i class="fa fa-fw fa-thumbs-o-up" ng-switch-when="false"></i>
+                            <i class="fa fa-fw fa-thumbs-up" style="color: blue" ng-switch-when="true"></i>
+                            {{ post.like.length }}
+                        </a>
+                        <a href="" class="innerAll text-center  text-muted" style="margin-left: 20px;" ng-click="favorite()" ng-switch="iconFavorite">
+                            <i class="fa fa-fw fa-heart-o" ng-switch-when="false"></i>
+                            <i class="fa fa-fw fa-heart" style="color: red" ng-switch-when="true"></i>
+                        </a>
+                    </div>
+                    <ul class="img-comment-list">
+                        <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;"
+                            ng-repeat="comment in post.comments">
+                            <div class="comment-img">
+                                <img ng-src="{{ comment.user.picture_profile }}">
+                            </div>
+                            <div class="comment-text">
+                                <strong><a ng-href="#/user/{{ comment.user.id }}" style="color: #0B0B0B;" ng-click="closeThisDialog()">{{ comment.user.username }}</a></strong>
+
+                                <p>{{ comment.content }}</p> <span
+                                    class="date sub-text">{{ comment.created_at}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form ng-submit="submitComment()">
+                    <div class="modal-meta-bottom">
+                        <input class="form-control" placeholder="Leave a commment.." type="text" ng-model="comment"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
