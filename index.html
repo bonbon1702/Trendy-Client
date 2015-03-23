@@ -76,7 +76,10 @@
                         <span class="label label-default pull-right">{{ noti.created_at }}</span>
                         <h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>
 
-                        <p class="margin-none">{{ noti.name_of_user_effected }} {{ noti.action }}
+                        <p class="margin-none" ng-if="loginUser.id != noti.user_id">{{ noti.action }}
+                            in
+                            {{ noti.username }}'s post</p>
+                        <p class="margin-none" ng-if="loginUser.id == noti.user_id">{{ noti.action }}
                             in
                             your post</p>
                     </div>
