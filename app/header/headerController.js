@@ -47,6 +47,7 @@
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
+                    console.log(data);
                     ngDialog.open({
                         template: 'app/header/templates/confirm.html',
                         className: 'ngdialog-theme-plain',
