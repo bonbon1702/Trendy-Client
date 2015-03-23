@@ -150,6 +150,7 @@
         socket.on('realTime.notification', function (data) {
             //Do something with data
             var results = JSON.parse(data);
+            console.log(results);
             if ($scope.loginUser.id != results.id_of_user_effected) {
                 if (results.user_id != $scope.loginUser.id && results.action == 'like') {
 
