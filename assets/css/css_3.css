@@ -207,7 +207,7 @@ body {
 
 .search input {
     height: 26px;
-    width: 100%;
+    width: 60%;
     padding: 0 12px 0 25px;
     background: white url("http://cssdeck.com/uploads/media/items/5/5JuDgOa.png") 8px 6px no-repeat;
     border-width: 1px;
@@ -346,4 +346,27 @@ body {
 
 .item102{
     width: 215px;
+}
+.no1{
+    width: 49.9%;
+}
+.no1Height{
+    height: 520px;
+}
+
+.no2{
+    float: right;
+    margin: -542px 0px;
+    width: 50%;
+}
+.no2Height{
+    height: 249px;
+}
+.no3{
+    float: right;
+    margin: -270px 0px;
+    width: 50%;
+}
+.no3Height{
+    height: 249px;
 }

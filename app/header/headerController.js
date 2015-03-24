@@ -9,6 +9,8 @@
     function headerController($scope, headerService, $location, ngDialog, ngAudio, $window) {
         $scope.notification = [];
         $scope.notification_unread = [];
+        $scope.trendy = true;
+
         $scope.update = function (type) {
             if (type.length > 1) {
                 headerService.search(type)
@@ -164,6 +166,10 @@
 
         $scope.getShopDetail = function () {
 
+        }
+
+        $scope.clickNavBar= function () {
+                    $scope.trendy = false;
         }
 
     }

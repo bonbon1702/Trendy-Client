@@ -105,33 +105,34 @@
             </button>
         </div>
     </div>
+    <ul class="nav navbar-nav">
+        <li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">
+            <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>
+        </li>
+    </ul>
     <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
         <autocomplete ng-model="type" data="data" on-type="update"
                       attr-placeholder="Search friend or shop..."
                       template-url="app/header/templates/searchBar.html">
         </autocomplete>
     </div>
-    <ul class="nav navbar-nav">
-        <li>
-            <a ng-href="#/">Trendy</a>
-        </li>
-        <li>
-            <a ng-href="#/newfeed">NewFeed</a>
-        </li>
-        <li>
-            <a ng-href="#/around">Around here</a>
-        </li>
-        <li>
-            <a ng-href="#/favorite">Favorite</a>
-        </li>
-    </ul>
+
     <div data-provides="fileupload">
             <span class="btn btn-default btn-file "
                   style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
                 <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
                     <span class="fa fa-camera"></span>
-                    Upload Image
+                    Upload
                 </button>
             </span>
     </div>
