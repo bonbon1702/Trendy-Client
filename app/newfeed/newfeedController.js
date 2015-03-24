@@ -25,7 +25,6 @@
                     newfeedService.getPostNewFeed(data)
                         .success(function (data) {
                             $scope.posts = data.posts;
-                            console.log(data);
                         })
                         .error(function (data) {
                             console.log(data);

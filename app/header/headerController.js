@@ -9,6 +9,8 @@
     function headerController($scope, headerService, $location, ngDialog, ngAudio, $window) {
         $scope.notification = [];
         $scope.notification_unread = [];
+        $scope.trendy = true;
+
         $scope.update = function (type) {
             if (type.length > 1) {
                 headerService.search(type)
@@ -150,14 +152,19 @@
         socket.on('realTime.notification', function (data) {
             //Do something with data
             var results = JSON.parse(data);
+
             if ($scope.loginUser.id != results.id_of_user_effected) {
-                if (results.user_id != $scope.loginUser.id && results.action == 'like') {
+                if (results.user_id != $scope.loginUser.id && (results.action == 'like' || results.action == 'favorite')) {
 
                 } else {
-                    $scope.notification_unread.push(results);
-                    $scope.notification.unshift(results);
-                    $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                    $scope.sound.play();
+                    for (var i=0; i < results.list_user.length; i++) {
+                        if ($scope.loginUser.id == results.list_user[i].id_of_user_effected) {
+                            $scope.notification_unread.push(results);
+                            $scope.notification.unshift(results);
+                            $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                            $scope.sound.play();
+                        }
+                    }
                 }
             }
         });
@@ -166,6 +173,13 @@
 
         }
 
+        $scope.clickNavBar= function () {
+            $scope.trendy = false;
+        }
+
+        $scope.clickNavBarTrendy= function () {
+            $scope.trendy = true;
+        }
     }
 
 })(angular);

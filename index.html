@@ -54,7 +54,7 @@
 <!--Header-->
 <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">
     <div class=" pull-left">
-        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
+        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/" ng-click="clickNavBarTrendy()">
         </a>
     </div>
     <ul class="notifications pull-left hidden-xs">
@@ -76,7 +76,10 @@
                         <span class="label label-default pull-right">{{ noti.created_at }}</span>
                         <h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>
 
-                        <p class="margin-none">{{ noti.name_of_user_effected }} {{ noti.action }}
+                        <p class="margin-none" ng-if="loginUser.id != noti.user_id">{{ noti.action }}
+                            in
+                            {{ noti.username }}'s post</p>
+                        <p class="margin-none" ng-if="loginUser.id == noti.user_id">{{ noti.action }}
                             in
                             your post</p>
                     </div>
@@ -95,7 +98,7 @@
             </a>
             <ul class="dropdown-menu" ng-show="loginUser != null">
                 <li><a href="about.html?lang=en">About</a></li>
-                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>
+                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
                 <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
@@ -105,33 +108,34 @@
             </button>
         </div>
     </div>
+    <ul class="nav navbar-nav">
+        <li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">
+            <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>
+        </li>
+    </ul>
     <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
         <autocomplete ng-model="type" data="data" on-type="update"
                       attr-placeholder="Search friend or shop..."
                       template-url="app/header/templates/searchBar.html">
         </autocomplete>
     </div>
-    <ul class="nav navbar-nav">
-        <li>
-            <a ng-href="#/">Trendy</a>
-        </li>
-        <li>
-            <a ng-href="#/newfeed">NewFeed</a>
-        </li>
-        <li>
-            <a ng-href="#/around">Around here</a>
-        </li>
-        <li>
-            <a ng-href="#/favorite">Favorite</a>
-        </li>
-    </ul>
+
     <div data-provides="fileupload">
             <span class="btn btn-default btn-file "
                   style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
                 <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
                     <span class="fa fa-camera"></span>
-                    Upload Image
+                    Upload
                 </button>
             </span>
     </div>

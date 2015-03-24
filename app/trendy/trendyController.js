@@ -20,7 +20,16 @@
         };
         trendyService.getPostTrendy(data)
             .success(function(data){
-                $scope.posts = data.posts;
+                $scope.postsTop3=[];
+                $scope.posts=[];
+                for (var i =0; i < 3; i++){
+                    $scope.postsTop3.push(data.posts[i]);
+                }
+
+                for (var j =3; j < data.posts.length; j++){
+                    $scope.posts.push(data.posts[j]);
+                }
+                console.log($scope.posts.length);
             })
             .error(function(data){
                 console.log(data);
@@ -46,8 +55,8 @@
                 trendyService.getPostTrendy(data)
                     .success(function (data) {
                         if (data.posts.length != 0) {
-                            for (var i =0; i < data.posts.length; i++){
-                                $scope.posts.push(data.posts[i]);
+                            for (var j =3; j < data.posts.length; j++){
+                                $scope.posts.push(data.posts[j]);
                             }
 
                             $scope.busy = false;
