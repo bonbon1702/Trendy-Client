@@ -348,7 +348,7 @@ body {
     width: 215px;
 }
 .no1{
-    width: 49.9%;
+    width: 50%;
 }
 .no1Height{
     height: 520px;
@@ -357,16 +357,16 @@ body {
 .no2{
     float: right;
     margin: -542px 0px;
-    width: 50%;
+    width: 51%;
 }
 .no2Height{
-    height: 249px;
+    height: 254px;
 }
 .no3{
     float: right;
-    margin: -270px 0px;
-    width: 50%;
+    margin: -276px 0px;
+    width: 51%;
 }
 .no3Height{
-    height: 249px;
+    height: 254px;
 }

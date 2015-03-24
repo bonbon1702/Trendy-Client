@@ -54,7 +54,7 @@
 <!--Header-->
 <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">
     <div class=" pull-left">
-        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">
+        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/" ng-click="clickNavBarTrendy()">
         </a>
     </div>
     <ul class="notifications pull-left hidden-xs">
@@ -98,7 +98,7 @@
             </a>
             <ul class="dropdown-menu" ng-show="loginUser != null">
                 <li><a href="about.html?lang=en">About</a></li>
-                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>
+                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
                 <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>

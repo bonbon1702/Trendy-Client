@@ -174,9 +174,12 @@
         }
 
         $scope.clickNavBar= function () {
-                    $scope.trendy = false;
+            $scope.trendy = false;
         }
 
+        $scope.clickNavBarTrendy= function () {
+            $scope.trendy = true;
+        }
     }
 
 })(angular);
