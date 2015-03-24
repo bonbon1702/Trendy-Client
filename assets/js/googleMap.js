@@ -24,6 +24,15 @@
                     }
                 ]
             },
+			{
+				"featureType": "administrative",
+				"elementType": "labels.text.fill",
+				"stylers": [
+					{
+						"color": "#444444"
+					}
+				]
+			},
             {
                 "featureType": "administrative.province",
                 "elementType": "labels",
@@ -68,7 +77,7 @@
                         "visibility": "on"
                     },
                     {
-                        "color": "#e0efef"
+                        "color": "rgb(231, 231, 231)"
                     }
                 ]
             },
@@ -152,16 +161,17 @@
                 "elementType": "all",
                 "stylers": [
                     {
-                        "color": "#7dcdcd"
-                    }
+                        "color": "#46bcec"
+                    },
+					{ invert_lightness: true }
                 ]
             }
         ];
         var mapOptions = {
-            zoom: 15,
+            zoom: 13,
             center: haNoiLocation,
             panControl: false,
-            zoomControl: true,
+            zoomControl: false,
             scaleControl: false,
             streetViewControl: false,
             scrollwheel: false,
@@ -198,16 +208,37 @@
         searchBox();
         homeButton();
 		//hideMap();
+		google.maps.event.addDomListener($('[role=zoom-in]')[0], 'click', function () {
+			map.setZoom(map.getZoom()+1);
+		});
+		google.maps.event.addDomListener($('[role=zoom-out]')[0], 'click', function () {
+		map.setZoom(map.getZoom()-1);
+		});
+		google.maps.event.addDomListener($('[role=toggle-size]')[0], 'click', function () {
+		var map = document.getElementById('map');
+		var btn = $('[role=toggle-size]')[0];
+		if (btn.style.transform=="rotate(180deg)")
+			{
+				map.style.height='308px';
+				btn.style.transform= "";
+			}
+		else 
+			{
+				map.style.height='408px';
+				btn.style.transform= "rotate(180deg)";
+			}
+		});
     }
     //----------------------------------------------------------------------------------------------------------------
 
     //--------------------------------------Search Button ----------------------------------------------------------
     var searchBox = function () {
-				// Create the search box and link it to the UI element.
-		  var input = /** @type {HTMLInputElement} */(
+		var defaultBounds = new google.maps.LatLngBounds(
+		new google.maps.LatLng(-33.8902, 151.1759),
+		new google.maps.LatLng(-33.8474, 151.2631));
+		
+		var input = /** @type {HTMLInputElement} */(
 			  document.getElementById('pac-input'));
-		  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
 		  var searchBox = new google.maps.places.SearchBox(
 			/** @type {HTMLInputElement} */(input));
 
@@ -264,13 +295,17 @@
 
     //--------------------------------------------Home Button---------------------------------------------------------
     var homeButton = function () {
-        var homeControlDiv = document.createElement('div');
-        var homeControl = new HomeControl(homeControlDiv, map);
+        // homeControlDiv = document.createElement('div');
+        //var homeControl = new HomeControl(homeControlDiv, map);
 
-        homeControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(homeControlDiv);
-
-
+        //homeControlDiv.index = 1;
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(homeControlDiv);
+		// Setup the click event listeners: simply set the map to
+		var controlUI = $('[role=current-location]')[0];
+		google.maps.event.addDomListener(controlUI, 'click', function () {
+			getLocation();
+		});
+		
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
@@ -345,10 +380,7 @@
             controlText.innerHTML = '<b>Home</b>';
             controlUI.appendChild(controlText);
 
-            // Setup the click event listeners: simply set the map to
-            google.maps.event.addDomListener(controlUI, 'click', function () {
-                getLocation();
-            });
+            
         }
     }
     //----------------------------------------------------------------------------------------------------------------
