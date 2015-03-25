@@ -168,7 +168,7 @@
             }
         ];
         var mapOptions = {
-            zoom: 13,
+            zoom: 12,
             center: haNoiLocation,
             panControl: false,
             zoomControl: false,
@@ -212,7 +212,7 @@
 			map.setZoom(map.getZoom()+1);
 		});
 		google.maps.event.addDomListener($('[role=zoom-out]')[0], 'click', function () {
-		map.setZoom(map.getZoom()-1);
+			map.setZoom(map.getZoom()-1);
 		});
 		google.maps.event.addDomListener($('[role=toggle-size]')[0], 'click', function () {
 		var map = document.getElementById('map');
@@ -224,7 +224,7 @@
 			}
 		else 
 			{
-				map.style.height='408px';
+				map.style.height='608px';
 				btn.style.transform= "rotate(180deg)";
 			}
 		});

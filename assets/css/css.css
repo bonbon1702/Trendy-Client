@@ -1107,44 +1107,7 @@ white-space: nowrap;
 	z-index:1002 !important;
 }
 /*********************************************************************************/
-.div-hide-map {
-display: block;
-width: 40%;
-color: #fff;
-background: #176CED;
-padding: 8px 16px;
-margin: 0 auto;
-font-weight: bold;
-text-align: center;
-cursor: pointer;
-outline: none;
-border: none;
-border-radius: 0 0 100px 100px;
-}
-.div-hide-map:hover {
-color: #fff;
-background: #40555c;
-text-decoration: none;
--webkit-transition: all 0.2s ease-in-out;
--o-transition: all 0.2s ease-in-out;
-transition: all 0.2s ease-in-out;
-outline: 0;
-} 
-.fa {
-margin-right: 5px;
-display: inline-block;
-font: normal normal normal 14px/1 FontAwesome;
-font-size: inherit;
-text-rendering: auto;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-.fa-chevron-circle-up:before {
-content: "\f139";
-}
-.fa-chevron-circle-down:before {
-content: "\f13a";
-}
+
 .transitionHideMap {
 
 -webkit-transition: all 0.2s linear;
