@@ -7,7 +7,7 @@
                         <div class="timeline-cover">
                             <div class="cover image">
                                 <div class="top" >
-                                    <img ng-src="{{ cover }}"/>
+                                    <img ng-src="{{ cover }}" ng-show="coverFlag == true"/>
                                     <div class="cropArea" ng-show="coverFlag == false">
                                         <img-crop image="cover"  area-min-size="100"
                                                    area-type="square" result-image="myCroppedImage" ></img-crop>
