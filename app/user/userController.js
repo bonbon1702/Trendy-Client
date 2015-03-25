@@ -5,19 +5,26 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService'];
+    userController.$inject = ['$scope', 'ngDialog', '$base64','$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService'];
 
-    function userController($scope, ngDialog, $routeParams, $route, userService, headerService, postService, homeService) {
+    function userController($scope, ngDialog,$base64 ,$routeParams, $route, userService, headerService, postService, homeService) {
         $scope.flwBtnLbl = 'Follow';
         $scope.loginUserId;
+        $scope.cover = '';
+        $scope.user;
+        $scope.myImage = '';
+        $scope.myCroppedImage = '';
+        $scope.coverFlag = true;
         userService.getUser($routeParams.userId)
             .success(function (data) {
                 $scope.loginUserId == $routeParams.userId;
                 $scope.following = [];
                 $scope.follower = [];
                 $scope.user = data.user;
+                $scope.cover = data.user.image_cover;
+                flag = false;
                 $scope.show = true;
-
+                $scope.flagCoverBtn = false;
                 if (data.user.follower.length > 0) {
                     for (var i = 0; i < data.user.follower.length; i += 1) {
                         $scope.follower.push(data.user.follower[i]);
@@ -195,7 +202,7 @@
         }
 
         $scope.deletePost = function (post) {
-            if (!$scope.loginUserId) {
+            if ($scope.loginUserId == null) {
                 headerService.openLogin();
                 event.stopPropagation();
                 event.preventDefault();
@@ -228,7 +235,7 @@
         }
 
         $scope.deletePostInAlbumDetail = function (post) {
-            if (!$scope.loginUserId) {
+            if ($scope.loginUserId == null) {
                 headerService.openLogin();
                 event.stopPropagation();
                 event.preventDefault();
@@ -263,16 +270,16 @@
 
         }
 
-        $scope.editAlbum = function (album) {
+        $scope.editAlbum = function (album,userId) {
             ngDialog.open({
                 template: 'app/post/templates/editAlbum.html',
                 className: 'ngdialog-theme-plain-custom-editAlbum',
                 controller: ['$scope', function ($scope) {
                     $scope.albPicture = album.album_detail[0].image_url_editor;
                     $scope.updtAlbName = album.album_name;
-
+                    console.log($scope.loginUserId);
                     $scope.deleteAlbum = function () {
-                        if (!$scope.loginUserId) {
+                        if (userId == null) {
                             headerService.openLogin();
                             event.stopPropagation();
                             event.preventDefault();
@@ -301,7 +308,7 @@
                     }
 
                     $scope.editAlbumName = function () {
-                        if (!$scope.loginUserId) {
+                        if (userId == null) {
                             headerService.openLogin();
                             event.stopPropagation();
                             event.preventDefault();
@@ -337,6 +344,43 @@
             postService.openPost(id);
         };
 
+        $scope.imageSelected = function ($files) {
+            headerService.upload($files[0])
+                .success(function (data) {
+                    $scope.flagCoverBtn = true;
+                    $scope.coverFlag = false;
+                    $scope.cover = data.upload.image_url;
+                    $scope.saveCoverImg = function () {
+                        //headerService.upload($scope.myCroppedImage)
+                        //    .success(function (data) {
+                                var coverImg = {
+                                    user_id: parseInt($routeParams.userId),
+                                    image_cover: $scope.myCroppedImage
+                                };
+                                userService.updateCover(coverImg)
+                                    .success(function () {
+                                        $scope.flagCoverBtn = false;
+                                        $scope.coverFlag = true;
+                                    })
+                                    .error(function (coverImg) {
+                                        console.log(coverImg);
+                                    });
+                            //})
+                            //.error()
+                    }
+                    $scope.cancelCoverImg = function () {
+                        $scope.cover = $scope.user.image_cover;
+                        $scope.coverFlag = true;
+                        $scope.flagCoverBtn = false;
+                        console.log(decodeURIComponent(escape($base64.decode($scope.myCroppedImage))));
+                    }
+
+                })
+                .error(function (data) {
+                    console.log(data);
+                });
+
+        };
 
     }
 })(angular);

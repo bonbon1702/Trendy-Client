@@ -34,6 +34,24 @@
                         follower_id:data['follower_id']
                     }
                 });
+            },
+
+            updateCover : function(data){
+                console.log(data.user_id);
+                return $http({
+                    method: 'PUT',
+                    url: $rootScope.url + 'user/' +data.user_id,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': '*'
+                    },
+                    params: {
+                        id:data['user_id'],
+                        image_cover:data['image_cover']
+                    }
+                });
             }
         }
     }

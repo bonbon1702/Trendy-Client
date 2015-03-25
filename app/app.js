@@ -18,7 +18,9 @@
             'ui.router',
             'ngAudio',
             'akoenig.deckgrid',
-            'masonry'
+            'masonry',
+            'ngImgCrop',
+            'base64'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider

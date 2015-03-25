@@ -370,3 +370,10 @@ body {
 .no3Height{
     height: 254px;
 }
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:100%;
+    height:350px;
+}
