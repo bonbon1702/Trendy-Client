@@ -55,7 +55,7 @@
                 trendyService.getPostTrendy(data)
                     .success(function (data) {
                         if (data.posts.length != 0) {
-                            for (var j =3; j < data.posts.length; j++){
+                            for (var j =0; j < data.posts.length; j++){
                                 $scope.posts.push(data.posts[j]);
                             }
 

@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$base64','$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService'];
+    userController.$inject = ['$scope', 'ngDialog', '$base64', '$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService'];
 
-    function userController($scope, ngDialog,$base64 ,$routeParams, $route, userService, headerService, postService, homeService) {
+    function userController($scope, ngDialog, $base64, $routeParams, $route, userService, headerService, postService, homeService) {
         $scope.flwBtnLbl = 'Follow';
         $scope.loginUserId;
         $scope.cover = '';
@@ -25,28 +25,73 @@
                 flag = false;
                 $scope.show = true;
                 $scope.flagCoverBtn = false;
-                if (data.user.follower.length > 0) {
-                    for (var i = 0; i < data.user.follower.length; i += 1) {
-                        $scope.follower.push(data.user.follower[i]);
-                        $scope.follower[i].status = 'Follow';
-                        for (var j = 0; j < data.user.following.length; j += 1) {
-                            if ($scope.following.length < data.user.following.length && data.user.following[j] != null) {
-                                $scope.following.push(data.user.following[j]);
-                                $scope.following[j].status = 'Following';
+
+                headerService.loginUser()
+                    .success(function (r) {
+                        if (r.user) {
+                            userService.getUser(r.user.id)
+                                .success(function (e) {
+                                    $scope.loginUser = e.user;
+                                    if (data.user.follower.length > 0) {
+                                        for (var i = 0; i < data.user.follower.length; i += 1) {
+                                            $scope.follower.push(data.user.follower[i]);
+                                            for (var k = 0; k < $scope.loginUser.follower.length; k++) {
+                                                if (data.user.follower[i] != null) {
+                                                    if ($scope.loginUser.id == data.user.follower[i].follower_id) {
+                                                        $scope.follower[i].status = 'none';
+                                                    } else if (data.user.follower[i].follower_id == $scope.loginUser.follower[k].follower_id) {
+                                                        $scope.follower[i].status = 'Following';
+                                                        break;
+                                                    } else {
+                                                        $scope.follower[i].status = 'Follow';
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (data.user.following.length > 0) {
+                                        for (var j = 0; j < data.user.following.length; j += 1) {
+                                            $scope.following.push(data.user.following[j]);
+                                            if ($scope.loginUser.following.length > 0) {
+                                                for (var k = 0; k < $scope.loginUser.following.length; k++) {
+                                                    if (data.user.following[j] != null) {
+                                                        if ($scope.loginUser.id == data.user.following[j].user_id) {
+                                                            $scope.following[j].status = 'none';
+                                                        } else if (data.user.following[j].user_id == $scope.loginUser.following[k].user_id) {
+                                                            $scope.following[j].status = 'Following';
+                                                            break;
+                                                        } else {
+                                                            $scope.following[j].status = 'Follow';
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                $scope.following[j].status = 'Follow';
+                                            }
+                                        }
+                                    }
+                                })
+                                .error();
+                        } else {
+                            if (data.user.follower.length > 0) {
+                                for (var i = 0; i < data.user.follower.length; i += 1) {
+                                    $scope.follower.push(data.user.follower[i]);
+                                    if (data.user.follower[i] != null) {
+                                        $scope.follower[i].status = 'none';
+                                    }
+                                }
                             }
-                            if ($scope.follower[i].follower_id == $scope.following[j].user_id) {
-                                $scope.follower[i].status = 'Following';
+                            if (data.user.following.length > 0) {
+                                for (var j = 0; j < data.user.following.length; j += 1) {
+                                    $scope.following.push(data.user.following[j]);
+                                    if (data.user.following[j] != null) {
+                                        $scope.following[j].status = 'none';
+                                    }
+                                }
                             }
                         }
-                    }
-                } else {
-                    for (var j = 0; j < data.user.following.length; j += 1) {
-                        if (data.user.following[j] != null) {
-                            $scope.following.push(data.user.following[j]);
-                            $scope.following[j].status = 'Following';
-                        }
-                    }
-                }
+                    })
+                    .error();
             })
             .error(function (data) {
                 console.log(data);
@@ -132,74 +177,59 @@
             if (user.status == 'Follow') {
                 data = {
                     user_id: user.follower_id,
-                    follower_id: $routeParams.userId
+                    follower_id: $scope.loginUser.id
                 };
                 userService.addFollow(data)
                     .success(function () {
                         user.status = 'Following';
-                        var flwing = user;
-                        $scope.following.push(flwing);
-                        $scope.user.following.length++;
-
                     })
                     .error(function (data) {
                         console.log(data);
                     })
             } else if (user.status == 'Following') {
                 data = {
-                    user_id: parseInt($routeParams.userId),
+                    user_id: $scope.loginUser.id,
                     follower_id: user.follower_id
                 };
+
                 userService.removeFollow(data)
                     .success(function () {
                         user.status = 'Follow';
-                        var flwing = user;
-                        $scope.following.splice(flwing);
-                        $scope.user.following.length--;
-                        console.log($scope.user.following.length);
                     })
                     .error(function () {
                         console.log(data);
                     })
             }
-        }
+        };
 
         $scope.followingBtnClick = function (user) {
-
             if (user.status == 'Follow') {
-                data = {
+                var data = {
                     user_id: user.user_id,
-                    follower_id: $routeParams.userId
+                    follower_id: $scope.loginUser.id
                 };
                 userService.addFollow(data)
                     .success(function () {
                         user.status = 'Following';
-                        var flwing = user;
-                        $scope.following.push(flwing);
-                        $scope.user.following.length++;
-
                     })
                     .error(function (data) {
                         console.log(data);
                     })
             } else if (user.status == 'Following') {
-                data = {
-                    user_id: parseInt($routeParams.userId),
+                var data = {
+                    user_id: $scope.loginUser.id,
                     follower_id: user.user_id
                 };
 
                 userService.removeFollow(data)
                     .success(function () {
                         user.status = 'Follow';
-                        var flwing = user;
-                        $scope.user.following.length--;
-                        console.log($scope.following);
                     })
                     .error(function () {
                         console.log(data);
                     })
             }
-        }
+        };
 
         $scope.deletePost = function (post) {
             if ($scope.loginUserId == null) {
@@ -270,7 +300,7 @@
 
         }
 
-        $scope.editAlbum = function (album,userId) {
+        $scope.editAlbum = function (album, userId) {
             ngDialog.open({
                 template: 'app/post/templates/editAlbum.html',
                 className: 'ngdialog-theme-plain-custom-editAlbum',
@@ -353,20 +383,20 @@
                     $scope.saveCoverImg = function () {
                         //headerService.upload($scope.myCroppedImage)
                         //    .success(function (data) {
-                                var coverImg = {
-                                    user_id: parseInt($routeParams.userId),
-                                    image_cover: $scope.myCroppedImage
-                                };
-                                userService.updateCover(coverImg)
-                                    .success(function () {
-                                        $scope.flagCoverBtn = false;
-                                        $scope.coverFlag = true;
-                                    })
-                                    .error(function (coverImg) {
-                                        console.log(coverImg);
-                                    });
-                            //})
-                            //.error()
+                        var coverImg = {
+                            user_id: parseInt($routeParams.userId),
+                            image_cover: $scope.myCroppedImage
+                        };
+                        userService.updateCover(coverImg)
+                            .success(function () {
+                                $scope.flagCoverBtn = false;
+                                $scope.coverFlag = true;
+                            })
+                            .error(function (coverImg) {
+                                console.log(coverImg);
+                            });
+                        //})
+                        //.error()
                     }
                     $scope.cancelCoverImg = function () {
                         $scope.cover = $scope.user.image_cover;

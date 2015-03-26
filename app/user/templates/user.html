@@ -8,11 +8,11 @@
                             <div class="cover image">
                                 <div class="top" >
                                     <img ng-src="{{ cover }}" ng-show="coverFlag == true"/>
-                                    <div class="cropArea" ng-show="coverFlag == false">
-                                        <img-crop image="cover"  area-min-size="100"
-                                                   area-type="square" result-image="myCroppedImage" ></img-crop>
+                                    <!--<div class="cropArea" ng-show="coverFlag == false">-->
+                                        <!--<img-crop image="cover"  area-min-size="100"-->
+                                                   <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
 
-                                    </div>
+                                    <!--</div>-->
                                 </div>
                                 <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"
                                      data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
@@ -34,7 +34,6 @@
                                         <span>Timeline</span>
                                         </a>
                                     </li>
-                                    <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
                                     </li>
                                     <li style="float: right;background: none;margin-right: 18px;" ng-if="flagCoverBtn == true">
                                         <button ng-click="cancelCoverImg()" class="btn btn-primary" style="margin-right: 20px;">
@@ -54,9 +53,9 @@
                                     <div class="photo">
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
                                     </div>
-                                    <div class="innerAll border-right pull-left">
-                                        <h3 class="margin-none">{{ user.username }}</h3>
-                                        <span>Works at MOSAICPRO</span>
+                                    <div class="innerAll border-right pull-left" style="margin-top: 12px">
+                                        <h3 class="margin-none">{{ user.username }} - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></h3>
+
                                     </div>
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">

@@ -74,7 +74,6 @@
                                     } else if (auth.network == 'twitter') {
 
                                     }
-
                                     headerService.save(data)
                                         .success(function (data) {
                                             $window.location.reload();

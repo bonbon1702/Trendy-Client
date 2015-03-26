@@ -20,24 +20,10 @@
                 });
             },
             removeFollow: function (data) {
-                return $http({
-                    method: 'DELETE',
-                    url: $rootScope.url + 'following/delete',
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept': '*'
-                    },
-                    params: {
-                        user_id:data['user_id'],
-                        follower_id:data['follower_id']
-                    }
-                });
+                return $http.get($rootScope.url + 'following/delete/userID/' + data.user_id + '/followerID/' + data.follower_id);
             },
 
             updateCover : function(data){
-                console.log(data.user_id);
                 return $http({
                     method: 'PUT',
                     url: $rootScope.url + 'user/' +data.user_id,
