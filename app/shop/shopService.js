@@ -30,7 +30,7 @@
             saveShopDetail: function(data){
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'shop_detail',
+                    url: $rootScope.url + 'shop/saveShopInfo',
                     data: data
                 })
             }
