@@ -164,6 +164,7 @@
     display: flex;
     position: initial;
     margin: auto;
+    padding: 20px 40px 50px;
     -webkit-box-align: center;
     -ms-flex-align: center;
 }
@@ -855,3 +856,25 @@ body {
     transition: all 0.1s ease-in 0s;
 }/*#side_navA_74*/
 
+}
+
+.goldMedal{
+     margin: 30px 601px;
+     float: right;
+     background-color: transparent;
+     position: absolute;
+ }
+
+.silverMedal{
+    margin: 20px 406px;
+    float: right;
+    background-color: transparent;
+    position: absolute;
+}
+
+.bronze{
+    margin: 20px 406px;
+    float: right;
+    background-color: transparent;
+    position: absolute;
+}
