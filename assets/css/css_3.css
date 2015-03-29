@@ -377,3 +377,24 @@ body {
     width:100%;
     height:350px;
 }
+
+.goldMedal{
+     margin: 30px 601px;
+     float: right;
+     background-color: transparent;
+     position: absolute;
+ }
+
+.silverMedal{
+    margin: 20px 406px;
+    float: right;
+    background-color: transparent;
+    position: absolute;
+}
+
+.bronze{
+    margin: 20px 406px;
+    float: right;
+    background-color: transparent;
+    position: absolute;
+}

@@ -33,7 +33,7 @@
         };
         hello.init({
             facebook: '513861542088702',
-            google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
+            google: '926387861043-o5o1ge96njti9r0duq25ig9jsuvfdqlb.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
             scope: 'email'
