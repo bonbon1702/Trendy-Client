@@ -147,7 +147,7 @@
                                 <div class="row">
                                     <div class="col-md-3" ng-repeat="album in user.album ">
                                         <div class="thumbnail widget-thumbnail" ng-show="show">
-                                            <a href="/#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
+                                            <a data-target="#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
                                                 <div class=" holderjs-fluid"
                                                      style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">
                                                     <img ng-src="{{ album.album_detail[0].image_url_editor }}"
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2-3-1" ng-hide="show">
-                                <a href="/#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
+                                <a data-target="#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
                                         style="color: #0084B4;margin-left: 18px;">Back</h4></a>
 
                                 <h3 style="text-align: center;margin-bottom: 30px;">{{ user.album[index].album_name}}</h3>
@@ -184,7 +184,6 @@
                                     <ul class="row">
 
                                         <!-- Gallery item -->
-
                                         <div class="blc-row" style="width: 22%;">
                                             <div ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 0">

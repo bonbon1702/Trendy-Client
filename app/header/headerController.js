@@ -5,8 +5,8 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', 'ngAudio', '$window'];
-    function headerController($scope, headerService, $location, ngDialog, ngAudio, $window) {
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', 'ngAudio', '$window', 'postService'];
+    function headerController($scope, headerService, $location, ngDialog, ngAudio, $window, postService) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.trendy = true;
@@ -32,7 +32,7 @@
             }
         };
         hello.init({
-            facebook: '513861542088702',
+            facebook: '849978158393821',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -40,11 +40,7 @@
         });
 
         $scope.checkLogin = function () {
-            if (!$scope.loginUser) {
-                headerService.openLogin();
-                event.stopPropagation();
-                event.preventDefault();
-            }
+            headerService.openLogin();
         };
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
@@ -56,7 +52,7 @@
                         controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
+                                $window.location.href = "http://trendyplus.dev/#/post?image="
                                 + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                             };
                             $scope.confirm = function () {
@@ -64,8 +60,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
+                                    "target:'http://trendyplus.dev/#/post', " +
+                                    "exit:'http://trendyplus.dev/#/'});"
                             }
                         }]
                     });
@@ -93,10 +89,12 @@
                                         if (noti.user_id != $scope.loginUser.id && noti.action == 'like') {
 
                                         } else {
+                                            noti.created_at = beautyDate.prettyDate(noti.created_at);
                                             $scope.notification.push(noti);
                                         }
                                     }
                                 }
+                                console.log($scope.notification);
                                 for (var i = 0; i < data.notification.notification_unread.length; i++) {
                                     var noti = data.notification.notification_unread[i];
                                     if (noti.id_of_user_effected !== $scope.loginUser.id) {
@@ -171,14 +169,18 @@
 
         $scope.getShopDetail = function () {
 
-        }
+        };
 
         $scope.clickNavBar= function () {
             $scope.trendy = false;
-        }
+        };
 
         $scope.clickNavBarTrendy= function () {
             $scope.trendy = true;
+        }
+
+        $scope.openPost = function(id){
+            postService.openPost(id);
         }
     }
 

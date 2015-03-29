@@ -68,9 +68,9 @@
                     </div>
                 </i>
             </a>
-            <ul class="dropdown-menu chat media-list">
-                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse">
-                    <a class="pull-left" href="#"><img class="media-object thumb"
+            <ul class="dropdown-menu chat media-list" style="max-height: 500px;overflow-y: auto;">
+                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse" ng-click="openPost(noti.post_id)" style="cursor: pointer">
+                    <a class="pull-left"><img class="media-object thumb"
                                                        ng-src="{{ noti.avatar_of_user_effected }}" alt="50x50"
                                                        width="50"/></a>
 
@@ -90,7 +90,7 @@
         </li>
     </ul>
     <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-        <div class="dropdown username pull-left" ng-show="loginUser != null">
+        <div class="dropdown username pull-left" ng-hide="loginUser == null" ng-cloak>
             <a class="dropdown-toggle" data-toggle="dropdown">
         				<span class="media margin-none">
         					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"
@@ -98,13 +98,12 @@
         					<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>
         				</span>
             </a>
-            <ul class="dropdown-menu" ng-show="loginUser != null">
-                <li><a href="about.html?lang=en">About</a></li>
+            <ul class="dropdown-menu" ng-hide="loginUser == null" ng-cloak>
                 <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
                 <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
-        <div class="dropdown username pull-left" ng-show="loginUser == null" style="margin: -2px;">
+        <div class="dropdown username pull-left" ng-hide="loginUser != null" style="margin: -2px;" ng-cloak>
             <button ng-click="openLogin()" class="btn btn-primary">Login
                 <i class="fa fa-fw fa-unlock-alt"></i>
             </button>
@@ -131,12 +130,24 @@
         </autocomplete>
     </div>
 
-    <div data-provides="fileupload">
-            <span class="btn btn-default btn-file "
-                  style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
-                <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
+    <div data-provides="fileupload" ng-hide="!loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-file-select="" ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
-                    <span class="fa fa-camera"></span>
+
+                    <span class="fa fa-camera" ></span>
+                    Upload
+                </button>
+            </span>
+    </div>
+    <div ng-hide="loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-click="checkLogin()" class="btn btn-primary"
+                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
+
+                    <span class="fa fa-camera" ></span>
                     Upload
                 </button>
             </span>
@@ -152,6 +163,7 @@
 <script src="assets/js/libs/jquery.js"></script>
 <script src="assets/js/libs/jquery-ui.min.js"></script>
 <script src="assets/js/libs/angular.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="assets/js/libs/masonry.pkgd.min.js"></script>
 <script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
@@ -197,7 +209,6 @@
 <script src="assets/js/libs/hello.min.js"></script>
 <script src="assets/js/libs/pixlr.js"></script>
 <script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
 <script src="assets/js/libs/angular.audio.js"></script>
 <script src="assets/js/libs/angular-deckgrid.js"></script>
 <script src="assets/js/libs/angular-masonry-directive.js"></script>
@@ -212,6 +223,8 @@
 <script src="assets/js/libs/crop-host.js"></script>
 <script src="assets/js/libs/crop-pubsub.js"></script>
 <script src="assets/js/libs/angular-base64.min.js"></script>
+<script src="assets/js/libs/pretty.js"></script>
+<script src="assets/js/libs/ui-bootstrap-tpls-0.9.0.min.js"></script>
 
 
 

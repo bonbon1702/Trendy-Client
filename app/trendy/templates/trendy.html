@@ -1,13 +1,181 @@
-<div style="width: 93%;margin: 75px 54px -71px;" >
-<div ng-repeat="post in postsTop3" class="item101" ng-class="{ no1: $index == 0 , no2 : $index == 1 , no3 : $index == 2 }">
-    <div style="margin-right: 22px;margin-top:12px">
+<!--<div style="width: 93%;margin: 75px 54px -71px;">-->
+<!--<div ng-repeat="post in postsTop3" class="item101"-->
+<!--ng-class="{ no1: $index == 0 , no2 : $index == 1 , no3 : $index == 2 }">-->
+<!--<div style="margin-right: 22px;margin-top:12px">-->
+<!--<div class="widget border-none bg-none widget-pinterest active"-->
+<!--style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">-->
+<!--<div class="widget-body bg-none padding-none"-->
+<!--ng-class="{ no1Height: $index == 0 , no2Height : $index == 1 , no3Height : $index == 2}"-->
+<!--style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">-->
+<!--<a ng-click="openPost(post.id)"-->
+<!--data-toggle="prettyPhoto" class="thumb">-->
+<!--<img ng-src="{{ post.image_url_editor }}" style="width: 100%"-->
+<!--alt="photo"/>-->
+<!--</a>-->
+
+<!--<div class="description  meta">-->
+<!--<div class="hover-blue">-->
+<!--<div class="title">-->
+<!--<a data-track="photo-click" ng-href="#/" class="title" style="font-size: 15px;">-->
+<!--{{ post.caption }}-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="attribution-block" style="height: 7px;margin-top: 6px;font-size: 15px">-->
+<!--<span class="attribution">-->
+<!--<span style="color: whitesmoke;">bởi </span>-->
+<!--<a data-track="owner" ng-href="#/user/{{post.user_id}}"-->
+<!--class="owner">{{ post.user.username }}</a>-->
+<!--</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<span class="inline-icons" style="font-size: 15px;">-->
+<!--<i class="fa fa-fw fa-thumbs-up" style="color: white;"></i>-->
+<!--<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"-->
+<!--style="margin-left: -4px;">-->
+<!--99+-->
+<!--</a>-->
+<!--<i class="fa fa-fw fa-heart " style="color: white;margin-left: 7px;"></i>-->
+<!--<a href="#" class="rapidnofollow comments-icon comments-inline-btn"-->
+<!--style="margin-left: -3px;">-->
+<!--<span class="comment-count count">{{ post.like.length }}</span>99+-->
+<!--</a>-->
+<!--</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<div style="width: 1251px;margin: auto;margin-top: 80px;">
+    <div style="height: 576px">
+        <div id="side_navDIV_1">
+            <ul id="side_navUL_2">
+                <li id="side_navLI_3">
+                    <a href="/popular" title="Popular Photos" id="side_navA_4">Popular</a>
+                </li>
+                <li id="side_navLI_5">
+                    <a href="/fresh" title="Fresh" id="side_navA_6">Fresh</a>
+                </li>
+                <li id="side_navLI_7">
+                    <a href="/upcoming" title="Upcoming Photos" id="side_navA_8">Upcoming</a>
+                </li>
+                <li id="side_navLI_9">
+                    <a href="/editors" title="Editors' Choice" id="side_navA_10">Editors' Choice</a>
+                </li>
+                <li id="side_navLI_11">
+                    <a href="/profiles" title="Trending Profiles" id="side_navA_12">Trending Profiles</a>
+                </li>
+            </ul>
+            <div id="side_navDIV_13">
+                <ul id="side_navUL_14">
+                    <li id="side_navLI_15">
+                        <a href="?" id="side_navA_16">All Categories</a>
+                    </li>
+                    <div id="side_navDIV_17">
+                        <span id="side_navSPAN_18">i</span>
+
+                        <div id="side_navDIV_19">
+                            <p id="side_navP_20">
+                                Shift+click to select multiple categories
+                            </p>
+                        </div>
+                    </div>
+                </ul>
+                <div id="side_navDIV_21">
+                </div>
+                <ul id="side_navUL_22">
+                    <li id="side_navLI_23">
+                        <a href="?categories=Abstract" id="side_navA_24">Abstract</a>
+                    </li>
+                    <li id="side_navLI_25">
+                        <a href="?categories=Macro" id="side_navA_26">Macro</a>
+                    </li>
+                    <li id="side_navLI_27">
+                        <a href="?categories=Animals" id="side_navA_28">Animals</a>
+                    </li>
+                    <li id="side_navLI_29">
+                        <a href="?categories=Nature" id="side_navA_30">Nature</a>
+                    </li>
+                    <li id="side_navLI_31">
+                        <a href="?categories=Black+and+White" id="side_navA_32">Black and White</a>
+                    </li>
+                    <li id="side_navLI_33">
+                        <a href="?categories=People" id="side_navA_34">People</a>
+                    </li>
+                    <li id="side_navLI_35">
+                        <a href="?categories=Celebrities" id="side_navA_36">Celebrities</a>
+                    </li>
+                    <li id="side_navLI_37">
+                        <a href="?categories=Performing+Arts" id="side_navA_38">Performing Arts</a>
+                    </li>
+                    <li id="side_navLI_39">
+                        <a href="?categories=City+%26+Architecture" id="side_navA_40">City &amp; Architecture</a>
+                    </li>
+                    <li id="side_navLI_41">
+                        <a href="?categories=Sport" id="side_navA_42">Sport</a>
+                    </li>
+                    <li id="side_navLI_43">
+                        <a href="?categories=Commercial" id="side_navA_44">Commercial</a>
+                    </li>
+                    <li id="side_navLI_45">
+                        <a href="?categories=Still+Life" id="side_navA_46">Still Life</a>
+                    </li>
+                    <li id="side_navLI_47">
+                        <a href="?categories=Concert" id="side_navA_48">Concert</a>
+                    </li>
+                    <li id="side_navLI_49">
+                        <a href="?categories=Street" id="side_navA_50">Street</a>
+                    </li>
+                    <li id="side_navLI_51">
+                        <a href="?categories=Family" id="side_navA_52">Family</a>
+                    </li>
+                    <li id="side_navLI_53">
+                        <a href="?categories=Transportation" id="side_navA_54">Transportation</a>
+                    </li>
+                    <li id="side_navLI_55">
+                        <a href="?categories=Fashion" id="side_navA_56">Fashion</a>
+                    </li>
+                    <li id="side_navLI_57">
+                        <a href="?categories=Travel" id="side_navA_58">Travel</a>
+                    </li>
+                    <li id="side_navLI_59">
+                        <a href="?categories=Film" id="side_navA_60">Film</a>
+                    </li>
+                    <li id="side_navLI_61">
+                        <a href="?categories=Underwater" id="side_navA_62">Underwater</a>
+                    </li>
+                    <li id="side_navLI_63">
+                        <a href="?categories=Fine+Art" id="side_navA_64">Fine Art</a>
+                    </li>
+                    <li id="side_navLI_65">
+                        <a href="?categories=Urban+Exploration" id="side_navA_66">Urban Exploration</a>
+                    </li>
+                    <li id="side_navLI_67">
+                        <a href="?categories=Food" id="side_navA_68">Food</a>
+                    </li>
+                    <li id="side_navLI_69">
+                        <a href="?categories=Wedding" id="side_navA_70">Wedding</a>
+                    </li>
+                    <li id="side_navLI_71">
+                        <a href="?categories=Journalism" id="side_navA_72">Journalism</a>
+                    </li>
+                    <li id="side_navLI_73">
+                        <a href="?categories=Uncategorized" id="side_navA_74">Uncategorized</a>
+                    </li>
+                    <li id="side_navLI_75">
+                        <a href="?categories=Landscapes" id="side_navA_76">Landscapes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="widget border-none bg-none widget-pinterest active"
-             style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
-            <div class="widget-body bg-none padding-none" ng-class="{ no1Height: $index == 0 , no2Height : $index == 1 , no3Height : $index == 2}"
-                 style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;" >
-                <a ng-click="openPost(post.id)"
+             style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;height: auto;
+  width: 644px;float: left;margin-left: 20px">
+            <div class="widget-body bg-none padding-none"
+                 style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                <a ng-click="openPost(postsNo1.id)"
                    data-toggle="prettyPhoto" class="thumb">
-                    <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
+                    <img ng-src="{{ postsNo1.image_url_editor }}" style="width: 100%;height: 574px;"
                          alt="photo"/>
                 </a>
 
@@ -15,73 +183,77 @@
                     <div class="hover-blue">
                         <div class="title">
                             <a data-track="photo-click" ng-href="#/" class="title" style="font-size: 15px;">
-                                {{ post.caption }}
+                                {{ postsNo1.caption }}
                             </a>
                         </div>
-                        <div class="attribution-block" style="height: 7px;margin-top: 6px;font-size: 15px">
-                            <span class="attribution">
-                                <span style="color: whitesmoke;">bởi </span>
-                                <a data-track="owner" ng-href="#/user/{{post.user_id}}"
-                                   class="owner">{{ post.user.username }}</a>
-                            </span>
+                        <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+                                <span class="attribution">
+                                    <span style="color: whitesmoke;">bởi </span>
+                                    <a data-track="owner" ng-href="#/user/{{postsNo1.user_id}}"
+                                       class="owner">{{ postsNo1.user.username }}</a>
+                                </span>
                         </div>
                     </div>
-                        <span class="inline-icons" style="font-size: 15px;">
-                            <i class="fa fa-fw fa-thumbs-up" style="color: white;"></i>
-                            <a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave" style="margin-left: -4px;">
-                                99+
-                            </a>
-                            <i class="fa fa-fw fa-heart " style="color: white;margin-left: 7px;"></i>
-                            <a href="#" class="rapidnofollow comments-icon comments-inline-btn" style="margin-left: -3px;">
-                                <span class="comment-count count">{{ post.like.length }}</span>99+
-                            </a>
-                        </span>
+                            <span class="inline-icons" style="font-size: 11px;">
+                                <i class="fa fa-fw fa-thumbs-up" style="color: white;"></i>
+                                <a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
+                                   style="margin-left: -4px;">
+                                    99+
+                                </a>
+                                <i class="fa fa-fw fa-heart " style="color: white;margin-left: 7px;"></i>
+                                <a href="#" class="rapidnofollow comments-icon comments-inline-btn"
+                                   style="margin-left: -3px;">
+                                    <span class="comment-count count">{{ postsNo1.like.length }}</span>
+                                </a>
+                            </span>
                 </div>
             </div>
         </div>
     </div>
-</div></div>
+    <div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}'
+        style="margin-top: 30px"
+         infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+        <!-- items -->
+        <div masonry-tile ng-repeat="post in posts" class="item101">
+            <div style="margin-right: 10px">
+                <div class="widget border-none bg-none widget-pinterest active"
+                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                    <div class="widget-body bg-none padding-none"
+                         style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                        <a ng-click="openPost(post.id)"
+                           data-toggle="prettyPhoto" class="thumb">
+                            <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
+                                 alt="photo"/>
+                        </a>
 
-<div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}' style="width: 1251px;margin: auto;margin-top: 80px;"
-     infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' >
-    <!-- items -->
-    <div masonry-tile ng-repeat="post in posts" class="item101">
-        <div style="margin-right: 10px">
-            <div class="widget border-none bg-none widget-pinterest active"
-                 style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                <div class="widget-body bg-none padding-none"
-                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;" >
-                    <a ng-click="openPost(post.id)"
-                       data-toggle="prettyPhoto" class="thumb">
-                        <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
-                             alt="photo"/>
-                    </a>
-
-                    <div class="description  meta">
-                        <div class="hover-blue">
-                            <div class="title">
-                                <a data-track="photo-click" ng-href="#/" class="title" style="font-size: 15px;">
-                                    {{ post.caption }}
-                                </a>
-                            </div>
-                            <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+                        <div class="description  meta">
+                            <div class="hover-blue">
+                                <div class="title">
+                                    <a data-track="photo-click" ng-href="#/" class="title" style="font-size: 15px;">
+                                        {{ post.caption }}
+                                    </a>
+                                </div>
+                                <div class="attribution-block" style="height: 7px;margin-top: 6px;">
                                 <span class="attribution">
                                     <span style="color: whitesmoke;">bởi </span>
                                     <a data-track="owner" ng-href="#/user/{{post.user_id}}"
                                        class="owner">{{ post.user.username }}</a>
                                 </span>
+                                </div>
                             </div>
-                        </div>
                             <span class="inline-icons" style="font-size: 11px;">
                                 <i class="fa fa-fw fa-thumbs-up" style="color: white;"></i>
-                                <a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave" style="margin-left: -4px;">
+                                <a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
+                                   style="margin-left: -4px;">
                                     99+
                                 </a>
                                 <i class="fa fa-fw fa-heart " style="color: white;margin-left: 7px;"></i>
-                                <a href="#" class="rapidnofollow comments-icon comments-inline-btn" style="margin-left: -3px;">
+                                <a href="#" class="rapidnofollow comments-icon comments-inline-btn"
+                                   style="margin-left: -3px;">
                                     <span class="comment-count count">{{ post.like.length }}</span>99+
                                 </a>
                             </span>
+                        </div>
                     </div>
                 </div>
             </div>
