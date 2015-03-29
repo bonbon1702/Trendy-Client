@@ -307,7 +307,6 @@
                 controller: ['$scope', function ($scope) {
                     $scope.albPicture = album.album_detail[0].image_url_editor;
                     $scope.updtAlbName = album.album_name;
-                    console.log($scope.loginUserId);
                     $scope.deleteAlbum = function () {
                         if (userId == null) {
                             headerService.openLogin();
