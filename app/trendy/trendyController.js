@@ -10,6 +10,14 @@
     function trendyController($scope, ngDialog, trendyService, headerService, userService, postService) {
         $scope.busy = false;
         $scope.posts = [];
+        $scope.postsTop3 = [];
+        $scope.tagContents = [];
+
+        trendyService.getAllTagContent()
+            .success(function(data){
+                $scope.tagContents = data.tagContent;
+            })
+            .error();
 
         headerService.loginUser()
             .success(function (data) {
@@ -21,9 +29,11 @@
         };
         trendyService.getPostTrendy(data)
             .success(function(data){
-                $scope.postsNo1= data.posts[0];
-                $scope.postsNo2= data.posts[1];
-                $scope.postsNo2= data.posts[2];
+                $scope.postsTop3=[];
+                $scope.posts=[];
+                for (var i =0; i < 3; i++){
+                    $scope.postsTop3.push(data.posts[i]);
+                }
 
                 for (var j =3; j < data.posts.length; j++){
                     $scope.posts.push(data.posts[j]);
@@ -44,7 +54,7 @@
                 var length = $scope.posts.length;
 
                 var data = {
-                    'id': length
+                    'id': length + 3
                 };
 
                 if ($scope.busy) return;

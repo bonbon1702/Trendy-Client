@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-
+    <base href="/">
     <title></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
@@ -109,20 +109,20 @@
             </button>
         </div>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">
-            <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>
-        </li>
-    </ul>
+    <!--<ul class="nav navbar-nav">-->
+        <!--<li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">-->
+            <!--<a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>-->
+        <!--</li>-->
+    <!--</ul>-->
     <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
         <autocomplete ng-model="type" data="data" on-type="update"
                       attr-placeholder="Search friend or shop..."
@@ -152,8 +152,23 @@
                 </button>
             </span>
     </div>
+    <div style="margin-top: 52px;height: 50px;position: fixed;width: 100%;background-color: black;text-align: center">
+        <!--<hr style="  width: 27%;margin-top: 25px;border-color: rgb(192, 181, 181);margin-left: 84px; ">-->
+        <!--<span style="color: #ffffff">Trendy</span>-->
+        <div class="nav-bar-trendy">
+            <div><hr style="width: 336px;"></div>
+            <span ng-class="typeClick == '/' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/" ng-click="navBar('/')">Trendy</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/newsfeed' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/newfeed" ng-click="navBar('/newsfeed')">NewsFeed</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/around' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/around" ng-click="navBar('/around')">Around Here</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/favorite' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/favorite" ng-click="navBar('/favorite')">Favorite</a></span>
+            <div><hr style=" width: 305px;"></div>
+        </div>
+    </div>
 </div>
-<div id="main" style="margin-top: 53px">
+<div id="main" style="margin-top: 132px">
     <!-- angular templating -->
     <!-- this is where content will be injected -->
 
@@ -268,6 +283,8 @@
 <script src="app/around/aroundController.js"></script>
 <script src="app/around/aroundService.js"></script>
 
+<script src="assets/js/libs/jquery-imagefill.js"></script>
+<script src="assets/js/image-fill.js"></script>
 </body>
 </html>
 

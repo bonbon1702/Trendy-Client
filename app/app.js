@@ -19,7 +19,8 @@
             'akoenig.deckgrid',
             'masonry',
             'ngImgCrop',
-            'base64'
+            'base64',
+            'imageFill'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $routeProvider
@@ -71,6 +72,7 @@
                 closeByDocument: true,
                 closeByEscape: true
             });
+            $locationProvider.html5Mode(true);
         })
         .run(function ($rootScope) {
             //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';

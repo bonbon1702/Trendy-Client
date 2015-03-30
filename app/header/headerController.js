@@ -10,6 +10,11 @@
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.trendy = true;
+        $scope.typeClick = $location.path();
+
+        $scope.navBar = function(type){
+            $scope.typeClick = type;
+        };
 
         $scope.update = function (type) {
             if (type.length > 1) {
@@ -32,7 +37,7 @@
             }
         };
         hello.init({
-            facebook: '513861542088702',
+            facebook: '849978158393821',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -94,7 +99,7 @@
                                         }
                                     }
                                 }
-                                console.log($scope.notification);
+
                                 for (var i = 0; i < data.notification.notification_unread.length; i++) {
                                     var noti = data.notification.notification_unread[i];
                                     if (noti.id_of_user_effected !== $scope.loginUser.id) {
