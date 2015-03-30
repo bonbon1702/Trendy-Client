@@ -54,7 +54,6 @@
                                     var data = {};
                                     var fb = hello("facebook").getAuthResponse();
                                     var google = hello("google").getAuthResponse();
-                                    console.log(google);
                                     if (auth.network == 'facebook') {
                                         data = {
                                             'email': r.email,
@@ -79,7 +78,7 @@
 
                                     headerService.save(data)
                                         .success(function (data) {
-                                            //$window.location.reload();
+                                            $window.location.reload();
                                         })
                                         .error(function (data) {
                                             console.log(data);
