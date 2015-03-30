@@ -92,6 +92,7 @@
             //        templateUrl: "", // Second template.
             //        controller: "userController"
             //    });
+            $locationProvider.html5Mode(true);
             ngDialogProvider.setDefaults({
                 showClose: true,
                 closeByDocument: true,
