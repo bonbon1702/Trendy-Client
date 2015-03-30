@@ -15,7 +15,16 @@
     var map, markers = [];
 
     shopMap.init = function (dataShop) {
-        var shopLocation = new google.maps.LatLng(dataShop.shop.shop_detail[0].lat, dataShop.shop.shop_detail[0].long);
+        var lat, long;
+        if (dataShop.shop.shop_detail.length > 0  && dataShop.shop.shop_detail.length > 0)
+        {
+            lat = dataShop.shop.shop_detail[0].lat;
+            long = dataShop.shop.shop_detail[0].long;
+        } else {
+            lat = dataShop.shop.lat;
+            long = dataShop.shop.long;
+        }
+        var shopLocation = new google.maps.LatLng(lat, long);
         var myStyles = [
             {
                 "featureType": "administrative.country",
@@ -176,7 +185,7 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         searchBox();
-        homeButton();
+        homeButton(dataShop.shop['user_avatar']);
     }
 
     var searchBox = function () {
@@ -237,7 +246,8 @@
         });
     }
 
-    var homeButton = function () {
+    var homeButton = function (icon) {
+        console.log(icon)
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
 
@@ -267,7 +277,7 @@
             if (markerHome!= null)
                 markerHome.setMap(null);
             //var marker = createMarker(map, null, myLatlng);
-            markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
+            markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:icon});
             markerHome.setMap(map);
             //var infowindow = new google.maps.InfoWindow({
             //    content: "It is your location"
@@ -321,13 +331,23 @@
         }
     }
     shopMap.createMarker = function (data) {
-        var shop = data.data;
+        var lat, long, address;
+        if (data.shop.shop_detail.length > 0  && data.shop.shop_detail.length > 0)
+        {
+            lat = data.shop.shop_detail[0].lat;
+            long = data.shop.shop_detail[0].long;
+            address = data.shop.shop_detail[0].street+", "+data.shop.shop_detail[0].district+", "+data.shop.shop_detail[0].city;
+        } else {
+            lat = data.shop.lat;
+            long = data.shop.long;
+            address = data.shop.address;
+        }
             new CustomMarker(
-                new google.maps.LatLng(data.shop.shop_detail[0].lat, data.shop.shop_detail[0].long),
+                new google.maps.LatLng(lat, long),
                 map,
                 {	marker_id:data.shop.id,
                     product:data.shop.name,
-                    shop:data.shop.shop_detail[0].street+", "+data.shop.shop_detail[0].district+", "+data.shop.shop_detail[0].city,
+                    shop: address,
                     img:data.shop.image_url
                 });
     };

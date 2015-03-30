@@ -11,7 +11,7 @@
 
     var map, markers = [];
     //------------------------------------------Map init--------------------------------------------------------------
-    googleMap.init = function () {
+    googleMap.init = function (data) {
         //console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
@@ -206,7 +206,7 @@
         //map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
 
         searchBox();
-        homeButton();
+        homeButton(data['user_avatar']);
 		//hideMap();
 		google.maps.event.addDomListener($('[role=zoom-in]')[0], 'click', function () {
 			map.setZoom(map.getZoom()+1);
@@ -294,7 +294,7 @@
 
 
     //--------------------------------------------Home Button---------------------------------------------------------
-    var homeButton = function () {
+    var homeButton = function (icon) {
         // homeControlDiv = document.createElement('div');
         //var homeControl = new HomeControl(homeControlDiv, map);
 
@@ -330,9 +330,9 @@
             //var marker = createMarker(map, null, myLatlng);
 			var img_user= $('[alt="user"]')[0].src;
 			if (img_user != undefined)
-			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:img_user});
+			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:icon});
 			else
-			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
+			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img: icon});
 			markerHome.setMap(map);
             //var infowindow = new google.maps.InfoWindow({
             //    content: "It is your location"

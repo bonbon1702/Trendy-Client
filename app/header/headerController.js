@@ -50,16 +50,21 @@
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
-                    console.log(data);
                     ngDialog.open({
                         template: 'app/header/templates/confirm.html',
                         className: 'ngdialog-theme-plain',
-                        controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
+                        controller: ['$scope', 'headerService', '$window', '$location', function ($scope, headerService, $window, $location) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://trendyplus.dev/#/post?image="
-                                + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
-                            };
+                                //$window.location.href = "http://trendyplus.dev/post?image="
+                                //+ data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
+                                $location.path('/post');
+                                $location.search({
+                                    image: data.upload.image_url,
+                                    title: data.upload.name,
+                                    editor: 'false'
+                                });
+                            }
                             $scope.confirm = function () {
                                 ngDialog.close();
                                 $window.location.href =

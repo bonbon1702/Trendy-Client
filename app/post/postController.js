@@ -133,6 +133,7 @@
             postService.save(data)
                 .success(function (data) {
                     $location.path("/");
+                    $location.search('');
                 })
                 .error(function (data) {
                     console.log(data);

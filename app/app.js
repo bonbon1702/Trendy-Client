@@ -23,6 +23,7 @@
             'imageFill'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
+            $locationProvider.html5Mode(true);
             $routeProvider
                 // route for the home page
                 .when('/', {
@@ -72,7 +73,7 @@
                 closeByDocument: true,
                 closeByEscape: true
             });
-            $locationProvider.html5Mode(true);
+
         })
         .run(function ($rootScope) {
             //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';

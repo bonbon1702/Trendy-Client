@@ -97,7 +97,7 @@
                                 for (var i=0;i<$scope.post.comments.length;i++){
                                     $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
                                 }
-                                console.log($scope.post);
+
                                 headerService.loginUser()
                                     .success(function (data) {
                                         $scope.loginUser = data.user;

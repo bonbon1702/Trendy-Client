@@ -30,7 +30,7 @@
                                 <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
                                 <ul class="list-unstyled">
                                     <li class="active">
-                                        <a ng-href="#/user/{{loginUserId}}">
+                                        <a ng-href="/user/{{loginUserId}}">
                                             <i class="fa fa-fw fa-clock-o"></i>
                                             <span>Timeline</span>
                                         </a>
@@ -61,7 +61,7 @@
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets" ng-href="#/following/{{user.id}}"
+                                               data-nav="tweets" ng-href="/following/{{user.id}}"
                                                data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
@@ -69,7 +69,7 @@
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="followers" ng-href="#/follower/{{user.id}}"
+                                               data-nav="followers" ng-href="/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Followers</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
@@ -104,7 +104,7 @@
                                         <img class="img-clean" ng-src="{{ flwer.picture_profile }}" alt="...">
                                     </a>
                                     <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                        <h4 class="media-heading"><a ng-href="#/user/{{flwer.follower_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
+                                        <h4 class="media-heading"><a ng-href="/user/{{flwer.follower_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
                                         <p>
                                             <i class="fa fa-fw fa-map-marker text-muted"></i> Living in Missouri, USA</p>
                                     </div>
@@ -140,7 +140,7 @@
 
                                     <div class="media-body">
                                         <h5>
-                                            <a ng-href="#/user/{{user.id}}" class="text-inverse"
+                                            <a ng-href="/user/{{user.id}}" class="text-inverse"
                                                style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
                                         <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"

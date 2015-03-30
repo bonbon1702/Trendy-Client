@@ -56,7 +56,7 @@
 <!--Header-->
 <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">
     <div class=" pull-left">
-        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/" ng-click="clickNavBarTrendy()">
+        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="/" ng-click="clickNavBarTrendy()">
         </a>
     </div>
     <ul class="notifications pull-left hidden-xs">
@@ -99,8 +99,8 @@
         				</span>
             </a>
             <ul class="dropdown-menu" ng-hide="loginUser == null" ng-cloak>
-                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
-                <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
+                <li><a data-track="owner" ng-href="/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
+                <li><a ng-href="/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
         <div class="dropdown username pull-left" ng-hide="loginUser != null" style="margin: -2px;" ng-cloak>
@@ -153,17 +153,15 @@
             </span>
     </div>
     <div style="margin-top: 52px;height: 50px;position: fixed;width: 100%;background-color: black;text-align: center">
-        <!--<hr style="  width: 27%;margin-top: 25px;border-color: rgb(192, 181, 181);margin-left: 84px; ">-->
-        <!--<span style="color: #ffffff">Trendy</span>-->
         <div class="nav-bar-trendy">
             <div><hr style="width: 336px;"></div>
-            <span ng-class="typeClick == '/' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/" ng-click="navBar('/')">Trendy</a></span>
+            <span ng-class="typeClick == '/' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/" ng-click="navBar('/')">Trendy</a></span>
             <div><hr style=" width: 58px;"></div>
-            <span ng-class="typeClick == '/newsfeed' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/newfeed" ng-click="navBar('/newsfeed')">NewsFeed</a></span>
+            <span ng-class="typeClick == '/newsfeed' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/newfeed" ng-click="navBar('/newsfeed')">NewsFeed</a></span>
             <div><hr style=" width: 58px;"></div>
-            <span ng-class="typeClick == '/around' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/around" ng-click="navBar('/around')">Around Here</a></span>
+            <span ng-class="typeClick == '/around' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/around" ng-click="navBar('/around')">Around Here</a></span>
             <div><hr style=" width: 58px;"></div>
-            <span ng-class="typeClick == '/favorite' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="#/favorite" ng-click="navBar('/favorite')">Favorite</a></span>
+            <span ng-class="typeClick == '/favorite' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/favorite" ng-click="navBar('/favorite')">Favorite</a></span>
             <div><hr style=" width: 305px;"></div>
         </div>
     </div>

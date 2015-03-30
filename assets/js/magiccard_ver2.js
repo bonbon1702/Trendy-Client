@@ -105,12 +105,12 @@ app.directive('magiccard', function () {
                     PosY = e.clientY + document.body.scrollTop
                     + document.documentElement.scrollTop;
                 }
-
+                console.log(ImgPos[1]);
                 position = {
                     PosX: PosX,
                     PosY: PosY,
                     ImgPosX: PosX - ImgPos[0],
-                    ImgPosY: PosY - 54
+                    ImgPosY: PosY - 120
                 };
                 return position;
             };
@@ -122,6 +122,7 @@ app.directive('magiccard', function () {
                 $scope.left = left;
                 $scope.imgTop = imgTop;
                 $scope.imgLeft = imgLeft;
+
                 $scope.show = true;
                 $scope.formData = "";
                 if ($scope.completing == true) {
