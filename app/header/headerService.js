@@ -53,6 +53,7 @@
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
                                     var fb = hello("facebook").getAuthResponse();
+                                    var google = hello("google").getAuthResponse();
                                     if (auth.network == 'facebook') {
                                         data = {
                                             'email': r.email,
@@ -69,7 +70,7 @@
                                             'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
                                             'sw_id': r.id,
                                             'gender': r.gender == 'male' ? 0 : 1,
-                                            'remember_token': fb.access_token
+                                            'remember_token': google.access_token
                                         };
                                     } else if (auth.network == 'twitter') {
 
