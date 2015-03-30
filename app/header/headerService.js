@@ -54,6 +54,7 @@
                                     var data = {};
                                     var fb = hello("facebook").getAuthResponse();
                                     var google = hello("google").getAuthResponse();
+                                    console.log(google);
                                     if (auth.network == 'facebook') {
                                         data = {
                                             'email': r.email,
