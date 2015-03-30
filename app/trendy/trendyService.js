@@ -11,6 +11,9 @@
         return {
             getPostTrendy: function (data) {
                 return $http.get($rootScope.url + 'post/getPostTrendy/paging/' + data.id);
+            },
+            getAllTagContent: function(){
+                return $http.get($rootScope.url + 'tagContent');
             }
         }
     }

@@ -5,11 +5,16 @@
     angular.module('MyApp')
         .controller('headerController', headerController);
 
-    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', 'ngAudio', '$window'];
-    function headerController($scope, headerService, $location, ngDialog, ngAudio, $window) {
+    headerController.$inject = ['$scope', 'headerService', '$location', 'ngDialog', 'ngAudio', '$window', 'postService'];
+    function headerController($scope, headerService, $location, ngDialog, ngAudio, $window, postService) {
         $scope.notification = [];
         $scope.notification_unread = [];
         $scope.trendy = true;
+        $scope.typeClick = $location.path();
+
+        $scope.navBar = function(type){
+            $scope.typeClick = type;
+        };
 
         $scope.update = function (type) {
             if (type.length > 1) {
@@ -32,7 +37,7 @@
             }
         };
         hello.init({
-            facebook: '725456127540058',
+            facebook: '849978158393821',
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
@@ -40,25 +45,26 @@
         });
 
         $scope.checkLogin = function () {
-            if (!$scope.loginUser) {
-                headerService.openLogin();
-                event.stopPropagation();
-                event.preventDefault();
-            }
+            headerService.openLogin();
         };
         $scope.imageSelected = function ($files) {
             headerService.upload($files[0])
                 .success(function (data) {
-                    console.log(data);
                     ngDialog.open({
                         template: 'app/header/templates/confirm.html',
                         className: 'ngdialog-theme-plain',
-                        controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
+                        controller: ['$scope', 'headerService', '$window', '$location', function ($scope, headerService, $window, $location) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://localhost:81/projects/Trendy-Client/#/post?image="
-                                + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
-                            };
+                                //$window.location.href = "http://trendyplus.dev/post?image="
+                                //+ data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
+                                $location.path('/post');
+                                $location.search({
+                                    image: data.upload.image_url,
+                                    title: data.upload.name,
+                                    editor: 'false'
+                                });
+                            }
                             $scope.confirm = function () {
                                 ngDialog.close();
                                 $window.location.href =
@@ -93,10 +99,12 @@
                                         if (noti.user_id != $scope.loginUser.id && noti.action == 'like') {
 
                                         } else {
+                                            noti.created_at = beautyDate.prettyDate(noti.created_at);
                                             $scope.notification.push(noti);
                                         }
                                     }
                                 }
+
                                 for (var i = 0; i < data.notification.notification_unread.length; i++) {
                                     var noti = data.notification.notification_unread[i];
                                     if (noti.id_of_user_effected !== $scope.loginUser.id) {
@@ -171,14 +179,18 @@
 
         $scope.getShopDetail = function () {
 
-        }
+        };
 
         $scope.clickNavBar= function () {
             $scope.trendy = false;
-        }
+        };
 
         $scope.clickNavBarTrendy= function () {
             $scope.trendy = true;
+        }
+
+        $scope.openPost = function(id){
+            postService.openPost(id);
         }
     }
 

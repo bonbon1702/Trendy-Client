@@ -76,6 +76,9 @@
             getPost: function (id) {
                 return $http.get($rootScope.url + 'post/' + id);
             },
+            loadTag: function (query){
+                return $http.get($rootScope.url + 'tagContent');
+            },
             openPost: function(id){
                 ngDialog.open({
                     template: 'app/post/templates/postDetail.html',
@@ -87,6 +90,13 @@
                         postService.getPost(id)
                             .success(function (data) {
                                 $scope.post = data.post;
+                                $scope.post.created_at = beautyDate.prettyDate($scope.post.created_at);
+                                for (var i=0;i<$scope.post.tag_picture.length;i++){
+                                    $scope.post.tag_picture[i].price = accounting.formatNumber($scope.post.tag_picture[i].price);
+                                }
+                                for (var i=0;i<$scope.post.comments.length;i++){
+                                    $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
+                                }
 
                                 headerService.loginUser()
                                     .success(function (data) {
@@ -208,8 +218,10 @@
                                         };
 
                                         if ($scope.iconFavorite == true) {
+                                            $scope.post.favorite.length--;
                                             $scope.iconFavorite = false;
                                         } else {
+                                            $scope.post.favorite.length++;
                                             $scope.iconFavorite = true;
                                         }
 

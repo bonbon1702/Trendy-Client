@@ -32,8 +32,20 @@
 
         shopService.get($routeParams.shopId)
             .success(function (data) {
-                shopMap.init(data);
-                shopMap.createMarker(data);
+                headerService.loginUser()
+                    .success(function (r) {
+                        if (r.user) {
+                            data.shop['user_avatar'] = r.user.picture_profile;
+                            shopMap.init(data);
+                            shopMap.createMarker(data);
+                        } else {
+                            data.shop['user_avatar'] = 'https://cdn4.iconfinder.com/data/icons/ironman_lin/512/ironman_III.png';
+                            shopMap.init(data);
+                            shopMap.createMarker(data);
+                        }
+                    })
+                    .error();
+
                 $scope.shop = data.shop;
 
                 for (var i = 0; i < data.shop.posts.length; i++) {

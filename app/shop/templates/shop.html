@@ -14,7 +14,7 @@
                             <div class="widget cover image" style="margin-top: -70px;">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
-                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;"/>
+                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;width: 109px;height: auto"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 9px;">
                                         <h3 class="margin-none">{{ shop.name }}</h3>
@@ -192,7 +192,7 @@
 
                     <!--  Message -->
                     <div class="media margin-none innerAll" ng-repeat="comment in shop.comments">
-                        <a ng-href="#/user/{{comment.user_id}}" class="pull-left hidden-xs">
+                        <a ng-href="/user/{{comment.user_id}}" class="pull-left hidden-xs">
                             <img ng-src="{{ comment.user.picture_profile }}" width="60" class="media-object">
                         </a>
                         <div class="media-body innerTB">
@@ -201,7 +201,7 @@
                                     <div class="innerT half">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <a ng-href="#/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
+                                                <a ng-href="/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
                                                 <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
                                             <div class="media-body">

@@ -29,7 +29,7 @@
                                 <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
                                 <ul class="list-unstyled">
                                     <li class="active">
-                                        <a ng-href="#/user/{{loginUserId}}">
+                                        <a ng-href="/user/{{loginUserId}}">
                                             <i class="fa fa-fw fa-clock-o"></i>
                                         <span>Timeline</span>
                                         </a>
@@ -60,7 +60,7 @@
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets" ng-href="#/following/{{user.id}}"
+                                               data-nav="tweets" ng-href="/following/{{user.id}}"
                                                data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
@@ -68,7 +68,7 @@
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="followers" ng-href="#/follower/{{user.id}}"
+                                               data-nav="followers" ng-href="/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Followers</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
@@ -147,7 +147,7 @@
                                 <div class="row">
                                     <div class="col-md-3" ng-repeat="album in user.album ">
                                         <div class="thumbnail widget-thumbnail" ng-show="show">
-                                            <a href="/#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
+                                            <a data-target="#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
                                                 <div class=" holderjs-fluid"
                                                      style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">
                                                     <img ng-src="{{ album.album_detail[0].image_url_editor }}"
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2-3-1" ng-hide="show">
-                                <a href="/#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
+                                <a data-target="#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
                                         style="color: #0084B4;margin-left: 18px;">Back</h4></a>
 
                                 <h3 style="text-align: center;margin-bottom: 30px;">{{ user.album[index].album_name}}</h3>
@@ -184,7 +184,6 @@
                                     <ul class="row">
 
                                         <!-- Gallery item -->
-
                                         <div class="blc-row" style="width: 22%;">
                                             <div ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 0">
@@ -303,7 +302,7 @@
 
                                     <div class="media-body">
                                         <h5>
-                                            <a ng-href="#/user/{{user.id}}" class="text-inverse"
+                                            <a ng-href="/user/{{user.id}}" class="text-inverse"
                                                style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
                                         <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"

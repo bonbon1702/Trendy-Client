@@ -11,12 +11,9 @@
         $scope.points = [];
         $scope.caption = null;
         $scope.album = null;
-
+        $scope.tagContent = [];
         $scope.tags = [];
 
-        $scope.tagChanged = function () {
-
-        };
 
         headerService.loginUser()
             .success(function (data) {
@@ -25,6 +22,25 @@
             .error(function (data) {
 
             });
+
+        postService.loadTag()
+            .success(function(data){
+                $scope.tagContent = data.tagContent;
+            });
+
+        $scope.addTag = function(id, content){
+            $scope.tags.push({
+                'id': id,
+                'content': content
+            });
+        };
+
+        $scope.deleteTag = function(id){
+            for (var i = 0; i< $scope.tags.length;i++){
+                if ($scope.tags[i].id == id) $scope.tags.splice(i, 1);
+            }
+        };
+
         $scope.image = {
             'image': $location.search().image,
             'name': $location.search().title,
@@ -38,7 +54,7 @@
                 top: point.top,
                 left: point.left,
                 name: point.info.name,
-                price: point.info.price,
+                price: accounting.formatNumber(point.info.price),
                 address: point.info.yourchoice
             };
             $scope.points.push(po);
@@ -117,6 +133,7 @@
             postService.save(data)
                 .success(function (data) {
                     $location.path("/");
+                    $location.search('');
                 })
                 .error(function (data) {
                     console.log(data);

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-
+    <base href="/">
     <title></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
@@ -56,7 +56,7 @@
 <!--Header-->
 <div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">
     <div class=" pull-left">
-        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/" ng-click="clickNavBarTrendy()">
+        <a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="/" ng-click="clickNavBarTrendy()">
         </a>
     </div>
     <ul class="notifications pull-left hidden-xs">
@@ -68,9 +68,9 @@
                     </div>
                 </i>
             </a>
-            <ul class="dropdown-menu chat media-list">
-                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse">
-                    <a class="pull-left" href="#"><img class="media-object thumb"
+            <ul class="dropdown-menu chat media-list" style="max-height: 500px;overflow-y: auto;">
+                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse" ng-click="openPost(noti.post_id)" style="cursor: pointer">
+                    <a class="pull-left"><img class="media-object thumb"
                                                        ng-src="{{ noti.avatar_of_user_effected }}" alt="50x50"
                                                        width="50"/></a>
 
@@ -90,7 +90,7 @@
         </li>
     </ul>
     <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
-        <div class="dropdown username pull-left" ng-show="loginUser != null">
+        <div class="dropdown username pull-left" ng-hide="loginUser == null" ng-cloak>
             <a class="dropdown-toggle" data-toggle="dropdown">
         				<span class="media margin-none">
         					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"
@@ -98,32 +98,31 @@
         					<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>
         				</span>
             </a>
-            <ul class="dropdown-menu" ng-show="loginUser != null">
-                <li><a href="about.html?lang=en">About</a></li>
-                <li><a data-track="owner" ng-href="#/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
-                <li><a ng-href="#/" ng-click="logout()">Logout</a></li>
+            <ul class="dropdown-menu" ng-hide="loginUser == null" ng-cloak>
+                <li><a data-track="owner" ng-href="/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
+                <li><a ng-href="/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
-        <div class="dropdown username pull-left" ng-show="loginUser == null" style="margin: -2px;">
+        <div class="dropdown username pull-left" ng-hide="loginUser != null" style="margin: -2px;" ng-cloak>
             <button ng-click="openLogin()" class="btn btn-primary">Login
                 <i class="fa fa-fw fa-unlock-alt"></i>
             </button>
         </div>
     </div>
-    <ul class="nav navbar-nav">
-        <li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">
-            <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
-        </li>
-        <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>
-        </li>
-    </ul>
+    <!--<ul class="nav navbar-nav">-->
+        <!--<li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">-->
+            <!--<a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newfeed" ng-click="clickNavBar()">NewFeed</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>-->
+        <!--</li>-->
+    <!--</ul>-->
     <div class="input-group hidden-xs pull-left" style="padding-left: 30px">
         <autocomplete ng-model="type" data="data" on-type="update"
                       attr-placeholder="Search friend or shop..."
@@ -131,18 +130,43 @@
         </autocomplete>
     </div>
 
-    <div data-provides="fileupload">
-            <span class="btn btn-default btn-file "
-                  style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">
-                <button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
+    <div data-provides="fileupload" ng-hide="!loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-file-select="" ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
-                    <span class="fa fa-camera"></span>
+
+                    <span class="fa fa-camera" ></span>
                     Upload
                 </button>
             </span>
     </div>
+    <div ng-hide="loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-click="checkLogin()" class="btn btn-primary"
+                         style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">
+
+                    <span class="fa fa-camera" ></span>
+                    Upload
+                </button>
+            </span>
+    </div>
+    <div style="margin-top: 52px;height: 50px;position: fixed;width: 100%;background-color: black;text-align: center">
+        <div class="nav-bar-trendy">
+            <div><hr style="width: 336px;"></div>
+            <span ng-class="typeClick == '/' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/" ng-click="navBar('/')">Trendy</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/newsfeed' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/newfeed" ng-click="navBar('/newsfeed')">NewsFeed</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/around' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/around" ng-click="navBar('/around')">Around Here</a></span>
+            <div><hr style=" width: 58px;"></div>
+            <span ng-class="typeClick == '/favorite' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/favorite" ng-click="navBar('/favorite')">Favorite</a></span>
+            <div><hr style=" width: 305px;"></div>
+        </div>
+    </div>
 </div>
-<div id="main" style="margin-top: 53px">
+<div id="main" style="margin-top: 132px">
     <!-- angular templating -->
     <!-- this is where content will be injected -->
 
@@ -152,6 +176,7 @@
 <script src="assets/js/libs/jquery.js"></script>
 <script src="assets/js/libs/jquery-ui.min.js"></script>
 <script src="assets/js/libs/angular.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="assets/js/libs/masonry.pkgd.min.js"></script>
 <script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
@@ -197,7 +222,6 @@
 <script src="assets/js/libs/hello.min.js"></script>
 <script src="assets/js/libs/pixlr.js"></script>
 <script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>
 <script src="assets/js/libs/angular.audio.js"></script>
 <script src="assets/js/libs/angular-deckgrid.js"></script>
 <script src="assets/js/libs/angular-masonry-directive.js"></script>
@@ -212,6 +236,8 @@
 <script src="assets/js/libs/crop-host.js"></script>
 <script src="assets/js/libs/crop-pubsub.js"></script>
 <script src="assets/js/libs/angular-base64.min.js"></script>
+<script src="assets/js/libs/pretty.js"></script>
+<script src="assets/js/libs/ui-bootstrap-tpls-0.9.0.min.js"></script>
 
 
 
@@ -255,6 +281,8 @@
 <script src="app/around/aroundController.js"></script>
 <script src="app/around/aroundService.js"></script>
 
+<script src="assets/js/libs/jquery-imagefill.js"></script>
+<script src="assets/js/image-fill.js"></script>
 </body>
 </html>
 
