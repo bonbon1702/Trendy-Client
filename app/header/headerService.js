@@ -79,7 +79,7 @@
 
                                     headerService.save(data)
                                         .success(function (data) {
-                                            $window.location.reload();
+                                            //$window.location.reload();
                                         })
                                         .error(function (data) {
                                             console.log(data);
