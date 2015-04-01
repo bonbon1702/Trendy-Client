@@ -228,73 +228,15 @@
                     <h5 class="innerAll margin-none bg-primary">SHOP YOU MAY LIKE</h5>
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
-                            <li class="list-group-item">
+                            <li class="list-group-item" ng-repeat="sug in suggestShop">
                                 <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
+                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object" style="height: 74px;"/>
                                     <div class="media-body">
                                         <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name != null">{{ sug.name }}</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name == null">{{ sug.address }}</a>
                                         </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 75px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
+                                        <button class="btn btn-primary" ng-click="likeShop(sug.id)">Like</button>
                                     </div>
                                 </div>
                             </li>

@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('shopController', shopController);
 
-    shopController.$inject = ['$scope', 'ngDialog', '$routeParams','$route', 'shopService', 'headerService'];
+    shopController.$inject = ['$scope', 'ngDialog', '$routeParams','$route', 'shopService', 'headerService', 'postService'];
 
-    function shopController($scope, ngDialog, $routeParams,$route, shopService, headerService) {
+    function shopController($scope, ngDialog, $routeParams,$route, shopService, headerService, postService) {
         $scope.comment = null;
         $scope.pagingShop = [];
         $scope.countShop = [];
@@ -19,6 +19,7 @@
         $scope.infoOpen = false;
         $scope.serviceOpen = false;
         $scope.contactOpen = false;
+        $scope.suggestShop = [];
 
 
         headerService.loginUser()
@@ -27,6 +28,38 @@
                     $scope.likeBtnStatus = "Like";
                 }
                 $scope.loginUser = data.user;
+                var r = {
+                    'loginId': data.user.id,
+                    'shopId': $routeParams.shopId
+                };
+                shopService.suggestShop(r)
+                    .success(function(k){
+                        $scope.suggestShop = k.suggests;
+                    })
+                    .error(function(data){});
+                $scope.likeShop = function(id){
+                    shopService.likeOrDislike({
+                        'id': id,
+                        'type': 1,
+                        'user': data.user.id
+                    })
+                        .success(function (data) {
+                            var r = {
+                                'loginId': $scope.loginUser.id,
+                                'shopId': $routeParams.shopId
+                            };
+                            shopService.suggestShop(r)
+                                .success(function(k){
+                                    $scope.suggestShop = k.suggests;
+                                })
+                                .error(function(data){});
+                        })
+                        .error(function (data) {
+
+                        });
+                };
+
+
             })
             .error();
 
@@ -291,119 +324,10 @@
                 }]
             });
 
-        }
+        };
 
         $scope.showDialog = function (id) {
-            ngDialog.open({
-                template: 'app/newfeed/templates/newfeed.html',
-                className: 'ngdialog-theme-plain post-dialog',
-                controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
-                    $scope.iconLike = false;
-
-                    newfeedService.get(id)
-                        .success(function (data) {
-                            $scope.post = data.post;
-
-                            headerService.loginUser()
-                                .success(function (data) {
-                                    $scope.loginUser = data.user;
-                                    if ($scope.loginUser) {
-                                        for (var i = 0; i < $scope.post.like.length; i++) {
-                                            if ($scope.post.like[i].user_id == $scope.loginUser.id) {
-                                                $scope.iconLike = true;
-                                                break;
-                                            } else {
-                                                $scope.iconLike = false;
-                                            }
-                                        }
-                                    }
-                                })
-                                .error();
-
-                            $scope.tags = [];
-                            for (var i = 0; i < $scope.post.tag.length; i++) {
-                                $scope.tags.push({
-                                    'text': $scope.post.tag[i].tag_content.content
-                                });
-                            }
-
-                            $scope.hoverPoint = function (index) {
-                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
-                                    var ele = angular.element($(this));
-                                    if (ele.html() == index) {
-                                        ele.parent().addClass('bounce');
-                                    }
-                                })
-                            };
-
-                            $scope.leavePoint = function (index) {
-                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
-                                    var ele = angular.element($(this));
-                                    if (ele.html() == index) {
-                                        ele.parent().removeClass('bounce');
-                                    }
-                                })
-                            };
-
-                            $scope.submitComment = function () {
-                                if (!$scope.loginUser) {
-                                    event.preventDefault();
-                                    headerService.openLogin();
-                                } else {
-                                    var data = {
-                                        'content': $scope.comment,
-                                        'type_comment': 0,
-                                        'type_id': id,
-                                        'user_id': $scope.loginUser.id
-                                    };
-                                    $scope.comment = null;
-                                    newfeedService.save(data)
-                                        .success(function (data) {
-                                            $scope.post.comments.push(data.comment);
-                                        })
-                                        .error(function (data) {
-
-                                        });
-                                }
-                            };
-
-                            $scope.likeOrDislike = function () {
-                                if (!$scope.loginUser) {
-                                    event.preventDefault();
-                                    headerService.openLogin();
-                                } else {
-                                    var data = {
-                                        id: id,
-                                        type: $scope.iconLike == true ? 0 : 1,
-                                        user: $scope.loginUser.id
-                                    };
-
-                                    newfeedService.likeOrDislike(data)
-                                        .success(function (data) {
-                                            if ($scope.iconLike == true) {
-                                                $scope.post.like.length--;
-                                                $scope.iconLike = false;
-                                            } else {
-                                                $scope.post.like.length++;
-                                                $scope.iconLike = true;
-                                            }
-
-                                        })
-                                        .error(function (data) {
-
-                                        });
-                                }
-                            };
-
-                            $scope.closeDialog = function () {
-                                ngDialog.close();
-                            }
-                        })
-                        .error(function (data) {
-
-                        });
-                }]
-            });
+            postService.openPost(id);
         };
     }
 })(angular);

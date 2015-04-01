@@ -41,7 +41,8 @@
             google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
             twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
         }, {
-            scope: 'email'
+            scope: 'email',
+            redirect_uri: 'http://trendyplus.dev/index.html'
         });
 
         $scope.checkLogin = function () {
@@ -166,7 +167,9 @@
 
                 } else {
                     for (var i=0; i < results.list_user.length; i++) {
-                        if ($scope.loginUser.id == results.list_user[i].id_of_user_effected) {
+
+                        if ($scope.loginUser.id != results.list_user[i].id_of_user_effected) {
+                            results['created_at'] = beautyDate.prettyDate(results['created_at']);
                             $scope.notification_unread.push(results);
                             $scope.notification.unshift(results);
                             $scope.sound = ngAudio.load("../assets/sound/beep.mp3");

@@ -33,6 +33,9 @@
                     url: $rootScope.url + 'shop/saveShopInfo',
                     data: data
                 })
+            },
+            suggestShop: function(data){
+                return $http.get($rootScope.url + 'shop/suggestShop/loginId/'+data.loginId+'/shopId/' + data.shopId);
             }
         }
     }

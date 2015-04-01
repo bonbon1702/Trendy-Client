@@ -83,7 +83,7 @@
                 ngDialog.open({
                     template: 'app/post/templates/postDetail.html',
                     className: 'ngdialog-theme-plain post-dialog',
-                    controller: ['$scope', 'newfeedService', '$window', 'headerService','postService', function ($scope, newfeedService, $window, headerService,postService) {
+                    controller: ['$scope', 'newfeedService', '$window', 'headerService','postService','ngAudio', function ($scope, newfeedService, $window, headerService,postService,ngAudio) {
                         $scope.iconLike = false;
                         $scope.iconFavorite = false;
 
@@ -237,7 +237,20 @@
 
                                 $scope.closeDialog = function () {
                                     ngDialog.close();
-                                }
+                                };
+
+                                var socket = io.connect('http://127.0.0.1:3000/');
+
+                                socket.on('realTime.comment', function (data) {
+                                    //Do something with data
+                                    var results = JSON.parse(data);
+                                    if (results.type_comment == 0 && results.type_id == id){
+                                        results['created_at'] = beautyDate.prettyDate(results['created_at']);
+                                        $scope.post.comments.push(results);
+                                        $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                                        $scope.sound.play();
+                                    }
+                                });
                             })
                             .error(function (data) {
 

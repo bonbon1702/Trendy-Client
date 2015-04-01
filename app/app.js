@@ -30,6 +30,10 @@
                     templateUrl: 'app/trendy/templates/trendy.html',
                     controller: 'trendyController'
                 })
+                .when('/tag/:content', {
+                    templateUrl: 'app/trendy/templates/trendyTag.html',
+                    controller: 'trendyTagController'
+                })
                 .when('/newfeed', {
                     templateUrl: 'app/newfeed/templates/newfeed.html',
                     controller: 'newfeedController'
