@@ -70,11 +70,14 @@
                                     {{ post.like.length }}
                                 </a>
                             </span>
-                            <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;"></i>
-                            <a  class="rapidnofollow comments-icon comments-inline-btn"
-                               style="margin-left: -3px;">
-                                <span class="comment-count count">{{ post.favorite.length }}</span>
-                            </a>
+                            <span ng-click="favoriteOrUn(post.id,post.isFavorite)">
+                                <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
+                                <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
+                                <a  class="rapidnofollow comments-icon comments-inline-btn"
+                                   style="margin-left: -3px;">
+                                    <span class="comment-count count">{{ post.favorite.length }}</span>
+                                </a>
+                            </span>
                         </span>
                         </div>
                     </div>
@@ -85,9 +88,9 @@
 
     <div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}'
          style="margin-top: 100px"
-         infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+         infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
         <!-- items -->
-        <div masonry-tile ng-repeat="post in posts" class="item101">
+        <div masonry-tile ng-repeat="post in posts track by $index" class="item101">
             <div style="margin-right: 10px">
                 <div class="widget border-none bg-none widget-pinterest active"
                      style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
@@ -114,17 +117,23 @@
                                 </span>
                                 </div>
                             </div>
-                            <span class="inline-icons" style="font-size: 11px;">
-                                <i class="fa fa-fw fa-thumbs-up" style="color: white;"></i>
-                                <a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
-                                   style="margin-left: -4px;">
-                                    {{ post.favorite.length }}
-                                </a>
-                                <i class="fa fa-fw fa-heart " style="color: white;margin-left: 7px;"></i>
-                                <a href="#" class="rapidnofollow comments-icon comments-inline-btn"
-                                   style="margin-left: -3px;">
-                                    <span class="comment-count count">{{ post.like.length }}</span>
-                                </a>
+                            <span class="inline-icons" style="font-size: 12px;">
+                                <span ng-click="likeOrDislikePost(post.id,post.isLike)" style="cursor: pointer">
+                                    <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
+                                    <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
+                                    <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
+                                       style="margin-left: -4px;">
+                                        {{ post.like.length }}
+                                    </a>
+                                </span>
+                                <span ng-click="favoriteOrUn(post.id,post.isFavorite)" style="cursor: pointer">
+                                    <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
+                                    <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
+                                    <a  class="rapidnofollow comments-icon comments-inline-btn"
+                                        style="margin-left: -3px;">
+                                        <span class="comment-count count">{{ post.favorite.length }}</span>
+                                    </a>
+                                </span>
                             </span>
                         </div>
                     </div>

@@ -12,7 +12,7 @@
                 return $http.get($rootScope.url + 'shop');
             },
             get: function(id) {
-                return $http.get($rootScope.url + 'shop/' + id);
+                return $http.get($rootScope.url + 'shop/getShop/' + id);
             },
             save: function(data) {
                 return $http({
