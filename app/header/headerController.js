@@ -71,8 +71,8 @@
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://trendyplus.dev/#/post', " +
-                                    "exit:'http://trendyplus.dev/#/'});"
+                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
+                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
                             }
                         }]
                     });
