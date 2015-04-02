@@ -15,9 +15,14 @@
         $scope.myImage = '';
         $scope.myCroppedImage = '';
         $scope.coverFlag = true;
+        $scope.itemToItemFollow = [];
+        $scope.pageUserId = $routeParams.userId;
+
+
+
         userService.getUser($routeParams.userId)
             .success(function (data) {
-                $scope.loginUserId == $routeParams.userId;
+                $scope.loginUserId = $routeParams.userId;
                 $scope.following = [];
                 $scope.follower = [];
                 $scope.user = data.user;
@@ -29,6 +34,38 @@
                 headerService.loginUser()
                     .success(function (r) {
                         if (r.user) {
+                            userService.suggestITI({
+                                'loginId': r.user.id,
+                                'user_id': $routeParams.userId
+                            }).success(function(data){
+
+                                $scope.itemToItemFollow = data.suggests;
+                            }).error(function(data){
+
+                            });
+
+                            $scope.folowingUser = function(user_id){
+                                data = {
+                                    user_id: user_id,
+                                    follower_id: $scope.loginUserId
+                                };
+                                userService.addFollow(data)
+                                    .success(function () {
+                                        userService.suggestITI({
+                                            'loginId': r.user.id,
+                                            'user_id': $routeParams.userId
+                                        }).success(function(k){
+                                            $scope.itemToItemFollow = [];
+                                            $scope.itemToItemFollow = k.suggests;
+                                        }).error(function(data){
+
+                                        });
+                                    })
+                                    .error(function (data) {
+                                        console.log(data);
+                                    })
+                            };
+
                             userService.getUser(r.user.id)
                                 .success(function (e) {
                                     $scope.loginUser = e.user;

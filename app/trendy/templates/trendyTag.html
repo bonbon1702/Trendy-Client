@@ -34,18 +34,18 @@
              ng-class="{ no1: $index == 0 , no2 : $index == 1 , no3 : $index == 2 }">
             <div style="margin-right: 22px;margin-top:12px" class="pullDown">
                 <div  class="widget border-none bg-none widget-pinterest active"
-                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;position: relative">
+                      style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;position: relative">
                     <img ng-src="assets/img/images/medal/1.png" class="goldMedal" ng-if="$index == 0">
                     <img ng-src="assets/img/images/medal/2.png" class="silverMedal" ng-if="$index == 1">
                     <img ng-src="assets/img/images/medal/3.png" class="bronze" ng-if="$index == 2">
-                    <div image-fill="{runOnce:true}"  class="widget-body bg-none padding-none"
+                    <div image-fill="{runOnce:true}" class="widget-body bg-none padding-none"
                          ng-class="{ no1Height: $index == 0 , no2Height : $index == 1 , no3Height : $index == 2}"
                          style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;cursor: pointer">
-                        <a ng-click="openPost(post.id)">
+
+                        <a ng-click="openPost(post.post_id)">
                             <img ng-src="{{ post.image_url_editor }}"
                                  alt="photo"/>
                         </a>
-
                         <div class="description  meta">
                             <div class="hover-blue">
                                 <div class="title">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                         <span class="inline-icons" style="font-size: 15px;">
-                            <span ng-click="likeOrDislikePost(post.id,post.isLike)">
+                            <span ng-click="likeOrDislikePost(post.post_id,post.isLike)">
                                 <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
                                 <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
                                 <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
@@ -70,11 +70,11 @@
                                     {{ post.like.length }}
                                 </a>
                             </span>
-                            <span ng-click="favoriteOrUn(post.id,post.isFavorite)">
+                            <span ng-click="favoriteOrUn(post.post_id,post.isFavorite)">
                                 <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
                                 <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
                                 <a  class="rapidnofollow comments-icon comments-inline-btn"
-                                   style="margin-left: -3px;">
+                                    style="margin-left: -3px;">
                                     <span class="comment-count count">{{ post.favorite.length }}</span>
                                 </a>
                             </span>
@@ -90,13 +90,13 @@
          style="margin-top: 100px"
          infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
         <!-- items -->
-        <div masonry-tile ng-repeat="post in posts track by $index" class="item101">
+        <div masonry-tile ng-repeat="post in posts" class="item101">
             <div style="margin-right: 10px">
                 <div class="widget border-none bg-none widget-pinterest active"
                      style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
                     <div class="widget-body bg-none padding-none"
                          style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                        <a ng-click="openPost(post.id)"
+                        <a ng-click="openPost(post.post_id)"
                            data-toggle="prettyPhoto" class="thumb">
                             <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
                                  alt="photo"/>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <span class="inline-icons" style="font-size: 12px;">
-                                <span ng-click="likeOrDislikePost(post.id,post.isLike)" style="cursor: pointer">
+                                <span ng-click="likeOrDislikePost(post.post_id,post.isLike)" style="cursor: pointer">
                                     <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
                                     <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
                                     <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
@@ -126,7 +126,7 @@
                                         {{ post.like.length }}
                                     </a>
                                 </span>
-                                <span ng-click="favoriteOrUn(post.id,post.isFavorite)" style="cursor: pointer">
+                                <span ng-click="favoriteOrUn(post.post_id,post.isFavorite)" style="cursor: pointer">
                                     <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
                                     <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
                                     <a  class="rapidnofollow comments-icon comments-inline-btn"

@@ -248,6 +248,7 @@
 			var places = searchBox.getPlaces();
 
 			if (places.length == 0) {
+                alert("No result that you want search");
 			  return;
 			}
 			for (var i = 0, marker; marker = markers[i]; i++) {

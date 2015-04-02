@@ -38,6 +38,9 @@
                         image_cover:data['image_cover']
                     }
                 });
+            },
+                suggestITI : function(data){
+                return $http.get($rootScope.url + 'follow/suggestionFollow/loginId/' + data.loginId + '/type/itemToItem/userId/' + data.user_id);
             }
         }
     }

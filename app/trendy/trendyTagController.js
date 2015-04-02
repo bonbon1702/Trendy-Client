@@ -1,21 +1,19 @@
 /**
- * Created by tuan on 11/1/2014.
+ * Created by nghia on 31/03/2015.
  */
 (function (angular) {
     angular.module('MyApp')
-        .controller('trendyController', trendyController);
+        .controller('trendyTagController', trendyTagController);
 
-    trendyController.$inject = ['$scope', 'ngDialog', 'trendyService', 'headerService', 'userService', 'postService', '$location'];
+    trendyTagController.$inject = ['$scope', 'ngDialog', 'trendyService', 'headerService', 'userService', 'postService', '$location','$routeParams'];
 
-    function trendyController($scope, ngDialog, trendyService, headerService, userService, postService, $location) {
+    function trendyTagController($scope, ngDialog, trendyService, headerService, userService, postService, $location,$routeParams) {
         $scope.busy = false;
         $scope.posts = [];
         $scope.postsTop3 = [];
         $scope.tagContents = [];
         $scope.postsAll = [];
 
-        $location.path("/");
-        $location.search('');
 
         trendyService.getAllTagContent()
             .success(function(data){
@@ -33,7 +31,7 @@
             postService.openPost(id);
         };
 
-        angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 5000);
+        angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
 
         $scope.likeOrDislikePost = function (id, isLike) {
             if (!$scope.loginUser) {
@@ -50,28 +48,28 @@
 
                 if (isLike == true) {
                     for (var i=0; i< $scope.postsTop3.length; i++){
-                        if ($scope.postsTop3[i].id == id){
+                        if ($scope.postsTop3[i].post_id == id){
                             $scope.postsTop3[i].like.length--;
                             $scope.postsTop3[i].isLike = false;
                         }
                     }
 
                     for (var i=0; i< $scope.posts.length; i++){
-                        if ($scope.posts[i].id == id){
+                        if ($scope.posts[i].post_id == id){
                             $scope.posts[i].like.length--;
                             $scope.posts[i].isLike = false;
                         }
                     }
                 } else {
                     for (var i=0; i< $scope.postsTop3.length; i++){
-                        if ($scope.postsTop3[i].id == id){
+                        if ($scope.postsTop3[i].post_id == id){
                             $scope.postsTop3[i].like.length++;
                             $scope.postsTop3[i].isLike = true;
                         }
                     }
 
                     for (var i=0; i< $scope.posts.length; i++){
-                        if ($scope.posts[i].id == id){
+                        if ($scope.posts[i].post_id == id){
                             $scope.posts[i].like.length++;
                             $scope.posts[i].isLike = true;
                         }
@@ -102,30 +100,31 @@
                     user_id: $scope.loginUser.id
                 };
 
+
                 if (isFavorite == true) {
                     for (var i = 0; i < $scope.postsTop3.length; i++) {
-                        if ($scope.postsTop3[i].id == id) {
+                        if ($scope.postsTop3[i].post_id == id) {
                             $scope.postsTop3[i].favorite.length--;
                             $scope.postsTop3[i].isFavorite = false;
                         }
                     }
 
                     for (var i = 0; i < $scope.posts.length; i++) {
-                        if ($scope.posts[i].id == id) {
+                        if ($scope.posts[i].post_id == id) {
                             $scope.posts[i].favorite.length--;
                             $scope.posts[i].isFavorite = false;
                         }
                     }
                 } else {
                     for (var i = 0; i < $scope.postsTop3.length; i++) {
-                        if ($scope.postsTop3[i].id == id) {
+                        if ($scope.postsTop3[i].post_id == id) {
                             $scope.postsTop3[i].favorite.length++;
                             $scope.postsTop3[i].isFavorite = true;
                         }
                     }
 
                     for (var i = 0; i < $scope.posts.length; i++) {
-                        if ($scope.posts[i].id == id) {
+                        if ($scope.posts[i].post_id == id) {
                             $scope.posts[i].favorite.length++;
                             $scope.posts[i].isFavorite = true;
                         }
@@ -146,11 +145,11 @@
 
         $scope.nextPage = function(){
             if ($scope.posts) {
+                var data = {
+                    'id': $scope.posts.length + $scope.postsTop3.length,
+                    tag : $routeParams.content
+                };
 
-                    var data = {
-                        'id': $scope.posts.length + $scope.postsTop3.length,
-                        tag : 'all'
-                    };
 
                 if ($scope.busy) return;
                 $scope.busy = true;
@@ -213,7 +212,6 @@
                                     $scope.posts.push(data.posts[j]);
                                 }
                             }
-
 
                             $scope.busy = false;
                         } else {

@@ -30,7 +30,7 @@
                                 <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
                                 <ul class="list-unstyled">
                                     <li class="active">
-                                        <a ng-href="/user/{{loginUserId}}">
+                                        <a ng-href="/user/{{pageUserId}}">
                                             <i class="fa fa-fw fa-clock-o"></i>
                                             <span>Timeline</span>
                                         </a>
@@ -134,7 +134,7 @@
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
                             <li class="list-group-item" ng-repeat="user in itemToItemFollow">
-                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 234px;">
+                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 100%;">
                                     <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
                                          style="height: 36px;margin: 5px 4px;"/>
 
