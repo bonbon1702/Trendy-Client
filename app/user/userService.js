@@ -15,7 +15,7 @@
             addFollow: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'follow',
+                    url: $rootScope.url + 'follow/addFollowing',
                     data: data
                 });
             },

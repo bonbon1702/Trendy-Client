@@ -11,7 +11,7 @@
             save: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'post',
+                    url: $rootScope.url + 'post/createPost',
                     data: data
                 });
             },
