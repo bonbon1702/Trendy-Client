@@ -91,7 +91,7 @@
                 });
             },
             getNotification: function(user_id){
-                return $http.get($rootScope.url + 'notification/' + user_id);
+                return $http.get($rootScope.url + 'notification/getNotification/' + user_id);
             },
             getShopDetail: function(){
                 return $http.get($rootScope.url + 'shop' );
