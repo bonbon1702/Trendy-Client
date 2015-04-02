@@ -79,6 +79,15 @@
             loadTag: function (query){
                 return $http.get($rootScope.url + 'tagContent');
             },
+            editPostCaption: function(data){
+                return $http.get($rootScope.url + 'post/editPostCaption/id/' + data.id + '/caption/' + data.caption);
+            },
+            editPostComment: function(data){
+                return $http.get($rootScope.url + 'comment/editPostComment/id/' + data.id + '/content/' + data.content)
+            },
+            deletePostComment: function(data){
+                return $http.get($rootScope.url + 'comment/deletePostComment/id/' + data.id)
+            },
             openPost: function(id){
                 ngDialog.open({
                     template: 'app/post/templates/postDetail.html',
@@ -86,6 +95,9 @@
                     controller: ['$scope', 'newfeedService', '$window', 'headerService','postService','ngAudio', function ($scope, newfeedService, $window, headerService,postService,ngAudio) {
                         $scope.iconLike = false;
                         $scope.iconFavorite = false;
+                        $scope.editing = false;
+                        $scope.editingComment = false;
+
 
                         postService.getPost(id)
                             .success(function (data) {
@@ -97,6 +109,7 @@
                                 for (var i=0;i<$scope.post.comments.length;i++){
                                     $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
                                 }
+                                $scope.editCaption = $scope.post.caption;
 
                                 headerService.loginUser()
                                     .success(function (data) {
@@ -233,6 +246,67 @@
                                                 console.log(data);
                                             });
                                     }
+                                };
+
+                                $scope.editComment = function(index, content){
+                                    $scope.post.comments[index].editing = 'yes';
+                                    $scope.editContent = content;
+                                };
+
+                                $scope.submitEditComment = function(index){
+                                    $scope.post.comments[index].content = this.editContent;
+                                    $scope.post.comments[index].editing = null;
+                                    postService.editPostComment({
+                                        id: $scope.post.comments[index].id,
+                                        content: this.editContent
+                                    }).success(function(data){
+
+                                    }).error();
+                                };
+
+                                $scope.deleteCommentIndex = function(index){
+
+                                    postService.deletePostComment({
+                                        id: $scope.post.comments[index].id
+                                    }).success(function(data){
+
+                                    }).error();
+                                    $scope.post.comments.splice(index,1);
+                                };
+
+                                $scope.closeEditComment = function(index){
+                                    $scope.post.comments[index].editing = null;
+                                };
+
+                                $scope.editPost = function(){
+                                    $scope.editing = true;
+                                };
+
+                                $scope.submitCaption = function(){
+                                    $scope.post.caption = this.editCaption;
+                                    $scope.editing = false;
+
+                                    postService.editPostCaption({
+                                        id: id,
+                                        caption: this.editCaption
+                                    }).success(function(data){
+
+                                    }).error(function(data){
+                                        console.log(data);
+                                    });
+                                };
+
+                                $scope.closeEdit = function(){
+                                    $scope.editing = false;
+                                };
+
+                                $scope.deletePost = function(){
+                                    postService.delete({
+                                        id: id
+                                    }).success(function(data){
+
+                                    }).error();
+                                    $window.location.reload();
                                 };
 
                                 $scope.closeDialog = function () {
