@@ -48,7 +48,6 @@
                                 $scope.posts[i].time_created = beautyDate.prettyDate($scope.posts[i].time_created);
                             }
 
-                            console.log($scope.posts);
                         })
                         .error(function (data) {
                             console.log(data);

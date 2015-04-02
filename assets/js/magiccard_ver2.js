@@ -105,7 +105,6 @@ app.directive('magiccard', function () {
                     PosY = e.clientY + document.body.scrollTop
                     + document.documentElement.scrollTop;
                 }
-                console.log(ImgPos[1]);
                 position = {
                     PosX: PosX,
                     PosY: PosY,

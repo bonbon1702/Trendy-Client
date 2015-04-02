@@ -12,13 +12,13 @@
             save: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'user',
+                    url: $rootScope.url + 'user/createUser',
                     data: data
                 });
             },
             upload: function (data) {
                 return $upload.upload({
-                    url: $rootScope.url + 'upload',
+                    url: $rootScope.url + 'upload/uploadPicture',
                     headers: {'Content-Type': data.type},
                     method: 'POST',
                     file: data,
@@ -91,10 +91,7 @@
                 });
             },
             getNotification: function(user_id){
-                return $http.get($rootScope.url + 'notification/' + user_id);
-            },
-            getShopDetail: function(){
-                return $http.get($rootScope.url + 'shop' );
+                return $http.get($rootScope.url + 'notification/getNotificationByUserId/' + user_id);
             },
             watchedNotification: function(data){
                 return $http({

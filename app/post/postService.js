@@ -22,9 +22,6 @@
                     ignoreLoadingBar: true
                 });
             },
-            get: function (data) {
-                return $http.get($rootScope.url + 'upload/' + data);
-            },
             upload: function (data) {
                 return $http({
                     method: 'POST',
@@ -35,26 +32,20 @@
             delete: function (data) {
                 return $http({
                     method: 'DELETE',
-                    url: $rootScope.url + 'post/delete/'+data.id
+                    url: $rootScope.url + 'post/deletePostById/'+data.id
                 });
             },
             deleteAlbum: function (data) {
                 return $http({
                     method: 'DELETE',
-                    url: $rootScope.url + 'album/delete/'+data.albName
+                    url: $rootScope.url + 'album/deleteAlbumByName/'+data.albName
                 });
             },
             editAlbumName: function(data){
                 return $http({
                     method: 'PUT',
-                    url: $rootScope.url + 'album/' +data.id,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept': '*'
-                    },
-                    params: {
+                    url: $rootScope.url + 'album/editAlbumById/' +data.id,
+                    data: {
                         album_name:data['album_name']
                     }
                 });
@@ -62,7 +53,7 @@
             saveComment: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'comment',
+                    url: $rootScope.url + 'comment/saveComment',
                     data: data,
                     ignoreLoadingBar: true
                 });
@@ -74,10 +65,10 @@
                 return $http.get($rootScope.url + 'favorite/userId/'+ data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
             },
             getPost: function (id) {
-                return $http.get($rootScope.url + 'post/' + id);
+                return $http.get($rootScope.url + 'post/getPostById/' + id);
             },
             loadTag: function (query){
-                return $http.get($rootScope.url + 'tagContent');
+                return $http.get($rootScope.url + 'tagContent/getAllTag');
             },
             editPostCaption: function(data){
                 return $http.get($rootScope.url + 'post/editPostCaption/id/' + data.id + '/caption/' + data.caption);
@@ -300,13 +291,12 @@
                                     $scope.editing = false;
                                 };
 
-                                $scope.deletePost = function(){
+                                $scope.deletePostInside = function(){
                                     postService.delete({
                                         id: id
                                     }).success(function(data){
-
+                                        $window.location.reload();
                                     }).error();
-                                    $window.location.reload();
                                 };
 
                                 $scope.closeDialog = function () {

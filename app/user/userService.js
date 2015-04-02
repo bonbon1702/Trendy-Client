@@ -27,19 +27,13 @@
                 return $http({
                     method: 'PUT',
                     url: $rootScope.url + 'user/' +data.user_id,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept': '*'
-                    },
-                    params: {
+                    data: {
                         id:data['user_id'],
                         image_cover:data['image_cover']
                     }
                 });
             },
-                suggestITI : function(data){
+            suggestITI : function(data){
                 return $http.get($rootScope.url + 'follow/suggestionFollow/loginId/' + data.loginId + '/type/itemToItem/userId/' + data.user_id);
             }
         }

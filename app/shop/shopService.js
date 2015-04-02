@@ -8,16 +8,13 @@
 
     function shopService($http, $rootScope) {
         return {
-            list: function () {
-                return $http.get($rootScope.url + 'shop');
-            },
             get: function(id) {
                 return $http.get($rootScope.url + 'shop/getShop/' + id);
             },
             save: function(data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'comment',
+                    url: $rootScope.url + 'comment/saveComment',
                     data: data
                 })
             },

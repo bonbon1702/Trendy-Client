@@ -87,12 +87,17 @@
                     }
                     $scope.countShop.push(data.shop.posts[i]);
                 }
-                for (var i = 0; i < $scope.shop.like.length; i++) {
-                    if ($scope.loginUser != null && $scope.loginUser.id == $scope.shop.like[i].user_id) {
-                        $scope.likeBtnStatus = "Liked";
-                    } else
-                        $scope.likeBtnStatus = "Like";
-                }
+                headerService.loginUser()
+                    .success(function(r){
+                        for (var i = 0; i < $scope.shop.like.length; i++) {
+                            if (r.user != null && r.user.id == $scope.shop.like[i].user_id) {
+                                $scope.likeBtnStatus = "Liked";
+                            } else
+                                $scope.likeBtnStatus = "Like";
+                        }
+                    }).error();
+
+
                 $scope.likeOrDislike = function () {
                     if (!$scope.loginUser) {
                         $scope.likeBtnStatus = "Like";

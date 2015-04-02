@@ -13,7 +13,7 @@
                         <a href=""><img class="img-circle" ng-src="{{ post.user.picture_profile }}"></a>
                         <strong><a ng-href="/user/{{ post.user.id }}" style="color: #0B0B0B;">{{ post.user.username
                             }}</a></strong>
-                        <span>{{ post.created_at }}</span><i class="fa fa-pencil" ng-click="editPost()" style="cursor:pointer;" ng-if="loginUser.id == post.user.id"></i><i style="padding-left: 15px;cursor: pointer" class="fa fa-trash-o" ng-click="deletePost()" ng-if="loginUser.id == post.user.id"></i>
+                        <span>{{ post.created_at }}</span><i class="fa fa-pencil" ng-click="editPost()" style="cursor:pointer;" ng-if="loginUser.id == post.user.id"></i><i style="padding-left: 15px;cursor: pointer" class="fa fa-trash-o" ng-click="deletePostInside()" ng-if="loginUser.id == post.user.id"></i>
                     </div>
                     <div ng-if="editing == true">
                         <form ng-submit="submitCaption()" class="form-inline">

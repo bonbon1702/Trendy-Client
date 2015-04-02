@@ -13,7 +13,7 @@
                 return $http.get($rootScope.url + 'post/getPostTrendy/paging/' + data.id + '/tag/'+ data.tag);
             },
             getAllTagContent: function(){
-                return $http.get($rootScope.url + 'tagContent');
+                return $http.get($rootScope.url + 'tagContent/getAllTag');
             }
         }
     }
