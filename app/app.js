@@ -20,7 +20,8 @@
             'masonry',
             'ngImgCrop',
             'base64',
-            'imageFill'
+            'imageFill',
+            'hoverCard'
         ])
         .config(function ($routeProvider,$stateProvider, ngDialogProvider, $locationProvider) {
             $locationProvider.html5Mode(true);

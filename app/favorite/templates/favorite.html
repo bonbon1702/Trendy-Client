@@ -26,24 +26,24 @@
                                                class="owner">{{ post.user.username }}</a></span>
                             </div>
                         </div>
-    								<span class="inline-icons" style="font-size: 11px;">
-    									<img width="12" height="12" alt="[★]"
-                                             src="https://s.yimg.com/pw/images/spaceball.gif"
-                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
-    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'"
-                                           title="Thêm ảnh này vào ảnh yêu thích của bạn?">
-                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
-                                        </a>
-    									<i class="fa fa-smile-o" style="color: white;"></i>
-    									<a title="Lời bình" href="#"
-                                           class="rapidnofollow comments-icon comments-inline-btn"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'">
-                                            <span class="comment-count count">{{ post.like.length }}</span>
-                                        </a>
-    								</span>
+    								<span class="inline-icons" style="font-size: 12px;">
+                                        <span ng-click="likeOrDislikePost(post.id,post.isLike)" style="cursor: pointer">
+                                            <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
+                                            <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
+                                            <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
+                                               style="margin-left: -4px;">
+                                                {{ post.like.length }}
+                                            </a>
+                                        </span>
+                                        <span ng-click="favoriteOrUn(post.id,post.isFavorite)" style="cursor: pointer">
+                                            <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
+                                            <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
+                                            <a  class="rapidnofollow comments-icon comments-inline-btn"
+                                                style="margin-left: -3px;">
+                                                <span class="comment-count count">{{ post.favorite.length }}</span>
+                                            </a>
+                                        </span>
+                                    </span>
                     </div>
                 </div>
             </div>

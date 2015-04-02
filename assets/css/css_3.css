@@ -406,10 +406,10 @@ body {
 #side_nav_DIV_1 {
     box-sizing: border-box;
     float: left;
-    height: 520px;
+    height: 391px;
     position: relative;
     text-rendering: optimizelegibility;
-    width: 280px;
+    width: 282px;
     perspective-origin: 140px 290px;
     transform-origin: 140px 290px;
     background: #ffffff;
@@ -420,7 +420,7 @@ body {
 
 #side_nav_UL_2 {
     box-sizing: border-box;
-    height: 211px;
+    height: 58px;
     text-rendering: optimizelegibility;
     width: 278px;
     perspective-origin: 139px 105.5px;
@@ -511,13 +511,14 @@ body {
 
 #side_nav_DIV_13 {
     box-sizing: border-box;
-    height: 363px;
+    height: 200px;
     text-rendering: optimizelegibility;
     width: 278px;
     perspective-origin: 139px 181.5px;
     transform-origin: 139px 181.5px;
     font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 3px 0px 10px;
+    border-bottom: 1px solid rgb(238, 239, 242);
 }/*#side_nav_DIV_13*/
 
 #side_nav_DIV_13:after {

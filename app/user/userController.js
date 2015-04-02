@@ -274,9 +274,9 @@
                 event.stopPropagation();
                 event.preventDefault();
             } else {
-                data = {
+                var data = {
                     'id': post.id
-                }
+                };
                 ngDialog.open({
                     template: 'app/post/templates/confirmDeletePost.html',
                     className: 'ngdialog-theme-plain-custom',
