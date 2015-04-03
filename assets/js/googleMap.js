@@ -11,7 +11,7 @@
 
     var map, markers = [];
     //------------------------------------------Map init--------------------------------------------------------------
-    googleMap.init = function (data) {
+    googleMap.init = function (data, shop) {
         //console.log(data);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
@@ -179,31 +179,20 @@
             styles: myStyles,
             disableDefaultUI: true,
             disableDoubleClickZoom: true
-        }
+        };
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        //var pos = new google.maps.LatLng(20.9875830,105.8316770);
-		//var pos2 = new google.maps.LatLng(21.0249399, 105.8457613);
-		//new CustomMarker(pos,map,{marker_id:'123',product:'shirt',shop:'123 ha noi xxxxxxxxxxxxxxxxxxxxxxxxxxxx',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
-		//new CustomMarker(pos2,map,{marker_id:'12',product:'short',shop:'435 ha noi zzzzzzzzzzzzzzzzzzzzzzzzzzzzz',img:'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/1797616_864798870202779_6605997033220665833_n.jpg?oh=10c93a918df802e0f1204ec0141359d4&oe=5588BA8F&__gda__=1435128561_4ab9658c234f758ddd418a2dfed1cf89'});
-        //new CustomMarker.prototype.remove();
-        //createMarker(map,null,pos);
-        //alert(data.length);
-        //createMarker(map,null,new google.maps.LatLng(21.0226967,105.8369637,13),'Ha Noi','dep');
-        //createMarker(map,icon,new google.maps.LatLng(21.0277866,105.812223,13));
-        //for (var i = 0; i < data.length; i++) {
-        //    var image = {
-        //        url: data[i].image_url,
-        //        size: new google.maps.Size(71, 71),
-        //        origin: new google.maps.Point(0, 0),
-        //        anchor: new google.maps.Point(17, 34),
-        //        scaledSize: new google.maps.Size(25, 25)
-        //    };
-        //    alert(data[i].name);
-        //    createMarker(map, null, new google.maps.LatLng(data[i].lat , data[i].long),data[i].name);
-        //    //markers.push(marker);
-        //}
-        //map.panTo(new google.maps.LatLng(data[0].lat, data[0].lang));
+
+        for (var i = 0; i < shop.length; i++) {
+            var pos = new google.maps.LatLng(shop[i].lat,shop[i].long);
+            new CustomMarker(pos,map,{
+                marker_id: shop[i].id,
+                product: shop[i].name,
+                shop: shop[i].address,
+                img:shop[i].image_url
+            });
+        }
+
 
         searchBox();
         homeButton(data['user_avatar']);
@@ -486,7 +475,7 @@
             google.maps.event.addDomListener(div, "click", function(event) {
                 //alert('You clicked on a shop!');
                 //'http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id
-                window.location=document.URL+'shop/'+self.args.marker_id;
+                window.location='/shop/'+self.args.marker_id;
                 google.maps.event.trigger(self, "click");
             });}
             var panes = this.getPanes();

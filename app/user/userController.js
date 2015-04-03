@@ -198,7 +198,7 @@
                         })
                 }
             }
-        }
+        };
 
         $scope.showTabAlbum = function (data) {
             $scope.show = false;
@@ -299,7 +299,7 @@
                 });
             }
 
-        }
+        };
 
         $scope.deletePostInAlbumDetail = function (post) {
             if ($scope.loginUserId == null) {
@@ -335,7 +335,7 @@
                 });
             }
 
-        }
+        };
 
         $scope.editAlbum = function (album, userId) {
             ngDialog.open({
@@ -352,7 +352,7 @@
                         } else {
                             data = {
                                 'albName': album.album_name
-                            }
+                            };
                             ngDialog.open({
                                 template: 'app/post/templates/confirmDeletePost.html',
                                 className: 'ngdialog-theme-plain-custom',
@@ -371,7 +371,7 @@
                                 }]
                             });
                         }
-                    }
+                    };
 
                     $scope.editAlbumName = function () {
                         if (userId == null) {
@@ -404,18 +404,19 @@
                 }]
             });
 
-        }
-
-        $scope.openPostUser = function (id) {
-            postService.openPost(id);
         };
 
-        $scope.imageSelected = function ($files) {
+        $scope.openPostUser = function (id) {
+            postService.openPost(id, 'user/' + $routeParams.userId);
+        };
+
+        $scope.imageSelected = function ($files,evt) {
             headerService.upload($files[0])
                 .success(function (data) {
                     $scope.flagCoverBtn = true;
                     $scope.coverFlag = false;
                     $scope.cover = data.upload.image_url;
+
                     $scope.saveCoverImg = function () {
                         //headerService.upload($scope.myCroppedImage)
                         //    .success(function (data) {
@@ -433,12 +434,11 @@
                             });
                         //})
                         //.error()
-                    }
+                    };
                     $scope.cancelCoverImg = function () {
                         $scope.cover = $scope.user.image_cover;
                         $scope.coverFlag = true;
                         $scope.flagCoverBtn = false;
-                        console.log(decodeURIComponent(escape($base64.decode($scope.myCroppedImage))));
                     }
 
                 })

@@ -69,7 +69,7 @@
                             console.log(data);
                         });
                     $scope.openPost = function(id){
-                        postService.openPost(id);
+                        postService.openPost(id, 'favorite');
                     };
 
                     angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);

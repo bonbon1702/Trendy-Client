@@ -82,7 +82,6 @@
                 if ($scope.loginUser) {
                     headerService.getNotification($scope.loginUser.id)
                         .success(function (data) {
-                            console.log(data);
                             if (data) {
                                 data.notification.notification.sort(function (a, b) {
                                     return b.id - a.id;
@@ -183,7 +182,7 @@
         }
 
         $scope.openPost = function(id){
-            postService.openPost(id);
+            postService.openPost(id, '');
         }
     }
 

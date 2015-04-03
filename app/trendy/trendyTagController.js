@@ -28,7 +28,7 @@
             .error();
 
         $scope.openPost = function(id){
-            postService.openPost(id);
+            postService.openPost(id, 'tag/' + $routeParams.content);
         };
 
         angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);

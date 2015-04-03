@@ -30,7 +30,7 @@
             .error();
 
         $scope.openPost = function(id){
-            postService.openPost(id);
+            postService.openPost(id, '');
         };
 
         angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 5000);

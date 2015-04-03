@@ -20,8 +20,9 @@
                 } else {
 
                     $scope.loginUser = data.user;
+
                     $scope.openPost = function (id) {
-                        postService.openPost(id);
+                        postService.openPost(id,'newsfeed');
                     };
 
                     var data = {

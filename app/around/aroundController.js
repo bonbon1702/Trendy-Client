@@ -19,6 +19,8 @@
             }
         }
 
+
+
         getLocation();
         function showPosition(position) {
             var lat, lng;
@@ -30,8 +32,67 @@
                 lng = 105.8457613;
             }
 
+            var data = {
+                'id': 0,
+                lat: lat,
+                lng: lng
+            };
+
+            aroundService.getPostAround(data)
+                .success(function (data) {
+                    headerService.loginUser()
+                        .success(function (r) {
+                            if (r.user) {
+                                for (var i = 0; i < data.posts.length; i++) {
+                                    if (data.posts[i].like.length > 0) {
+                                        for (var j = 0; j < data.posts[i].like.length; j++) {
+                                            if (data.posts[i].like[j].user_id == r.user.id) {
+                                                data.posts[i].isLike = true;
+                                                break;
+                                            } else {
+                                                data.posts[i].isLike = false;
+                                            }
+                                        }
+                                    } else {
+                                        data.posts[i].isLike = false;
+                                    }
+
+                                    if (data.posts[i].favorite.length > 0) {
+                                        for (var j = 0; j < data.posts[i].favorite.length; j++) {
+                                            if (data.posts[i].favorite[j].user_id == r.user.id) {
+                                                data.posts[i].isFavorite = true;
+                                                break;
+                                            } else {
+                                                data.posts[i].isFavorite = false;
+                                            }
+                                        }
+                                    } else {
+                                        data.posts[i].isFavorite = false;
+                                    }
+                                }
+                            } else {
+                                for (var i = 0; i < data.posts.length; i++) {
+                                    data.posts[i].isLike = false;
+                                    data.posts[i].isFavorite = false;
+                                }
+                            }
+                        })
+                        .error();
+                    if (data.posts.length != 0) {
+                        for (var i = 0; i < data.posts.length; i++) {
+                            $scope.posts.push(data.posts[i]);
+                        }
+                        $scope.busy = false;
+                    } else {
+                        $scope.busy = true;
+                    }
+                })
+                .error(function (data) {
+                    console.log(data);
+                });
+
             $scope.openPost = function (id) {
-                postService.openPost(id);
+                postService.openPost(id, 'around');
             };
 
             angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
@@ -108,17 +169,22 @@
         headerService.loginUser()
             .success(function (data) {
                 $scope.loginUser = data.user;
-                if (data.user) {
-                    var data = {
-                        'user_avatar': data.user.picture_profile
-                    };
-                    googleMap.init(data);
-                } else {
-                    var data = {
-                        'user_avatar': 'https://cdn4.iconfinder.com/data/icons/ironman_lin/512/ironman_III.png'
-                    };
-                    googleMap.init(data);
-                }
+                aroundService.getAllShop()
+                    .success(function(r){
+                        if ($scope.loginUser) {
+                            var data = {
+                                'user_avatar': $scope.loginUser.picture_profile
+                            };
+
+                            googleMap.init(data, r.data);
+                        } else {
+                            var data = {
+                                'user_avatar': 'https://cdn4.iconfinder.com/data/icons/ironman_lin/512/ironman_III.png'
+                            };
+                            googleMap.init(data, r.data);
+                        }
+                    })
+                    .error();
             })
             .error();
 

@@ -199,8 +199,8 @@ body {
 .search {
     position: relative;
     margin: 0 auto;
-    width: 400px;
-    padding-top: 16px;
+    width: 226px;
+    padding-top: 19px;
     padding-left: 5px;
 }
 
@@ -238,17 +238,18 @@ body {
 
 .search .results {
     margin-top: 18px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #cbcfe2 #c8cee7 #c4c7d7;
-    border-radius: 3px;
-    background-color: #fdfdfd;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #eceef4));
-    background-image: -webkit-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -moz-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -ms-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: -o-linear-gradient(top, #fdfdfd, #eceef4);
-    background-image: linear-gradient(top, #fdfdfd, #eceef4);
+    width: 300px;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #cbcfe2 #c8cee7 #c4c7d7;*/
+    /*border-radius: 3px;*/
+    /*background-color: #fdfdfd;*/
+    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #eceef4));*/
+    /*background-image: -webkit-linear-gradient(top, #fdfdfd, #eceef4);*/
+    /*background-image: -moz-linear-gradient(top, #fdfdfd, #eceef4);*/
+    /*background-image: -ms-linear-gradient(top, #fdfdfd, #eceef4);*/
+    /*background-image: -o-linear-gradient(top, #fdfdfd, #eceef4);*/
+    /*background-image: linear-gradient(top, #fdfdfd, #eceef4);*/
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);

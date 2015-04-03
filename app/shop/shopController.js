@@ -20,6 +20,7 @@
         $scope.serviceOpen = false;
         $scope.contactOpen = false;
         $scope.suggestShop = [];
+        $scope.editingComment = false;
 
 
         headerService.loginUser()
@@ -31,6 +32,36 @@
                 var r = {
                     'loginId': data.user.id,
                     'shopId': $routeParams.shopId
+                };
+
+                $scope.editComment = function(index, content){
+                    $scope.shop.comments[index].editing = 'yes';
+                    $scope.editContent = content;
+                };
+
+                $scope.submitEditComment = function(index){
+                    $scope.shop.comments[index].content = this.editContent;
+                    $scope.shop.comments[index].editing = null;
+                    shopService.editShopComment({
+                        id: $scope.shop.comments[index].id,
+                        content: this.editContent
+                    }).success(function(data){
+
+                    }).error();
+                };
+
+                $scope.deleteCommentIndex = function(index){
+
+                    shopService.deleteShopComment({
+                        id: $scope.shop.comments[index].id
+                    }).success(function(data){
+
+                    }).error();
+                    $scope.shop.comments.splice(index,1);
+                };
+
+                $scope.closeEditComment = function(index){
+                    $scope.shop.comments[index].editing = null;
                 };
                 shopService.suggestShop(r)
                     .success(function(k){
@@ -78,7 +109,9 @@
                         }
                     })
                     .error();
-
+                for (var i=0; i < data.shop.comments.length;i++){
+                    data.shop.comments[i].created_at = beautyDate.prettyDate(data.shop.comments[i].created_at);
+                }
                 $scope.shop = data.shop;
 
                 for (var i = 0; i < data.shop.posts.length; i++) {
@@ -205,7 +238,7 @@
                 .error(function () {
                     console.log(data);
                 });
-        }
+        };
 
         $scope.infoShop = function (shop) {
             ngDialog.open({
@@ -214,66 +247,70 @@
                 className: 'ngdialog-theme-plain-infoShop',
                 controller: ['$scope', function ($scope) {
                     $scope.shop=shop;
+
+
                     $scope.infoShopToggle = function () {
                         $scope.infoOpen = true;
                         $scope.serviceOpen = false;
                         $scope.contactOpen = false;
-                    }
+                    };
                     $scope.saveInfoShop = function () {
                         $scope.infoOpen = false;
-                    }
+                    };
                     $scope.serviceShopToggle = function () {
                         $scope.infoOpen = false;
                         $scope.serviceOpen = true;
                         $scope.contactOpen = false;
-                    }
+                    };
                     $scope.saveServiceShop = function () {
                         $scope.serviceOpen = false;
-                    }
+                    };
                     $scope.contactShopToggle = function () {
                         $scope.infoOpen = false;
                         $scope.serviceOpen = false;
                         $scope.contactOpen = true;
-                    }
+                    };
                     $scope.saveContactShop = function () {
                         $scope.contactOpen = false;
+                    };
+                    if (shop.shop_detail.length > 0) {
+                        //Map
+                        $scope.street = shop.shop_detail[0].street;
+                        $scope.district = shop.shop_detail[0].district;
+                        $scope.city = shop.shop_detail[0].city;
+                        $scope.near_place = shop.shop_detail[0].near_place;
+                        $scope.way_direction = shop.shop_detail[0].way_direction;
+
+                        //Basic Information
+                        $scope.shop_name = shop.shop_detail[0].name;
+                        $scope.time_open = shop.shop_detail[0].time_open;
+                        $scope.time_close = shop.shop_detail[0].time_close;
+                        $scope.price_from = shop.shop_detail[0].price_from;
+                        $scope.price_to = shop.shop_detail[0].price_to;
+
+
+                        //Service Infomation
+                        $scope.morning = shop.shop_detail[0].midday == 1 ? true : false;
+                        $scope.midday = shop.shop_detail[0].midday == 1 ? true : false;
+                        $scope.afternoon = shop.shop_detail[0].afternoon == 1 ? true : false;
+                        $scope.night = shop.shop_detail[0].night == 1 ? true : false;
+                        $scope.shipping = shop.shop_detail[0].shipping == 1 ? true : false;
+                        $scope.credit_card = shop.shop_detail[0].credit_card == 1 ? true : false;
+                        $scope.cooler = shop.shop_detail[0].cooler == 1 ? true : false;
+                        $scope.parking = shop.shop_detail[0].parking == 1 ? true : false;
+                        $scope.children = shop.shop_detail[0].children == 1 ? true : false;
+                        $scope.teen = shop.shop_detail[0].teen == 1 ? true : false;
+                        $scope.middleaged = shop.shop_detail[0].middleaged == 1 ? true : false;
+                        $scope.oldster = shop.shop_detail[0].oldster == 1 ? true : false;
+                        $scope.men = shop.shop_detail[0].men == 1 ? true : false;
+                        $scope.women = shop.shop_detail[0].women == 1 ? true : false;
+
+                        //Contact information
+                        $scope.phone = shop.shop_detail[0].tel;
+                        $scope.website = shop.shop_detail[0].website;
+                        $scope.facebook_page = shop.shop_detail[0].facebook_page;
+
                     }
-                    //Map
-                    $scope.street = shop.shop_detail[0].street;
-                    $scope.district = shop.shop_detail[0].district;
-                    $scope.city = shop.shop_detail[0].city;
-                    $scope.near_place = shop.shop_detail[0].near_place;
-                    $scope.way_direction = shop.shop_detail[0].way_direction;
-
-                    //Basic Information
-                    $scope.shop_name=shop.shop_detail[0].name;
-                    $scope.time_open=shop.shop_detail[0].time_open;
-                    $scope.time_close=shop.shop_detail[0].time_close;
-                    $scope.price_from=shop.shop_detail[0].price_from;
-                    $scope.price_to=shop.shop_detail[0].price_to;
-
-
-                    //Service Infomation
-                    $scope.morning =shop.shop_detail[0].midday == 1 ? true : false;
-                    $scope.midday = shop.shop_detail[0].midday == 1 ? true : false;
-                    $scope.afternoon = shop.shop_detail[0].afternoon == 1 ? true : false;
-                    $scope.night = shop.shop_detail[0].night == 1 ? true : false;
-                    $scope.shipping = shop.shop_detail[0].shipping == 1 ? true : false;
-                    $scope.credit_card = shop.shop_detail[0].credit_card == 1 ? true : false;
-                    $scope.cooler = shop.shop_detail[0].cooler == 1 ? true : false;
-                    $scope.parking = shop.shop_detail[0].parking == 1 ? true : false;
-                    $scope.children = shop.shop_detail[0].children == 1 ? true : false;
-                    $scope.teen = shop.shop_detail[0].teen == 1 ? true : false;
-                    $scope.middleaged = shop.shop_detail[0].middleaged == 1 ? true : false;
-                    $scope.oldster = shop.shop_detail[0].oldster == 1 ? true : false;
-                    $scope.men = shop.shop_detail[0].men == 1 ? true : false;
-                    $scope.women = shop.shop_detail[0].women== 1 ? true : false;
-
-                    //Contact information
-                    $scope.phone=shop.shop_detail[0].tel;
-                    $scope.website=shop.shop_detail[0].website;
-                    $scope.facebook_page=shop.shop_detail[0].facebook_page;
-
                     $scope.saveShopDetail = function(){
                         data ={
                             'shop_id' : shop.id,
@@ -307,8 +344,8 @@
                             'website' : $scope.website,
                             'facebook_page' : $scope.facebook_page,
                             'approve' : 0
-                        }
-                        console.log($scope.morning);
+                        };
+
                         shopService.saveShopDetail(data)
                             .success(function(data){
                                 ngDialog.open({
@@ -332,7 +369,7 @@
         };
 
         $scope.showDialog = function (id) {
-            postService.openPost(id);
+            postService.openPost(id, 'shop/'+ $routeParams.shopId);
         };
     }
 })(angular);

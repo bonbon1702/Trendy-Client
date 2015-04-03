@@ -801,3 +801,417 @@ header h1 {
         transform: translateX(0);
     }
 }
+
+#like_wrap_DIV_1 {
+    box-sizing: border-box;
+    float: left;
+    height: 50px;
+    text-rendering: optimizelegibility;
+    width: 70px;
+    perspective-origin: 35px 25px;
+    transform-origin: 35px 25px;
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}/*#like_wrap_DIV_1*/
+
+#like_wrap_A_2 {
+    box-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px 0px inset;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    text-decoration: none;
+    text-rendering: optimizelegibility;
+    width: 70px;
+    perspective-origin: 35px 25px;
+    transform-origin: 35px 25px;
+    background: rgb(2, 173, 234) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    transition: all 0.15s ease-out 0s;
+}/*#like_wrap_A_2*/
+
+#like_wrap_SPAN_3 {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    position: relative;
+    text-rendering: optimizelegibility;
+    width: 70px;
+    perspective-origin: 35px 25px;
+    transform-origin: 35px 25px;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_3*/
+
+#like_wrap_SPAN_4 {
+    background-position: -111px -9px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 16px;
+    position: relative;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    top: 8px;
+    width: 14px;
+    perspective-origin: 7px 8px;
+    transform-origin: 7px 8px;
+    background: rgba(0, 0, 0, 0) url(https://assetcdn.500px.org/assets/v3/sprites/photos-b5ca59bbae763fce511ef1bdcf4b364f.png) no-repeat scroll -111px -9px / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 28px;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_4*/
+
+#like_wrap_SPAN_5 {
+    bottom: 8px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 12px;
+    position: absolute;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    width: 70px;
+    align-self: stretch;
+    perspective-origin: 35px 6px;
+    transform-origin: 35px 6px;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_5*/
+
+#like_wrap_SPAN_6 {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: none;
+    height: 50px;
+    position: relative;
+    text-rendering: optimizelegibility;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_6*/
+
+#like_wrap_SPAN_7 {
+    background-position: -129px -9px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 16px;
+    position: relative;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    top: 8px;
+    width: 14px;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    background: rgba(0, 0, 0, 0) url(https://assetcdn.500px.org/assets/v3/sprites/photos-b5ca59bbae763fce511ef1bdcf4b364f.png) no-repeat scroll -129px -9px / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px auto;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_7*/
+
+#like_wrap_SPAN_8 {
+    bottom: 8px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    width: 100%;
+    align-self: stretch;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px auto;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#like_wrap_SPAN_8*/
+
+#favorite_wrap_DIV_1 {
+    box-sizing: border-box;
+    float: left;
+    height: 50px;
+    text-rendering: optimizelegibility;
+    width: 40px;
+    perspective-origin: 20px 25px;
+    transform-origin: 20px 25px;
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 0px 0px 5px;
+}/*#favorite_wrap_DIV_1*/
+
+#favorite_wrap_A_2 {
+    box-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px 0px inset;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 50px;
+    text-decoration: none;
+    text-rendering: optimizelegibility;
+    width: 40px;
+    perspective-origin: 20px 25px;
+    transform-origin: 20px 25px;
+    background: rgb(255, 74, 80) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    transition: all 0.15s ease-out 0s;
+}/*#favorite_wrap_A_2*/
+
+#favorite_wrap_SPAN_3 {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 15px;
+    text-rendering: optimizelegibility;
+    width: 40px;
+    perspective-origin: 20px 7.5px;
+    transform-origin: 20px 7.5px;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#favorite_wrap_SPAN_3*/
+
+#favorite_wrap_SPAN_4 {
+    background-position: -42px -9px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 15px;
+    position: relative;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    top: 17px;
+    width: 19px;
+    perspective-origin: 9.5px 7.5px;
+    transform-origin: 9.5px 7.5px;
+    background: rgba(0, 0, 0, 0) url(https://assetcdn.500px.org/assets/v3/sprites/photos-b5ca59bbae763fce511ef1bdcf4b364f.png) no-repeat scroll -42px -9px / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 10.5px;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#favorite_wrap_SPAN_4*/
+
+#favorite_wrap_SPAN_5 {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: none;
+    text-rendering: optimizelegibility;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#favorite_wrap_SPAN_5*/
+
+#favorite_wrap_SPAN_6 {
+    background-position: -65px -9px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 15px;
+    position: relative;
+    text-align: center;
+    text-rendering: optimizelegibility;
+    top: 17px;
+    width: 19px;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    background: rgba(0, 0, 0, 0) url(https://assetcdn.500px.org/assets/v3/sprites/photos-b5ca59bbae763fce511ef1bdcf4b364f.png) no-repeat scroll -65px -9px / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal bold normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px auto;
+    outline: rgb(255, 255, 255) none 0px;
+}/*#favorite_wrap_SPAN_6*/
+
+#stat_wrap_DIV_1 {
+    box-sizing: border-box;
+    float: left;
+    height: 50px;
+    position: relative;
+    text-rendering: optimizelegibility;
+    width: 96px;
+    perspective-origin: 48px 33px;
+    transform-origin: 48px 33px;
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}/*#stat_wrap_DIV_1*/
+
+#stat_wrap_DIV_2 {
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 50px;
+    text-rendering: optimizelegibility;
+    width: 96px;
+    perspective-origin: 48px 33px;
+    transform-origin: 48px 33px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+    padding-top: 4px;
+}/*#stat_wrap_DIV_2*/
+
+#stat_wrap_DIV_2:after {
+    clear: both;
+    color: rgb(247, 248, 250);
+    display: block;
+    text-rendering: optimizelegibility;
+    visibility: hidden;
+    width: 76px;
+    perspective-origin: 38px 0px;
+    transform-origin: 38px 0px;
+    content: ' ';
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 0px/0px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+}/*#stat_wrap_DIV_2:after*/
+
+#stat_wrap_DIV_3 {
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    float: left;
+    height: 51px;
+    text-rendering: optimizelegibility;
+    width: 76px;
+    perspective-origin: 38px 25.5px;
+    transform-origin: 38px 25.5px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+}/*#stat_wrap_DIV_3*/
+
+#stat_wrap_TABLE_4 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 51px;
+    text-rendering: optimizelegibility;
+    width: 76px;
+    perspective-origin: 38px 25.5px;
+    transform-origin: 38px 25.5px;
+    border: 0px none rgb(247, 248, 250);
+    border-spacing: 0px 0px;
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+}/*#stat_wrap_TABLE_4*/
+
+#stat_wrap_TBODY_5 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 51px;
+    text-rendering: optimizelegibility;
+    vertical-align: baseline;
+    width: 76px;
+    perspective-origin: 38px 25.5px;
+    transform-origin: 38px 25.5px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+}/*#stat_wrap_TBODY_5*/
+
+#stat_wrap_TR_6, #stat_wrap_TR_11, #stat_wrap_TR_16 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 17px;
+    text-rendering: optimizelegibility;
+    width: 76px;
+    perspective-origin: 38px 8.5px;
+    transform-origin: 38px 8.5px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+}/*#stat_wrap_TR_6, #stat_wrap_TR_11, #stat_wrap_TR_16*/
+
+#stat_wrap_TD_7, #stat_wrap_TD_12, #stat_wrap_TD_17 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 17px;
+    text-rendering: optimizelegibility;
+    width: 41px;
+    perspective-origin: 20.5px 8.5px;
+    transform-origin: 20.5px 8.5px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+    padding: 3px 0px 2px 8px;
+}/*#stat_wrap_TD_7, #stat_wrap_TD_12, #stat_wrap_TD_17*/
+
+#stat_wrap_SPAN_8, #stat_wrap_SPAN_13, #stat_wrap_SPAN_18 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(113, 118, 122);
+    text-rendering: optimizelegibility;
+    border: 0px none rgb(113, 118, 122);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(113, 118, 122) none 0px;
+}/*#stat_wrap_SPAN_8, #stat_wrap_SPAN_13, #stat_wrap_SPAN_18*/
+
+#stat_wrap_TD_9, #stat_wrap_TD_14, #stat_wrap_TD_19 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(247, 248, 250);
+    height: 17px;
+    text-rendering: optimizelegibility;
+    width: 35px;
+    perspective-origin: 17.5px 8.5px;
+    transform-origin: 17.5px 8.5px;
+    border: 0px none rgb(247, 248, 250);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(247, 248, 250) none 0px;
+    padding: 3px 0px 2px 8px;
+}/*#stat_wrap_TD_9, #stat_wrap_TD_14, #stat_wrap_TD_19*/
+
+#stat_wrap_SPAN_10, #stat_wrap_SPAN_15 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(113, 118, 122);
+    display: block;
+    height: 12px;
+    text-rendering: optimizelegibility;
+    width: 27px;
+    perspective-origin: 13.5px 6px;
+    transform-origin: 13.5px 6px;
+    border: 0px none rgb(113, 118, 122);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(113, 118, 122) none 0px;
+}/*#stat_wrap_SPAN_10, #stat_wrap_SPAN_15*/
+
+#stat_wrap_SPAN_20 {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: rgb(113, 118, 122);
+    display: block;
+    height: 12px;
+    text-rendering: optimizelegibility;
+    width: 27px;
+    perspective-origin: 13.5px 6px;
+    transform-origin: 13.5px 6px;
+    border: 0px none rgb(113, 118, 122);
+    font: normal normal normal normal 12px/12px 'Helvetica Neue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(113, 118, 122) none 0px;
+}/*#stat_wrap_SPAN_20*/
+

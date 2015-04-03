@@ -33,7 +33,13 @@
             },
             suggestShop: function(data){
                 return $http.get($rootScope.url + 'shop/suggestShop/loginId/'+data.loginId+'/shopId/' + data.shopId);
-            }
+            },
+            editShopComment: function(data){
+                return $http.get($rootScope.url + 'comment/editShopComment/id/' + data.id + '/content/' + data.content)
+            },
+            deleteShopComment: function(data){
+                return $http.get($rootScope.url + 'comment/deleteShopComment/id/' + data.id)
+            },
         }
     }
 })(angular);

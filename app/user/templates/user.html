@@ -1,4 +1,4 @@
-<div id="content" ng-controller="userController">
+<div id="content" ng-controller="userController" style="margin-top: 55px;">
     <div class="innerAll">
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
             <div class="col-lg-9 col-md-8" >
@@ -7,26 +7,34 @@
                         <div class="timeline-cover">
                             <div class="cover image">
                                 <div class="top" >
-                                    <img ng-src="{{ cover }}" ng-show="coverFlag == true"/>
+                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
                                     <!--<div class="cropArea" ng-show="coverFlag == false">-->
-                                        <!--<img-crop image="cover"  area-min-size="100"-->
+                                        <!--<img-crop image="cover"-->
                                                    <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
-
+                                        <!--<img-crop image="cover" result-image="myCroppedImage"></img-crop>-->
+                                    <!--</div>-->
+                                    <!--<div ng-show="coverFlag == false">-->
+                                        <!--<image-crop-->
+                                                <!--data-width="100%"-->
+                                                <!--data-height="auto"-->
+                                                <!--data-shape="square"-->
+                                                <!--data-result="cover"-->
+                                                <!--data-step="myCroppedImage">-->
+                                        <!--</image-crop>-->
                                     <!--</div>-->
                                 </div>
-                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"
-                                     data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
-                                    <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
-                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">
-                                                <span class="fileupload-new"></span>
-                                                <button ng-file-select ng-file-change="imageSelected($files, $event)"
-                                                        class="cover-img">
-                                                </button>
-                                            </span>
-                                    </div>
-                                </div>
-                                <!--{{ myCroppedImage }}-->
-                                <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
+                                <!--<div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"-->
+                                     <!--data-ft="{&quot;tn&quot;:&quot;*|&quot;}">-->
+                                    <!--<div class="fileupload fileupload-new margin-none" data-provides="fileupload">-->
+                                            <!--<span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">-->
+                                                <!--<span class="fileupload-new"></span>-->
+                                                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)"-->
+                                                        <!--class="cover-img">-->
+                                                <!--</button>-->
+                                            <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
                                 <ul class="list-unstyled">
                                     <li class="active">
                                         <a ng-href="/user/{{pageUserId}}">

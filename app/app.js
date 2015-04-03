@@ -35,7 +35,12 @@
                     templateUrl: 'app/trendy/templates/trendyTag.html',
                     controller: 'trendyTagController'
                 })
-                .when('/newfeed', {
+                .when('/post/:id',{
+                    templateUrl: 'app/post/templates/postDetailPage.html',
+                    controller: 'postDetailController',
+                    reloadOnSearch: false
+                })
+                .when('/newsfeed', {
                     templateUrl: 'app/newfeed/templates/newfeed.html',
                     controller: 'newfeedController'
                 })
@@ -51,10 +56,6 @@
                     templateUrl: 'app/post/templates/post.html',
                     controller: 'postController',
                     reloadOnSearch: false
-                })
-                .when('/post/:id',{
-                    templateUrl: 'app/post/templates/postDetail.html',
-                    controller: 'PostController'
                 })
                 .when('/user/:userId', {
                     templateUrl: 'app/user/templates/user.html',
@@ -80,9 +81,26 @@
             });
 
         })
-        .run(function ($rootScope) {
+        .run(function ($rootScope, $location,$route,$timeout) {
             //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
             //$rootScope.url = 'http://104.43.9.177/api/';
             $rootScope.url = 'http://trendy-server.dev/api/';
+            var original = $location.path;
+            $location.path = function (path, reload) {
+                if (reload === false) {
+                    var lastRoute = $route.current;
+                    if (lastRoute) {
+                        var un = $rootScope.$on('$locationChangeSuccess', function () {
+                            $route.current = lastRoute;
+                            $route.current.ignore = true;
+                            un();
+                        });
+                        $timeout(function(){
+                            un()
+                        }, 500);
+                    }
+                }
+                return original.apply($location, [path]);
+            };
         });
 })(angular);

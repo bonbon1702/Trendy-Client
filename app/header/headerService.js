@@ -45,7 +45,7 @@
                 return ngDialog.open({
                     template: 'app/header/templates/login.html',
                     className: 'ngdialog-theme-plain',
-                    controller: ['$scope', 'headerService', '$window', '$location', function ($scope, headerService, $window, $location) {
+                    controller: ['$scope', 'headerService', '$window', '$location','$route', function ($scope, headerService, $window, $location,$route) {
                         $rootScope.$on('ngDialog.closing', function (e, $dialog) {
                             $location.path("/");
                         });
