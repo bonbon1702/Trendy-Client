@@ -74,33 +74,7 @@
                     controller: 'shopController'
                 })
                 .otherwise({redirectTo: '/'});
-            //$stateProvider
-            //    .state('tab1-3', {
-            //        url: '/tab1-3',
-            //        templateUrl: "", // First template.
-            //        controller: "userController"
-            //    })
-            //
-            //    .state('tab2-3', {
-            //        url: '/tab2-3',
-            //        templateUrl: "", // Second template.
-            //        controller: "userController"
-            //    })
-            //    .state('tab2-3-1', {
-            //        url: '/tab2-3-1',
-            //        templateUrl: "", // Second template.
-            //        controller: "userController"
-            //    })
-            //    .state('tab3-3', {
-            //        url: '/tab3-3',
-            //        templateUrl: "", // Third template.
-            //        controller: "userController"
-            //    })
-            //    .state('tab4-3', {
-            //        url: '/tab4-3',
-            //        templateUrl: "", // Second template.
-            //        controller: "userController"
-            //    });
+
             $locationProvider.html5Mode(true);
             ngDialogProvider.setDefaults({
                 showClose: true,
@@ -110,9 +84,6 @@
 
         })
         .run(function ($rootScope, $location,$route,$timeout) {
-            //$rootScope.url = 'http://localhost:81/projects/Trendy-Server/public/api/';
-            //$rootScope.url = 'http://104.43.9.177/api/';
-            $rootScope.url = 'http://trendy-server.dev/api/';
             var original = $location.path;
             $location.path = function (path, reload) {
                 if (reload === false) {

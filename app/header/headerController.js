@@ -36,13 +36,7 @@
                     });
             }
         };
-        hello.init({
-            facebook: '903918442963068',
-            google: '785860817367-or5nbtrsppv2bm44nnfqeuf2t1qlffqj.apps.googleusercontent.com',
-            twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
-        }, {
-            scope: 'email'
-        });
+
 
 
         $scope.checkLogin = function () {
@@ -57,10 +51,7 @@
                         controller: ['$scope', 'headerService', '$window', '$location', function ($scope, headerService, $window, $location) {
                             $scope.close = function () {
                                 ngDialog.close();
-                                $window.location.href = "http://trendyplus.org/#/post?image="
-                                + data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
-                            };
-                                //$window.location.href = "http://trendyplus.dev/post?image="
+                                //$window.location.href = "http://trendyplus.org/post?image="
                                 //+ data.upload.image_url + '&title=' + data.upload.name + '&editor=false';
                                 $location.path('/post');
                                 $location.search({
@@ -68,16 +59,16 @@
                                     title: data.upload.name,
                                     editor: 'false'
                                 });
-                            }
+                            };
+
+
                             $scope.confirm = function () {
                                 ngDialog.close();
                                 $window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
-                                    "target:'http://localhost:81/projects/Trendy-Client/#/post', " +
-                                    "exit:'http://localhost:81/projects/Trendy-Client/#/'});"
-                                    "target:'http://trendyplus.org/#/post', " +
-                                    "exit:'http://trendyplus.org/#/'});"
+                                    "target:'http://trendyplus.org/post', " +
+                                    "exit:'http://trendyplus.org'});";
                             }
                         }]
                     });
@@ -191,7 +182,7 @@
 
         $scope.clickNavBarTrendy= function () {
             $scope.trendy = true;
-        }
+        };
 
         $scope.openPost = function(id){
             postService.openPost(id, '');
