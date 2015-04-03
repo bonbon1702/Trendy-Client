@@ -200,7 +200,7 @@
                     ngDialog.close();
                 };
 
-                var socket = io.connect('http://127.0.0.1:3000/');
+                var socket = io.connect('http://103.7.40.222:3000/');
 
                 socket.on('realTime.comment', function (data) {
                     //Do something with data
