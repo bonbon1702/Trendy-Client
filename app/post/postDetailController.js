@@ -208,8 +208,8 @@
                     if (results.type_comment == 0 && results.type_id == id) {
                         results['created_at'] = beautyDate.prettyDate(results['created_at']);
                         $scope.post.comments.push(results);
-                        $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
-                        $scope.sound.play();
+                        //$scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                        //$scope.sound.play();
                     }
                 });
             }).error();
