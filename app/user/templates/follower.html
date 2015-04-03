@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" style="margin-top: 55px;">
     <div class="innerAll">
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
             <div class="col-lg-9 col-md-8">
@@ -7,55 +7,80 @@
                     <div class="widget border-bottom">
                         <div class="timeline-cover">
                             <div class="cover image">
-                                <div class="top">
-                                    <img src="assets/img/images/photodune-2755655-party-time-s.jpg"
-                                         class="img-responsive"/>
+                                <div class="top" >
+                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
+                                    <!--<div class="cropArea" ng-show="coverFlag == false">-->
+                                    <!--<img-crop image="cover"  area-min-size="100"-->
+                                    <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
+
+                                    <!--</div>-->
                                 </div>
-                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector" data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
-                                    <!--<a class="_30vy fbTimelineEditCoverButton _p"  aria-haspopup="true"-->
-                                    <!--aria-expanded="false" role="button" id="u_jsonp_3_7" aria-owns="u_16_3">-->
-                                    <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
-                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b"><span class="fileupload-new"></span>
-                                                <input type="file" class="margin-none "></span>
-                                        <!--<i class="_30vz img sp_qcED-f6xcm7 sx_80b32b"></i>-->
-                                    </div>
-                                    <!--<input type="file" class="margin-none">-->
-                                    <!--<div class="_30v-"><span class="_30w0 _50f7">Update Cover Photo</span></div>-->
-                                    </a>
-                                </div>
+                                <!--<div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"-->
+                                     <!--data-ft="{&quot;tn&quot;:&quot;*|&quot;}">-->
+                                    <!--<div class="fileupload fileupload-new margin-none" data-provides="fileupload">-->
+                                            <!--<span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">-->
+                                                <!--<span class="fileupload-new"></span>-->
+                                                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)"-->
+                                                        <!--class="cover-img">-->
+                                                <!--</button>-->
+                                            <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--{{ myCroppedImage }}-->
+                                <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
                                 <ul class="list-unstyled">
-                                    <li class="active"><a ng-href="#/user/{{user.id}}"><i class="fa fa-fw fa-clock-o"></i>
-                                        <span>Timeline</span></a></li>
-                                    <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
+                                    <li class="active">
+                                        <a ng-href="/user/{{pageUserId}}">
+                                            <i class="fa fa-fw fa-clock-o"></i>
+                                            <span>Timeline</span>
+                                        </a>
+                                    </li>
+                                    </li>
+                                    <li style="float: right;background: none;margin-right: 18px;" ng-if="flagCoverBtn == true">
+                                        <button ng-click="cancelCoverImg()" class="btn btn-primary" style="margin-right: 20px;">
+                                            <i class="fa fa-times" style="font-size: 13px;width: 11px;"></i>
+                                            Cancel
+                                        </button>
+                                        <button ng-click="saveCoverImg()" class="btn btn-primary">
+                                            <i class="fa fa-check" style="font-size: 13px;width: 11px;"></i>
+                                            Save
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
+
                             <div class="widget cover image">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
                                     </div>
-                                    <div class="innerAll border-right pull-left">
-                                        <h3 class="margin-none">{{ user.username }}</h3>
-                                        <span>Works at MOSAICPRO</span>
+                                    <div class="innerAll border-right pull-left" style="margin-top: 12px">
+                                        <h3 class="margin-none">{{ user.username }} - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></h3>
+
                                     </div>
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets" ng-href="#/following/{{user.id}}" data-original-title="" style="color: #0084B4;">
+                                               data-nav="tweets" ng-href="/following/{{user.id}}"
+                                               data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
                                             </a>
                                         </li>
-                                        <li class="ProfileNav-item ProfileNav-item--followers is-active">
+                                        <li class="ProfileNav-item ProfileNav-item--followers">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="followers" ng-href="#/follower/{{user.id}}"
+                                               data-nav="followers" ng-href="/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Followers</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
                                             </a>
                                         </li>
+
                                     </div>
+                                    <button ng-click="flwBtnClick()" ng-hide="flwBtnStatus"
+                                            class="btn btn-primary ng-binding" style="margin: 23px 41px;float: right;">
+                                        <i class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>{{flwBtnLbl}}
+                                    </button>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -79,7 +104,7 @@
                                         <img class="img-clean" ng-src="{{ flwer.picture_profile }}" alt="...">
                                     </a>
                                     <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                        <h4 class="media-heading"><a ng-href="#/user/{{flwer.follower_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
+                                        <h4 class="media-heading"><a ng-href="/user/{{flwer.follower_id}}" class="text-inverse" style="color: #424242;">{{ flwer.username }}</a></h4>
                                         <p>
                                             <i class="fa fa-fw fa-map-marker text-muted"></i> Living in Missouri, USA</p>
                                     </div>
@@ -88,7 +113,7 @@
                             <div class="col-sm-3">
                                 <div class="innerAll text-right">
                                     <div class="btn-group-vertical btn-group-sm">
-                                        <button ng-click="followBtnClick(flwer)"  class="btn btn-primary" style="display: inline-flex;">
+                                        <button ng-hide="flwer.status == 'none'" ng-click="followBtnClick(flwer)"  class="btn btn-primary" style="display: inline-flex;">
                                             <i  class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>{{ flwer.status }}
                                         </button>
 
@@ -104,145 +129,31 @@
             <div class="col-md-4 col-lg-3">
 
                 <div class="widget">
-                    <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY KNOW</h5>
+                    <h5 class="innerAll margin-none">PEOPLE YOU MAY WANT TO FOLLOW</h5>
 
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                                         style="height: 44px;"/>
+                            <li class="list-group-item" ng-repeat="user in itemToItemFollow">
+                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 100%;">
+                                    <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
+                                         style="height: 36px;margin: 5px 4px;"/>
 
                                     <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
+                                        <h5>
+                                            <a ng-href="/user/{{user.id}}" class="text-inverse"
+                                               style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                                         style="height: 44px;"/>
-
-                                    <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                                        </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                                         style="height: 44px;"/>
-
-                                    <div class="media-body">
-                                        <h5 class="margin-none">
-                                            <a href="" class="text-inverse"
-                                               style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                                        </h5>
-
-                                        <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                            <a href="" class="btn btn-primary"
-                                               style="width: 71px;height: 28px;margin-top: -24px;">
-                                                <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                                Follow
-                                            </a>
-                                        </div>
+                                        <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
+                                           ng-click="following(user.id)">
+                                            Follow
+                                        </a>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-
-                <div class="widget">
-                    <h5 class="innerAll margin-none bg-primary">Recent News</h5>
-
-                    <div class="widget-body padding-none">
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
-
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">Social Admin Released</a></h5>
-                                <small>on February 2nd, 2014</small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
-
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">Timeline Cover Page</a></h5>
-                                <small>on February 2nd, 2014</small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
-
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">1000+ Sales</a></h5>
-                                <small>on February 2nd, 2014</small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
-
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">On-Page Optimization</a></h5>
-                                <small>on February 2nd, 2014</small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"/>
-
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">14th Admin Template</a></h5>
-                                <small>on February 2nd, 2014</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
-        </div>
-    </div>
-
 
     <!-- Blueimp Gallery -->
     <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">

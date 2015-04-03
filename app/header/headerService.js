@@ -12,13 +12,13 @@
             save: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'user',
+                    url: $rootScope.url + 'user/createUser',
                     data: data
                 });
             },
             upload: function (data) {
                 return $upload.upload({
-                    url: $rootScope.url + 'upload',
+                    url: $rootScope.url + 'upload/uploadPicture',
                     headers: {'Content-Type': data.type},
                     method: 'POST',
                     file: data,
@@ -45,8 +45,10 @@
                 return ngDialog.open({
                     template: 'app/header/templates/login.html',
                     className: 'ngdialog-theme-plain',
-                    controller: ['$scope', 'headerService', '$window', function ($scope, headerService, $window) {
-
+                    controller: ['$scope', 'headerService', '$window', '$location','$route', function ($scope, headerService, $window, $location,$route) {
+                        //$rootScope.$on('ngDialog.closing', function (e, $dialog) {
+                        //    $location.path("/");
+                        //});
                         $scope.login = function (data) {
                             ngDialog.close();
                             hello(data).login().then(function (auth) {
@@ -75,7 +77,6 @@
                                     } else if (auth.network == 'twitter') {
 
                                     }
-
                                     headerService.save(data)
                                         .success(function (data) {
                                             $window.location.reload();
@@ -91,10 +92,7 @@
                 });
             },
             getNotification: function(user_id){
-                return $http.get($rootScope.url + 'notification/' + user_id);
-            },
-            getShopDetail: function(){
-                return $http.get($rootScope.url + 'shop' );
+                return $http.get($rootScope.url + 'notification/getNotificationByUserId/' + user_id);
             },
             watchedNotification: function(data){
                 return $http({

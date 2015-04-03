@@ -105,13 +105,11 @@ app.directive('magiccard', function () {
                     PosY = e.clientY + document.body.scrollTop
                     + document.documentElement.scrollTop;
                 }
-                //PosX = PosX - ImgPos[0];
-                //PosY = PosY - ImgPos[1];
                 position = {
                     PosX: PosX,
                     PosY: PosY,
                     ImgPosX: PosX - ImgPos[0],
-                    ImgPosY: PosY - ImgPos[1]
+                    ImgPosY: PosY - 54
                 };
                 return position;
             };
@@ -123,6 +121,7 @@ app.directive('magiccard', function () {
                 $scope.left = left;
                 $scope.imgTop = imgTop;
                 $scope.imgLeft = imgLeft;
+
                 $scope.show = true;
                 $scope.formData = "";
                 if ($scope.completing == true) {
@@ -155,9 +154,9 @@ app.directive('hovercard', function () {
         link: link,
         controller: controller,
         template: '<div class="has-magiccard">\
-            <img alt="Photo" class="img-responsive" ng-src="{{ src }}">\
+            <img style="height: 500px;width: auto;" alt="Photo" class="img-responsive" ng-src="{{ src }}">\
         <div ng-repeat="point in points">\
-            <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left }}px">\
+            <div class="magiccard" style="top: {{ point.top }}px; left: {{ point.left - 25 }}px">\
                 <span class="item-tag-1" style="margin-left: 0px">\
                     <span class="item-tag-label">\
                                 {{ $index +1 }}\
@@ -170,10 +169,9 @@ app.directive('hovercard', function () {
             if (scope.data) {
                 var img = angular.element(document.querySelector('.has-magiccard')).find('img');
                 var margin_left = parseInt(img.css('margin-left').substring(0,img.css('margin-left').length -2 ));
-
                 for (var i = 0; i < scope.data.length; i++) {
                     var point = {
-                        top: parseInt(scope.data[i].top) + 50,
+                        top: parseInt(scope.data[i].top),
                         left: parseInt(scope.data[i].left) + margin_left
                     };
                     scope.points.push(point);

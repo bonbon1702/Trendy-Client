@@ -25,13 +25,51 @@
 
                     favoriteService.getPostFavorite(data)
                         .success(function (data) {
+                            headerService.loginUser()
+                                .success(function (r) {
+                                    if (r.user) {
+                                        for (var i = 0; i < data.posts.length; i++) {
+                                            if (data.posts[i].like.length > 0) {
+                                                for (var j = 0; j < data.posts[i].like.length; j++) {
+                                                    if (data.posts[i].like[j].user_id == r.user.id) {
+                                                        data.posts[i].isLike = true;
+                                                        break;
+                                                    } else {
+                                                        data.posts[i].isLike = false;
+                                                    }
+                                                }
+                                            } else {
+                                                data.posts[i].isLike = false;
+                                            }
+
+                                            if (data.posts[i].favorite.length > 0) {
+                                                for (var j = 0; j < data.posts[i].favorite.length; j++) {
+                                                    if (data.posts[i].favorite[j].user_id == r.user.id) {
+                                                        data.posts[i].isFavorite = true;
+                                                        break;
+                                                    } else {
+                                                        data.posts[i].isFavorite = false;
+                                                    }
+                                                }
+                                            } else {
+                                                data.posts[i].isFavorite = false;
+                                            }
+                                        }
+                                    } else {
+                                        for (var i = 0; i < data.posts.length; i++) {
+                                            data.posts[i].isLike = false;
+                                            data.posts[i].isFavorite = false;
+                                        }
+                                    }
+                                })
+                                .error();
                             $scope.posts = data.posts;
                         })
                         .error(function (data) {
                             console.log(data);
                         });
                     $scope.openPost = function(id){
-                        postService.openPost(id);
+                        postService.openPost(id, 'favorite');
                     };
 
                     angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 1000);
@@ -51,6 +89,44 @@
                             favoriteService.getPostFavorite(data)
                                 .success(function (data) {
                                     if (data.posts.length != 0) {
+                                        headerService.loginUser()
+                                            .success(function (r) {
+                                                if (r.user) {
+                                                    for (var i = 0; i < data.posts.length; i++) {
+                                                        if (data.posts[i].like.length > 0) {
+                                                            for (var j = 0; j < data.posts[i].like.length; j++) {
+                                                                if (data.posts[i].like[j].user_id == r.user.id) {
+                                                                    data.posts[i].isLike = true;
+                                                                    break;
+                                                                } else {
+                                                                    data.posts[i].isLike = false;
+                                                                }
+                                                            }
+                                                        } else {
+                                                            data.posts[i].isLike = false;
+                                                        }
+
+                                                        if (data.posts[i].favorite.length > 0) {
+                                                            for (var j = 0; j < data.posts[i].favorite.length; j++) {
+                                                                if (data.posts[i].favorite[j].user_id == r.user.id) {
+                                                                    data.posts[i].isFavorite = true;
+                                                                    break;
+                                                                } else {
+                                                                    data.posts[i].isFavorite = false;
+                                                                }
+                                                            }
+                                                        } else {
+                                                            data.posts[i].isFavorite = false;
+                                                        }
+                                                    }
+                                                } else {
+                                                    for (var i = 0; i < data.posts.length; i++) {
+                                                        data.posts[i].isLike = false;
+                                                        data.posts[i].isFavorite = false;
+                                                    }
+                                                }
+                                            })
+                                            .error();
                                         for (var i =0; i < data.posts.length; i++){
                                             $scope.posts.push(data.posts[i]);
                                         }
@@ -62,6 +138,88 @@
                                 })
                                 .error(function (data) {
                                     console.log(data);
+                                });
+                        }
+                    };
+
+
+                    $scope.likeOrDislikePost = function (id, isLike) {
+                        if (!$scope.loginUser) {
+                            event.preventDefault();
+                            headerService.openLogin();
+                        } else {
+                            var data = {
+                                id: id,
+                                type: isLike == true ? 0 : 1,
+                                user: $scope.loginUser.id
+                            };
+
+
+
+                            if (isLike == true) {
+                                for (var i=0; i< $scope.posts.length; i++){
+                                    if ($scope.posts[i].id == id){
+                                        $scope.posts[i].like.length--;
+                                        $scope.posts[i].isLike = false;
+                                    }
+                                }
+                            } else {
+                                for (var i=0; i< $scope.posts.length; i++){
+                                    if ($scope.posts[i].id == id){
+                                        $scope.posts[i].like.length++;
+                                        $scope.posts[i].isLike = true;
+                                    }
+                                }
+                            }
+
+
+
+                            postService.likeOrDislike(data)
+                                .success(function (data) {
+
+
+                                })
+                                .error(function (data) {
+
+                                });
+                        }
+                    };
+
+                    $scope.favoriteOrUn = function(id, isFavorite) {
+                        if (!$scope.loginUser) {
+                            event.preventDefault();
+                            headerService.openLogin();
+                        } else {
+                            var data = {
+                                post_id: id,
+                                type: isFavorite == true ? 'unFavorite' : 'favorite',
+                                user_id: $scope.loginUser.id
+                            };
+
+                            if (isFavorite == true) {
+                                for (var i = 0; i < $scope.posts.length; i++) {
+                                    if ($scope.posts[i].id == id) {
+                                        $scope.posts[i].favorite.length--;
+                                        $scope.posts[i].isFavorite = false;
+                                    }
+                                }
+                            } else {
+                                for (var i = 0; i < $scope.posts.length; i++) {
+                                    if ($scope.posts[i].id == id) {
+                                        $scope.posts[i].favorite.length++;
+                                        $scope.posts[i].isFavorite = true;
+                                    }
+                                }
+                            }
+
+
+                            postService.favoritePost(data)
+                                .success(function (data) {
+
+
+                                })
+                                .error(function (data) {
+
                                 });
                         }
                     };

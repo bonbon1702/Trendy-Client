@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('shopController', shopController);
 
-    shopController.$inject = ['$scope', 'ngDialog', '$routeParams','$route', 'shopService', 'headerService'];
+    shopController.$inject = ['$scope', 'ngDialog', '$routeParams','$route', 'shopService', 'headerService', 'postService'];
 
-    function shopController($scope, ngDialog, $routeParams,$route, shopService, headerService) {
+    function shopController($scope, ngDialog, $routeParams,$route, shopService, headerService, postService) {
         $scope.comment = null;
         $scope.pagingShop = [];
         $scope.countShop = [];
@@ -19,6 +19,8 @@
         $scope.infoOpen = false;
         $scope.serviceOpen = false;
         $scope.contactOpen = false;
+        $scope.suggestShop = [];
+        $scope.editingComment = false;
 
 
         headerService.loginUser()
@@ -27,13 +29,89 @@
                     $scope.likeBtnStatus = "Like";
                 }
                 $scope.loginUser = data.user;
+                var r = {
+                    'loginId': data.user.id,
+                    'shopId': $routeParams.shopId
+                };
+
+                $scope.editComment = function(index, content){
+                    $scope.shop.comments[index].editing = 'yes';
+                    $scope.editContent = content;
+                };
+
+                $scope.submitEditComment = function(index){
+                    $scope.shop.comments[index].content = this.editContent;
+                    $scope.shop.comments[index].editing = null;
+                    shopService.editShopComment({
+                        id: $scope.shop.comments[index].id,
+                        content: this.editContent
+                    }).success(function(data){
+
+                    }).error();
+                };
+
+                $scope.deleteCommentIndex = function(index){
+
+                    shopService.deleteShopComment({
+                        id: $scope.shop.comments[index].id
+                    }).success(function(data){
+
+                    }).error();
+                    $scope.shop.comments.splice(index,1);
+                };
+
+                $scope.closeEditComment = function(index){
+                    $scope.shop.comments[index].editing = null;
+                };
+                shopService.suggestShop(r)
+                    .success(function(k){
+                        $scope.suggestShop = k.suggests;
+                    })
+                    .error(function(data){});
+                $scope.likeShop = function(id){
+                    shopService.likeOrDislike({
+                        'id': id,
+                        'type': 1,
+                        'user': data.user.id
+                    })
+                        .success(function (data) {
+                            var r = {
+                                'loginId': $scope.loginUser.id,
+                                'shopId': $routeParams.shopId
+                            };
+                            shopService.suggestShop(r)
+                                .success(function(k){
+                                    $scope.suggestShop = k.suggests;
+                                })
+                                .error(function(data){});
+                        })
+                        .error(function (data) {
+
+                        });
+                };
+
+
             })
             .error();
 
         shopService.get($routeParams.shopId)
             .success(function (data) {
-                shopMap.init(data);
-                shopMap.createMarker(data);
+                headerService.loginUser()
+                    .success(function (r) {
+                        if (r.user) {
+                            data.shop['user_avatar'] = r.user.picture_profile;
+                            shopMap.init(data);
+                            shopMap.createMarker(data);
+                        } else {
+                            data.shop['user_avatar'] = 'https://cdn4.iconfinder.com/data/icons/ironman_lin/512/ironman_III.png';
+                            shopMap.init(data);
+                            shopMap.createMarker(data);
+                        }
+                    })
+                    .error();
+                for (var i=0; i < data.shop.comments.length;i++){
+                    data.shop.comments[i].created_at = beautyDate.prettyDate(data.shop.comments[i].created_at);
+                }
                 $scope.shop = data.shop;
 
                 for (var i = 0; i < data.shop.posts.length; i++) {
@@ -42,12 +120,17 @@
                     }
                     $scope.countShop.push(data.shop.posts[i]);
                 }
-                for (var i = 0; i < $scope.shop.like.length; i++) {
-                    if ($scope.loginUser != null && $scope.loginUser.id == $scope.shop.like[i].user_id) {
-                        $scope.likeBtnStatus = "Liked";
-                    } else
-                        $scope.likeBtnStatus = "Like";
-                }
+                headerService.loginUser()
+                    .success(function(r){
+                        for (var i = 0; i < $scope.shop.like.length; i++) {
+                            if (r.user != null && r.user.id == $scope.shop.like[i].user_id) {
+                                $scope.likeBtnStatus = "Liked";
+                            } else
+                                $scope.likeBtnStatus = "Like";
+                        }
+                    }).error();
+
+
                 $scope.likeOrDislike = function () {
                     if (!$scope.loginUser) {
                         $scope.likeBtnStatus = "Like";
@@ -155,7 +238,7 @@
                 .error(function () {
                     console.log(data);
                 });
-        }
+        };
 
         $scope.infoShop = function (shop) {
             ngDialog.open({
@@ -164,66 +247,70 @@
                 className: 'ngdialog-theme-plain-infoShop',
                 controller: ['$scope', function ($scope) {
                     $scope.shop=shop;
+
+
                     $scope.infoShopToggle = function () {
                         $scope.infoOpen = true;
                         $scope.serviceOpen = false;
                         $scope.contactOpen = false;
-                    }
+                    };
                     $scope.saveInfoShop = function () {
                         $scope.infoOpen = false;
-                    }
+                    };
                     $scope.serviceShopToggle = function () {
                         $scope.infoOpen = false;
                         $scope.serviceOpen = true;
                         $scope.contactOpen = false;
-                    }
+                    };
                     $scope.saveServiceShop = function () {
                         $scope.serviceOpen = false;
-                    }
+                    };
                     $scope.contactShopToggle = function () {
                         $scope.infoOpen = false;
                         $scope.serviceOpen = false;
                         $scope.contactOpen = true;
-                    }
+                    };
                     $scope.saveContactShop = function () {
                         $scope.contactOpen = false;
+                    };
+                    if (shop.shop_detail.length > 0) {
+                        //Map
+                        $scope.street = shop.shop_detail[0].street;
+                        $scope.district = shop.shop_detail[0].district;
+                        $scope.city = shop.shop_detail[0].city;
+                        $scope.near_place = shop.shop_detail[0].near_place;
+                        $scope.way_direction = shop.shop_detail[0].way_direction;
+
+                        //Basic Information
+                        $scope.shop_name = shop.shop_detail[0].name;
+                        $scope.time_open = shop.shop_detail[0].time_open;
+                        $scope.time_close = shop.shop_detail[0].time_close;
+                        $scope.price_from = shop.shop_detail[0].price_from;
+                        $scope.price_to = shop.shop_detail[0].price_to;
+
+
+                        //Service Infomation
+                        $scope.morning = shop.shop_detail[0].midday == 1 ? true : false;
+                        $scope.midday = shop.shop_detail[0].midday == 1 ? true : false;
+                        $scope.afternoon = shop.shop_detail[0].afternoon == 1 ? true : false;
+                        $scope.night = shop.shop_detail[0].night == 1 ? true : false;
+                        $scope.shipping = shop.shop_detail[0].shipping == 1 ? true : false;
+                        $scope.credit_card = shop.shop_detail[0].credit_card == 1 ? true : false;
+                        $scope.cooler = shop.shop_detail[0].cooler == 1 ? true : false;
+                        $scope.parking = shop.shop_detail[0].parking == 1 ? true : false;
+                        $scope.children = shop.shop_detail[0].children == 1 ? true : false;
+                        $scope.teen = shop.shop_detail[0].teen == 1 ? true : false;
+                        $scope.middleaged = shop.shop_detail[0].middleaged == 1 ? true : false;
+                        $scope.oldster = shop.shop_detail[0].oldster == 1 ? true : false;
+                        $scope.men = shop.shop_detail[0].men == 1 ? true : false;
+                        $scope.women = shop.shop_detail[0].women == 1 ? true : false;
+
+                        //Contact information
+                        $scope.phone = shop.shop_detail[0].tel;
+                        $scope.website = shop.shop_detail[0].website;
+                        $scope.facebook_page = shop.shop_detail[0].facebook_page;
+
                     }
-                    //Map
-                    $scope.street = shop.shop_detail[0].street;
-                    $scope.district = shop.shop_detail[0].district;
-                    $scope.city = shop.shop_detail[0].city;
-                    $scope.near_place = shop.shop_detail[0].near_place;
-                    $scope.way_direction = shop.shop_detail[0].way_direction;
-
-                    //Basic Information
-                    $scope.shop_name=shop.shop_detail[0].name;
-                    $scope.time_open=shop.shop_detail[0].time_open;
-                    $scope.time_close=shop.shop_detail[0].time_close;
-                    $scope.price_from=shop.shop_detail[0].price_from;
-                    $scope.price_to=shop.shop_detail[0].price_to;
-
-
-                    //Service Infomation
-                    $scope.morning =shop.shop_detail[0].midday == 1 ? true : false;
-                    $scope.midday = shop.shop_detail[0].midday == 1 ? true : false;
-                    $scope.afternoon = shop.shop_detail[0].afternoon == 1 ? true : false;
-                    $scope.night = shop.shop_detail[0].night == 1 ? true : false;
-                    $scope.shipping = shop.shop_detail[0].shipping == 1 ? true : false;
-                    $scope.credit_card = shop.shop_detail[0].credit_card == 1 ? true : false;
-                    $scope.cooler = shop.shop_detail[0].cooler == 1 ? true : false;
-                    $scope.parking = shop.shop_detail[0].parking == 1 ? true : false;
-                    $scope.children = shop.shop_detail[0].children == 1 ? true : false;
-                    $scope.teen = shop.shop_detail[0].teen == 1 ? true : false;
-                    $scope.middleaged = shop.shop_detail[0].middleaged == 1 ? true : false;
-                    $scope.oldster = shop.shop_detail[0].oldster == 1 ? true : false;
-                    $scope.men = shop.shop_detail[0].men == 1 ? true : false;
-                    $scope.women = shop.shop_detail[0].women== 1 ? true : false;
-
-                    //Contact information
-                    $scope.phone=shop.shop_detail[0].tel;
-                    $scope.website=shop.shop_detail[0].website;
-                    $scope.facebook_page=shop.shop_detail[0].facebook_page;
-
                     $scope.saveShopDetail = function(){
                         data ={
                             'shop_id' : shop.id,
@@ -257,8 +344,8 @@
                             'website' : $scope.website,
                             'facebook_page' : $scope.facebook_page,
                             'approve' : 0
-                        }
-                        console.log($scope.morning);
+                        };
+
                         shopService.saveShopDetail(data)
                             .success(function(data){
                                 ngDialog.open({
@@ -279,119 +366,10 @@
                 }]
             });
 
-        }
+        };
 
         $scope.showDialog = function (id) {
-            ngDialog.open({
-                template: 'app/newfeed/templates/newfeed.html',
-                className: 'ngdialog-theme-plain post-dialog',
-                controller: ['$scope', 'newfeedService', '$window', 'headerService', function ($scope, newfeedService, $window, headerService) {
-                    $scope.iconLike = false;
-
-                    newfeedService.get(id)
-                        .success(function (data) {
-                            $scope.post = data.post;
-
-                            headerService.loginUser()
-                                .success(function (data) {
-                                    $scope.loginUser = data.user;
-                                    if ($scope.loginUser) {
-                                        for (var i = 0; i < $scope.post.like.length; i++) {
-                                            if ($scope.post.like[i].user_id == $scope.loginUser.id) {
-                                                $scope.iconLike = true;
-                                                break;
-                                            } else {
-                                                $scope.iconLike = false;
-                                            }
-                                        }
-                                    }
-                                })
-                                .error();
-
-                            $scope.tags = [];
-                            for (var i = 0; i < $scope.post.tag.length; i++) {
-                                $scope.tags.push({
-                                    'text': $scope.post.tag[i].tag_content.content
-                                });
-                            }
-
-                            $scope.hoverPoint = function (index) {
-                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
-                                    var ele = angular.element($(this));
-                                    if (ele.html() == index) {
-                                        ele.parent().addClass('bounce');
-                                    }
-                                })
-                            };
-
-                            $scope.leavePoint = function (index) {
-                                angular.element(document).find('div .magiccard span .item-tag-label').each(function () {
-                                    var ele = angular.element($(this));
-                                    if (ele.html() == index) {
-                                        ele.parent().removeClass('bounce');
-                                    }
-                                })
-                            };
-
-                            $scope.submitComment = function () {
-                                if (!$scope.loginUser) {
-                                    event.preventDefault();
-                                    headerService.openLogin();
-                                } else {
-                                    var data = {
-                                        'content': $scope.comment,
-                                        'type_comment': 0,
-                                        'type_id': id,
-                                        'user_id': $scope.loginUser.id
-                                    };
-                                    $scope.comment = null;
-                                    newfeedService.save(data)
-                                        .success(function (data) {
-                                            $scope.post.comments.push(data.comment);
-                                        })
-                                        .error(function (data) {
-
-                                        });
-                                }
-                            };
-
-                            $scope.likeOrDislike = function () {
-                                if (!$scope.loginUser) {
-                                    event.preventDefault();
-                                    headerService.openLogin();
-                                } else {
-                                    var data = {
-                                        id: id,
-                                        type: $scope.iconLike == true ? 0 : 1,
-                                        user: $scope.loginUser.id
-                                    };
-
-                                    newfeedService.likeOrDislike(data)
-                                        .success(function (data) {
-                                            if ($scope.iconLike == true) {
-                                                $scope.post.like.length--;
-                                                $scope.iconLike = false;
-                                            } else {
-                                                $scope.post.like.length++;
-                                                $scope.iconLike = true;
-                                            }
-
-                                        })
-                                        .error(function (data) {
-
-                                        });
-                                }
-                            };
-
-                            $scope.closeDialog = function () {
-                                ngDialog.close();
-                            }
-                        })
-                        .error(function (data) {
-
-                        });
-                }]
-            });
+            postService.openPost(id, 'shop/'+ $routeParams.shopId);
         };
     }
 })(angular);

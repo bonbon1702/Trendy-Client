@@ -45,12 +45,12 @@ app.directive('autocomplete', function () {
 
             // starts autocompleting on typing in something
             $scope.$watch('searchParam', function (newValue, oldValue) {
-
                 if (oldValue === newValue || (!oldValue && $scope.initLock)) {
                     return;
                 }
 
                 if (watching && typeof $scope.searchParam !== 'undefined' && $scope.searchParam !== null) {
+                    if ($scope.searchParam.length < 3) $scope.suggestions = null;
                     $scope.completing = true;
                     $scope.searchFilter = $scope.searchParam;
                     $scope.selectedIndex = -1;

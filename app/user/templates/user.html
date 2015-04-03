@@ -1,51 +1,74 @@
-<div id="content">
+<div id="content" ng-controller="userController" style="margin-top: 55px;">
     <div class="innerAll">
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
-            <div class="col-lg-9 col-md-8" style="top:42px;">
-
+            <div class="col-lg-9 col-md-8" >
                 <div class="timeline-cover">
                     <div class="widget border-bottom">
                         <div class="timeline-cover">
                             <div class="cover image">
-                                <div class="top">
-                                    <img src="assets/img/images/photodune-2755655-party-time-s.jpg"
-                                         class="img-responsive"/>
+                                <div class="top" >
+                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
+                                    <!--<div class="cropArea" ng-show="coverFlag == false">-->
+                                        <!--<img-crop image="cover"-->
+                                                   <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
+                                        <!--<img-crop image="cover" result-image="myCroppedImage"></img-crop>-->
+                                    <!--</div>-->
+                                    <!--<div ng-show="coverFlag == false">-->
+                                        <!--<image-crop-->
+                                                <!--data-width="100%"-->
+                                                <!--data-height="auto"-->
+                                                <!--data-shape="square"-->
+                                                <!--data-result="cover"-->
+                                                <!--data-step="myCroppedImage">-->
+                                        <!--</image-crop>-->
+                                    <!--</div>-->
                                 </div>
-                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"
-                                     data-ft="{&quot;tn&quot;:&quot;*|&quot;}">
-                                    <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
-                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b"><span
-                                                    class="fileupload-new"></span>
-                                                <button ng-file-select ng-file-change="imageSelected($files, $event)"
-                                                        class="cover-img">
-                                                </button>
-                                    </div>
-                                    </a>
-                                </div>
+                                <!--<div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"-->
+                                     <!--data-ft="{&quot;tn&quot;:&quot;*|&quot;}">-->
+                                    <!--<div class="fileupload fileupload-new margin-none" data-provides="fileupload">-->
+                                            <!--<span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">-->
+                                                <!--<span class="fileupload-new"></span>-->
+                                                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)"-->
+                                                        <!--class="cover-img">-->
+                                                <!--</button>-->
+                                            <!--</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
                                 <ul class="list-unstyled">
                                     <li class="active">
-                                        <a ng-href="#/user/{{loginUserId}}">
+                                        <a ng-href="/user/{{pageUserId}}">
                                             <i class="fa fa-fw fa-clock-o"></i>
                                         <span>Timeline</span>
                                         </a>
                                     </li>
-                                    <li><a href="about.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a>
+                                    </li>
+                                    <li style="float: right;background: none;margin-right: 18px;" ng-if="flagCoverBtn == true">
+                                        <button ng-click="cancelCoverImg()" class="btn btn-primary" style="margin-right: 20px;">
+                                            <i class="fa fa-times" style="font-size: 13px;width: 11px;"></i>
+                                            Cancel
+                                        </button>
+                                        <button ng-click="saveCoverImg()" class="btn btn-primary">
+                                            <i class="fa fa-check" style="font-size: 13px;width: 11px;"></i>
+                                            Save
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
+
                             <div class="widget cover image">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
                                     </div>
-                                    <div class="innerAll border-right pull-left">
-                                        <h3 class="margin-none">{{ user.username }}</h3>
-                                        <span>Works at MOSAICPRO</span>
+                                    <div class="innerAll border-right pull-left" style="margin-top: 12px">
+                                        <h3 class="margin-none">{{ user.username }} - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></h3>
+
                                     </div>
                                     <div class="innerAll pull-left">
                                         <li class="ProfileNav-item ProfileNav-item--following">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="tweets" ng-href="#/following/{{user.id}}"
+                                               data-nav="tweets" ng-href="/following/{{user.id}}"
                                                data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
@@ -53,7 +76,7 @@
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
                                             <a class="ProfileNav-stat ProfileNav-stat--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor"
-                                               data-nav="followers" ng-href="#/follower/{{user.id}}"
+                                               data-nav="followers" ng-href="/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Followers</span>
                                                 <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
@@ -132,7 +155,7 @@
                                 <div class="row">
                                     <div class="col-md-3" ng-repeat="album in user.album ">
                                         <div class="thumbnail widget-thumbnail" ng-show="show">
-                                            <a href="/#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
+                                            <a data-target="#tab2-3-1" ng-click="showTabAlbum($index)" data-toggle="tab">
                                                 <div class=" holderjs-fluid"
                                                      style="color: rgb(170, 170, 170); width: 100%; height: 200px; line-height: 200px; background-color: rgb(238, 238, 238);">
                                                     <img ng-src="{{ album.album_detail[0].image_url_editor }}"
@@ -141,7 +164,7 @@
                                             </a>
                                             <div class="description  meta" style="background: none;top: 160px;left: 18px;">
                                                 <div class="hover-blue">
-                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album)">
+                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album,user.id)">
                                                         <i class="fa fa-edit" style="color: #626366;"></i>
                                                     </button>
                                                 </div>
@@ -160,7 +183,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2-3-1" ng-hide="show">
-                                <a href="/#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
+                                <a data-target="#tab2-3" data-toggle="tab" ng-click="setShowInitValue()"><h4
                                         style="color: #0084B4;margin-left: 18px;">Back</h4></a>
 
                                 <h3 style="text-align: center;margin-bottom: 30px;">{{ user.album[index].album_name}}</h3>
@@ -169,13 +192,12 @@
                                     <ul class="row">
 
                                         <!-- Gallery item -->
-
                                         <div class="blc-row" style="width: 22%;">
                                             <div ng-repeat="post in user.album[index].album_detail">
                                                 <div ng-if="$index % 4 == 0">
                                                     <div class="widget border-none bg-none widget-pinterest active">
                                                         <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
+                                                            <a class="thumb no-ajaxify" ng-click="openPostUser(post.post_id)"
                                                                data-gallery="gallery-3" >
                                                                 <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                                      class="img-responsive"/>
@@ -199,7 +221,7 @@
                                                 <div ng-if="$index % 4 == 1">
                                                     <div class="widget border-none bg-none widget-pinterest active">
                                                         <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
+                                                            <a class="thumb no-ajaxify" ng-click="openPostUser(post.post_id)"
                                                                data-gallery="gallery-3" >
                                                                 <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                                      class="img-responsive"/>
@@ -222,7 +244,7 @@
                                                 <div ng-if="$index % 4 == 2">
                                                     <div class="widget border-none bg-none widget-pinterest active">
                                                         <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
+                                                            <a class="thumb no-ajaxify" ng-click="openPostUser(post.post_id)"
                                                                data-gallery="gallery-3" >
                                                                 <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                                      class="img-responsive"/>
@@ -245,7 +267,7 @@
                                                 <div ng-if="$index % 4 == 3">
                                                     <div class="widget border-none bg-none widget-pinterest active">
                                                         <div class="widget-body bg-none padding-none">
-                                                            <a class="thumb no-ajaxify" ng-click="showDialog(post.post_id)"
+                                                            <a class="thumb no-ajaxify" ng-click="openPostUser(post.post_id)"
                                                                data-gallery="gallery-3" >
                                                                 <img ng-src="{{ post.image_url_editor }}" alt="photo"
                                                                      class="img-responsive"/>
@@ -269,36 +291,12 @@
                                 </div>
                                 <!-- // Gallery END -->
                             </div>
-                            <div class="tab-pane" id="tab3-3">
-                                <h4>Third tab</h4>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel
-                                    massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum.
-                                    Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend
-                                    nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget
-                                    gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur
-                                    ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus
-                                    magna.</p>
-                            </div>
-
-                            <div class="tab-pane" id="tab4-3">
-                                <h4>Fourth tab</h4>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ultrices libero vel
-                                    massa egestas facilisis. Mauris convallis augue nec dolor dignissim vestibulum.
-                                    Praesent imperdiet elit posuere arcu posuere consectetur. Morbi dignissim eleifend
-                                    nibh, eget tincidunt nibh dignissim hendrerit. Cras iaculis congue lorem, eget
-                                    gravida augue vehicula sed. Nam lorem sem, consectetur ac tempus quis, consectetur
-                                    ut lectus. In bibendum luctus pharetra. Morbi lacinia sem sem. Phasellus quis tellus
-                                    magna.</p>
-                            </div>
-
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-4 col-lg-3"  style="top:42px;">
+            <div class="col-md-4 col-lg-3">
 
                 <div class="widget">
                     <h5 class="innerAll margin-none">PEOPLE YOU MAY WANT TO FOLLOW</h5>
@@ -306,17 +304,17 @@
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
                             <li class="list-group-item" ng-repeat="user in itemToItemFollow">
-                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 234px;">
+                                <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 100%;">
                                     <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
                                          style="height: 36px;margin: 5px 4px;"/>
 
                                     <div class="media-body">
                                         <h5>
-                                            <a ng-href="#/user/{{user.id}}" class="text-inverse"
+                                            <a ng-href="/user/{{user.id}}" class="text-inverse"
                                                style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
                                         <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
-                                           ng-click="following(user.id)">
+                                           ng-click="folowingUser(user.id)">
                                             Follow
                                         </a>
                                     </div>

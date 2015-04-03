@@ -10,7 +10,10 @@
     function aroundService($http, $rootScope){
         return {
             getPostAround: function (data) {
-                return $http.get($rootScope.url + 'post/getPostAround/paging/' + data.id);
+                return $http.get($rootScope.url + 'post/getPostAround/paging/' + data.id + '/lat/'+ data.lat + '/lng/'+ data.lng);
+            },
+            getAllShop: function (){
+                return $http.get($rootScope.url + 'getShopList');
             }
         }
     }

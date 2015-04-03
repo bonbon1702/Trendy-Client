@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-md-8">
+<div class="col-lg-9 col-md-8" style="width: 100%;margin-top: 53px">
     <div style="position: relative">
         <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
             <div class="height-controller" style="height: 500px;">
@@ -8,7 +8,7 @@
                                callback="callback" data="shop" update="update"></magiccard>
                     <div class="description  meta">
                         <div class="hover-blue">
-                            <button id="tagButton" style="margin-left: 419px;" class=" btn btn-primary">Click to tag
+                            <button id="tagButton" style="margin-left: 46%;" class=" btn btn-primary">Click to tag
                             </button>
                         </div>
 
@@ -26,93 +26,35 @@
                 <input type="submit" ng-click="submit()" value="Submit" class="submit">
             </div>
             <div class="under-right" style="width:50%;">
-                <div style="width: 292px;">
-                    <tags-input ng-model="tags" on-tag-added="tagChanged()"></tags-input>
+                <!-- Single button -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Tag <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="tag in tagContent" ng-click="addTag(tag.id, tag.content)" style="cursor: pointer">
+                            <a>
+                                {{tag.content}}
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+                <span style="padding-left: 50px" ng-if="tags.length > 0">
+                    <span ng-repeat="tag in tags" style="padding-right: 10px">
+                        <i class="fa fa-tags fa-lg" style="color:#176CED;padding-right: 3px"></i>{{ tag.content }}<i class="fa fa-times" ng-click="deleteTag(tag.id)" style="padding-left: 3px"></i>
+                    </span>
+                </span>
+
                 <!--<button id="tagButton" class="btn btn-primary">Click to tag</button>-->
-                <div ng-repeat="point in points track by $index">
-                    <h3>{{ $index+1 }}-{{ point.name }} - {{ point.price }} - {{ point.address }} -
-                        <button ng-click="deletePoint($index)"
-                                class="btn btn-primary">Delete
-                        </button>
-                    </h3>
+                <div ng-repeat="point in points track by $index" style="padding-top: 30px">
+                    <span class="numberCircle-post">{{ $index+1 }}</span>
+                    <span style="font-size: large">{{ point.name }} with {{ point.price }} VND at {{ point.address }}
+                        <i class="fa fa-times" ng-click="deletePoint($index)" style="padding-left: 3px"></i>
+                    <span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="col-md-4 col-lg-3">
-    <div class="widget">
-        <h5 class="innerAll margin-none bg-primary">PEOPLE YOU MAY KNOW</h5>
-
-        <div class="widget-body padding-none">
-            <ul class="list-group list-group-1 borders-none margin-none">
-                <li class="list-group-item">
-                    <div class="media border-bottom innerAll margin-none">
-                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                             style="height: 44px;"/>
-
-                        <div class="media-body">
-                            <h5 class="margin-none">
-                                <a href="" class="text-inverse"
-                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                            </h5>
-
-                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                <a href="" class="btn btn-primary"
-                                   style="width: 71px;height: 28px;margin-top: -24px;">
-                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                    Follow
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="media border-bottom innerAll margin-none">
-                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                             style="height: 44px;"/>
-
-                        <div class="media-body">
-                            <h5 class="margin-none">
-                                <a href="" class="text-inverse"
-                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                            </h5>
-
-                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                <a href="" class="btn btn-primary"
-                                   style="width: 71px;height: 28px;margin-top: -24px;">
-                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                    Follow
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="media border-bottom innerAll margin-none">
-                        <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object"
-                             style="height: 44px;"/>
-
-                        <div class="media-body">
-                            <h5 class="margin-none">
-                                <a href="" class="text-inverse"
-                                   style="margin-top: -10px;margin-left: -16px;">Social Admin Released</a>
-                            </h5>
-
-                            <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
-                                <a href="" class="btn btn-primary"
-                                   style="width: 71px;height: 28px;margin-top: -24px;">
-                                    <i class="fa fa-user" style="font-size: 13px;width: 11px;"></i>
-                                    Follow
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
 
 
-</div>

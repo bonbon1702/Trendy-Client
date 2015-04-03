@@ -8,16 +8,13 @@
 
     function shopService($http, $rootScope) {
         return {
-            list: function () {
-                return $http.get($rootScope.url + 'shop');
-            },
             get: function(id) {
-                return $http.get($rootScope.url + 'shop/' + id);
+                return $http.get($rootScope.url + 'shop/getShop/' + id);
             },
             save: function(data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'comment',
+                    url: $rootScope.url + 'comment/saveComment',
                     data: data
                 })
             },
@@ -30,10 +27,19 @@
             saveShopDetail: function(data){
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'shop_detail',
+                    url: $rootScope.url + 'shop/saveShopInfo',
                     data: data
                 })
-            }
+            },
+            suggestShop: function(data){
+                return $http.get($rootScope.url + 'shop/suggestShop/loginId/'+data.loginId+'/shopId/' + data.shopId);
+            },
+            editShopComment: function(data){
+                return $http.get($rootScope.url + 'comment/editShopComment/id/' + data.id + '/content/' + data.content)
+            },
+            deleteShopComment: function(data){
+                return $http.get($rootScope.url + 'comment/deleteShopComment/id/' + data.id)
+            },
         }
     }
 })(angular);

@@ -1,247 +1,304 @@
-<!--<!DOCTYPE html>-->
-<!--<html ng-app="MyApp">-->
-<!--<head>-->
-    <!--<meta charset="utf-8">-->
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <!--<script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>-->
-    <!--<base href="/">-->
-    <!--<title></title>-->
-    <!--&lt;!&ndash; Bootstrap &ndash;&gt;-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/font-awesome.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_filetypes.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_regular.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_social.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/dist/css/picto.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/css.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-infoShop.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-editAlbum.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-congratulation.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/autocomplete.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/magiccard.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/animations.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/jquery-ui.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/loading-bar.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/animate.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.easy-pie-chart.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-select.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-switch.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/fileupload.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/multi-select.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/dropzone.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.plupload.queue.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/blueimp-gallery.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.gritter.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.notyfy.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/notyfy.theme.default.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/prettyPhoto.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/css_1.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/css_2.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/css_3.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="assets/css/css_4.css">-->
-    <!--<link rel="stylesheet" type="text/css"-->
-          <!--href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">-->
-    <!--<link rel="stylesheet" type="text/css"-->
-          <!--href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">-->
-
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash; MAIN CONTENT AND INJECTED VIEWS &ndash;&gt;-->
-<!--&lt;!&ndash;Header&ndash;&gt;-->
-<!--<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;">-->
-    <!--<div class=" pull-left">-->
-        <!--<a class="btn bt-sm glyphicon glyphicon-home" style="top: 9px;font-size: 1.5em;color: #ccc;" ng-href="#/">-->
-        <!--</a>-->
-    <!--</div>-->
-    <!--<ul class="notifications pull-left hidden-xs">-->
-        <!--<li class="dropdown notif">-->
-            <!--<a href="" class="dropdown-toggle" data-toggle="dropdown" ng-click="reader_notification()">-->
-                <!--<i class="notif-block icon-envelope-1" style="position: relative;">-->
-                    <!--<div class="numberCircle" ng-if="notification_unread.length > 0">-->
-                        <!--{{ notification_unread.length }}-->
-                    <!--</div>-->
-                <!--</i>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu chat media-list">-->
-                <!--<li class="media" ng-repeat="noti in notification | orderBy:id:reverse">-->
-                    <!--<a class="pull-left" href="#"><img class="media-object thumb"-->
-                                                       <!--ng-src="{{ noti.avatar_of_user_effected }}" alt="50x50"-->
-                                                       <!--width="50"/></a>-->
-
-                    <!--<div class="media-body">-->
-                        <!--<span class="label label-default pull-right">{{ noti.created_at }}</span>-->
-                        <!--<h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>-->
-
-                        <!--<p class="margin-none">{{ noti.name_of_user_effected }} {{ noti.action }}-->
-                            <!--in-->
-                            <!--your post</p>-->
-                    <!--</div>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</li>-->
-    <!--</ul>-->
-    <!--<div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">-->
-        <!--<div class="dropdown username pull-left" ng-show="loginUser != null">-->
-            <!--<a class="dropdown-toggle" data-toggle="dropdown">-->
-        				<!--<span class="media margin-none">-->
-        					<!--<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"-->
-                                                         <!--class="img-circle"></span>-->
-        					<!--<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>-->
-        				<!--</span>-->
-            <!--</a>-->
-            <!--<ul class="dropdown-menu" ng-show="loginUser != null">-->
-                <!--<li><a href="about.html?lang=en">About</a></li>-->
-                <!--<li><a data-track="owner" ng-href="#/user/{{loginUser.id}}">Profile</a></li>-->
-                <!--<li><a ng-href="#/" ng-click="logout()">Logout</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="dropdown username pull-left" ng-show="loginUser == null" style="margin: -2px;">-->
-            <!--<button ng-click="openLogin()" class="btn btn-primary">Login-->
-                <!--<i class="fa fa-fw fa-unlock-alt"></i>-->
-            <!--</button>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="input-group hidden-xs pull-left" style="padding-left: 30px">-->
-        <!--<autocomplete ng-model="type" data="data" on-type="update"-->
-                      <!--attr-placeholder="Search friend or shop..."-->
-                      <!--template-url="app/header/templates/searchBar.html">-->
-        <!--</autocomplete>-->
-    <!--</div>-->
-    <!--<ul class="nav navbar-nav">-->
-        <!--<li>-->
-            <!--<a ng-href="#/">Trendy</a>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a ng-href="#/newfeed">NewFeed</a>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a ng-href="#/around">Around here</a>-->
-        <!--</li>-->
-        <!--<li>-->
-            <!--<a ng-href="#/favorite">Favorite</a>-->
-        <!--</li>-->
-    <!--</ul>-->
-    <!--<div data-provides="fileupload">-->
-            <!--<span class="btn btn-default btn-file "-->
-                  <!--style="margin: 9px;background-color: #176CED;color: #fff;float: right" ng-click="checkLogin()">-->
-                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)" class="btn btn-primary"-->
-                        <!--style="border: none;background-color: #176CED;height: 22px;width: 112px;padding: 0px 0px ;display: list-item;">-->
-                    <!--<span class="fa fa-camera"></span>-->
-                    <!--Upload Image-->
-                <!--</button>-->
-            <!--</span>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div id="main" style="margin-top: 53px">-->
-    <!--&lt;!&ndash; angular templating &ndash;&gt;-->
-    <!--&lt;!&ndash; this is where content will be injected &ndash;&gt;-->
-
-    <!--<div ng-view></div>-->
-<!--</div>-->
-
-<!--<script src="assets/js/libs/jquery.js"></script>-->
-<!--<script src="assets/js/libs/jquery-ui.min.js"></script>-->
-<!--<script src="assets/js/libs/angular.js"></script>-->
-<!--<script src="assets/js/libs/masonry.pkgd.min.js"></script>-->
-<!--<script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>-->
-<!--<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>-->
-<!--<script src="assets/css/dist/js/bootstrap.min.js"></script>-->
-<!--<script src="assets/js/libs/ngDialog.min.js"></script>-->
-<!--<script src="assets/js/googleMap.js"></script>-->
-<!--<script src="assets/js/infoShopMap.js"></script>-->
-<!--<script src="assets/js/shopMap.js"></script>-->
-<!--<script src="assets/js/core.init.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>-->
-<!--<script src="assets/js/loadTabs.js"></script>-->
-<!--<script src="assets/js/magiccard_ver2.js"></script>-->
-<!--<script src="assets/js/libs/accounting.min.js"></script>-->
-<!--<script src="assets/js/main_marker.js"></script>-->
-<!--<script src="assets/js/autocomplete.js"></script>-->
-<!--<script src="assets/js/lazyloading_v2.js"></script>-->
-<!--<script src="assets/js/libs/loading-bar.min.js"></script>-->
-<!--<script src="assets/js/libs/jquery.easypiechart.min.js"></script>-->
-<!--<script src="assets/js/libs/bootstrap-select.js"></script>-->
-<!--<script src="assets/js/libs/bootstrap-switch.js"></script>-->
-<!--<script src="assets/js/libs/bootstrap-fileupload.js"></script>-->
-<!--<script src="assets/js/libs/jquery.multi-select.js"></script>-->
-<!--<script src="assets/js/libs/dropzone.min.js"></script>-->
-<!--<script src="assets/js/libs/jquery.plupload.queue.js"></script>-->
-<!--<script src="assets/js/libs/blueimp-gallery.min.js"></script>-->
-<!--<script src="assets/js/libs/blueimp-gallery-fullscreen.js"></script>-->
-<!--<script src="assets/js/libs/blueimp-gallery-indicator.js"></script>-->
-<!--<script src="assets/js/libs/blueimp-gallery-video.js"></script>-->
-<!--<script src="assets/js/libs/blueimp-helper.js"></script>-->
-<!--<script src="assets/js/libs/jquery.blueimp-gallery.min.js"></script>-->
-<!--<script src="assets/js/libs/jquery.gritter.min.js"></script>-->
-<!--<script src="assets/js/libs/jquery.notyfy.js"></script>-->
-<!--<script src="assets/js/libs/jquery.prettyPhoto.js"></script>-->
-<!--<script src="assets/js/libs/modernizr.js"></script>-->
-<!--<script src="assets/js/libs/caman.full.min.js"></script>-->
-<!--<script src="assets/js/magicSearch.js"></script>-->
-<!--<script src="assets/js/libs/angular-route.js"></script>-->
-<!--<script src="assets/js/libs/angular-ui-router.min.js"></script>-->
-<!--<script src="assets/js/libs/angular-route.min.js"></script>-->
-<!--<script src="assets/js/libs/angular-route.min.js.map"></script>-->
-<!--<script src="assets/js/libs/oauth.min.js"></script>-->
-<!--<script src="assets/js/libs/angular-file-upload-all.min.js"></script>-->
-<!--<script src="assets/js/libs/hello.min.js"></script>-->
-<!--<script src="assets/js/libs/pixlr.js"></script>-->
-<!--<script src="assets/js/libs/ng-infinite-scroll.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js"></script>-->
-<!--<script src="assets/js/libs/angular.audio.js"></script>-->
-<!--<script src="assets/js/libs/angular-deckgrid.js"></script>-->
-<!--<script src="assets/js/libs/angular-masonry-directive.js"></script>-->
-
-
-<!--&lt;!&ndash; load angularjs file &ndash;&gt;-->
-<!--<script src="app/app.js"></script>-->
-<!--&lt;!&ndash; load our application &ndash;&gt;-->
-
-<!--&lt;!&ndash;home&ndash;&gt;-->
-<!--<script src="app/home/homeController.js"></script>-->
-<!--<script src="app/home/homeService.js"></script>-->
-
-<!--&lt;!&ndash;user&ndash;&gt;-->
-<!--<script src="app/user/userController.js"></script>-->
-<!--<script src="app/user/userService.js"></script>-->
-
-<!--&lt;!&ndash;shop&ndash;&gt;-->
-<!--<script src="app/shop/shopController.js"></script>-->
-<!--<script src="app/shop/shopService.js"></script>-->
-
-<!--&lt;!&ndash;post&ndash;&gt;-->
-<!--<script src="app/post/postController.js"></script>-->
-<!--<script src="app/post/postService.js"></script>-->
-
-<!--&lt;!&ndash;newfeed&ndash;&gt;-->
-<!--<script src="app/newfeed/newfeedController.js"></script>-->
-<!--<script src="app/newfeed/newfeedService.js"></script>-->
-
-<!--&lt;!&ndash;header&ndash;&gt;-->
-<!--<script src="app/header/headerController.js"></script>-->
-<!--<script src="app/header/headerService.js"></script>-->
-
-<!--&lt;!&ndash;trendy&ndash;&gt;-->
-<!--<script src="app/trendy/trendyController.js"></script>-->
-<!--<script src="app/trendy/trendyService.js"></script>-->
-
-<!--&lt;!&ndash;favorite&ndash;&gt;-->
-<!--<script src="app/favorite/favoriteController.js"></script>-->
-<!--<script src="app/favorite/favoriteService.js"></script>-->
-
-<!--&lt;!&ndash;around&ndash;&gt;-->
-<!--<script src="app/around/aroundController.js"></script>-->
-<!--<script src="app/around/aroundService.js"></script>-->
-
-<!--</body>-->
-<!--</html>-->
-<html>
-<head></head>
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <base href="/">
+    <title></title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_filetypes.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_regular.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/glyphicons_social.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dist/css/picto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-infoShop.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-editAlbum.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ngDialog-theme-plain-custom-congratulation.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/autocomplete.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/magiccard.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/animations.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/loading-bar.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.easy-pie-chart.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/bootstrap-switch.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/fileupload.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/multi-select.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.plupload.queue.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/blueimp-gallery.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.gritter.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/jquery.notyfy.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/notyfy.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/prettyPhoto.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/ng-img-crop.css">
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/libs/ng-img-crop.scss">-->
+    <link rel="stylesheet" type="text/css" href="assets/css/css_1.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css_2.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css_3.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css_4.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/libs/image-crop-styles.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
+</head>
 <body>
-<img src="http://winmain.vn/wp-content/uploads/2013/09/bao-tri-dot-xuat.jpg">
+<!-- MAIN CONTENT AND INJECTED VIEWS -->
+<!--Header-->
+<div class="navbar hidden-print navbar-default box main" role="navigation" ng-controller="headerController" style="position: fixed;width: 100%;top:0;z-index: 999999;">
+    <ul class="notifications pull-left hidden-xs">
+        <li class="dropdown notif">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-click="reader_notification()" style="font-size: 20px;padding-top: 11px;">
+                <i class="glyphicon glyphicon-bell" style="position: relative;">
+                    <div class="numberCircle" ng-if="notification_unread.length > 0">
+                        {{ notification_unread.length }}
+                    </div>
+                </i>
+            </a>
+            <ul class="dropdown-menu chat media-list" style="max-height: 500px;overflow-y: auto;">
+                <li class="media" ng-repeat="noti in notification | orderBy:id:reverse" ng-click="openPost(noti.post_id)" style="cursor: pointer">
+                    <a class="pull-left"><img class="media-object thumb"
+                                                       ng-src="{{ noti.avatar_of_user_effected }}" alt="50x50"
+                                                       width="50"/></a>
+
+                    <div class="media-body">
+                        <span class="label label-default pull-right">{{ noti.created_at }}</span>
+                        <h5 class="media-heading">{{ noti.name_of_user_effected }}</h5>
+
+                        <p class="margin-none" ng-if="loginUser.id != noti.user_id">{{ noti.action }}
+                            in
+                            {{ noti.username }}'s post</p>
+                        <p class="margin-none" ng-if="loginUser.id == noti.user_id">{{ noti.action }}
+                            in
+                            your post</p>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="user-action pull-right menu-right-hidden-xs menu-left-hidden-xs border-left">
+        <div class="dropdown username pull-left" ng-hide="loginUser == null" ng-cloak>
+            <a class="dropdown-toggle" data-toggle="dropdown">
+        				<span class="media margin-none">
+        					<span class="pull-left"><img ng-src="{{ loginUser.picture_profile }}" alt="user"
+                                                         class="img-circle"></span>
+        					<span class="media-body">{{ loginUser.username}} <span class="caret"></span></span>
+        				</span>
+            </a>
+            <ul class="dropdown-menu" ng-hide="loginUser == null" ng-cloak>
+                <li><a data-track="owner" ng-href="/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
+                <li><a ng-href="/" ng-click="logout()">Logout</a></li>
+            </ul>
+        </div>
+        <div class="dropdown username pull-left" ng-hide="loginUser != null" style="margin: -2px;" ng-cloak>
+            <button ng-click="openLogin()" class="btn btn-primary">Login
+                <i class="fa fa-fw fa-unlock-alt"></i>
+            </button>
+        </div>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="ProfileNav-item ProfileNav-item--following is-active"  ng-class="trendy == true ? 'is-active' : ''">
+            <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newsfeed" ng-click="clickNavBar()">Newsfeed</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
+        </li>
+        <li>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/favorite" ng-click="clickNavBar()">Favorite</a>
+        </li>
+    </ul>
+
+
+    <div data-provides="fileupload" ng-hide="!loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-file-select="" ng-file-change="imageSelected($files, $event)" class="btn btn-primary"
+                         style="border: none;background-color: #176CED;height: 22px;width: 75px;padding: 0px 0px ;display: list-item;">
+
+                    <span class="fa fa-camera" ></span>
+                    Upload
+                </button>
+            </span>
+    </div>
+    <div ng-hide="loginUser" ng-cloak>
+            <span class="btn btn-default btn-file"
+                  style="margin: 9px;background-color: #176CED;color: #fff;float: right">
+                <button  ng-click="checkLogin()" class="btn btn-primary"
+                         style="border: none;background-color: #176CED;height: 22px;width: 75px;padding: 0px 0px ;display: list-item;">
+
+                    <span class="fa fa-camera" ></span>
+                    Upload
+                </button>
+            </span>
+    </div>
+    <div class="input-group hidden-xs pull-left" style="padding-left: 30px;float: right !important;">
+        <autocomplete ng-model="type" data="data" on-type="update"
+                      attr-placeholder="Search friend or shop..."
+                      template-url="app/header/templates/searchBar.html">
+        </autocomplete>
+    </div>
+
+
+    <!--<div style="margin-top: 52px;height: 50px;position: fixed;width: 100%;background-color: black;text-align: center">-->
+        <!--<div class="nav-bar-trendy">-->
+            <!--<div><hr style="width: 336px;"></div>-->
+            <!--<span ng-class="typeClick == '/' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/" ng-click="navBar('/')">Trendy</a></span>-->
+            <!--<div><hr style=" width: 58px;"></div>-->
+            <!--<span ng-class="typeClick == '/newsfeed' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/newfeed" ng-click="navBar('/newsfeed')">NewsFeed</a></span>-->
+            <!--<div><hr style=" width: 58px;"></div>-->
+            <!--<span ng-class="typeClick == '/around' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/around" ng-click="navBar('/around')">Around Here</a></span>-->
+            <!--<div><hr style=" width: 58px;"></div>-->
+            <!--<span ng-class="typeClick == '/favorite' ? 'bigbigFont' : 'smallsmallFont'"><a style="text-decoration: none;" ng-href="/favorite" ng-click="navBar('/favorite')">Favorite</a></span>-->
+            <!--<div><hr style=" width: 305px;"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<div id="main">
+    <!-- angular templating -->
+    <!-- this is where content will be injected -->
+
+    <div ng-view></div>
+</div>
+
+<script src="assets/js/libs/jquery.js"></script>
+<script src="assets/js/libs/jquery-ui.min.js"></script>
+<script src="assets/js/libs/angular.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="assets/js/libs/masonry.pkgd.min.js"></script>
+<script src="assets/js/libs/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script src="assets/css/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/libs/ngDialog.min.js"></script>
+<script src="assets/js/googleMap.js"></script>
+<script src="assets/js/infoShopMap.js"></script>
+<script src="assets/js/shopMap.js"></script>
+<script src="assets/js/core.init.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="assets/js/loadTabs.js"></script>
+<script src="assets/js/magiccard_ver2.js"></script>
+<script src="assets/js/libs/accounting.min.js"></script>
+<script src="assets/js/main_marker.js"></script>
+<script src="assets/js/autocomplete.js"></script>
+<script src="assets/js/lazyloading_v2.js"></script>
+<script src="assets/js/libs/loading-bar.min.js"></script>
+<script src="assets/js/libs/jquery.easypiechart.min.js"></script>
+<script src="assets/js/libs/bootstrap-select.js"></script>
+<script src="assets/js/libs/bootstrap-switch.js"></script>
+<script src="assets/js/libs/bootstrap-fileupload.js"></script>
+<script src="assets/js/libs/jquery.multi-select.js"></script>
+<script src="assets/js/libs/dropzone.min.js"></script>
+<script src="assets/js/libs/jquery.plupload.queue.js"></script>
+<script src="assets/js/libs/blueimp-gallery.min.js"></script>
+<script src="assets/js/libs/blueimp-gallery-fullscreen.js"></script>
+<script src="assets/js/libs/blueimp-gallery-indicator.js"></script>
+<script src="assets/js/libs/blueimp-gallery-video.js"></script>
+<script src="assets/js/libs/blueimp-helper.js"></script>
+<script src="assets/js/libs/jquery.blueimp-gallery.min.js"></script>
+<script src="assets/js/libs/jquery.gritter.min.js"></script>
+<script src="assets/js/libs/jquery.notyfy.js"></script>
+<script src="assets/js/libs/jquery.prettyPhoto.js"></script>
+<script src="assets/js/libs/modernizr.js"></script>
+<script src="assets/js/libs/caman.full.min.js"></script>
+<script src="assets/js/magicSearch.js"></script>
+<script src="assets/js/libs/angular-route.js"></script>
+<script src="assets/js/libs/angular-ui-router.min.js"></script>
+<script src="assets/js/libs/angular-route.min.js"></script>
+<script src="assets/js/libs/angular-route.min.js.map"></script>
+<script src="assets/js/libs/oauth.min.js"></script>
+<script src="assets/js/libs/angular-file-upload-all.min.js"></script>
+<script src="assets/js/libs/hello.min.js"></script>
+<script src="assets/js/libs/pixlr.js"></script>
+<script src="assets/js/libs/ng-infinite-scroll.min.js"></script>
+<script src="assets/js/libs/angular.audio.js"></script>
+<script src="assets/js/libs/angular-deckgrid.js"></script>
+<script src="assets/js/libs/angular-masonry-directive.js"></script>
+<script src="assets/js/libs/init.js"></script>
+<script src="assets/js/libs/ng-img-crop.js"></script>
+<script src="assets/js/libs/ng-img-crop-1.js"></script>
+<script src="assets/js/libs/crop-area-circle.js"></script>
+<script src="assets/js/libs/crop-area-square.js"></script>
+<script src="assets/js/libs/crop-area.js"></script>
+<script src="assets/js/libs/crop-canvas.js"></script>
+<script src="assets/js/libs/crop-exif.js"></script>
+<script src="assets/js/libs/crop-host.js"></script>
+<script src="assets/js/libs/crop-pubsub.js"></script>
+<script src="assets/js/libs/angular-base64.min.js"></script>
+<script src="assets/js/libs/pretty.js"></script>
+<script src="assets/js/libs/ui-bootstrap-tpls-0.9.0.min.js"></script>
+<script src="assets/js/libs/image-crop.js"></script>
+
+
+
+<!-- load angularjs file -->
+<script src="app/app.js"></script>
+<!-- load our application -->
+
+<!--home-->
+<script src="app/home/homeController.js"></script>
+<script src="app/home/homeService.js"></script>
+
+<!--user-->
+<script src="app/user/userController.js"></script>
+<script src="app/user/userService.js"></script>
+
+<!--shop-->
+<script src="app/shop/shopController.js"></script>
+<script src="app/shop/shopService.js"></script>
+
+<!--post-->
+<script src="app/post/postController.js"></script>
+<script src="app/post/postDetailController.js"></script>
+<script src="app/post/postService.js"></script>
+
+<!--newfeed-->
+<script src="app/newfeed/newfeedController.js"></script>
+<script src="app/newfeed/newfeedService.js"></script>
+
+<!--header-->
+<script src="app/header/headerController.js"></script>
+<script src="app/header/headerService.js"></script>
+
+<!--trendy-->
+<script src="app/trendy/trendyController.js"></script>
+<script src="app/trendy/trendyTagController.js"></script>
+<script src="app/trendy/trendyService.js"></script>
+
+<!--favorite-->
+<script src="app/favorite/favoriteController.js"></script>
+<script src="app/favorite/favoriteService.js"></script>
+
+<!--around-->
+<script src="app/around/aroundController.js"></script>
+<script src="app/around/aroundService.js"></script>
+
+<script src="assets/js/libs/jquery-imagefill.js"></script>
+<script src="assets/js/image-fill.js"></script>
+<script src="assets/js/libs/jquery.hovercard.min.js"></script>
+<script src="assets/js/hovercard.js"></script>
+<script>
+
+        hello.init({
+            facebook: '849978158393821',
+            google: '103178250738-8o22armgdv5ej7ip215l4inmc1kvmqo9.apps.googleusercontent.com',
+            twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
+        }, {
+            scope: 'email'
+        });
+
+</script>
 </body>
 </html>
+
+

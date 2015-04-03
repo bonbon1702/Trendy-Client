@@ -1,11 +1,11 @@
-<div id="content">
+<div id="content" style="margin-top: 54px">
     <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div class="innerAll">
-        <div id="map" style="position: absolute;left: 0px;top: 0px;overflow: hidden;width: 71%;height: 18%;z-index: 0;
+        <div id="map" style="position: absolute;left: 0px;top: 10px;overflow: hidden;width: 71%;height: 18%;z-index: 0;
         				transform: translateZ(0px) translateZ(0px);background-color: rgb(229, 227, 223);margin: 0px 34px 0px 33px;"></div>
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
 
-            <div class="col-lg-9 col-md-8" style="padding: 3px 6px;margin-top: 315px;">
+            <div class="col-lg-9 col-md-8" style="padding: 3px 6px;top: 314px;">
 
                 <div class="timeline-cover">
                     <div class="widget border-bottom">
@@ -14,10 +14,11 @@
                             <div class="widget cover image" style="margin-top: -70px;">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
-                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;"/>
+                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;width: 109px;height: auto"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 9px;">
-                                        <h3 class="margin-none">{{ shop.name }}</h3>
+                                        <h3 class="margin-none" ng-if="shop.name != null ">{{ shop.name }}</h3>
+                                        <h3 class="margin-none" ng-if="shop.name == null ">{{ shop.address }}</h3>
                                         <br/>
                                         <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
                                             <a ng-click="likeOrDislike()" class="btn btn-primary" style="width: 64px;height: 28px;margin-top: -24px;">
@@ -192,7 +193,7 @@
 
                     <!--  Message -->
                     <div class="media margin-none innerAll" ng-repeat="comment in shop.comments">
-                        <a ng-href="#/user/{{comment.user_id}}" class="pull-left hidden-xs">
+                        <a ng-href="/user/{{comment.user_id}}" class="pull-left hidden-xs">
                             <img ng-src="{{ comment.user.picture_profile }}" width="60" class="media-object">
                         </a>
                         <div class="media-body innerTB">
@@ -201,12 +202,21 @@
                                     <div class="innerT half">
                                         <div class="media">
                                             <div class="pull-left">
-                                                <a ng-href="#/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
+                                                <a ng-href="/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
                                                 <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
-                                            <div class="media-body">
+                                            <div ng-if="comment.editing == 'yes'">
+                                                <form ng-submit="submitEditComment($index)" class="form-inline">
+                                                    <input type="text" class="form-control" ng-model="editContent" name="editContent" style="width: 210px;">
+                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
+                                                    <button ng-click="closeEditComment($index)" class="btn btn-primary"><i class="fa fa-times"></i></button>
+                                                </form>
+                                            </div>
+                                            <div ng-if="comment.editing == null" class="media-body">
                                                 {{comment.content}}
                                             </div>
+                                            <i class="fa fa-pencil" ng-click="editComment($index,comment.content)" style="cursor:pointer;" ng-if="loginUser.id == comment.user.id"></i>
+                                            <i style="padding-left: 10px;cursor: pointer" class="fa fa-trash-o" ng-click="deleteCommentIndex($index)" ng-if="loginUser.id == comment.user.id"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -222,79 +232,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-3">
+            <div class="col-md-4 col-lg-3" style="top: 10px;">
 
                 <div class="widget" style="margin-top: -10px;">
                     <h5 class="innerAll margin-none bg-primary">SHOP YOU MAY LIKE</h5>
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
-                            <li class="list-group-item">
+                            <li class="list-group-item" ng-repeat="sug in suggestShop">
                                 <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
+                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object" style="height: 74px;"/>
                                     <div class="media-body">
                                         <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name != null">{{ sug.name }}</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name == null">{{ sug.address }}</a>
                                         </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 74px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img src="assets/img/images/people/35/22.jpg" class="pull-left media-object" style="height: 75px;"/>
-                                    <div class="media-body">
-                                        <h5 style="margin: 11px 1px;">
-                                            <a href="" class="text-inverse" style="margin: -10px -16px;">Social Admin Released</a>
-                                        </h5>
-                                        <div class="btn-group-vertical btn-group-sm" style="display: inline-flex;margin-top: -1px;">
-                                            <img class="media-object thumb" src="assets/img/images/like-black-small.png" alt="50x50"  style="background: none;"/>
-                                            0
-                                        </div>
+                                        <button class="btn btn-primary" ng-click="likeShop(sug.id)">Like</button>
                                     </div>
                                 </div>
                             </li>

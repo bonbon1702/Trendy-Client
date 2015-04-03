@@ -1,52 +1,33 @@
-<div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}' style="width: 1251px;margin: auto;margin-top: 80px;"
-     infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' >
-    <!-- items -->
-    <div masonry-tile ng-repeat="post in posts" class="item101">
-        <div style="margin-right: 10px">
-            <div class="widget border-none bg-none widget-pinterest active"
-                 style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                <div class="widget-body bg-none padding-none"
-                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                    <a ng-click="openPost(post.id)"
-                       data-toggle="prettyPhoto" class="thumb">
-                        <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
-                             alt="photo"/>
-                    </a>
+<div infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+    <section id="cd-timeline" class="cd-container">
 
-                    <div class="description  meta">
-                        <div class="hover-blue">
-                            <div class="title">
-                                <a data-track="photo-click" ng-href="#/" class="title">
-                                    {{ post.caption }}
-                                </a>
-                            </div>
-                            <div class="attribution-block" style="height: 7px;margin-top: 6px;">
-    										<span class="attribution"><span>bởi </span>
-    										<a data-track="owner" ng-href="#/user/{{post.user_id}}"
-                                               class="owner">{{ post.user.username }}</a></span>
-                            </div>
-                        </div>
-    								<span class="inline-icons" style="font-size: 11px;">
-    									<img width="12" height="12" alt="[★]"
-                                             src="https://s.yimg.com/pw/images/spaceball.gif"
-                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
-    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'"
-                                           title="Thêm ảnh này vào ảnh yêu thích của bạn?">
-                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
-                                        </a>
-    									<i class="fa fa-smile-o" style="color: white;"></i>
-    									<a title="Lời bình" href="#"
-                                           class="rapidnofollow comments-icon comments-inline-btn"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'">
-                                            <span class="comment-count count">{{ post.like.length }}</span>
-                                        </a>
-    								</span>
-                    </div>
-                </div>
+        <div class="cd-timeline-block" ng-repeat="post in posts">
+            <div class="cd-timeline-img cd-picture">
+                <img ng-src="{{ post.user.picture_profile }}" alt="Picture" class="img-circle">
             </div>
+            <!-- cd-timeline-img -->
+
+            <div class="cd-timeline-content" style="cursor: pointer">
+
+
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut-->
+                    <!--hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis-->
+                    <!--qui ut.</p>-->
+                <!--<a href="#0" class="cd-read-more">Read more</a>-->
+                <img ng-src="{{ post.image_url_editor }}" style="width: 100%" ng-click="openPost(post.id)" >
+                <span class="cd-date">
+                    <h2 style="font-size: 20px"><a ng-href="/user/{{ post.user.id }}" style="color: black">{{ post.user.username }}</a>
+                        <i class="fa fa-upload" ng-if="post.type == 'create'"></i>
+                        <i class="fa fa-thumbs-o-up" ng-if="post.type == 'like'" style="color: blue"></i>
+                        <i class="fa fa-comment-o" ng-if="post.type == 'comment'"></i>
+                        <i class="fa fa-heart-o " ng-if="post.type == 'favorite'" style="color: red"></i>
+                    </h2>
+                    <span style="font-size: 14px">{{ post.time_created }}</span>
+                </span>
+            </div>
+            <!-- cd-timeline-content -->
         </div>
-    </div>
+        <!-- cd-timeline-block -->
+    </section>
+    <!-- cd-timeline -->
 </div>

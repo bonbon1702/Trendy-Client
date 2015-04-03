@@ -1,49 +1,150 @@
-<div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}' style="width: 1251px;margin: auto;margin-top: 80px;"
-     infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1' >
-    <!-- items -->
-    <div masonry-tile ng-repeat="post in posts" class="item101">
-        <div style="margin-right: 10px">
-            <div class="widget border-none bg-none widget-pinterest active"
-                 style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                <div class="widget-body bg-none padding-none"
-                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
-                    <a ng-click="openPost(post.id)"
-                       data-toggle="prettyPhoto" class="thumb">
-                        <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
-                             alt="photo"/>
-                    </a>
+<div style="width: 1251px;margin: auto;margin-top: 73px;">
+    <div id="side_nav_DIV_1">
+        <ul id="side_nav_UL_2">
+            <li id="side_nav_LI_3">
+                <a ng-href="/" title="Popular Photos" id="side_nav_A_4">All The Time</a>
+            </li>
+        </ul>
+        <div id="side_nav_DIV_13">
+            <ul id="side_nav_UL_14">
+                <li id="side_nav_LI_15">
+                    <a ng-href="/" id="side_nav_A_16">All Tags</a>
+                </li>
+                <div id="side_nav_DIV_17">
+                    <span id="side_nav_SPAN_18">i</span>
+                    <div id="side_nav_DIV_19">
+                        <p id="side_nav_P_20">
+                            Shift+click to select multiple categories
+                        </p>
+                    </div>
+                </div>
+            </ul>
+            <div id="side_nav_DIV_21">
+            </div>
+            <ul id="side_nav_UL_22">
+                <li id="side_nav_LI_23" ng-repeat="tagContent in tagContents">
+                    <a ng-href="/tag/{{ tagContent.content }}" style="cursor: pointer" id="side_nav_A_24" >{{ tagContent.content }}</a>
+                </li>
 
-                    <div class="description  meta">
-                        <div class="hover-blue">
-                            <div class="title">
-                                <a data-track="photo-click" ng-href="#/" class="title">
-                                    {{ post.caption }}
+            </ul>
+        </div>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "http://connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId=903918442963068&version=v2.3";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-page" data-href="https://www.facebook.com/TrendyPlus.vn" data-width="280" data-height="100" data-hide-cover="false" data-show-facepile="false" data-show-posts="false" style="position: absolute;left: 0;top:258px"></div>
+    </div>
+    <div style="margin-left: 300px">
+        <div ng-repeat="post in postsTop3 track by $index" class="item101"
+             ng-class="{ no1: $index == 0 , no2 : $index == 1 , no3 : $index == 2 }">
+            <div style="margin-right: 22px;margin-top:12px" class="pullDown">
+                <div  class="widget border-none bg-none widget-pinterest active"
+                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;position: relative">
+                    <!--<img ng-src="assets/img/images/medal/1.png" class="goldMedal" ng-if="$index == 0">-->
+                    <!--<img ng-src="assets/img/images/medal/2.png" class="silverMedal" ng-if="$index == 1">-->
+                    <!--<img ng-src="assets/img/images/medal/3.png" class="bronze" ng-if="$index == 2">-->
+                    <div image-fill="{runOnce:true}"  class="widget-body bg-none padding-none"
+                         ng-class="{ no1Height: $index == 0 , no2Height : $index == 1 , no3Height : $index == 2}"
+                         style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;cursor: pointer">
+                        <a ng-click="openPost(post.id)">
+                            <img ng-src="{{ post.image_url_editor }}"
+                                 alt="photo"/>
+                        </a>
+
+                        <div class="description  meta">
+                            <div class="hover-blue">
+                                <div class="title">
+                                    <a data-track="photo-click" ng-href="/" class="title" style="font-size: 15px;">
+                                        {{ post.caption }}
+                                    </a>
+                                </div>
+                                <div class="attribution-block" style="height: 7px;margin-top: 6px;font-size: 15px">
+                            <span class="attribution">
+                                <span style="color: whitesmoke;">bởi </span>
+                                <a data-track="owner" ng-href="/user/{{post.user_id}}"
+                                   class="owner">{{ post.user.username }}</a>
+                            </span>
+                                </div>
+                            </div>
+                        <span class="inline-icons" style="font-size: 15px;">
+                            <span ng-click="likeOrDislikePost(post.id,post.isLike)">
+                                <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
+                                <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
+                                <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
+                                   style="margin-left: -4px;">
+                                    {{ post.like.length }}
                                 </a>
-                            </div>
-                            <div class="attribution-block" style="height: 7px;margin-top: 6px;">
-    										<span class="attribution"><span>bởi </span>
-    										<a data-track="owner" ng-href="#/user/{{post.user_id}}"
-                                               class="owner">{{ post.user.username }}</a></span>
-                            </div>
+                            </span>
+                            <span ng-click="favoriteOrUn(post.id,post.isFavorite)">
+                                <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
+                                <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
+                                <a  class="rapidnofollow comments-icon comments-inline-btn"
+                                   style="margin-left: -3px;">
+                                    <span class="comment-count count">{{ post.favorite.length }}</span>
+                                </a>
+                            </span>
+                        </span>
                         </div>
-    								<span class="inline-icons" style="font-size: 11px;">
-    									<img width="12" height="12" alt="[★]"
-                                             src="https://s.yimg.com/pw/images/spaceball.gif"
-                                             style="background: rgba(150, 25, 25, 0) url(https://s.yimg.com/pw/images/sprites/icons/fav.png) no-repeat scroll center;background-size: contain;margin-right: -3px;vertical-align: top;margin-top: -1px;width: 15px;height: 15px;">
-    									<a data-track="favorite" href="#" class="rapidnofollow fave-star-inline canfave"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'"
-                                           title="Thêm ảnh này vào ảnh yêu thích của bạn?">
-                                            <span class="fave-count count" style="margin-right: 3px;">99+</span>
-                                        </a>
-    									<i class="fa fa-smile-o" style="color: white;"></i>
-    									<a title="Lời bình" href="#"
-                                           class="rapidnofollow comments-icon comments-inline-btn"
-                                           onMouseOver="this.style.color='white'"
-                                           onMouseOut="this.style.color='white'">
-                                            <span class="comment-count count">{{ post.like.length }}</span>
-                                        </a>
-    								</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div masonry='{ "columnWidth": 250 , "itemSelector" : ".item101"}'
+         style="margin-top: 100px"
+         infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='0.5'>
+        <!-- items -->
+        <div masonry-tile ng-repeat="post in posts track by $index" class="item101">
+            <div style="margin-right: 10px">
+                <div class="widget border-none bg-none widget-pinterest active"
+                     style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                    <div class="widget-body bg-none padding-none"
+                         style="-webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);box-shadow: 2px 2px rgba(0, 0, 0, 0.22);border-radius: 6px;">
+                        <a ng-click="openPost(post.id)"
+                           data-toggle="prettyPhoto" class="thumb">
+                            <img ng-src="{{ post.image_url_editor }}" style="width: 100%"
+                                 alt="photo"/>
+                        </a>
+
+                        <div class="description  meta">
+                            <div class="hover-blue">
+                                <div class="title">
+                                    <a data-track="photo-click" ng-href="/" class="title" style="font-size: 15px;">
+                                        {{ post.caption }}
+                                    </a>
+                                </div>
+                                <div class="attribution-block" style="height: 7px;margin-top: 6px;">
+                                <span class="attribution">
+                                    <span style="color: whitesmoke;">bởi </span>
+                                    <a data-track="owner" ng-href="/user/{{post.user_id}}"
+                                       class="owner">{{ post.user.username }}</a>
+                                </span>
+                                </div>
+                            </div>
+                            <span class="inline-icons" style="font-size: 12px;">
+                                <span ng-click="likeOrDislikePost(post.id,post.isLike)" style="cursor: pointer">
+                                    <i class="fa fa-fw fa-thumbs-up" style="color: white;" ng-if="post.isLike == false"></i>
+                                    <i class="fa fa-fw fa-thumbs-up" style="color: blue;" ng-if="post.isLike == true"></i>
+                                    <a data-track="favorite" class="rapidnofollow fave-star-inline canfave"
+                                       style="margin-left: -4px;">
+                                        {{ post.like.length }}
+                                    </a>
+                                </span>
+                                <span ng-click="favoriteOrUn(post.id,post.isFavorite)" style="cursor: pointer">
+                                    <i class="fa fa-fw fa-heart" style="color: white;margin-left: 7px;" ng-if="post.isFavorite == false"></i>
+                                    <i class="fa fa-fw fa-heart" style="color: red;margin-left: 7px;" ng-if="post.isFavorite == true"></i>
+                                    <a  class="rapidnofollow comments-icon comments-inline-btn"
+                                        style="margin-left: -3px;">
+                                        <span class="comment-count count">{{ post.favorite.length }}</span>
+                                    </a>
+                                </span>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

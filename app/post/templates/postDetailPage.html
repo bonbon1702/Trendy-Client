@@ -1,0 +1,148 @@
+<div class="col-lg-9 col-md-8" style="width: 100%;margin-top: 53px">
+    <div style="position: relative">
+        <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
+            <div class="height-controller" style="height: 500px;">
+                <div class="view photo-well-media-scrappy-view" id="yui_3_16_0_1_1422362340497_1698">
+
+                    <hovercard src="{{ post.image_url_editor | trusted }}" data="post.tag_picture"></hovercard>
+                </div>
+            </div>
+        </div>
+        <div id="image-pic">
+            <div class="under-left" style="width:50%;">
+                <img ng-src="{{ post.user.picture_profile }}" class="avatar-large"/>
+                <b class="word">{{ post.user.username }}</b>
+                <span style="padding-left: 20px">{{post.caption}}</span>
+                <div style="margin-left: 261px;margin-bottom: 36px"> {{ post.created_at }}</div>
+                <div id="type" class="border-top collapse in" style="height: 65px;margin: 37px 0 0 175px;border-top:none" ng-if="loginUser != null">
+                    <a href="" class="pull-left">
+                        <img ng-src="{{ loginUser.picture_profile }}" width="65" class="media-object">
+                    </a>
+                    <form ng-submit="submitComment()" style="height: 23px;">
+                        <input type="text" style="width:79%;height: 277%;" class="form-control rounded-none border-none"
+                               placeholder="Write your messages..." ng-model="comment"/>
+                    </form>
+                </div>
+                <div class="widget border-top padding-none margin-none" style="width: 460px;border: none;margin-left: 175px !important;">
+
+                    <!--  Message -->
+                    <div class="media margin-none innerAll" ng-repeat="comment in post.comments" style="  border-bottom: 1px solid #efefef;">
+                        <a ng-href="/user/{{comment.user_id}}" class="pull-left hidden-xs">
+                            <img ng-src="{{ comment.user.picture_profile }}" width="60" class="media-object">
+                        </a>
+                        <div class="media-body innerTB">
+                            <div class="row" style="margin: 0">
+                                <div class="col-sm-6" style="  width: 100%;">
+                                    <div class="innerT half">
+                                        <div class="media">
+                                            <div class="pull-left">
+                                                <a ng-href="/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
+                                                <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
+                                            </div>
+                                            <div ng-if="comment.editing == 'yes'">
+                                                <form ng-submit="submitEditComment($index)" class="form-inline">
+                                                    <input type="text" class="form-control" ng-model="editContent" name="editContent" style="width: 188px;">
+                                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
+                                                    <button ng-click="closeEditComment($index)" class="btn btn-primary"><i class="fa fa-times"></i></button>
+                                                </form>
+                                            </div>
+                                            <div ng-if="comment.editing == null" class="media-body">
+                                                {{comment.content}}
+                                            </div>
+                                            <i class="fa fa-pencil" ng-click="editComment($index,comment.content)" style="cursor:pointer;" ng-if="loginUser.id == comment.user.id"></i>
+                                            <i style="padding-left: 10px;cursor: pointer" class="fa fa-trash-o" ng-click="deleteCommentIndex($index)" ng-if="loginUser.id == comment.user.id"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 hidden-xs" style="  width: 100%;">
+        										<span class="pull-right innerR innerT text-right  text-muted">
+        										{{ comment.created_at }}
+        										</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="under-right" style="width:50%;">
+                <!-- Single button -->
+                <div style=" height: 80px;">
+                    <div id="stat_wrap_DIV_1">
+                        <div id="stat_wrap_DIV_2">
+                            <div id="stat_wrap_DIV_3">
+                                <table id="stat_wrap_TABLE_4">
+                                    <tbody id="stat_wrap_TBODY_5">
+                                    <tr id="stat_wrap_TR_6">
+                                        <td id="stat_wrap_TD_7">
+                                            <span id="stat_wrap_SPAN_8">Like</span>
+                                        </td>
+                                        <td id="stat_wrap_TD_9">
+                                            <span id="stat_wrap_SPAN_10">{{ post.like.length }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr id="stat_wrap_TR_11">
+                                        <td id="stat_wrap_TD_12">
+                                            <span id="stat_wrap_SPAN_13">Favorite</span>
+                                        </td>
+                                        <td id="stat_wrap_TD_14">
+                                            <span id="stat_wrap_SPAN_15">{{ post.favorite.length}}</span>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="like_wrap_DIV_1" ng-switch="iconLike">
+                        <a id="like_wrap_A_2" ng-click="likeOrDislike()">
+                            <span id="like_wrap_SPAN_3" ng-switch-when="false">
+                                <span id="like_wrap_SPAN_4"></span>
+                                <span id="like_wrap_SPAN_5">Like</span></span>
+                            <span id="like_wrap_SPAN_3" ng-switch-when="true">
+                                <span id="like_wrap_SPAN_4"></span>
+                                <span id="like_wrap_SPAN_5">Liked</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div id="favorite_wrap_DIV_1" ng-click="favorite()" ng-switch="iconFavorite">
+                        <a id="favorite_wrap_A_2" ng-switch-when="false">
+                            <span id="favorite_wrap_SPAN_3" >
+                                <span id="favorite_wrap_SPAN_4"></span>
+                            </span>
+
+                        </a>
+                        <a id="favorite_wrap_A_2" style="background-color: #525558" ng-switch-when="true">
+                            <span id="favorite_wrap_SPAN_3" >
+                                    <span id="favorite_wrap_SPAN_4"></span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <hr class="line" style="margin: 0 0 33px 0">
+                <b style="font-size: 28px">Details</b>
+                <div style="margin-top: 10px">
+                    <span style="padding-right: 50px">Tags:</span>
+                    <span style="padding-left: 50px" ng-if="post.tag.length > 0">
+                        <span ng-repeat="tag in post.tag" style="padding-right: 10px">
+                            <i class="fa fa-tags fa-lg" style="color:#176CED;padding-right: 3px"></i>{{ tag.content.content }}
+                        </span>
+                    </span>
+                </div>
+
+                <div style="margin-top: 10px">
+                    <span style="padding-right: 62px">Tag picture:</span>
+                    <span ng-repeat="point in post.tag_picture" style="padding-right: 10px">
+                        <span ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)">
+                            <span class="numberCircle-post" hover-card point-name="{{ point.name }}" point-price="{{ point.price }}" point-address="{{ point.shop.address }}" point-aid="{{point.shop.id}}">{{ $index+1 }}</span>
+                        </span>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

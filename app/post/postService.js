@@ -11,7 +11,7 @@
             save: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'post',
+                    url: $rootScope.url + 'post/createPost',
                     data: data
                 });
             },
@@ -21,9 +21,6 @@
                     url: $rootScope.url + 'shop/searchShop/' + data.type,
                     ignoreLoadingBar: true
                 });
-            },
-            get: function (data) {
-                return $http.get($rootScope.url + 'upload/' + data);
             },
             upload: function (data) {
                 return $http({
@@ -35,58 +32,83 @@
             delete: function (data) {
                 return $http({
                     method: 'DELETE',
-                    url: $rootScope.url + 'post/delete/'+data.id
+                    url: $rootScope.url + 'post/deletePostById/' + data.id
                 });
             },
             deleteAlbum: function (data) {
                 return $http({
                     method: 'DELETE',
-                    url: $rootScope.url + 'album/delete/'+data.albName
+                    url: $rootScope.url + 'album/deleteAlbumByName/' + data.albName
                 });
             },
-            editAlbumName: function(data){
+            editAlbumName: function (data) {
                 return $http({
                     method: 'PUT',
-                    url: $rootScope.url + 'album/' +data.id,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*',
-                        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT,DELETE',
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Accept': '*'
-                    },
-                    params: {
-                        album_name:data['album_name']
+                    url: $rootScope.url + 'album/editAlbumById/' + data.id,
+                    data: {
+                        album_name: data['album_name']
                     }
                 });
             },
             saveComment: function (data) {
                 return $http({
                     method: 'POST',
-                    url: $rootScope.url + 'comment',
+                    url: $rootScope.url + 'comment/saveComment',
                     data: data,
                     ignoreLoadingBar: true
                 });
             },
             likeOrDislike: function (data) {
-                return $http.get($rootScope.url + 'like/likePost/' + data.id+ '/type/' +data.type+ '/user/'+data.user);
+                return $http.get($rootScope.url + 'like/likePost/' + data.id + '/type/' + data.type + '/user/' + data.user);
             },
-            favoritePost: function(data){
-                return $http.get($rootScope.url + 'favorite/userId/'+ data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
+            favoritePost: function (data) {
+                return $http.get($rootScope.url + 'favorite/userId/' + data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
             },
             getPost: function (id) {
-                return $http.get($rootScope.url + 'post/' + id);
+                return $http.get($rootScope.url + 'post/getPostById/' + id);
             },
-            openPost: function(id){
+            loadTag: function (query) {
+                return $http.get($rootScope.url + 'tagContent/getAllTag');
+            },
+            editPostCaption: function (data) {
+                return $http.get($rootScope.url + 'post/editPostCaption/id/' + data.id + '/caption/' + data.caption);
+            },
+            editPostComment: function (data) {
+                return $http.get($rootScope.url + 'comment/editPostComment/id/' + data.id + '/content/' + data.content)
+            },
+            deletePostComment: function (data) {
+                return $http.get($rootScope.url + 'comment/deletePostComment/id/' + data.id)
+            },
+            openPost: function (id, currentUrl) {
                 ngDialog.open({
                     template: 'app/post/templates/postDetail.html',
                     className: 'ngdialog-theme-plain post-dialog',
-                    controller: ['$scope', 'newfeedService', '$window', 'headerService','postService', function ($scope, newfeedService, $window, headerService,postService) {
+                    controller: ['$scope', 'newfeedService', '$window', 'headerService', 'postService', 'ngAudio', '$location', '$rootScope', function ($scope, newfeedService, $window, headerService, postService, ngAudio, $location, $rootScope) {
                         $scope.iconLike = false;
                         $scope.iconFavorite = false;
+                        $scope.editing = false;
+                        $scope.editingComment = false;
 
+                        $location.path('/post/' + id, false);
+                        $rootScope.$on('ngDialog.closing', function (e, $dialog) {
+                            $rootScope.$apply(function() {
+
+                                $location.path('/' + currentUrl, false);
+                            });
+
+                        });
                         postService.getPost(id)
                             .success(function (data) {
                                 $scope.post = data.post;
+                                $scope.post.created_at = beautyDate.prettyDate($scope.post.created_at);
+                                for (var i = 0; i < $scope.post.tag_picture.length; i++) {
+                                    $scope.post.tag_picture[i].price = accounting.formatNumber($scope.post.tag_picture[i].price);
+                                }
+                                for (var i = 0; i < $scope.post.comments.length; i++) {
+                                    $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
+                                }
+                                $scope.editCaption = $scope.post.caption;
+
 
                                 headerService.loginUser()
                                     .success(function (data) {
@@ -100,8 +122,8 @@
                                                     $scope.iconLike = false;
                                                 }
                                             }
-                                            for (var i = 0; i< $scope.post.favorite.length; i++){
-                                                if ($scope.post.favorite[i].user_id == $scope.loginUser.id){
+                                            for (var i = 0; i < $scope.post.favorite.length; i++) {
+                                                if ($scope.post.favorite[i].user_id == $scope.loginUser.id) {
                                                     $scope.iconFavorite = true;
                                                     break;
                                                 } else {
@@ -196,7 +218,7 @@
                                     }
                                 };
 
-                                $scope.favorite = function(){
+                                $scope.favorite = function () {
                                     if (!$scope.loginUser) {
                                         event.preventDefault();
                                         headerService.openLogin();
@@ -208,8 +230,10 @@
                                         };
 
                                         if ($scope.iconFavorite == true) {
+                                            $scope.post.favorite.length--;
                                             $scope.iconFavorite = false;
                                         } else {
+                                            $scope.post.favorite.length++;
                                             $scope.iconFavorite = true;
                                         }
 
@@ -223,9 +247,82 @@
                                     }
                                 };
 
+                                $scope.editComment = function (index, content) {
+                                    $scope.post.comments[index].editing = 'yes';
+                                    $scope.editContent = content;
+                                };
+
+                                $scope.submitEditComment = function (index) {
+                                    $scope.post.comments[index].content = this.editContent;
+                                    $scope.post.comments[index].editing = null;
+                                    postService.editPostComment({
+                                        id: $scope.post.comments[index].id,
+                                        content: this.editContent
+                                    }).success(function (data) {
+
+                                    }).error();
+                                };
+
+                                $scope.deleteCommentIndex = function (index) {
+
+                                    postService.deletePostComment({
+                                        id: $scope.post.comments[index].id
+                                    }).success(function (data) {
+
+                                    }).error();
+                                    $scope.post.comments.splice(index, 1);
+                                };
+
+                                $scope.closeEditComment = function (index) {
+                                    $scope.post.comments[index].editing = null;
+                                };
+
+                                $scope.editPost = function () {
+                                    $scope.editing = true;
+                                };
+
+                                $scope.submitCaption = function () {
+                                    $scope.post.caption = this.editCaption;
+                                    $scope.editing = false;
+
+                                    postService.editPostCaption({
+                                        id: id,
+                                        caption: this.editCaption
+                                    }).success(function (data) {
+
+                                    }).error(function (data) {
+                                        console.log(data);
+                                    });
+                                };
+
+                                $scope.closeEdit = function () {
+                                    $scope.editing = false;
+                                };
+
+                                $scope.deletePostInside = function () {
+                                    postService.delete({
+                                        id: id
+                                    }).success(function (data) {
+                                        $window.location.reload();
+                                    }).error();
+                                };
+
                                 $scope.closeDialog = function () {
                                     ngDialog.close();
-                                }
+                                };
+
+                                var socket = io.connect('http://127.0.0.1:3000/');
+
+                                socket.on('realTime.comment', function (data) {
+                                    //Do something with data
+                                    var results = JSON.parse(data);
+                                    if (results.type_comment == 0 && results.type_id == id) {
+                                        results['created_at'] = beautyDate.prettyDate(results['created_at']);
+                                        $scope.post.comments.push(results);
+                                        $scope.sound = ngAudio.load("../assets/sound/beep.mp3");
+                                        $scope.sound.play();
+                                    }
+                                });
                             })
                             .error(function (data) {
 
