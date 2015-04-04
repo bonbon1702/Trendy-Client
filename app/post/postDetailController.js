@@ -205,7 +205,7 @@
                 socket.on('realTime.comment', function (data) {
                     //Do something with data
                     var results = JSON.parse(data);
-                    if (results.type_comment == 0 && results.type_id == id) {
+                    if (results.type_comment == 0 && results.type_id == $routeParam.id) {
                         results['created_at'] = beautyDate.prettyDate(results['created_at']);
                         $scope.post.comments.push(results);
                         //$scope.sound = ngAudio.load("../assets/sound/beep.mp3");
