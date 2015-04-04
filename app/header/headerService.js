@@ -26,7 +26,12 @@
                 });
             },
             loginUser: function () {
-                var fb = hello("facebook").getAuthResponse();
+                if(hello("google").getAuthResponse() != null){
+                    var fb = hello("google").getAuthResponse();
+                }else if(hello("facebook").getAuthResponse() != null){
+                    var fb = hello("facebook").getAuthResponse();
+                }
+
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'user/getLoginUser',
@@ -46,15 +51,17 @@
                     template: 'app/header/templates/login.html',
                     className: 'ngdialog-theme-plain',
                     controller: ['$scope', 'headerService', '$window', '$location','$route', function ($scope, headerService, $window, $location,$route) {
-                        //$rootScope.$on('ngDialog.closing', function (e, $dialog) {
-                        //    $location.path("/");
-                        //});
+                        $rootScope.$on('ngDialog.closing', function (e, $dialog) {
+                            $location.path("/");
+                        });
                         $scope.login = function (data) {
                             ngDialog.close();
                             hello(data).login().then(function (auth) {
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
                                     var fb = hello("facebook").getAuthResponse();
+                                    var google = hello("google").getAuthResponse();
+                                    var twitter = hello("twitter").getAuthResponse();
                                     if (auth.network == 'facebook') {
                                         data = {
                                             'email': r.email,
@@ -71,7 +78,7 @@
                                             'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
                                             'sw_id': r.id,
                                             'gender': r.gender == 'male' ? 0 : 1,
-                                            'remember_token': fb.access_token
+                                            'remember_token': google.access_token
                                         };
                                     } else if (auth.network == 'twitter') {
 
