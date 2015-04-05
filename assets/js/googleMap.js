@@ -183,15 +183,7 @@
 
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        for (var i = 0; i < shop.length; i++) {
-            var pos = new google.maps.LatLng(shop[i].lat,shop[i].long);
-            new CustomMarker(pos,map,{
-                marker_id: shop[i].id,
-                product: shop[i].name,
-                shop: shop[i].address,
-                img:shop[i].image_url
-            });
-        }
+        googleMap.createMarker(shop);
 
 
         searchBox();
@@ -314,31 +306,17 @@
             }
 
             // For each place, get the icon, place name, and location.
-            // markers = [];
 			if (markerHome!= null)
 			markerHome.setMap(null);
-            //var marker = createMarker(map, null, myLatlng);
+
 			var img_user= $('[alt="user"]')[0].src;
 			if (img_user != undefined)
 			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:icon});
 			else
 			markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img: icon});
 			markerHome.setMap(map);
-            //var infowindow = new google.maps.InfoWindow({
-            //    content: "It is your location"
-            //});
-			
-            //markers.push(marker);
+
             map.setCenter(myLatlng);
-            //map.setZoom(15);
-			
-			
-            //google.maps.event.addListener(marker, 'mouseover', function () {
-            //    infowindow.open(map, marker);
-            //});
-            //google.maps.event.addListener(marker, 'mouseout', function () {
-            //    infowindow.close();
-            //});
         }
 
         function HomeControl(controlDiv, map) {
@@ -411,15 +389,15 @@
 	//-----------------------------------------------Create Marker shop on map----------------------------------------
 	googleMap.createMarker = function (data) {
 		var shop = data.data;
-		for (var i = 0, marker; marker = shop[i]; i++) {
-        //var marker = 
+		for (var i = 0; i < data.length; i++) {
+        //var marker =
 		new CustomMarker(
-						new google.maps.LatLng(data.data[i].lat, data.data[i].long),
+						new google.maps.LatLng(data[i].lat, data[i].long),
 						map,
-						{	marker_id:data.data[i].id,
-							product:data.data[i].name,
-							shop:data.data[i].address,
-							img:data.data[i].image_url
+						{	marker_id:data[i].id,
+							name:data[i].name,
+							address:data[i].address,
+							img:data[i].image_url
 						});
 		}
     };
@@ -435,7 +413,6 @@
     CustomMarker.prototype.draw = function() {
 
         var self = this;
-
         var div = this.div;
         var div1 = this.div;
         if (!div) {
@@ -448,18 +425,18 @@
             div.style.cursor = 'pointer';
             //div.id='heart';
 			var img = "";
-			var product = "";
-			var shop = "";
+			var name = "";
+			var address = "";
 			if (self.args.img != null && self.args.img != '') img = self.args.img;
-			if (self.args.product != null && self.args.product != '') product = self.args.product;
-			if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
+			if (self.args.name != null && self.args.name != '') name = self.args.name;
+			if (self.args.address != null && self.args.address != '') address = self.args.address;
             div.innerHTML ='<div class="marker"><img class="img-marker" '
                             +'src="'+img+'">'
 							+'<div class="marker-hover">'    
 							+'<a role="product">'
-							+	product
+							+	name
 							+'</a>'       
-							+'<a role="shop">'+shop+'</a></div></div>';
+							+'<a role="shop">'+address+'</a></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
@@ -471,10 +448,9 @@
                 div.dataset.marker_id = self.args.marker_id;
                 div1.dataset.marker_id = self.args.marker_id;
             }
-            if (self.args.product != null && self.args.product != '') {
+
+            if (self.args.marker_id != null && self.args.marker_id != '') {
             google.maps.event.addDomListener(div, "click", function(event) {
-                //alert('You clicked on a shop!');
-                //'http://localhost:81/projects/Trendy-Client/?#/shop/'+self.args.marker_id
                 window.location='/shop/'+self.args.marker_id;
                 google.maps.event.trigger(self, "click");
             });}
@@ -490,9 +466,6 @@
     if (point) {
         div.style.left = (point.x -42) + 'px';
         div.style.top = (point.y -86) + 'px';
-		
-        //div1.style.left = (point.x+5) + 'px';
-        //div1.style.top = (point.y-12) + 'px';
     }
     };
 

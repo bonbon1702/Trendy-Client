@@ -62,7 +62,7 @@
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 12px">
-                                        <h3 class="margin-none">{{ user.username }} - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></h3>
+                                        <h3 class="margin-none">{{ user.username }} - <span ng-if="user.sw_id != ''"><a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
 
                                     </div>
                                     <div class="innerAll pull-left">

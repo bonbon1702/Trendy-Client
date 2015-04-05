@@ -247,7 +247,6 @@
     }
 
     var homeButton = function (icon) {
-        console.log(icon)
         var homeControlDiv = document.createElement('div');
         var homeControl = new HomeControl(homeControlDiv, map);
 
@@ -382,10 +381,10 @@
             div.innerHTML ='<div class="marker"><img class="img-marker" '
             +'src="'+img+'">'
             +'<div class="marker-hover">'
-            +'<a href="" role="product">'
+            +'<span role="product">'
             +	product
-            +'</a>'
-            +'<a href="" role="shop">'+shop+'</a></div></div>';
+            +'</span>'
+            +'<span role="shop">'+shop+'</span></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
@@ -399,7 +398,6 @@
             }
 
             google.maps.event.addDomListener(div, "click", function(event) {
-                alert('You clicked on a shop!');
                 google.maps.event.trigger(self, "click");
             });
             var panes = this.getPanes();

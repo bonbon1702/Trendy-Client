@@ -15,13 +15,7 @@
         $scope.navBar = function(type){
             $scope.typeClick = type;
         };
-        hello.init({
-            facebook: '513861542088702',
-            google: '926387861043-o5o1ge96njti9r0duq25ig9jsuvfdqlb.apps.googleusercontent.com',
-            twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
-        }, {
-            scope: 'email'
-        });
+
         $scope.update = function (type) {
             if (type.length > 1) {
                 headerService.search(type)

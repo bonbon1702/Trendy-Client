@@ -26,11 +26,11 @@
                         <div ng-if="editing == false">
                             {{ post.caption }}
                         </div>
-                        <div ng-repeat="point in post.tag_picture">
-                            <div ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)">
+                        <span ng-repeat="point in post.tag_picture" style="margin-right: 10px">
+                            <span ng-mouseover="hoverPoint($index+1)" ng-mouseleave="leavePoint($index+1)">
                                 <span class="numberCircle-post" hover-card point-name="{{ point.name }}" point-price="{{ point.price }}" point-address="{{ point.shop.address }}" point-aid="{{point.shop.id}}">{{ $index+1 }}</span>
-                            </div>
-                        </div>
+                            </span>
+                        </span>
                         <span ng-repeat="tag in post.tag" style="padding-right: 10px">
                             <i class="fa fa-tags fa-lg" style="color:#176CED;padding-right: 3px"></i>{{ tag.content.content }}
                         </span>

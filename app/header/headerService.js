@@ -26,40 +26,43 @@
                 });
             },
             loginUser: function () {
-                var fb = hello("facebook").getAuthResponse();
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                }
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'user/getLoginUser',
                     data: {
-                        remember_token: fb ? fb.access_token : ''
+                        remember_token: nw ? nw.access_token : ''
                     }
                 });
             },
             getUser: function (data) {
                 return $http.get($rootScope.url + 'user/getUser/' + data);
             },
-            search: function(data){
+            search: function (data) {
                 return $http.get($rootScope.url + 'searchAllPage/' + data);
             },
             openLogin: function () {
                 return ngDialog.open({
                     template: 'app/header/templates/login.html',
                     className: 'ngdialog-theme-plain',
-                    controller: ['$scope', 'headerService', '$window', '$location','$route', function ($scope, headerService, $window, $location,$route) {
+                    controller: ['$scope', 'headerService', '$window', '$location', '$route', function ($scope, headerService, $window, $location, $route) {
                         //$rootScope.$on('ngDialog.closing', function (e, $dialog) {
                         //    $location.path("/");
                         //});
                         $scope.login = function (data) {
                             ngDialog.close();
                             hello(data).login({
-                                force:false,
+                                force: false,
                                 redirect_uri: 'http://trendyplus.dev/redirect.html'
                             }).then(function (auth) {
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
-                                    var fb = hello("facebook").getAuthResponse();
-                                    var google = hello("google").getAuthResponse();
                                     if (auth.network == 'facebook') {
+                                        var fb = hello("facebook").getAuthResponse();
                                         data = {
                                             'email': r.email,
                                             'username': r.name,
@@ -69,11 +72,12 @@
                                             'remember_token': fb.access_token
                                         };
                                     } else if (auth.network == 'google') {
+                                        var google = hello("google").getAuthResponse();
                                         data = {
                                             'email': r.email,
                                             'username': r.name,
                                             'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
-                                            'sw_id': r.id,
+                                            'sw_id': '',
                                             'gender': r.gender == 'male' ? 0 : 1,
                                             'remember_token': google.access_token
                                         };
@@ -94,10 +98,10 @@
                     }]
                 });
             },
-            getNotification: function(user_id){
+            getNotification: function (user_id) {
                 return $http.get($rootScope.url + 'notification/getNotificationByUserId/' + user_id);
             },
-            watchedNotification: function(data){
+            watchedNotification: function (data) {
                 return $http({
                     method: 'POST',
                     url: $rootScope.url + 'notification/watchedNotification',
