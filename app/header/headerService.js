@@ -57,7 +57,7 @@
                             ngDialog.close();
                             hello(data).login({
                                 force: false,
-                                redirect_uri: 'http://trendyplus.dev/redirect.html'
+                                redirect_uri: 'http://trendyplus.org/redirect.html'
                             }).then(function (auth) {
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
