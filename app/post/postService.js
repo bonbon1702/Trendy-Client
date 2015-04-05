@@ -102,12 +102,11 @@
                             image.onload = function () {
                                 var s = this.naturalHeight / 500,
                                     newWidth, widthTotal, modelImage;
-                                if (this.naturalWidth < 700){
-                                    newWidth = this.naturalWidth / s;
+                                newWidth = this.naturalWidth / s;
+                                if (newWidth < 700){
                                     widthTotal = 700 + 327;
                                     modelImage = 700;
                                 } else {
-                                    newWidth = this.naturalWidth / s;
                                     widthTotal = newWidth + 327;
                                     modelImage = newWidth;
                                 }
