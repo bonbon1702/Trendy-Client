@@ -51,7 +51,10 @@
                         //});
                         $scope.login = function (data) {
                             ngDialog.close();
-                            hello(data).login().then(function (auth) {
+                            hello(data).login({
+                                force:false,
+                                redirect_uri: 'http://trendyplus.dev/redirect.html'
+                            }).then(function (auth) {
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
                                     var fb = hello("facebook").getAuthResponse();

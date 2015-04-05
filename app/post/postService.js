@@ -97,8 +97,37 @@
                             });
 
                         });
+                        $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                            var image = $dialog.find('.has-magiccard img')[0];
+                            image.onload = function () {
+                                var s = this.naturalHeight / 500,
+                                    newWidth, widthTotal, modelImage;
+                                if (this.naturalWidth < 700){
+                                    newWidth = this.naturalWidth / s;
+                                    widthTotal = 700 + 327;
+                                    modelImage = 700;
+                                } else {
+                                    newWidth = this.naturalWidth / s;
+                                    widthTotal = newWidth + 327;
+                                    modelImage = newWidth;
+                                }
+
+                                $dialog.find('.ngdialog-content').css('width', widthTotal);
+
+                                $dialog.find('.has-magiccard img').css('width', newWidth);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width',modelImage -2);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding',0);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width','327');
+                            };
+
+
+                        });
+
+
+
                         postService.getPost(id)
                             .success(function (data) {
+
                                 $scope.post = data.post;
                                 $scope.post.created_at = beautyDate.prettyDate($scope.post.created_at);
                                 for (var i = 0; i < $scope.post.tag_picture.length; i++) {
