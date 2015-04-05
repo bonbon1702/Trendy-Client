@@ -56,8 +56,7 @@
                         $scope.login = function (data) {
                             ngDialog.close();
                             hello(data).login({
-                                force: false,
-                                redirect_uri: 'http://trendyplus.org/redirect.html'
+                                force: false
                             }).then(function (auth) {
                                 hello(auth.network).api('/me').then(function (r) {
                                     var data = {};
