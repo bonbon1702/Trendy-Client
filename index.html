@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-    <base href="/">
+    <base href="/"/>
     <title></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="assets/css/dist/css/bootstrap.min.css">
@@ -50,6 +50,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.bootstrap.min.css">
+
 </head>
 <body>
 <!-- MAIN CONTENT AND INJECTED VIEWS -->
@@ -59,7 +60,7 @@
         <li class="dropdown notif">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" ng-click="reader_notification()" style="font-size: 20px;padding-top: 11px;">
                 <i class="glyphicon glyphicon-bell" style="position: relative;">
-                    <div class="numberCircle" ng-if="notification_unread.length > 0">
+                    <div class="numberCircle" ng-if="notification_unread.length > 0" ng-cloak>
                         {{ notification_unread.length }}
                     </div>
                 </i>
@@ -95,7 +96,7 @@
         				</span>
             </a>
             <ul class="dropdown-menu" ng-hide="loginUser == null" ng-cloak>
-                <li><a data-track="owner" ng-href="/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
+                <li><a data-track="owner" ng-href="/projects/Trendy-Client/user/{{loginUser.id}}" ng-click="clickNavBar()">Profile</a></li>
                 <li><a ng-href="/" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
@@ -110,7 +111,7 @@
             <a class="ProfileNav-start ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/">Trendy</a>
         </li>
         <li>
-            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/newsfeed" ng-click="clickNavBar()">Newsfeed</a>
+            <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" href="#/newsfeed" ng-click="clickNavBar()">Newsfeed</a>
         </li>
         <li>
             <a class="ProfileNav-start  ProfileNav-start--link u-borderUserColor u-textCenter js-tooltip js-nav u-textUserColor" ng-href="#/around" ng-click="clickNavBar()">Around here</a>
@@ -287,12 +288,13 @@
 <script src="assets/js/image-fill.js"></script>
 <script src="assets/js/libs/jquery.hovercard.min.js"></script>
 <script src="assets/js/hovercard.js"></script>
+
 <script>
 
     hello.init({
         facebook: '849978158393821',
         google: '785860817367-or5nbtrsppv2bm44nnfqeuf2t1qlffqj.apps.googleusercontent.com',
-        twitter: '2518012026-WrP1ptaKi9jS3C84BMjqaqkdyjywX0Mfmpadp8Q'
+        twitter: 'RgDl3rxPf08mA7WEFLMbo6nkf'
     }, {
         scope: 'email'
     });

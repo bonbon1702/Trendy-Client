@@ -128,6 +128,7 @@
         $scope.logout = function () {
             hello("facebook").logout();
             hello("google").logout();
+            hello("twitter").logout();
             $window.location.reload();
         };
 
