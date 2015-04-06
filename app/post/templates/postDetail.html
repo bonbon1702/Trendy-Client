@@ -35,6 +35,14 @@
                             <i class="fa fa-tags fa-lg" style="color:#176CED;padding-right: 3px"></i>{{ tag.content.content }}
                         </span>
                     </div>
+                    <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "http://connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId=903918442963068&version=v2.3";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+
                     <div class="row row-merge" style="height: 26px;padding-left: 13px">
                         <a style="color:#7187B6" ng-click="likeOrDislike()" ng-switch="iconLike">
                             <span ng-switch-when="false">Like</span>
@@ -45,6 +53,8 @@
                             <span ng-switch-when="false">Favorite</span>
                             <span ng-switch-when="true">Favorited</span>
                         </a>
+                        ·
+                        <span class="fb-share-button" data-href="http://trendyplus.org/post/{{ post.id }}" data-layout="button_count" style=""></span>
                     </div>
                     <ul class="img-comment-list" style="padding-left: 13px">
                         <li style="background-color: #e9eaed;margin-top: 1px;padding:4px 0px 4px 6px ;  font-size: 14px;color: rgb(69, 97, 157);">
