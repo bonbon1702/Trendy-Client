@@ -164,7 +164,7 @@
                 } else {
                     for (var i=0; i < results.list_user.length; i++) {
 
-                        if ($scope.loginUser.id != results.list_user[i].id_of_user_effected) {
+                        if ($scope.loginUser.id == results.list_user[i].id_of_user_effected) {
                             results['created_at'] = beautyDate.prettyDate(results['created_at']);
                             $scope.notification_unread.push(results);
                             $scope.notification.unshift(results);

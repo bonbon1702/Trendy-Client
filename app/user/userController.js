@@ -17,6 +17,7 @@
         $scope.coverFlag = true;
         $scope.itemToItemFollow = [];
         $scope.pageUserId = $routeParams.userId;
+        $scope.flwBtnStatus = true;
 
 
 
@@ -40,6 +41,7 @@
                             }).success(function(data){
 
                                 $scope.itemToItemFollow = data.suggests;
+                                console.log($scope.itemToItemFollow)
                             }).error(function(data){
 
                             });
