@@ -25,6 +25,7 @@
 
         headerService.loginUser()
             .success(function (data) {
+                headerService.alertBan(data);
                 $scope.loginUser = data.user;
             })
             .error();

@@ -51,88 +51,88 @@
                             <div class="info address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                                 <span class=" icon-location-fill-1"></span>
                                 <span itemprop="streetAddress">
-                                    <div ng-if="shop.shop_detail[0].street != null" style="display: inline;">{{ shop.shop_detail[0].street }}, </div>
-                                    <div ng-if="shop.shop_detail[0].district != null" style="display: inline;">{{ shop.shop_detail[0].district }}, </div>
-                                    <div ng-if="shop.shop_detail[0].city != null" style="display: inline;">{{ shop.shop_detail[0].city }}</div>
+                                    <div ng-if="shop.shop_detail.street != null" style="display: inline;">{{ shop.shop_detail.street }}, </div>
+                                    <div ng-if="shop.shop_detail.district != null" style="display: inline;">{{ shop.shop_detail.district }}, </div>
+                                    <div ng-if="shop.shop_detail.city != null" style="display: inline;">{{ shop.shop_detail.city }}</div>
                                 </span>
                             </div>
 
                             <div class="info telephone">
                                 <span class=" fa fa-phone"></span>
-                                {{ shop.shop_detail[0].tel }}
+                                {{ shop.shop_detail.tel }}
                             </div>
 
                             <div class="info price-range">
                                 <span class="icon-tag-1"></span>
-                                <div ng-if="shop.shop_detail[0].price_from != null" style="display: inline;">{{ shop.shop_detail[0].price_from }}.000 đ - </div>
-                                <div ng-if=" shop.shop_detail[0].price_to >0" style="display: inline;">{{ shop.shop_detail[0].price_to }}.000 đ</div>
+                                <div ng-if="shop.shop_detail.price_from != null" style="display: inline;">{{ shop.shop_detail.price_from }}.000 đ - </div>
+                                <div ng-if=" shop.shop_detail.price_to >0" style="display: inline;">{{ shop.shop_detail.price_to }}.000 đ</div>
                             </div>
                         </div>
 
                         <div class="collapse" id="comments-collapse" style="height: auto;">
                             <!-- Second Comment -->
                             <dl class="details" style="margin: 23px;">
-                                <div ng-if="shop.shop_detail[0].near_place != null">
+                                <div ng-if="shop.shop_detail.near_place != null">
                                     <dt>Khu vực</dt>
-                                    <dd>{{ shop.shop_detail[0].near_place }}</dd>
+                                    <dd>{{ shop.shop_detail.near_place }}</dd>
                                 </div>
                                 <br>
-                                <div ng-if="shop.shop_detail[0].way_direction != null">
+                                <div ng-if="shop.shop_detail.way_direction != null">
                                     <dt>Chỉ đường</dt>
-                                    <dd>{{ shop.shop_detail[0].way_direction  }}</dd>
+                                    <dd>{{ shop.shop_detail.way_direction  }}</dd>
                                 </div>
                                 <br>
 
-                                <div ng-if="shop.shop_detail[0].price_from != null && shop.shop_detail[0].price_to != null">
+                                <div ng-if="shop.shop_detail.price_from != null && shop.shop_detail.price_to != null">
                                     <dt>Khoảng giá</dt>
-                                    <dd>{{ shop.shop_detail[0].price_from  }}0 đ <div ng-if="shop.shop_detail[0].price_to != null" style="display: inline">~ {{ shop.shop_detail[0].price_to }}.000 đ</div></dd>
+                                    <dd>{{ shop.shop_detail.price_from  }}0 đ <div ng-if="shop.shop_detail.price_to != null" style="display: inline">~ {{ shop.shop_detail.price_to }}.000 đ</div></dd>
                                 </div>
                                 <br>
                                 <dt>Thời gian phục vụ</dt>
                                 <dd>
                                 <span itemprop="openingHoursSpecification" itemscope="" itemtype="http://schema.org/OpeningHoursSpecification">
                                     <span itemprop="dayOfWeek" itemscope="" itemtype="http://schema.org/DayOfWeek">
-                                       <div ng-if="shop.shop_detail[0].time_open != null" style="display: inline">{{ shop.shop_detail[0].time_open }} -</div> {{ shop.shop_detail[0].time_close }}
+                                       <div ng-if="shop.shop_detail.time_open != null" style="display: inline">{{ shop.shop_detail.time_open }} -</div> {{ shop.shop_detail.time_close }}
                                     </span>
                                 </span>
                                 </dd>
                                 <br>
                                 <dt>Phục vụ</dt>
                                 <dd>
-                                    <div ng-if="shop.shop_detail[0].morning == 1" style="display: inline">Buổi sáng  </div>
-                                    <div ng-if="shop.shop_detail[0].midday == 1" style="display: inline">Buổi trưa  </div>
-                                    <div ng-if="shop.shop_detail[0].afternoon == 1" style="display: inline">Buổi chiều  </div>
-                                    <div ng-if="shop.shop_detail[0].evening == 1" style="display: inline">Buổi tối </div>
+                                    <div ng-if="shop.shop_detail.morning == 1" style="display: inline">Buổi sáng  </div>
+                                    <div ng-if="shop.shop_detail.midday == 1" style="display: inline">Buổi trưa  </div>
+                                    <div ng-if="shop.shop_detail.afternoon == 1" style="display: inline">Buổi chiều  </div>
+                                    <div ng-if="shop.shop_detail.evening == 1" style="display: inline">Buổi tối </div>
                                 </dd>
                                 <br>
                                 <dt>Tiện nghi</dt>
                                 <dd>
-                                    <div ng-if="shop.shop_detail[0].shipping == 1" style="display: inline">Dịch vụ vận chuyển, </div>
-                                    <div ng-if="shop.shop_detail[0].credit_card == 1" style="display: inline">Thanh toán bằng thẻ, </div>
-                                    <div ng-if="shop.shop_detail[0].cooler == 1" style="display: inline">Điều hòa, </div>
-                                    <div ng-if="shop.shop_detail[0].parking == 1" style="display: inline">Phục vụ trông xe</div>
+                                    <div ng-if="shop.shop_detail.shipping == 1" style="display: inline">Dịch vụ vận chuyển, </div>
+                                    <div ng-if="shop.shop_detail.credit_card == 1" style="display: inline">Thanh toán bằng thẻ, </div>
+                                    <div ng-if="shop.shop_detail.cooler == 1" style="display: inline">Điều hòa, </div>
+                                    <div ng-if="shop.shop_detail.parking == 1" style="display: inline">Phục vụ trông xe</div>
                                 </dd>
                                 <br>
                                 <dt>Đối tượng</dt>
                                 <dd>
-                                    <div ng-if="shop.shop_detail[0].children == 1" style="display: inline">Trẻ nhỏ, </div>
-                                    <div ng-if="shop.shop_detail[0].teen == 1" style="display: inline">Thanh-Thiếu niên, </div>
-                                    <div ng-if="shop.shop_detail[0].middleaged == 1" style="display: inline">Trung niên, </div>
-                                    <div ng-if="shop.shop_detail[0].oldster == 1" style="display: inline">Người già, </div>
-                                    <div ng-if="shop.shop_detail[0].men == 1" style="display: inline">Đồ Nam, </div>
-                                    <div ng-if="shop.shop_detail[0].women == 1" style="display: inline">Đồ Nữ</div>
+                                    <div ng-if="shop.shop_detail.children == 1" style="display: inline">Trẻ nhỏ, </div>
+                                    <div ng-if="shop.shop_detail.teen == 1" style="display: inline">Thanh-Thiếu niên, </div>
+                                    <div ng-if="shop.shop_detail.middleaged == 1" style="display: inline">Trung niên, </div>
+                                    <div ng-if="shop.shop_detail.oldster == 1" style="display: inline">Người già, </div>
+                                    <div ng-if="shop.shop_detail.men == 1" style="display: inline">Đồ Nam, </div>
+                                    <div ng-if="shop.shop_detail.women == 1" style="display: inline">Đồ Nữ</div>
                                 </dd>
                                 <br>
-                                <div ng-if="shop.shop_detail[0].website != null" style="display: inline">
+                                <div ng-if="shop.shop_detail.website != null" style="display: inline">
                                 <dt>Web site</dt>
                                 <dd>
-                                    {{ shop.shop_detail[0].website }}
+                                    {{ shop.shop_detail.website }}
                                 </dd>
                                 </div>
-                                <div ng-if="shop.shop_detail[0].facebook_page != null" style="display: inline">
+                                <div ng-if="shop.shop_detail.facebook_page != null" style="display: inline">
                                     <dt>Facebook</dt>
                                     <dd>
-                                        <a href="{{ shop.shop_detail[0].facebook_page }}" style="color: #2a6496;">{{ shop.shop_detail[0].facebook_page }}</a>
+                                        <a href="{{ shop.shop_detail.facebook_page }}" style="color: #2a6496;">{{ shop.shop_detail.facebook_page }}</a>
                                     </dd>
                                 </div>
                                 <br>

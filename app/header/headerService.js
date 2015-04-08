@@ -30,6 +30,8 @@
                     var nw = hello("google").getAuthResponse();
                 } else if (hello("facebook").getAuthResponse() != null) {
                     var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
                 }
                 return $http({
                     method: 'POST',
@@ -76,12 +78,20 @@
                                             'email': r.email,
                                             'username': r.name,
                                             'avatar': r.picture.substring(0, r.picture.length - 2) + '100',
-                                            'sw_id': '',
+                                            'sw_id': r.id,
                                             'gender': r.gender == 'male' ? 0 : 1,
                                             'remember_token': google.access_token
                                         };
                                     } else if (auth.network == 'twitter') {
-
+                                        var twitter = hello("twitter").getAuthResponse();
+                                        data = {
+                                            'email': '',
+                                            'username': r.name,
+                                            'avatar': r.profile_image_url.replace("_normal", ""),
+                                            'sw_id': r.id,
+                                            'gender': r.gender == 'male' ? 0 : 1,
+                                            'remember_token': twitter.access_token
+                                        };
                                     }
                                     headerService.save(data)
                                         .success(function (data) {
@@ -107,6 +117,17 @@
                     data: data,
                     ignoreLoadingBar: true
                 });
+            },
+            alertBan: function(data){
+                if (data.status == 1) {
+                    return ngDialog.open({
+                        template: 'app/header/templates/alertBan.html',
+                        className: 'ngdialog-theme-plain',
+                        controller: ['$scope', 'headerService', '$window', '$location', '$route', function ($scope, headerService, $window, $location, $route) {
+
+                        }]
+                    });
+                }
             }
         }
     }
