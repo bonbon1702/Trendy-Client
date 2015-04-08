@@ -340,6 +340,14 @@
                                     ngDialog.close();
                                 };
 
+                                $scope.displayED = function (index){
+                                    $scope.post.comments[index].statusED = true;
+                                };
+
+                                $scope.notDisplayED = function(index){
+                                    $scope.post.comments[index].statusED = false;
+                                };
+
                                 var socket = io.connect('http://103.7.40.222:3000/');
 
                                 socket.on('realTime.comment', function (data) {

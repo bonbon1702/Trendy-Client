@@ -64,14 +64,14 @@
                             <i class="fa fa-heart-o"> {{ post.favorite.length }} people favorite this</i>
                         </li>
                         <li style="background-color: #e9eaed;margin-top: 1px;padding-left: 6px;"
-                            ng-repeat="comment in post.comments">
+                            ng-repeat="comment in post.comments" ng-mouseenter="displayED($index)" ng-mouseleave="notDisplayED($index)">
                             <div class="comment-img">
                                 <img ng-src="{{ comment.user.picture_profile }}">
                             </div>
                             <div class="comment-text">
                                 <strong><a ng-href="/user/{{ comment.user.id }}" style="color: #0B0B0B;" ng-click="closeThisDialog()">{{ comment.user.username }}</a>
-                                    <i class="fa fa-pencil" ng-click="editComment($index,comment.content)" style="cursor:pointer;margin-left:89px" ng-if="loginUser.id == comment.user.id"></i>
-                                    <i style="padding-left: 10px;cursor: pointer" class="fa fa-trash-o" ng-click="deleteCommentIndex($index)" ng-if="loginUser.id == comment.user.id"></i>
+                                    <i class="fa fa-pencil" ng-show="comment.statusED == true" ng-click="editComment($index,comment.content)" style="cursor:pointer;margin-left:89px" ng-if="loginUser.id == comment.user.id"></i>
+                                    <i style="padding-left: 10px;cursor: pointer" ng-show="comment.statusED == true" class="fa fa-trash-o" ng-click="deleteCommentIndex($index)" ng-if="loginUser.id == comment.user.id"></i>
                                 </strong>
                                 <div ng-if="comment.editing == 'yes'">
                                     <form ng-submit="submitEditComment($index)" class="form-inline">

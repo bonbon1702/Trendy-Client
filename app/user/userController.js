@@ -41,7 +41,6 @@
                             }).success(function(data){
 
                                 $scope.itemToItemFollow = data.suggests;
-                                console.log($scope.itemToItemFollow)
                             }).error(function(data){
 
                             });

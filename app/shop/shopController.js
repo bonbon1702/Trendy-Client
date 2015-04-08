@@ -27,70 +27,72 @@
             .success(function (data) {
                 if (data.user == null) {
                     $scope.likeBtnStatus = "Like";
-                }
-                $scope.loginUser = data.user;
-                var r = {
-                    'loginId': data.user.id,
-                    'shopId': $routeParams.shopId
-                };
+                } else {
+                    $scope.loginUser = data.user;
+                    var r = {
+                        'loginId': data.user.id,
+                        'shopId': $routeParams.shopId
+                    };
 
-                $scope.editComment = function(index, content){
-                    $scope.shop.comments[index].editing = 'yes';
-                    $scope.editContent = content;
-                };
+                    $scope.editComment = function (index, content) {
+                        $scope.shop.comments[index].editing = 'yes';
+                        $scope.editContent = content;
+                    };
 
-                $scope.submitEditComment = function(index){
-                    $scope.shop.comments[index].content = this.editContent;
-                    $scope.shop.comments[index].editing = null;
-                    shopService.editShopComment({
-                        id: $scope.shop.comments[index].id,
-                        content: this.editContent
-                    }).success(function(data){
+                    $scope.submitEditComment = function (index) {
+                        $scope.shop.comments[index].content = this.editContent;
+                        $scope.shop.comments[index].editing = null;
+                        shopService.editShopComment({
+                            id: $scope.shop.comments[index].id,
+                            content: this.editContent
+                        }).success(function (data) {
 
-                    }).error();
-                };
+                        }).error();
+                    };
 
-                $scope.deleteCommentIndex = function(index){
+                    $scope.deleteCommentIndex = function (index) {
 
-                    shopService.deleteShopComment({
-                        id: $scope.shop.comments[index].id
-                    }).success(function(data){
+                        shopService.deleteShopComment({
+                            id: $scope.shop.comments[index].id
+                        }).success(function (data) {
 
-                    }).error();
-                    $scope.shop.comments.splice(index,1);
-                };
+                        }).error();
+                        $scope.shop.comments.splice(index, 1);
+                    };
 
-                $scope.closeEditComment = function(index){
-                    $scope.shop.comments[index].editing = null;
-                };
-                shopService.suggestShop(r)
-                    .success(function(k){
-                        $scope.suggestShop = k.suggests;
-                    })
-                    .error(function(data){});
-                $scope.likeShop = function(id){
-                    shopService.likeOrDislike({
-                        'id': id,
-                        'type': 1,
-                        'user': data.user.id
-                    })
-                        .success(function (data) {
-                            var r = {
-                                'loginId': $scope.loginUser.id,
-                                'shopId': $routeParams.shopId
-                            };
-                            shopService.suggestShop(r)
-                                .success(function(k){
-                                    $scope.suggestShop = k.suggests;
-                                })
-                                .error(function(data){});
+                    $scope.closeEditComment = function (index) {
+                        $scope.shop.comments[index].editing = null;
+                    };
+                    shopService.suggestShop(r)
+                        .success(function (k) {
+                            $scope.suggestShop = k.suggests;
                         })
                         .error(function (data) {
-
                         });
-                };
+                    $scope.likeShop = function (id) {
+                        shopService.likeOrDislike({
+                            'id': id,
+                            'type': 1,
+                            'user': data.user.id
+                        })
+                            .success(function (data) {
+                                var r = {
+                                    'loginId': $scope.loginUser.id,
+                                    'shopId': $routeParams.shopId
+                                };
+                                shopService.suggestShop(r)
+                                    .success(function (k) {
+                                        $scope.suggestShop = k.suggests;
+                                    })
+                                    .error(function (data) {
+                                    });
+                            })
+                            .error(function (data) {
 
+                            });
+                    };
 
+                }
             })
             .error();
 
@@ -112,7 +114,13 @@
                 for (var i=0; i < data.shop.comments.length;i++){
                     data.shop.comments[i].created_at = beautyDate.prettyDate(data.shop.comments[i].created_at);
                 }
-                $scope.shop = data.shop;
+                if (data.shop.shop_detail){
+                    data.shop['name'] = data.shop.shop_detail['name'];
+                    data.shop['address'] = data.shop.shop_detail['street'] + ', ' + data.shop.shop_detail['district'] + ', ' + data.shop.shop_detail['city'];
+                    $scope.shop = data.shop;
+                } else{
+                    $scope.shop = data.shop;
+                }
 
                 for (var i = 0; i < data.shop.posts.length; i++) {
                     if (i < 12) {
@@ -273,42 +281,42 @@
                     $scope.saveContactShop = function () {
                         $scope.contactOpen = false;
                     };
-                    if (shop.shop_detail.length > 0) {
+                    if (shop.shop_detail) {
                         //Map
-                        $scope.street = shop.shop_detail[0].street;
-                        $scope.district = shop.shop_detail[0].district;
-                        $scope.city = shop.shop_detail[0].city;
-                        $scope.near_place = shop.shop_detail[0].near_place;
-                        $scope.way_direction = shop.shop_detail[0].way_direction;
+                        $scope.street = shop.shop_detail.street;
+                        $scope.district = shop.shop_detail.district;
+                        $scope.city = shop.shop_detail.city;
+                        $scope.near_place = shop.shop_detail.near_place;
+                        $scope.way_direction = shop.shop_detail.way_direction;
 
                         //Basic Information
-                        $scope.shop_name = shop.shop_detail[0].name;
-                        $scope.time_open = shop.shop_detail[0].time_open;
-                        $scope.time_close = shop.shop_detail[0].time_close;
-                        $scope.price_from = shop.shop_detail[0].price_from;
-                        $scope.price_to = shop.shop_detail[0].price_to;
+                        $scope.shop_name = shop.shop_detail.name;
+                        $scope.time_open = shop.shop_detail.time_open;
+                        $scope.time_close = shop.shop_detail.time_close;
+                        $scope.price_from = shop.shop_detail.price_from;
+                        $scope.price_to = shop.shop_detail.price_to;
 
 
                         //Service Infomation
-                        $scope.morning = shop.shop_detail[0].midday == 1 ? true : false;
-                        $scope.midday = shop.shop_detail[0].midday == 1 ? true : false;
-                        $scope.afternoon = shop.shop_detail[0].afternoon == 1 ? true : false;
-                        $scope.night = shop.shop_detail[0].night == 1 ? true : false;
-                        $scope.shipping = shop.shop_detail[0].shipping == 1 ? true : false;
-                        $scope.credit_card = shop.shop_detail[0].credit_card == 1 ? true : false;
-                        $scope.cooler = shop.shop_detail[0].cooler == 1 ? true : false;
-                        $scope.parking = shop.shop_detail[0].parking == 1 ? true : false;
-                        $scope.children = shop.shop_detail[0].children == 1 ? true : false;
-                        $scope.teen = shop.shop_detail[0].teen == 1 ? true : false;
-                        $scope.middleaged = shop.shop_detail[0].middleaged == 1 ? true : false;
-                        $scope.oldster = shop.shop_detail[0].oldster == 1 ? true : false;
-                        $scope.men = shop.shop_detail[0].men == 1 ? true : false;
-                        $scope.women = shop.shop_detail[0].women == 1 ? true : false;
+                        $scope.morning = shop.shop_detail.midday == 1 ? true : false;
+                        $scope.midday = shop.shop_detail.midday == 1 ? true : false;
+                        $scope.afternoon = shop.shop_detail.afternoon == 1 ? true : false;
+                        $scope.night = shop.shop_detail.night == 1 ? true : false;
+                        $scope.shipping = shop.shop_detail.shipping == 1 ? true : false;
+                        $scope.credit_card = shop.shop_detail.credit_card == 1 ? true : false;
+                        $scope.cooler = shop.shop_detail.cooler == 1 ? true : false;
+                        $scope.parking = shop.shop_detail.parking == 1 ? true : false;
+                        $scope.children = shop.shop_detail.children == 1 ? true : false;
+                        $scope.teen = shop.shop_detail.teen == 1 ? true : false;
+                        $scope.middleaged = shop.shop_detail.middleaged == 1 ? true : false;
+                        $scope.oldster = shop.shop_detail.oldster == 1 ? true : false;
+                        $scope.men = shop.shop_detail.men == 1 ? true : false;
+                        $scope.women = shop.shop_detail.women == 1 ? true : false;
 
                         //Contact information
-                        $scope.phone = shop.shop_detail[0].tel;
-                        $scope.website = shop.shop_detail[0].website;
-                        $scope.facebook_page = shop.shop_detail[0].facebook_page;
+                        $scope.phone = shop.shop_detail.tel;
+                        $scope.website = shop.shop_detail.website;
+                        $scope.facebook_page = shop.shop_detail.facebook_page;
 
                     }
                     $scope.saveShopDetail = function(){
@@ -320,8 +328,8 @@
                             'city' : $scope.city,
                             'near_place' : $scope.near_place,
                             'way_direction' : $scope.way_direction,
-                            'lat' : shop.shop_detail[0].lat,
-                            'long' : shop.shop_detail[0].long,
+                            'lat' : shop.shop_detail.lat,
+                            'long' : shop.shop_detail.long,
                             'time_open' : $scope.time_open,
                             'time_close' : $scope.time_close,
                             'price_from' : $scope.price_from,

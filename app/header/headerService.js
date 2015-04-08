@@ -107,6 +107,17 @@
                     data: data,
                     ignoreLoadingBar: true
                 });
+            },
+            alertBan: function(data){
+                if (data.status == 1) {
+                    return ngDialog.open({
+                        template: 'app/header/templates/alertBan.html',
+                        className: 'ngdialog-theme-plain',
+                        controller: ['$scope', 'headerService', '$window', '$location', '$route', function ($scope, headerService, $window, $location, $route) {
+
+                        }]
+                    });
+                }
             }
         }
     }
