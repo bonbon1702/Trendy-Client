@@ -184,7 +184,7 @@ body {
 }
 
 .photo-well-scrappy-view img{
-    max-height: 520px;
+    height: 520px;
 }
 
 .view:hover .description {

@@ -6,7 +6,6 @@
             id="{{ attrs.inputid }}"/>
     <ul class="results" ng-show="completing && suggestions.length>0">
         <li
-                suggestion
                 ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:'toString()' track by $index"
                 index="{{ $index }}"
                 ng-class="{ active: ($index === selectedIndex) }" ng-click="select(suggestion.name)">
@@ -15,6 +14,11 @@
                 <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px"><b>{{ suggestion.name }}</b></span>
                 <span style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px">{{ suggestion.sub }}</span>
             </a>
+        </li>
+    </ul>
+    <ul class="results" ng-show="completing && suggestions.length <=0 ">
+        <li>
+           <div style="display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding-left: 60px">No result for <b>{{ searchParam }}</b></div>
         </li>
     </ul>
 </div>

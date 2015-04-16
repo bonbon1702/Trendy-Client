@@ -58,6 +58,8 @@
                                         }).success(function(k){
                                             $scope.itemToItemFollow = [];
                                             $scope.itemToItemFollow = k.suggests;
+                                            $scope.user.following.length++;
+                                            $scope.following.push($scope.user);
                                         }).error(function(data){
 
                                         });

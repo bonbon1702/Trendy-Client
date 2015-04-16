@@ -91,7 +91,7 @@
 
                         $location.path('/post/' + id, false);
                         $rootScope.$on('ngDialog.closing', function (e, $dialog) {
-                            $rootScope.$apply(function() {
+                            $rootScope.$apply(function () {
 
                                 $location.path('/' + currentUrl, false);
                             });
@@ -102,7 +102,7 @@
                             image.onload = function () {
                                 var s = this.naturalHeight / 500,
                                     newWidth, widthTotal, modelImage;
-                                if (this.naturalWidth < 700){
+                                if (this.naturalWidth < 700) {
                                     newWidth = this.naturalWidth / s;
                                     widthTotal = 700 + 327;
                                     modelImage = 700;
@@ -115,14 +115,13 @@
                                 $dialog.find('.ngdialog-content').css('width', widthTotal);
 
                                 $dialog.find('.has-magiccard img').css('width', newWidth);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width',modelImage -2);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding',0);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width','327');
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width', modelImage - 2);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding', 0);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width', '327');
                             };
 
 
                         });
-
 
 
                         postService.getPost(id)
@@ -138,6 +137,89 @@
                                 }
                                 $scope.editCaption = $scope.post.caption;
 
+                                $scope.captionLength = $scope.post.caption.length;
+                                $scope.captionCustom = $scope.post.caption.substr(0, 32) + "\n";
+                                if ($scope.captionLength < 33) {
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
+                                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
+                                    for (var i = 0; i < 2; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
+                                    for (var i = 0; i < 3; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
+                                    for (var i = 0; i < 4; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
+                                    for (var i = 0; i < 5; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
+                                    for (var i = 0; i < 6; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.post.caption = $scope.captionCustom;
+                                } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
+                                    for (var i = 0; i < 7; i++) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
+                                    }
+                                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(224, $scope.post.caption.length - 224);
+                                    $scope.post.caption = $scope.captionCustom;
+                                }
+
+                                $scope.cmts = $scope.post.comments;
+                                for (var i = 0; i < $scope.post.comments.length; i++) {
+                                    $scope.captionLength = $scope.post.comments[i].content.length;
+                                    $scope.captionCustom = $scope.post.comments[i].content.substr(0, 25) + "\n";
+                                    if ($scope.captionLength < 33) {
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 25) + "\n";
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
+                                        for (var i = 0; i < 2; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
+                                        for (var i = 0; i < 3; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
+                                        for (var i = 0; i < 4; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
+                                        for (var i = 0; i < 5; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
+                                        for (var i = 0; i < 6; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
+                                        for (var i = 0; i < 7; i++) {
+                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
+                                        }
+                                        $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(224, $scope.post.comments[i].content.length - 224);
+                                        $scope.cmts[i].content = $scope.captionCustom;
+                                    }
+                                    console.log($scope.cmts[i].content);
+                                }
 
                                 headerService.loginUser()
                                     .success(function (data) {
@@ -192,28 +274,40 @@
                                         event.preventDefault();
                                         headerService.openLogin();
                                     } else {
-                                        var data = {
-                                            'content': $scope.comment,
-                                            'type_comment': 0,
-                                            'type_id': id,
-                                            'user_id': $scope.loginUser.id
-                                        };
-                                        $scope.comment = null;
-                                        //$scope.post.comments.push({
-                                        //    'content': data.content,
-                                        //    'created_at': 'Just now',
-                                        //    'user': {
-                                        //        'username': $scope.loginUser.username,
-                                        //        'id': $scope.loginUser.id,
-                                        //        'picture_profile': $scope.loginUser.picture_profile
-                                        //    }
-                                        //});
-                                        postService.saveComment(data)
-                                            .success(function (data) {
-                                            })
-                                            .error(function (data) {
+                                        if (this.comment != null) {
+                                            if (this.comment.length > 255) {
+                                                ngDialog.open({
+                                                    template: 'app/post/templates/alertInpTxtLength.html',
+                                                    className: 'ngdialog-theme-plain-custom',
 
-                                            });
+                                                    controller: ['$scope', 'postService', function ($scope, postService) {
+                                                    }]
+                                                });
+                                            } else {
+                                                var data = {
+                                                    'content': this.comment,
+                                                    'type_comment': 0,
+                                                    'type_id': id,
+                                                    'user_id': $scope.loginUser.id
+                                                };
+                                                this.comment = null;
+                                                $scope.post.comments.push({
+                                                    'content': data.content,
+                                                    'created_at': 'Just now',
+                                                    'user': {
+                                                        'username': $scope.loginUser.username,
+                                                        'id': $scope.loginUser.id,
+                                                        'picture_profile': $scope.loginUser.picture_profile
+                                                    }
+                                                });
+                                                postService.saveComment(data)
+                                                    .success(function (data) {
+                                                    })
+                                                    .error(function (data) {
+
+                                                    });
+                                            }
+                                        }
                                     }
                                 };
 
@@ -281,47 +375,162 @@
                                     $scope.editContent = content;
                                 };
 
-                                $scope.submitEditComment = function (index) {
-                                    $scope.post.comments[index].content = this.editContent;
-                                    $scope.post.comments[index].editing = null;
-                                    postService.editPostComment({
-                                        id: $scope.post.comments[index].id,
-                                        content: this.editContent
-                                    }).success(function (data) {
+                                $scope.submitEditComment = function (index, editContent) {
+                                    if (editContent.length > 255) {
+                                        ngDialog.open({
+                                            template: 'app/post/templates/alertInpTxtLength.html',
+                                            className: 'ngdialog-theme-plain-custom',
 
-                                    }).error();
+                                            controller: ['$scope', 'postService', function ($scope, postService) {
+                                            }]
+                                        });
+                                    } else {
+
+                                        $scope.captionLength = $scope.editContent.length;
+                                        $scope.captionCustom = this.editContent.substr(0, 32) + "\n";
+                                        if ($scope.captionLength < 33) {
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
+                                            $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            $$scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
+                                            for (var i = 0; i < 2; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
+                                            for (var i = 0; i < 3; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
+                                            for (var i = 0; i < 4; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
+                                            for (var i = 0; i < 5; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
+                                            for (var i = 0; i < 6; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
+                                            for (var i = 0; i < 6; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
+                                            }
+                                            $scope.captionCustom = $scope.captionCustom + this.editContent.substr(224, this.editContent.length - 224);
+                                            $scope.post.comments[index].content = $scope.captionCustom;
+                                        }
+
+                                        //$scope.post.comments[index].content = this.editContent;
+                                        $scope.post.comments[index].editing = null;
+                                        postService.editPostComment({
+                                            id: $scope.post.comments[index].id,
+                                            content: this.editContent
+                                        }).success(function (data) {
+
+                                        }).error();
+                                    }
                                 };
 
-                                $scope.deleteCommentIndex = function (index) {
+                                $scope.deleteCommentIndex = function (index, comments) {
+                                    ngDialog.open({
+                                        template: 'app/post/templates/deleteCmtConfirm.html',
+                                        className: 'ngdialog-theme-plain-custom',
 
-                                    postService.deletePostComment({
-                                        id: $scope.post.comments[index].id
-                                    }).success(function (data) {
-
-                                    }).error();
-                                    $scope.post.comments.splice(index, 1);
+                                        controller: ['$scope', 'postService', function ($scope, postService) {
+                                            $scope.close = function () {
+                                                ngDialog.close();
+                                            };
+                                            $scope.confirm = function () {
+                                                postService.deletePostComment({
+                                                    id: comments[index].id
+                                                })
+                                                    .success(function (data) {
+                                                    })
+                                                    .error();
+                                                comments.splice(index, 1);
+                                            }
+                                        }]
+                                    });
                                 };
 
                                 $scope.closeEditComment = function (index) {
                                     $scope.post.comments[index].editing = null;
                                 };
 
-                                $scope.editPost = function () {
+                                $scope.editPost = function (caption) {
                                     $scope.editing = true;
+                                    $scope.editCaption = caption;
                                 };
 
-                                $scope.submitCaption = function () {
-                                    $scope.post.caption = this.editCaption;
-                                    $scope.editing = false;
+                                $scope.submitCaption = function (editCaption) {
+                                    if (editCaption.length > 255) {
+                                        ngDialog.open({
+                                            template: 'app/post/templates/alertInpTxtLength.html',
+                                            className: 'ngdialog-theme-plain-custom',
 
-                                    postService.editPostCaption({
-                                        id: id,
-                                        caption: this.editCaption
-                                    }).success(function (data) {
+                                            controller: ['$scope', 'postService', function ($scope, postService) {
+                                            }]
+                                        });
+                                    } else {
 
-                                    }).error(function (data) {
-                                        console.log(data);
-                                    });
+                                        $scope.captionLength = this.editCaption.length;
+                                        $scope.captionCustom = this.editCaption.substr(0, 32) + "\n";
+                                        if ($scope.captionLength < 33) {
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
+                                            $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
+                                            for (var i = 0; i < 2; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
+                                            for (var i = 0; i < 3; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
+                                            for (var i = 0; i < 4; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
+                                            for (var i = 0; i < 5; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
+                                            for (var i = 0; i < 6; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.post.caption = $scope.captionCustom;
+                                        } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
+                                            for (var i = 0; i < 7; i++) {
+                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
+                                            }
+                                            $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(224, $scope.post.caption.length - 224);
+                                            $scope.post.caption = $scope.captionCustom;
+                                        }
+
+                                        $scope.post.caption = $scope.post.caption;
+                                        $scope.editing = false;
+
+                                        postService.editPostCaption({
+                                            id: id,
+                                            caption: this.editCaption
+                                        }).success(function (data) {
+
+                                        }).error(function (data) {
+                                            console.log(data);
+                                        });
+                                    }
                                 };
 
                                 $scope.closeEdit = function () {
@@ -329,22 +538,34 @@
                                 };
 
                                 $scope.deletePostInside = function () {
-                                    postService.delete({
-                                        id: id
-                                    }).success(function (data) {
-                                        $window.location.reload();
-                                    }).error();
+                                    ngDialog.open({
+                                        template: 'app/post/templates/confirmDeletePost.html',
+                                        className: 'ngdialog-theme-plain-custom',
+
+                                        controller: ['$scope', 'postService', function ($scope, postService) {
+                                            $scope.close = function () {
+                                                ngDialog.close();
+                                            };
+                                            $scope.confirm = function () {
+                                                postService.delete({
+                                                    id: id
+                                                }).success(function (data) {
+                                                    $window.location.reload();
+                                                }).error();
+                                            }
+                                        }]
+                                    });
                                 };
 
                                 $scope.closeDialog = function () {
                                     ngDialog.close();
                                 };
 
-                                $scope.displayED = function (index){
+                                $scope.displayED = function (index) {
                                     $scope.post.comments[index].statusED = true;
                                 };
 
-                                $scope.notDisplayED = function(index){
+                                $scope.notDisplayED = function (index) {
                                     $scope.post.comments[index].statusED = false;
                                 };
 

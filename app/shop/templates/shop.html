@@ -14,7 +14,7 @@
                             <div class="widget cover image" style="margin-top: -70px;">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
-                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px;width: 109px;height: auto"/>
+                                        <img ng-src="{{ shop.image_url }}" class="img-circle" style="margin: 59px 0px -6px" width="109px" height="104px"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 9px;">
                                         <h3 class="margin-none" ng-if="shop.name != null ">{{ shop.name }}</h3>
@@ -240,7 +240,7 @@
                         <ul class="list-group list-group-1 borders-none margin-none">
                             <li class="list-group-item" ng-repeat="sug in suggestShop">
                                 <div class="media border-bottom innerAll margin-none">
-                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object" style="height: 74px;"/>
+                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object" style="height: 74px;" width="78px"/>
                                     <div class="media-body">
                                         <h5 style="margin: 11px 1px;">
                                             <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name != null">{{ sug.name }}</a>
