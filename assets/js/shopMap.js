@@ -1,9 +1,6 @@
 /**
  * Created by Nam on 13/3/2015.
  */
-/**
- * Created by tuan on 12/11/2014.
- */
 (function (root, factory) {
     root.shopMap = factory(root);
 })(this, function (root) {
@@ -14,7 +11,7 @@
 
     var map, markers = [];
 
-    shopMap.init = function (dataShop) {
+    shopMap.init = function (dataShop,datauser) {
         var lat, long;
         if (dataShop.shop.shop_detail != null )
         {
@@ -32,6 +29,15 @@
                 "stylers": [
                     {
                         "visibility": "simplified"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#444444"
                     }
                 ]
             },
@@ -79,7 +85,7 @@
                         "visibility": "on"
                     },
                     {
-                        "color": "#e0efef"
+                        "color": "rgb(231, 231, 231)"
                     }
                 ]
             },
@@ -163,8 +169,9 @@
                 "elementType": "all",
                 "stylers": [
                     {
-                        "color": "#7dcdcd"
-                    }
+                        "color": "#46bcec"
+                    },
+                    { invert_lightness: true }
                 ]
             }
         ];
@@ -172,7 +179,7 @@
             zoom: 15,
             center: shopLocation ,
             panControl: false,
-            zoomControl: true,
+            zoomControl: false,
             scaleControl: false,
             streetViewControl: false,
             scrollwheel: false,
@@ -185,15 +192,23 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         searchBox();
-        homeButton(dataShop.shop['user_avatar']);
+        homeButton(datauser.picture_profile);
+        google.maps.event.addDomListener($('[role=zoom-in]')[0], 'click', function () {
+            map.setZoom(map.getZoom()+1);
+        });
+        google.maps.event.addDomListener($('[role=zoom-out]')[0], 'click', function () {
+            map.setZoom(map.getZoom()-1);
+        });
     }
 
+    //--------------------------------------Search Button ----------------------------------------------------------
     var searchBox = function () {
-        // Create the search box and link it to the UI element.
+        var defaultBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-33.8902, 151.1759),
+            new google.maps.LatLng(-33.8474, 151.2631));
+
         var input = /** @type {HTMLInputElement} */(
             document.getElementById('pac-input'));
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
         var searchBox = new google.maps.places.SearchBox(
             /** @type {HTMLInputElement} */(input));
 
@@ -203,6 +218,7 @@
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
+                alert("No result that you want search");
                 return;
             }
             for (var i = 0, marker; marker = markers[i]; i++) {
@@ -245,14 +261,21 @@
             searchBox.setBounds(bounds);
         });
     }
+    //----------------------------------------------------------------------------------------------------------------
 
+
+    //--------------------------------------------Home Button---------------------------------------------------------
     var homeButton = function (icon) {
-        var homeControlDiv = document.createElement('div');
-        var homeControl = new HomeControl(homeControlDiv, map);
+        // homeControlDiv = document.createElement('div');
+        //var homeControl = new HomeControl(homeControlDiv, map);
 
-        homeControlDiv.index = 1;
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(homeControlDiv);
-
+        //homeControlDiv.index = 1;
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(homeControlDiv);
+        // Setup the click event listeners: simply set the map to
+        var controlUI = $('[role=current-location]')[0];
+        google.maps.event.addDomListener(controlUI, 'click', function () {
+            getLocation();
+        });
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -272,27 +295,17 @@
             }
 
             // For each place, get the icon, place name, and location.
-            // markers = [];
             if (markerHome!= null)
                 markerHome.setMap(null);
-            //var marker = createMarker(map, null, myLatlng);
+
+            //var img_user= $('[alt="user"]')[0].src;
+            //if (img_user != undefined)
             markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:icon});
+            //else
+            //markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img: icon});
             markerHome.setMap(map);
-            //var infowindow = new google.maps.InfoWindow({
-            //    content: "It is your location"
-            //});
 
-            //markers.push(marker);
             map.setCenter(myLatlng);
-            //map.setZoom(15);
-
-
-            google.maps.event.addListener(marker, 'mouseover', function () {
-                infowindow.open(map, marker);
-            });
-            google.maps.event.addListener(marker, 'mouseout', function () {
-                infowindow.close();
-            });
         }
 
         function HomeControl(controlDiv, map) {
@@ -304,12 +317,13 @@
 
             // Set CSS for the control border
             var controlUI = document.createElement('div');
-            controlUI.style.backgroundColor = 'white';
-            controlUI.style.borderStyle = 'solid';
-            controlUI.style.borderWidth = '1px';
-            controlUI.style.cursor = 'pointer';
-            controlUI.style.textAlign = 'center';
-            controlUI.style.height = '32px';
+            controlUI.className = "btn-home";
+            //controlUI.style.backgroundColor = 'white';
+            //controlUI.style.borderStyle = 'solid';
+            //controlUI.style.borderWidth = '1px';
+            //controlUI.style.cursor = 'pointer';
+            //controlUI.style.textAlign = 'center';
+            //controlUI.style.height = '32px';
             controlUI.title = 'Click to set the map to Home';
             controlDiv.appendChild(controlUI);
 
@@ -323,12 +337,11 @@
             controlText.innerHTML = '<b>Home</b>';
             controlUI.appendChild(controlText);
 
-            // Setup the click event listeners: simply set the map to
-            google.maps.event.addDomListener(controlUI, 'click', function () {
-                getLocation();
-            });
+
         }
     }
+    //----------------------------------------------------------------------------------------------------------------
+
     shopMap.createMarker = function (data) {
         var lat, long, address;
         if (data.shop.shop_detail != null)
@@ -341,14 +354,14 @@
             long = data.shop.long;
             address = data.shop.address;
         }
-            new CustomMarker(
-                new google.maps.LatLng(lat, long),
-                map,
-                {	marker_id:data.shop.id,
-                    product:data.shop.name,
-                    shop: address,
-                    img:data.shop.image_url
-                });
+        new CustomMarker(
+            new google.maps.LatLng(lat, long),
+            map,
+            {	marker_id:data.shop.id,
+                product:data.shop.name,
+                shop: address,
+                img:data.shop.image_url
+            });
     };
     function CustomMarker(latlng, map, args) {
         this.latlng = latlng;
@@ -372,7 +385,7 @@
 
             div.style.position = 'absolute';
             div.style.cursor = 'pointer';
-            var img = "";
+            var img = "http://images.fashiontimes.com/data/images/full/4853/versace.jpg";
             var product = "";
             var shop = "";
             if (self.args.img != null && self.args.img != '') img = self.args.img;

@@ -1,8 +1,32 @@
 <div id="content" style="margin-top: 54px">
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
     <div class="innerAll">
+        <div style="position: absolute;left: 0px;top: 10px;overflow: hidden;width: 71%;height: 250px;z-index: 0;
+        				transform: translateZ(0px) translateZ(0px);background-color: rgb(229, 227, 223);margin: 0px 34px 0px 33px;">
+            <div class="map-wrapper" style="height: 250px;">
+                <div id="control-div" class="map-controls-wrapper">
+                    <div class="map-controls">
+                        <div class="inner-align">
+                            <div class="address-input-wrapper">
+                                <input id="pac-input" type="text" maxlength="255" role="location" name="address" autocomplete="off" data-dd-name="test" placeholder="Search Box">
+                                <div role="dropdown"><ul class="dd-items"></ul></div>
+                            </div>
+                            <div class="tooltip" data-tooltip-id="CURRENT_LOCATION">
+                                <a class="btn" role="close"></a>
+                            </div>
+                            <a class="btn" role="current-location"></a>
+                            <a class="btn" role="zoom-in"></a>
+                            <a class="btn" role="zoom-out"></a>
+                        </div>
+                    </div>
+                </div>
+                <div id="map" class="transitionHideMap"
+                     style="position: relative; overflow: hidden; width: 100%; height: 250px; z-index: 0; transform: translateZ(0px); background-color: rgb(229, 227, 223);"></div>
+            </div>
+        </div>
+        <!--
         <div id="map" style="position: absolute;left: 0px;top: 10px;overflow: hidden;width: 71%;height: 250px;z-index: 0;
         				transform: translateZ(0px) translateZ(0px);background-color: rgb(229, 227, 223);margin: 0px 34px 0px 33px;"></div>
+        				-->
         <div class="row" style="margin-left: 17px;margin-right: 15px;">
 
             <div class="col-lg-9 col-md-8" style="padding: 3px 6px;top: 314px;">
@@ -36,10 +60,10 @@
                         <div class="info-wrapper" style="margin-left: 22px;">
                             <ul class="share-box">
                                 <!--<li class="fb-like-wrapper" style="display: inline-block;">-->
-                                    <!--<div class="fb-like fb_iframe_widget" data-width="135" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=600859170003466&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135"><span style="vertical-align: bottom; width: 123px; height: 20px;"><iframe name="f313ddcd9c" width="135px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=600859170003466&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F7r8gQb8MIqE.js%3Fversion%3D41%23cb%3Df1a5025a18%26domain%3Dlozi.vn%26origin%3Dhttp%253A%252F%252Flozi.vn%252Ff337c71048%26relation%3Dparent.parent&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135" style="border: none; visibility: visible; width: 123px; height: 20px;" class=""></iframe></span></div>-->
+                                <!--<div class="fb-like fb_iframe_widget" data-width="135" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=600859170003466&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135"><span style="vertical-align: bottom; width: 123px; height: 20px;"><iframe name="f313ddcd9c" width="135px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="http://www.facebook.com/v2.0/plugins/like.php?action=like&amp;app_id=600859170003466&amp;channel=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter%2F7r8gQb8MIqE.js%3Fversion%3D41%23cb%3Df1a5025a18%26domain%3Dlozi.vn%26origin%3Dhttp%253A%252F%252Flozi.vn%252Ff337c71048%26relation%3Dparent.parent&amp;href=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;share=true&amp;show_faces=true&amp;width=135" style="border: none; visibility: visible; width: 123px; height: 20px;" class=""></iframe></span></div>-->
                                 <!--</li>-->
                                 <!--<li class="g-plusone-wrapper" style="display: inline-block;">-->
-                                    <!--<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1419420875747" name="I0_1419420875747" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Flozi.vn&amp;url=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.DyIrs0WwupM.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCO5fZ6t2zIj8KbzeYuUVfSYsYTtlQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1419420875747&amp;parent=http%3A%2F%2Flozi.vn&amp;pfname=&amp;rpctoken=37899160" data-gapiattached="true" title="+1"></iframe></div>-->
+                                <!--<div id="___plusone_1" style="text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 90px; height: 20px; background: transparent;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" tabindex="0" vspace="0" width="100%" id="I0_1419420875747" name="I0_1419420875747" src="https://apis.google.com/u/0/se/0/_/+1/fastbutton?usegapi=1&amp;size=medium&amp;origin=http%3A%2F%2Flozi.vn&amp;url=http%3A%2F%2Flozi.vn%2Fnha-hang%2Fcanopee-cafe-so-60-hang-trong-hang-trong-hoan-kiem-ha-noi&amp;gsrc=3p&amp;ic=1&amp;jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.DyIrs0WwupM.O%2Fm%3D__features__%2Fam%3DAQ%2Frt%3Dj%2Fd%3D1%2Ft%3Dzcms%2Frs%3DAGLTcCO5fZ6t2zIj8KbzeYuUVfSYsYTtlQ#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh&amp;id=I0_1419420875747&amp;parent=http%3A%2F%2Flozi.vn&amp;pfname=&amp;rpctoken=37899160" data-gapiattached="true" title="+1"></iframe></div>-->
                                 <!--</li>-->
                             </ul>
 
@@ -124,10 +148,10 @@
                                 </dd>
                                 <br>
                                 <div ng-if="shop.shop_detail.website != null" style="display: inline">
-                                <dt>Web site</dt>
-                                <dd>
-                                    {{ shop.shop_detail.website }}
-                                </dd>
+                                    <dt>Web site</dt>
+                                    <dd>
+                                        {{ shop.shop_detail.website }}
+                                    </dd>
                                 </div>
                                 <div ng-if="shop.shop_detail.facebook_page != null" style="display: inline">
                                     <dt>Facebook</dt>
@@ -185,7 +209,7 @@
                     </a>
                     <form ng-submit="submitComment()" style="height: 23px;">
                         <input type="text" style="width: 93%;height: 277%;" class="form-control rounded-none border-none"
-                                  placeholder="Write your messages..." ng-model="comment"/>
+                               placeholder="Write your messages..." ng-model="comment"/>
                     </form>
                 </div>
 
@@ -206,7 +230,7 @@
                                                 <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
                                             <div ng-if="comment.editing == 'yes'">
-                                                <form ng-submit="submitEditComment($index)" class="form-inline">
+                                                <form ng-submit="submitEditComment($index,editContent)" class="form-inline">
                                                     <input type="text" class="form-control" ng-model="editContent" name="editContent" style="width: 210px;">
                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
                                                     <button ng-click="closeEditComment($index)" class="btn btn-primary"><i class="fa fa-times"></i></button>
@@ -246,7 +270,7 @@
                                             <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;  color: #767676;" ng-if="sug.name != null">{{ sug.name }}</a>
                                             <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;  color: #767676;" ng-if="sug.name == null">{{ sug.address }}</a>
                                         </h5>
-                                        <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
+                                        <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -14px;color: #327DEF;font-size: 11px;font-weight: normal;"
                                            ng-click="likeShop(sug.id)">
                                             Like
                                         </a>

@@ -7,28 +7,28 @@
 
     postDetailController.$inject = ['$scope', 'ngDialog', 'postService', '$location', '$routeParams', 'headerService', '$window'];
 
-    function postDetailController($scope,ngDialog, postService, $location, $routeParam, headerService, $window) {
+    function postDetailController($scope, ngDialog, postService, $location, $routeParam, headerService, $window) {
         $scope.iconLike = false;
         $scope.iconFavorite = false;
         $scope.editing = false;
         $scope.editingComment = false;
         postService.getPost($routeParam.id)
-            .success(function(data){
+            .success(function (data) {
                 $scope.post = data.post;
 
 
-                $scope.captionCustom=$scope.post.caption.substr(0,48)+"\n";
-                for(var i=0;i<4;i++){
-                    $scope.captionCustom=$scope.captionCustom+$scope.post.caption.substr(0,48)+"\n";
+                $scope.captionCustom = $scope.post.caption.substr(0, 48) + "\n";
+                for (var i = 0; i < 4; i++) {
+                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 48) + "\n";
                 }
-                $scope.captionCustom=$scope.captionCustom+$scope.post.caption.substr(240,$scope.post.caption.length-240);
-                $scope.post.caption=$scope.captionCustom;
+                $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(240, $scope.post.caption.length - 240);
+                $scope.post.caption = $scope.captionCustom;
 
                 $scope.post.created_at = beautyDate.prettyDate($scope.post.created_at);
-                for (var i=0; i< $scope.post.tag_picture.length; i++){
+                for (var i = 0; i < $scope.post.tag_picture.length; i++) {
                     $scope.post.tag_picture[i].top = $scope.post.tag_picture[i].top - 20;
                 }
-                for (var i=0; i< $scope.post.comments.length; i++){
+                for (var i = 0; i < $scope.post.comments.length; i++) {
                     $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
                 }
                 headerService.loginUser()
@@ -60,30 +60,40 @@
                         event.preventDefault();
                         headerService.openLogin();
                     } else {
-                        if(this.comment != null){
-                            var data = {
-                                'content': this.comment,
-                                'type_comment': 0,
-                                'type_id': $routeParam.id,
-                                'user_id': $scope.loginUser.id
-                            };
-                            this.comment = null;
-                            $scope.post.comments.push({
-                                'content': data.content,
-                                'created_at': 'Just now',
-                                'user': {
-                                    'username': $scope.loginUser.username,
-                                    'id': $scope.loginUser.id,
-                                    'picture_profile': $scope.loginUser.picture_profile
-                                }
-                            });
+                        if (this.comment != null) {
+                            if (this.comment.length > 255) {
+                                ngDialog.open({
+                                    template: 'app/post/templates/alertInpTxtLength.html',
+                                    className: 'ngdialog-theme-plain-custom',
 
-                            postService.saveComment(data)
-                                .success(function (data) {
-                                })
-                                .error(function (data) {
-
+                                    controller: ['$scope', 'postService', function ($scope, postService) {
+                                    }]
                                 });
+                            } else {
+                                var data = {
+                                    'content': this.comment,
+                                    'type_comment': 0,
+                                    'type_id': $routeParam.id,
+                                    'user_id': $scope.loginUser.id
+                                };
+                                this.comment = null;
+                                $scope.post.comments.push({
+                                    'content': data.content,
+                                    'created_at': 'Just now',
+                                    'user': {
+                                        'username': $scope.loginUser.username,
+                                        'id': $scope.loginUser.id,
+                                        'picture_profile': $scope.loginUser.picture_profile
+                                    }
+                                });
+
+                                postService.saveComment(data)
+                                    .success(function (data) {
+                                    })
+                                    .error(function (data) {
+
+                                    });
+                            }
                         }
                     }
                 };
@@ -151,8 +161,8 @@
                     $scope.editContent = content;
                 };
 
-                $scope.submitEditComment = function (index,editContent) {
-                    if(editContent.length > 255 ){
+                $scope.submitEditComment = function (index, editContent) {
+                    if (editContent.length > 255) {
                         ngDialog.open({
                             template: 'app/post/templates/alertInpTxtLength.html',
                             className: 'ngdialog-theme-plain-custom',
@@ -160,7 +170,7 @@
                             controller: ['$scope', 'postService', function ($scope, postService) {
                             }]
                         });
-                    }else{
+                    } else {
                         $scope.post.comments[index].content = this.editContent;
                         $scope.post.comments[index].editing = null;
                         postService.editPostComment({
@@ -172,7 +182,7 @@
                     }
                 };
 
-                $scope.deleteCommentIndex = function (index,comments) {
+                $scope.deleteCommentIndex = function (index, comments) {
                     ngDialog.open({
                         template: 'app/post/templates/confirmDeletePost.html',
                         className: 'ngdialog-theme-plain-custom',
