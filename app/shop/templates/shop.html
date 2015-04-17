@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 9px;">
                                         <h3 class="margin-none" ng-if="shop.name != null ">{{ shop.name }}</h3>
-                                        <h3 class="margin-none" ng-if="shop.name == null ">{{ shop.address }}</h3>
+                                        <h3 class="margin-none" ng-if="shop.name == null || shop.name == '' ">{{ shop.address }}</h3>
                                         <br/>
                                         <div class="btn-group-vertical btn-group-sm" style="margin-top: 13px;">
                                             <a ng-click="likeOrDislike()" class="btn btn-primary" style="width: 64px;height: 28px;margin-top: -24px;">

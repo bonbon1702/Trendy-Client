@@ -390,14 +390,14 @@
             var shop = "";
             if (self.args.img != null && self.args.img != '') img = self.args.img;
             if (self.args.product != null && self.args.product != '') product = self.args.product;
-            if (self.args.shop != null && self.args.product != '') shop = self.args.shop;
+            if (self.args.shop != null && self.args.shop != '') shop = self.args.shop;
             div.innerHTML ='<div class="marker"><img class="img-marker" '
             +'src="'+img+'">'
             +'<div class="marker-hover">'
-            +'<span role="product">'
+            +'<a role="product">'
             +	product
-            +'</span>'
-            +'<span role="shop">'+shop+'</span></div></div>';
+            +'</a>'
+            +'<a role="shop">'+shop+'</a></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
