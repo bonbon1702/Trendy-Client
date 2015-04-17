@@ -16,7 +16,7 @@
 
     shopMap.init = function (dataShop) {
         var lat, long;
-        if (dataShop.shop.shop_detail.length > 0  && dataShop.shop.shop_detail.length > 0)
+        if (dataShop.shop.shop_detail != null )
         {
             lat = dataShop.shop.shop_detail[0].lat;
             long = dataShop.shop.shop_detail[0].long;
@@ -331,7 +331,7 @@
     }
     shopMap.createMarker = function (data) {
         var lat, long, address;
-        if (data.shop.shop_detail.length > 0  && data.shop.shop_detail.length > 0)
+        if (data.shop.shop_detail != null)
         {
             lat = data.shop.shop_detail[0].lat;
             long = data.shop.shop_detail[0].long;

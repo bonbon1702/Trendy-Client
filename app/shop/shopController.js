@@ -98,22 +98,13 @@
 
         shopService.get($routeParams.shopId)
             .success(function (data) {
-                headerService.loginUser()
-                    .success(function (r) {
-                        if (r.user) {
-                            data.shop['user_avatar'] = r.user.picture_profile;
-                            shopMap.init(data);
-                            shopMap.createMarker(data);
-                        } else {
-                            data.shop['user_avatar'] = 'https://cdn4.iconfinder.com/data/icons/ironman_lin/512/ironman_III.png';
-                            shopMap.init(data);
-                            shopMap.createMarker(data);
-                        }
-                    })
-                    .error();
+
+                shopMap.init(data);
+                shopMap.createMarker(data);
                 for (var i=0; i < data.shop.comments.length;i++){
                     data.shop.comments[i].created_at = beautyDate.prettyDate(data.shop.comments[i].created_at);
                 }
+
                 if (data.shop.shop_detail){
                     data.shop['name'] = data.shop.shop_detail['name'];
                     data.shop['address'] = data.shop.shop_detail['street'] + ', ' + data.shop.shop_detail['district'] + ', ' + data.shop.shop_detail['city'];
@@ -130,6 +121,9 @@
                 }
                 headerService.loginUser()
                     .success(function(r){
+                        if($scope.shop.like.length == 0){
+                            $scope.likeBtnStatus ="Like";
+                        }
                         for (var i = 0; i < $scope.shop.like.length; i++) {
                             if (r.user != null && r.user.id == $scope.shop.like[i].user_id) {
                                 $scope.likeBtnStatus = "Liked";

@@ -235,18 +235,21 @@
             <div class="col-md-4 col-lg-3" style="top: 10px;">
 
                 <div class="widget" style="margin-top: -10px;">
-                    <h5 class="innerAll margin-none bg-primary">SHOP YOU MAY LIKE</h5>
+                    <h5 class="innerAll margin-none">SHOP YOU MAY LIKE</h5>
                     <div class="widget-body padding-none">
                         <ul class="list-group list-group-1 borders-none margin-none">
                             <li class="list-group-item" ng-repeat="sug in suggestShop">
-                                <div class="media border-bottom innerAll margin-none">
-                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object" style="height: 74px;" width="78px"/>
+                                <div class="media border-bottom innerAll margin-none pull-left media-object"  style="background: #fff;width: 100%;">
+                                    <img ng-src="{{ sug.image_url }}" class="pull-left media-object img-circle" style="height: 74px;" width="78px"/>
                                     <div class="media-body">
                                         <h5 style="margin: 11px 1px;">
-                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name != null">{{ sug.name }}</a>
-                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;" ng-if="sug.name == null">{{ sug.address }}</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;  color: #767676;" ng-if="sug.name != null">{{ sug.name }}</a>
+                                            <a href="/shop/{{ sug.id }}" class="text-inverse" style="margin: -10px -16px;  color: #767676;" ng-if="sug.name == null">{{ sug.address }}</a>
                                         </h5>
-                                        <button class="btn btn-primary" ng-click="likeShop(sug.id)">Like</button>
+                                        <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
+                                           ng-click="likeShop(sug.id)">
+                                            Like
+                                        </a>
                                     </div>
                                 </div>
                             </li>
