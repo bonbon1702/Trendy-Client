@@ -110,7 +110,12 @@
 
         shopService.get($routeParams.shopId)
             .success(function (data) {
-
+                headerService.loginUser()
+                    .success(function (data) {
+                        $scope.loginUser=data.user;
+                    })
+                    .error(function (data) {
+                    });
                 shopMap.init(data, $scope.loginUser);
                 shopMap.createMarker(data);
                 for (var i = 0; i < data.shop.comments.length; i++) {
@@ -316,7 +321,7 @@
 
 
                         //Service Infomation
-                        $scope.morning = shop.shop_detail.midday == 1 ? true : false;
+                        $scope.morning = shop.shop_detail.morning == 1 ? true : false;
                         $scope.midday = shop.shop_detail.midday == 1 ? true : false;
                         $scope.afternoon = shop.shop_detail.afternoon == 1 ? true : false;
                         $scope.night = shop.shop_detail.night == 1 ? true : false;
@@ -341,17 +346,17 @@
                         data = {
                             'shop_id': shop.id,
                             'name': $scope.shop_name,
-                            'street': $scope.street,
-                            'district': $scope.district,
-                            'city': $scope.city,
-                            'near_place': $scope.near_place,
-                            'way_direction': $scope.way_direction,
-                            'lat': shop.shop_detail.lat,
-                            'long': shop.shop_detail.long,
-                            'time_open': $scope.time_open,
-                            'time_close': $scope.time_close,
-                            'price_from': $scope.price_from,
-                            'price_to': $scope.price_to,
+                            'street': $scope.street != null ? $scope.street : '',
+                            'district': $scope.district!= null ? $scope.district : '',
+                            'city': $scope.city!= null ? $scope.city : '',
+                            'near_place': $scope.near_place!= null ? $scope.near_place : '',
+                            'way_direction': $scope.way_direction!= null ? $scope.way_direction : '',
+                            'lat': shop.lat,
+                            'long': shop.long,
+                            'time_open': $scope.time_open!= null ? $scope.time_open : '',
+                            'time_close': $scope.time_close!= null ? $scope.time_close : '',
+                            'price_from': $scope.price_from!= null ? $scope.price_from : '',
+                            'price_to': $scope.price_to!= null ? $scope.price_to : '',
                             'morning': $scope.morning == true ? 1 : 0,
                             'midday': $scope.midday == true ? 1 : 0,
                             'afternoon': $scope.afternoon == true ? 1 : 0,
@@ -366,9 +371,9 @@
                             'oldster': $scope.oldster == true ? 1 : 0,
                             'men': $scope.men == true ? 1 : 0,
                             'women': $scope.women == true ? 1 : 0,
-                            'tel': $scope.phone,
-                            'website': $scope.website,
-                            'facebook_page': $scope.facebook_page,
+                            'tel': $scope.phone!= null ? $scope.phone : '',
+                            'website': $scope.website!= null ? $scope.website : '',
+                            'facebook_page': $scope.facebook_page!= null ? $scope.facebook_page : '',
                             'approve': 0
                         };
 

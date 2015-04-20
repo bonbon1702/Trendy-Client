@@ -137,90 +137,6 @@
                                 }
                                 $scope.editCaption = $scope.post.caption;
 
-                                $scope.captionLength = $scope.post.caption.length;
-                                $scope.captionCustom = $scope.post.caption.substr(0, 32) + "\n";
-                                if ($scope.captionLength < 33) {
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
-                                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
-                                    for (var i = 0; i < 2; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
-                                    for (var i = 0; i < 3; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
-                                    for (var i = 0; i < 4; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
-                                    for (var i = 0; i < 5; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
-                                    for (var i = 0; i < 6; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.post.caption = $scope.captionCustom;
-                                } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
-                                    for (var i = 0; i < 7; i++) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 32) + "\n";
-                                    }
-                                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(224, $scope.post.caption.length - 224);
-                                    $scope.post.caption = $scope.captionCustom;
-                                }
-
-                                $scope.cmts = $scope.post.comments;
-                                for (var i = 0; i < $scope.post.comments.length; i++) {
-                                    $scope.captionLength = $scope.post.comments[i].content.length;
-                                    $scope.captionCustom = $scope.post.comments[i].content.substr(0, 25) + "\n";
-                                    if ($scope.captionLength < 33) {
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 25) + "\n";
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
-                                        for (var i = 0; i < 2; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
-                                        for (var i = 0; i < 3; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
-                                        for (var i = 0; i < 4; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
-                                        for (var i = 0; i < 5; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
-                                        for (var i = 0; i < 6; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
-                                        for (var i = 0; i < 7; i++) {
-                                            $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(0, 32) + "\n";
-                                        }
-                                        $scope.captionCustom = $scope.captionCustom + $scope.post.comments[i].content.substr(224, $scope.post.comments[i].content.length - 224);
-                                        $scope.cmts[i].content = $scope.captionCustom;
-                                    }
-                                    console.log($scope.cmts[i].content);
-                                }
-
                                 headerService.loginUser()
                                     .success(function (data) {
                                         $scope.loginUser = data.user;
@@ -385,48 +301,7 @@
                                             }]
                                         });
                                     } else {
-
-                                        $scope.captionLength = $scope.editContent.length;
-                                        $scope.captionCustom = this.editContent.substr(0, 32) + "\n";
-                                        if ($scope.captionLength < 33) {
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
-                                            $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            $$scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
-                                            for (var i = 0; i < 2; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
-                                            for (var i = 0; i < 3; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
-                                            for (var i = 0; i < 4; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
-                                            for (var i = 0; i < 5; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
-                                            for (var i = 0; i < 6; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
-                                            for (var i = 0; i < 6; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editContent.substr(0, 32) + "\n";
-                                            }
-                                            $scope.captionCustom = $scope.captionCustom + this.editContent.substr(224, this.editContent.length - 224);
-                                            $scope.post.comments[index].content = $scope.captionCustom;
-                                        }
-
-                                        //$scope.post.comments[index].content = this.editContent;
+                                        $scope.post.comments[index].content = this.editContent;
                                         $scope.post.comments[index].editing = null;
                                         postService.editPostComment({
                                             id: $scope.post.comments[index].id,
@@ -478,48 +353,7 @@
                                             }]
                                         });
                                     } else {
-
-                                        $scope.captionLength = this.editCaption.length;
-                                        $scope.captionCustom = this.editCaption.substr(0, 32) + "\n";
-                                        if ($scope.captionLength < 33) {
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 32 && $scope.captionLength < 65) {
-                                            $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 64 && $scope.captionLength < 97) {
-                                            for (var i = 0; i < 2; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 96 && $scope.captionLength < 129) {
-                                            for (var i = 0; i < 3; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 128 && $scope.captionLength < 161) {
-                                            for (var i = 0; i < 4; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 160 && $scope.captionLength < 193) {
-                                            for (var i = 0; i < 5; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 192 && $scope.captionLength < 225) {
-                                            for (var i = 0; i < 6; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.post.caption = $scope.captionCustom;
-                                        } else if ($scope.captionLength > 224 && $scope.captionLength < 255) {
-                                            for (var i = 0; i < 7; i++) {
-                                                $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(0, 32) + "\n";
-                                            }
-                                            $scope.captionCustom = $scope.captionCustom + this.editCaption.substr(224, $scope.post.caption.length - 224);
-                                            $scope.post.caption = $scope.captionCustom;
-                                        }
-
-                                        $scope.post.caption = $scope.post.caption;
+                                        $scope.post.caption = this.editCaption;
                                         $scope.editing = false;
 
                                         postService.editPostCaption({

@@ -5,15 +5,15 @@
     angular.module('MyApp')
         .controller('postController', postController);
 
-    postController.$inject = ['$scope','ngDialog','postService', '$location', '$routeParams', 'headerService', '$window'];
+    postController.$inject = ['$scope', 'ngDialog', 'postService', '$location', '$routeParams', 'headerService', '$window'];
 
-    function postController($scope, ngDialog,postService, $location, $routeParam, headerService, $window) {
+    function postController($scope, ngDialog, postService, $location, $routeParam, headerService, $window) {
         $scope.points = [];
         $scope.caption = null;
         $scope.album = null;
         $scope.tagContent = [];
         $scope.tags = [];
-        $scope.captionCustom=null;
+        $scope.captionCustom = null;
 
         headerService.loginUser()
             .success(function (data) {
@@ -79,7 +79,7 @@
                     angular.element($(this)).find('.item-tag-label').text(angular.element($(this)).find('.item-tag-label').text() - 1);
                     angular.element($(this)).attr('id', id - 1);
                 }
-            });sho
+            });
 
             angular.element(document).find('.point#' + number).remove();
 
@@ -108,25 +108,11 @@
             }
         };
         $scope.submit = function () {
-            if ($scope.caption.length > 255) {
-                ngDialog.open({
-                    template: 'app/post/templates/alertInpTxtLength.html',
-                    className: 'ngdialog-theme-plain-custom',
-
-                    controller: ['$scope', 'postService', function ($scope, postService) {
-                    }]
-                });
-            } else {
-                $scope.captionCustom=$scope.caption.substr(0,24)+"\n";
-                for(var i=0;i<10;i++){
-                    $scope.captionCustom=$scope.captionCustom+$scope.caption.substr(0,24)+"\n";
-                }
-                $scope.captionCustom=$scope.captionCustom+$scope.caption.substr(240,$scope.caption.length-240);
-
+            if ($scope.caption == null) {
                 var data;
                 if ($scope.image.editor != 'false') {
                     data = {
-                        caption: $scope.captionCustom,
+                        caption: $scope.caption,
                         points: $scope.points,
                         name: $scope.image.name,
                         album: $scope.album != null ? $scope.album : "Untitled Album",
@@ -153,7 +139,55 @@
                     .error(function (data) {
                         console.log(data);
                     });
+            } else {
+                if ($scope.caption.length > 255) {
+                    ngDialog.open({
+                        template: 'app/post/templates/alertInpTxtLength.html',
+                        className: 'ngdialog-theme-plain-custom',
+
+                        controller: ['$scope', 'postService', function ($scope, postService) {
+                        }]
+                    });
+                } else {
+                    $scope.captionCustom = $scope.caption.substr(0, 24) + "\n";
+                    for (var i = 0; i < 10; i++) {
+                        $scope.captionCustom = $scope.captionCustom + $scope.caption.substr(0, 24) + "\n";
+                    }
+                    $scope.captionCustom = $scope.captionCustom + $scope.caption.substr(240, $scope.caption.length - 240);
+
+                    var data;
+                    if ($scope.image.editor != 'false') {
+                        data = {
+                            caption: $scope.captionCustom,
+                            points: $scope.points,
+                            name: $scope.image.name,
+                            album: $scope.album != null ? $scope.album : "Untitled Album",
+                            url: $scope.image.image,
+                            tags: $scope.tags,
+                            user_id: $scope.user.id
+                        };
+                    } else {
+                        data = {
+                            caption: $scope.caption,
+                            points: $scope.points,
+                            name: $scope.image.name,
+                            album: $scope.album != null ? $scope.album : "Untitled Album",
+                            url: null,
+                            tags: $scope.tags,
+                            user_id: $scope.user.id
+                        };
+                    }
+                    postService.save(data)
+                        .success(function (data) {
+                            $location.path("/");
+                            $location.search('');
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        });
+                }
             }
+
         }
 
     }

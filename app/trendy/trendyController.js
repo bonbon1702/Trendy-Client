@@ -51,7 +51,7 @@
 
                 if (isLike == true) {
                     for (var i=0; i< $scope.postsTop3.length; i++){
-                        if ($scope.postsTop3[i].id == id){
+                        if ($scope.postsTop3[i] != null &&$scope.postsTop3[i].id == id){
                             $scope.postsTop3[i].like.length--;
                             $scope.postsTop3[i].isLike = false;
                         }
@@ -65,7 +65,7 @@
                     }
                 } else {
                     for (var i=0; i< $scope.postsTop3.length; i++){
-                        if ($scope.postsTop3[i].id == id){
+                        if ($scope.postsTop3[i] != null && $scope.postsTop3[i].id == id){
                             $scope.postsTop3[i].like.length++;
                             $scope.postsTop3[i].isLike = true;
                         }
@@ -105,7 +105,7 @@
 
                 if (isFavorite == true) {
                     for (var i = 0; i < $scope.postsTop3.length; i++) {
-                        if ($scope.postsTop3[i].id == id) {
+                        if ($scope.postsTop3[i] != null && $scope.postsTop3[i].id == id) {
                             $scope.postsTop3[i].favorite.length--;
                             $scope.postsTop3[i].isFavorite = false;
                         }
@@ -119,7 +119,7 @@
                     }
                 } else {
                     for (var i = 0; i < $scope.postsTop3.length; i++) {
-                        if ($scope.postsTop3[i].id == id) {
+                        if ($scope.postsTop3[i] != null && $scope.postsTop3[i].id == id) {
                             $scope.postsTop3[i].favorite.length++;
                             $scope.postsTop3[i].isFavorite = true;
                         }

@@ -34,12 +34,12 @@
 
                 headerService.loginUser()
                     .success(function (r) {
+                        $scope.loginUserID=r.user.id;
                         if (r.user) {
                             userService.suggestITI({
                                 'loginId': r.user.id,
                                 'user_id': $routeParams.userId
                             }).success(function(data){
-
                                 $scope.itemToItemFollow = data.suggests;
                             }).error(function(data){
 

@@ -74,10 +74,10 @@
 
                             <div class="info address" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
                                 <span class=" icon-location-fill-1"></span>
-                                <span itemprop="streetAddress">
-                                    <div ng-if="shop.shop_detail.street != null" style="display: inline;">{{ shop.shop_detail.street }}, </div>
-                                    <div ng-if="shop.shop_detail.district != null" style="display: inline;">{{ shop.shop_detail.district }}, </div>
-                                    <div ng-if="shop.shop_detail.city != null" style="display: inline;">{{ shop.shop_detail.city }}</div>
+                                <span itemprop="streetAddress" ng-if="shop.shop_detail!= null">
+                                    <div ng-if="shop.shop_detail.street != null || shop.shop_detail.street != '' " style="display: inline;">{{ shop.shop_detail.street }}, </div>
+                                    <div ng-if="shop.shop_detail.district != null || shop.shop_detail.district != '' " style="display: inline;">{{ shop.shop_detail.district }}, </div>
+                                    <div ng-if="shop.shop_detail.city != null || shop.shop_detail.city != '' " style="display: inline;">{{ shop.shop_detail.city }}</div>
                                 </span>
                             </div>
 
@@ -88,8 +88,10 @@
 
                             <div class="info price-range">
                                 <span class="icon-tag-1"></span>
-                                <div ng-if="shop.shop_detail.price_from != null" style="display: inline;">{{ shop.shop_detail.price_from }}.000 đ - </div>
-                                <div ng-if=" shop.shop_detail.price_to >0" style="display: inline;">{{ shop.shop_detail.price_to }}.000 đ</div>
+                                <div ng-if="shop.shop_detail!= null" style="  display: inline-flex;">
+                                    <div ng-if="shop.shop_detail.price_from != null; shop.shop_detail.price_from != '' " style="display: inline;">{{ shop.shop_detail.price_from }}.000 đ - </div>
+                                    <div ng-if="shop.shop_detail.price_to >0 ; shop.shop_detail.price_to != '' " style="display: inline;">&nbsp {{ shop.shop_detail.price_to }}.000 đ</div>
+                                </div>
                             </div>
                         </div>
 
@@ -116,7 +118,7 @@
                                 <dd>
                                 <span itemprop="openingHoursSpecification" itemscope="" itemtype="http://schema.org/OpeningHoursSpecification">
                                     <span itemprop="dayOfWeek" itemscope="" itemtype="http://schema.org/DayOfWeek">
-                                       <div ng-if="shop.shop_detail.time_open != null" style="display: inline">{{ shop.shop_detail.time_open }} -</div> {{ shop.shop_detail.time_close }}
+                                       <div ng-if="shop.shop_detail.time_open != null" style="display: inline">{{ shop.shop_detail.time_open }} h-</div> {{ shop.shop_detail.time_close }} h
                                     </span>
                                 </span>
                                 </dd>

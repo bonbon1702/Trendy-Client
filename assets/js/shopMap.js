@@ -11,12 +11,11 @@
 
     var map, markers = [];
 
-    shopMap.init = function (dataShop,datauser) {
+    shopMap.init = function (dataShop, datauser) {
         var lat, long;
-        if (dataShop.shop.shop_detail != null )
-        {
-            lat = dataShop.shop.shop_detail[0].lat;
-            long = dataShop.shop.shop_detail[0].long;
+        if (dataShop.shop.shop_detail != null) {
+            lat = dataShop.shop.shop_detail.lat;
+            long = dataShop.shop.shop_detail.long;
         } else {
             lat = dataShop.shop.lat;
             long = dataShop.shop.long;
@@ -171,13 +170,13 @@
                     {
                         "color": "#46bcec"
                     },
-                    { invert_lightness: true }
+                    {invert_lightness: true}
                 ]
             }
         ];
         var mapOptions = {
             zoom: 15,
-            center: shopLocation ,
+            center: shopLocation,
             panControl: false,
             zoomControl: false,
             scaleControl: false,
@@ -194,10 +193,10 @@
         searchBox();
         homeButton(datauser.picture_profile);
         google.maps.event.addDomListener($('[role=zoom-in]')[0], 'click', function () {
-            map.setZoom(map.getZoom()+1);
+            map.setZoom(map.getZoom() + 1);
         });
         google.maps.event.addDomListener($('[role=zoom-out]')[0], 'click', function () {
-            map.setZoom(map.getZoom()-1);
+            map.setZoom(map.getZoom() - 1);
         });
     }
 
@@ -214,7 +213,7 @@
 
         // Listen for the event fired when the user selects an item from the
         // pick list. Retrieve the matching places for that item.
-        google.maps.event.addListener(searchBox, 'places_changed', function() {
+        google.maps.event.addListener(searchBox, 'places_changed', function () {
             var places = searchBox.getPlaces();
 
             if (places.length == 0) {
@@ -295,12 +294,12 @@
             }
 
             // For each place, get the icon, place name, and location.
-            if (markerHome!= null)
+            if (markerHome != null)
                 markerHome.setMap(null);
 
             //var img_user= $('[alt="user"]')[0].src;
             //if (img_user != undefined)
-            markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img:icon});
+            markerHome = new CustomMarker(myLatlng, map, {marker_id: 'myPos', shop: 'It is your location', img: icon});
             //else
             //markerHome = new CustomMarker(myLatlng,map,{marker_id:'myPos',shop:'It is your location',img: icon});
             markerHome.setMap(map);
@@ -344,23 +343,36 @@
 
     shopMap.createMarker = function (data) {
         var lat, long, address;
-        if (data.shop.shop_detail != null)
-        {
-            lat = data.shop.shop_detail[0].lat;
-            long = data.shop.shop_detail[0].long;
-            address = data.shop.shop_detail[0].street+", "+data.shop.shop_detail[0].district+", "+data.shop.shop_detail[0].city;
-        } else {
+        if (data.shop.shop_detail != null) {
+            if (data.shop.shop_detail.street != '' && data.shop.shop_detail.district != '' && data.shop.shop_detail.city != '') {
+                lat = data.shop.shop_detail.lat;
+                long = data.shop.shop_detail.long;
+                address = data.shop.shop_detail.street + ", " + data.shop.shop_detail.district + ", " + data.shop.shop_detail.city;
+            } else if (data.shop.shop_detail.street == '' || data.shop.shop_detail.district == '' || data.shop.shop_detail.city == '') {
+                lat = data.shop.shop_detail.lat;
+                long = data.shop.shop_detail.long;
+                address = data.shop.address;
+            }
+        }
+        else {
             lat = data.shop.lat;
             long = data.shop.long;
             address = data.shop.address;
         }
+        var product = null;
+        if (data.shop.shop_detail == null) {
+            product = data.shop.name;
+        } else {
+            product = data.shop.shop_detail.name;
+        }
         new CustomMarker(
             new google.maps.LatLng(lat, long),
             map,
-            {	marker_id:data.shop.id,
-                product:data.shop.name,
+            {
+                marker_id: data.shop.id,
+                product: product,
                 shop: address,
-                img:data.shop.image_url
+                img: data.shop.image_url
             });
     };
     function CustomMarker(latlng, map, args) {
@@ -371,7 +383,7 @@
 
     CustomMarker.prototype = new google.maps.OverlayView();
 
-    CustomMarker.prototype.draw = function() {
+    CustomMarker.prototype.draw = function () {
 
         var self = this;
 
@@ -391,13 +403,13 @@
             if (self.args.img != null && self.args.img != '') img = self.args.img;
             if (self.args.product != null && self.args.product != '') product = self.args.product;
             if (self.args.shop != null && self.args.shop != '') shop = self.args.shop;
-            div.innerHTML ='<div class="marker"><img class="img-marker" '
-            +'src="'+img+'">'
-            +'<div class="marker-hover">'
-            +'<a role="product">'
-            +	product
-            +'</a>'
-            +'<a role="shop">'+shop+'</a></div></div>';
+            div.innerHTML = '<div class="marker"><img class="img-marker" '
+            + 'src="' + img + '">'
+            + '<div class="marker-hover">'
+            + '<a role="product">'
+            + product
+            + '</a>'
+            + '<a role="shop">' + shop + '</a></div></div>';
             div1 = document.createElement('div');
 
             div1.className = 'pulse';
@@ -410,7 +422,7 @@
                 div1.dataset.marker_id = self.args.marker_id;
             }
 
-            google.maps.event.addDomListener(div, "click", function(event) {
+            google.maps.event.addDomListener(div, "click", function (event) {
                 google.maps.event.trigger(self, "click");
             });
             var panes = this.getPanes();
@@ -421,12 +433,12 @@
         var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
         if (point) {
-            div.style.left = (point.x -42) + 'px';
-            div.style.top = (point.y -86) + 'px';
+            div.style.left = (point.x - 42) + 'px';
+            div.style.top = (point.y - 86) + 'px';
         }
     };
 
-    CustomMarker.prototype.remove = function() {
+    CustomMarker.prototype.remove = function () {
         if (this.div) {
             this.div.parentNode.removeChild(this.div);
             this.div = null;
@@ -437,7 +449,7 @@
         }
     };
 
-    CustomMarker.prototype.getPosition = function() {
+    CustomMarker.prototype.getPosition = function () {
         return this.latlng;
     };
     return shopMap;

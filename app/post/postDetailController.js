@@ -16,14 +16,6 @@
             .success(function (data) {
                 $scope.post = data.post;
 
-
-                $scope.captionCustom = $scope.post.caption.substr(0, 48) + "\n";
-                for (var i = 0; i < 4; i++) {
-                    $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(0, 48) + "\n";
-                }
-                $scope.captionCustom = $scope.captionCustom + $scope.post.caption.substr(240, $scope.post.caption.length - 240);
-                $scope.post.caption = $scope.captionCustom;
-
                 $scope.post.created_at = beautyDate.prettyDate($scope.post.created_at);
                 for (var i = 0; i < $scope.post.tag_picture.length; i++) {
                     $scope.post.tag_picture[i].top = $scope.post.tag_picture[i].top - 20;

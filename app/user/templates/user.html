@@ -134,7 +134,7 @@
 
                                                                 <div class="description  meta" style="background: none;">
                                                                     <div class="hover-blue">
-                                                                        <button class="btn btn-circle btn-default" style="margin:-6px 139px;" ng-click="deletePost(post)">
+                                                                        <button class="btn btn-circle btn-default" style="margin:-6px 139px;" ng-click="deletePost(post)" ng-if="loginUserID == post.user_id">
                                                                             <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                         </button>
                                                                     </div>
