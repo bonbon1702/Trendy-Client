@@ -30,6 +30,10 @@
             });
 
         $scope.addTag = function (id, content) {
+            for (var i = 0; i < $scope.tags.length; i++) {
+                if ($scope.tags[i].content == content)
+                    return;
+            }
             $scope.tags.push({
                 'id': id,
                 'content': content

@@ -8,7 +8,7 @@
                         <div class="timeline-cover">
                             <div class="cover image">
                                 <div class="top" >
-                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
+                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;" />
                                     <!--<div class="cropArea" ng-show="coverFlag == false">-->
                                     <!--<img-crop image="cover"  area-min-size="100"-->
                                     <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
@@ -52,7 +52,7 @@
                             <div class="widget cover image">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="photo">
-                                        <img ng-src="{{ user.picture_profile }}" class="img-circle"/>
+                                        <img ng-src="{{ user.picture_profile }}" class="img-circle" width="100px" height="100px"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 12px">
                                         <h3 class="margin-none">{{ user.username }} - <span ng-if="user.sw_id != ''"><a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
