@@ -14,6 +14,7 @@
         $scope.tagContent = [];
         $scope.tags = [];
         $scope.captionCustom = null;
+        $scope.isDisabled=false;
 
         headerService.loginUser()
             .success(function (data) {
@@ -109,6 +110,7 @@
         };
         $scope.submit = function () {
             if ($scope.caption == null) {
+                $scope.isDisabled=true;
                 var data;
                 if ($scope.image.editor != 'false') {
                     data = {
@@ -149,6 +151,7 @@
                         }]
                     });
                 } else {
+                    $scope.isDisabled=true;
                     $scope.captionCustom = $scope.caption.substr(0, 24) + "\n";
                     for (var i = 0; i < 10; i++) {
                         $scope.captionCustom = $scope.captionCustom + $scope.caption.substr(0, 24) + "\n";

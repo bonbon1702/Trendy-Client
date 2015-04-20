@@ -378,30 +378,33 @@ body {
 }
 
 .goldMedal{
-    z-index: 999;
+    z-index: 1;
     width: 70px;
     height: auto;
     float: right;
     background-color: transparent;
     position: absolute;
+    margin: 15px;
 }
 
 .silverMedal{
-    z-index: 999;
-    width: 50px;
+    z-index: 1;
+    width: 40px;
     height: auto;
     float: right;
     background-color: transparent;
     position: absolute;
+    margin: 15px;
 }
 
 .bronze{
-    z-index: 999;
-    width: 30px;
+    z-index: 1;
+    width: 40px;
     height: auto;
     float: right;
     background-color: transparent;
     position: absolute;
+    margin: 15px;
 }
 
 #side_nav_DIV_1 {

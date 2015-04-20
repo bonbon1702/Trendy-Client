@@ -23,7 +23,7 @@
                 <hr class="line">
                 <textarea ng-model="caption" class="text-area" placeholder="Add a caption"></textarea>
                 <input ng-model="album" type="textbox" placeholder="Add a album" class="text-box"/>
-                <input type="submit" ng-click="submit()" value="Submit" class="submit">
+                <input type="submit" ng-disabled="{{isDisabled == true}}" ng-click="submit()" value="Submit" class="submit">
             </div>
             <div class="under-right" style="width:50%;">
                 <!-- Single button -->
