@@ -39,7 +39,7 @@
             },
             deleteShopComment: function(data){
                 return $http.get($rootScope.url + 'comment/deleteShopComment/id/' + data.id)
-            },
+            }
         }
     }
 })(angular);

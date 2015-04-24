@@ -59,12 +59,13 @@
                                     title: data.upload.name,
                                     editor: 'false'
                                 });
+                                $window.location.reload();
                             };
 
 
                             $scope.confirm = function () {
                                 ngDialog.close();
-                                $window.location.href =
+                                window.location.href =
                                     "javascript:pixlr.edit({image:'" + data.upload.image_url + "', " +
                                     "title:'" + data.upload.name + "', service:'express', locktitle: 'true', " +
                                     "target:'http://trendyplus.org/post', " +
