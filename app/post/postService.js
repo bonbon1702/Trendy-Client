@@ -384,7 +384,8 @@
                                                 postService.delete({
                                                     id: id
                                                 }).success(function (data) {
-                                                    $window.location.reload();
+                                                    $location.path("/");
+                                                    ngDialog.close();
                                                 }).error();
                                             }
                                         }]
