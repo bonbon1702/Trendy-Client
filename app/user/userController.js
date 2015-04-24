@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('userController', userController);
 
-    userController.$inject = ['$scope', 'ngDialog', '$base64', '$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService'];
+    userController.$inject = ['$scope', 'ngDialog', '$base64', '$routeParams', '$route', 'userService', 'headerService', 'postService', 'homeService','$window'];
 
-    function userController($scope, ngDialog, $base64, $routeParams, $route, userService, headerService, postService, homeService) {
+    function userController($scope, ngDialog, $base64, $routeParams, $route, userService, headerService, postService, homeService,$window) {
         $scope.flwBtnLbl = 'Follow';
         $scope.loginUserId;
         $scope.cover = '';
@@ -23,6 +23,7 @@
 
         userService.getUser($routeParams.userId)
             .success(function (data) {
+                console.log(data);
                 $scope.loginUserId = $routeParams.userId;
                 $scope.following = [];
                 $scope.follower = [];
@@ -134,8 +135,7 @@
                     .error();
             })
             .error(function (data) {
-                console.log(data);
-
+                $window.location.href = "http://trendyplus.dev/404.html";
             });
 
         headerService.loginUser()

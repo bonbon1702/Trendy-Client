@@ -5,9 +5,9 @@
     angular.module('MyApp')
         .controller('shopController', shopController);
 
-    shopController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route', 'shopService', 'headerService', 'postService'];
+    shopController.$inject = ['$scope', 'ngDialog', '$routeParams', '$route', 'shopService', 'headerService', 'postService','$window'];
 
-    function shopController($scope, ngDialog, $routeParams, $route, shopService, headerService, postService) {
+    function shopController($scope, ngDialog, $routeParams, $route, shopService, headerService, postService,$window) {
         $scope.comment = null;
         $scope.pagingShop = [];
         $scope.countShop = [];
@@ -182,7 +182,7 @@
                 };
             })
             .error(function (data) {
-                console.log(data);
+                $window.location.href = "http://trendyplus.dev/404.html";
             });
 
         $scope.submitComment = function () {
