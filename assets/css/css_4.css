@@ -133,15 +133,15 @@
 
 .infor{
     margin-top:12px;
-    background:url('../img/images/home.png') no-repeat 10px center;
+    background:url('../img/images/icons/home.png') no-repeat 10px center;
 }
 
 .service{
-    background:url('../img/images/service.png') no-repeat 10px center;
+    background:url('../img/images/icons/service.png') no-repeat 10px center;
 }
 
 .contact{
-    background:url('../img/images/contact.png') no-repeat 10px center;
+    background:url('../img/images/icons/contact.png') no-repeat 10px center;
 }
 .tabt{
     width: 100%;

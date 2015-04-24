@@ -91,7 +91,7 @@
 
                         $location.path('/post/' + id, false);
                         $rootScope.$on('ngDialog.closing', function (e, $dialog) {
-                            $rootScope.$apply(function() {
+                            $rootScope.$apply(function () {
 
                                 $location.path('/' + currentUrl, false);
                             });
@@ -107,6 +107,7 @@
                                     widthTotal = 700 + 327;
                                     modelImage = 700;
                                 } else {
+                                    newWidth = this.naturalWidth / s;
                                     widthTotal = newWidth + 327;
                                     modelImage = newWidth;
                                 }
@@ -114,9 +115,9 @@
                                 $dialog.find('.ngdialog-content').css('width', widthTotal);
 
                                 $dialog.find('.has-magiccard img').css('width', newWidth);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width',modelImage -2);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding',0);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width','327');
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width', modelImage - 2);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding', 0);
+                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width', '327');
                             };
 
 
@@ -136,7 +137,6 @@
                                     $scope.post.comments[i].created_at = beautyDate.prettyDate($scope.post.comments[i].created_at);
                                 }
                                 $scope.editCaption = $scope.post.caption;
-
 
                                 headerService.loginUser()
                                     .success(function (data) {
@@ -191,28 +191,40 @@
                                         event.preventDefault();
                                         headerService.openLogin();
                                     } else {
-                                        var data = {
-                                            'content': $scope.comment,
-                                            'type_comment': 0,
-                                            'type_id': id,
-                                            'user_id': $scope.loginUser.id
-                                        };
-                                        $scope.comment = null;
-                                        //$scope.post.comments.push({
-                                        //    'content': data.content,
-                                        //    'created_at': 'Just now',
-                                        //    'user': {
-                                        //        'username': $scope.loginUser.username,
-                                        //        'id': $scope.loginUser.id,
-                                        //        'picture_profile': $scope.loginUser.picture_profile
-                                        //    }
-                                        //});
-                                        postService.saveComment(data)
-                                            .success(function (data) {
-                                            })
-                                            .error(function (data) {
+                                        if (this.comment != null) {
+                                            if (this.comment.length > 255) {
+                                                ngDialog.open({
+                                                    template: 'app/post/templates/alertInpTxtLength.html',
+                                                    className: 'ngdialog-theme-plain-custom',
 
-                                            });
+                                                    controller: ['$scope', 'postService', function ($scope, postService) {
+                                                    }]
+                                                });
+                                            } else {
+                                                var data = {
+                                                    'content': this.comment,
+                                                    'type_comment': 0,
+                                                    'type_id': id,
+                                                    'user_id': $scope.loginUser.id
+                                                };
+                                                this.comment = null;
+                                                $scope.post.comments.push({
+                                                    'content': data.content,
+                                                    'created_at': 'Just now',
+                                                    'user': {
+                                                        'username': $scope.loginUser.username,
+                                                        'id': $scope.loginUser.id,
+                                                        'picture_profile': $scope.loginUser.picture_profile
+                                                    }
+                                                });
+                                                postService.saveComment(data)
+                                                    .success(function (data) {
+                                                    })
+                                                    .error(function (data) {
+
+                                                    });
+                                            }
+                                        }
                                     }
                                 };
 
@@ -280,47 +292,80 @@
                                     $scope.editContent = content;
                                 };
 
-                                $scope.submitEditComment = function (index) {
-                                    $scope.post.comments[index].content = this.editContent;
-                                    $scope.post.comments[index].editing = null;
-                                    postService.editPostComment({
-                                        id: $scope.post.comments[index].id,
-                                        content: this.editContent
-                                    }).success(function (data) {
+                                $scope.submitEditComment = function (index, editContent) {
+                                    if (editContent.length > 255) {
+                                        ngDialog.open({
+                                            template: 'app/post/templates/alertInpTxtLength.html',
+                                            className: 'ngdialog-theme-plain-custom',
 
-                                    }).error();
+                                            controller: ['$scope', 'postService', function ($scope, postService) {
+                                            }]
+                                        });
+                                    } else {
+                                        $scope.post.comments[index].content = this.editContent;
+                                        $scope.post.comments[index].editing = null;
+                                        postService.editPostComment({
+                                            id: $scope.post.comments[index].id,
+                                            content: this.editContent
+                                        }).success(function (data) {
+
+                                        }).error();
+                                    }
                                 };
 
-                                $scope.deleteCommentIndex = function (index) {
+                                $scope.deleteCommentIndex = function (index, comments) {
+                                    ngDialog.open({
+                                        template: 'app/post/templates/deleteCmtConfirm.html',
+                                        className: 'ngdialog-theme-plain-custom',
 
-                                    postService.deletePostComment({
-                                        id: $scope.post.comments[index].id
-                                    }).success(function (data) {
-
-                                    }).error();
-                                    $scope.post.comments.splice(index, 1);
+                                        controller: ['$scope', 'postService', function ($scope, postService) {
+                                            $scope.close = function () {
+                                                ngDialog.close();
+                                            };
+                                            $scope.confirm = function () {
+                                                postService.deletePostComment({
+                                                    id: comments[index].id
+                                                })
+                                                    .success(function (data) {
+                                                    })
+                                                    .error();
+                                                comments.splice(index, 1);
+                                            }
+                                        }]
+                                    });
                                 };
 
                                 $scope.closeEditComment = function (index) {
                                     $scope.post.comments[index].editing = null;
                                 };
 
-                                $scope.editPost = function () {
+                                $scope.editPost = function (caption) {
                                     $scope.editing = true;
+                                    $scope.editCaption = caption;
                                 };
 
-                                $scope.submitCaption = function () {
-                                    $scope.post.caption = this.editCaption;
-                                    $scope.editing = false;
+                                $scope.submitCaption = function (editCaption) {
+                                    if (editCaption.length > 255) {
+                                        ngDialog.open({
+                                            template: 'app/post/templates/alertInpTxtLength.html',
+                                            className: 'ngdialog-theme-plain-custom',
 
-                                    postService.editPostCaption({
-                                        id: id,
-                                        caption: this.editCaption
-                                    }).success(function (data) {
+                                            controller: ['$scope', 'postService', function ($scope, postService) {
+                                            }]
+                                        });
+                                    } else {
+                                        $scope.post.caption = this.editCaption;
+                                        $scope.editing = false;
 
-                                    }).error(function (data) {
-                                        console.log(data);
-                                    });
+                                        postService.editPostCaption({
+                                            id: id,
+                                            caption: this.editCaption
+                                        }).success(function (data) {
+
+                                        }).error(function (data) {
+                                            console.log(data);
+                                        });
+                                    }
                                 };
 
                                 $scope.closeEdit = function () {
@@ -328,22 +373,34 @@
                                 };
 
                                 $scope.deletePostInside = function () {
-                                    postService.delete({
-                                        id: id
-                                    }).success(function (data) {
-                                        $window.location.reload();
-                                    }).error();
+                                    ngDialog.open({
+                                        template: 'app/post/templates/confirmDeletePost.html',
+                                        className: 'ngdialog-theme-plain-custom',
+
+                                        controller: ['$scope', 'postService', function ($scope, postService) {
+                                            $scope.close = function () {
+                                                ngDialog.close();
+                                            };
+                                            $scope.confirm = function () {
+                                                postService.delete({
+                                                    id: id
+                                                }).success(function (data) {
+                                                    $window.location.reload();
+                                                }).error();
+                                            }
+                                        }]
+                                    });
                                 };
 
                                 $scope.closeDialog = function () {
                                     ngDialog.close();
                                 };
 
-                                $scope.displayED = function (index){
+                                $scope.displayED = function (index) {
                                     $scope.post.comments[index].statusED = true;
                                 };
 
-                                $scope.notDisplayED = function(index){
+                                $scope.notDisplayED = function (index) {
                                     $scope.post.comments[index].statusED = false;
                                 };
 

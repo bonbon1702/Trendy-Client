@@ -168,7 +168,7 @@
             }
         ];
         var mapOptions = {
-            zoom: 12,
+            zoom: 13,
             center: haNoiLocation,
             panControl: false,
             zoomControl: false,

@@ -62,7 +62,7 @@
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle"  width="100px" height="100px"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 12px">
-                                        <h3 class="margin-none">{{ user.username }} - <span ng-if="user.sw_id != ''"><a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
+                                        <h3 class="margin-none">{{ user.username }}<span ng-if="user.sw_id.length == 15"> - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
 
                                     </div>
                                     <div class="innerAll pull-left">
@@ -134,7 +134,7 @@
 
                                                                 <div class="description  meta" style="background: none;">
                                                                     <div class="hover-blue">
-                                                                        <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePost(post)">
+                                                                        <button class="btn btn-circle btn-default" style="margin:-6px 139px;" ng-click="deletePost(post)" ng-if="loginUserID == post.user_id">
                                                                             <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                         </button>
                                                                     </div>
@@ -307,7 +307,6 @@
                                 <div class="media border-bottom innerAll margin-none pull-left media-object" style="background: #fff;width: 100%;">
                                     <img ng-src="{{ user.picture_profile }}" class="pull-left media-object img-circle"
                                          style="height: 36px;margin: 5px 4px;"/>
-
                                     <div class="media-body">
                                         <h5>
                                             <a ng-href="/user/{{user.id}}" class="text-inverse"

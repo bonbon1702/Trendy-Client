@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-md-8" style="width: 100%;margin-top: 53px">
+<div class="col-lg-9 col-md-8" style="  width: 100%;margin-top: 53px;margin-left: -7px;">
     <div style="position: relative">
         <div class="view photo-well-scrappy-view" id="yui_3_16_0_1_1422362340497_1618">
             <div class="height-controller" style="height: 500px;">
@@ -12,7 +12,7 @@
             <div class="under-left" style="width:50%;">
                 <img ng-src="{{ post.user.picture_profile }}" class="avatar-large"/>
                 <b class="word">{{ post.user.username }}</b>
-                <span style="padding-left: 20px">{{post.caption}}</span>
+                <span style="  padding-left: 259px;display: block;overflow-wrap: break-word;  max-width: 634px;  margin-top: 10px;">{{post.caption}}</span>
                 <div style="margin-left: 261px;margin-bottom: 36px"> {{ post.created_at }}</div>
                 <div id="type" class="border-top collapse in" style="height: 65px;margin: 37px 0 0 175px;border-top:none" ng-if="loginUser != null">
                     <a href="" class="pull-left">
@@ -39,18 +39,20 @@
                                                 <a ng-href="/user/{{comment.user_id}}" class="strong text-inverse ">{{ comment.user.username }}</a>
                                                 <span class="innerR text-muted visible-xs">{{ comment.created_at }} </span>
                                             </div>
+                                            <div class="pull-right">
+                                                <i class="fa fa-pencil" ng-click="editComment($index,comment.content)" style="cursor:pointer;" ng-if="loginUser.id == comment.user.id"></i>
+                                                <i style="padding-left: 10px;cursor: pointer" class="fa fa-trash-o" ng-click="deleteCommentIndex($index,post.comments)" ng-if="loginUser.id == comment.user.id"></i>
+                                            </div>
                                             <div ng-if="comment.editing == 'yes'">
-                                                <form ng-submit="submitEditComment($index)" class="form-inline">
+                                                <form ng-submit="submitEditComment($index,editContent)" class="form-inline">
                                                     <input type="text" class="form-control" ng-model="editContent" name="editContent" style="width: 188px;">
                                                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i></button>
                                                     <button ng-click="closeEditComment($index)" class="btn btn-primary"><i class="fa fa-times"></i></button>
                                                 </form>
                                             </div>
-                                            <div ng-if="comment.editing == null" class="media-body">
+                                            <div ng-if="comment.editing == null" class="media-body" style="  display: block;overflow-wrap: break-word;margin: 20px 0px;">
                                                 {{comment.content}}
                                             </div>
-                                            <i class="fa fa-pencil" ng-click="editComment($index,comment.content)" style="cursor:pointer;" ng-if="loginUser.id == comment.user.id"></i>
-                                            <i style="padding-left: 10px;cursor: pointer" class="fa fa-trash-o" ng-click="deleteCommentIndex($index)" ng-if="loginUser.id == comment.user.id"></i>
                                         </div>
                                     </div>
                                 </div>

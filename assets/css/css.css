@@ -1052,6 +1052,7 @@ z-index:3;
 }
 
 .marker .marker-hover {
+    margin: 0px 6px;
 display: none;
 position: absolute;
 top: -8px;
