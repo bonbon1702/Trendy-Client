@@ -5,7 +5,7 @@
             placeholder="{{ attrs.placeholder }}"
             id="{{ attrs.inputid }}"/>
     <div>
-        <ul class="results" ng-show="completing && suggestions.length>0" style="max-height: 500px;overflow-y: auto;">
+        <ul class="results" ng-show="completing && suggestions.length>0" style="max-height: 250px;overflow-y: auto;">
             <li
                     ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:'toString()' track by $index"
                     index="{{ $index }}"
