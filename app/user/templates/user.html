@@ -164,7 +164,7 @@
                                             </a>
                                             <div class="description  meta" style="background: none;top: 160px;left: 18px;">
                                                 <div class="hover-blue">
-                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album,user.id)">
+                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album,user.id)" ng-if="loginUserID == post.user_id">
                                                         <i class="fa fa-edit" style="color: #626366;"></i>
                                                     </button>
                                                 </div>
@@ -205,7 +205,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default"  style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)">
+                                                                    <button class="btn btn-circle btn-default"  style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -229,7 +229,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -252,7 +252,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -275,7 +275,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -313,7 +313,7 @@
                                                style="margin:-1px -10px;color: #767676;">{{ user.username }}</a>
                                         </h5>
                                         <a href="" style="width: 71px;height: 28px;margin-top: -29px;margin-left: -9px;color: #327DEF;font-size: 11px;font-weight: normal;"
-                                           ng-click="folowingUser(user.id)">
+                                           ng-click="followingUser(user.id)">
                                             Follow
                                         </a>
                                     </div>
