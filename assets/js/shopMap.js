@@ -20,7 +20,7 @@
             lat = dataShop.shop.lat;
             long = dataShop.shop.long;
         }
-        console.log(lat,long)
+
         var shopLocation = new google.maps.LatLng(lat, long);
         var myStyles = [
             {
@@ -192,7 +192,6 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         searchBox();
-        console.log(datauser);
         if (datauser){
             homeButton(datauser.picture_profile);
         }else{
