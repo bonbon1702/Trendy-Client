@@ -111,13 +111,15 @@
         shopService.get($routeParams.shopId)
             .success(function (data) {
                 headerService.loginUser()
-                    .success(function (data) {
-                        $scope.loginUser=data.user;
+                    .success(function (k) {
+                        $scope.loginUser=k.user;
+                        shopMap.init(data, $scope.loginUser);
+                        shopMap.createMarker(data);
                     })
                     .error(function (data) {
                     });
-                shopMap.init(data, $scope.loginUser);
-                shopMap.createMarker(data);
+
+
                 for (var i = 0; i < data.shop.comments.length; i++) {
                     data.shop.comments[i].created_at = beautyDate.prettyDate(data.shop.comments[i].created_at);
                 }

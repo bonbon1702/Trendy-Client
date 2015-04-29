@@ -20,6 +20,7 @@
             lat = dataShop.shop.lat;
             long = dataShop.shop.long;
         }
+        console.log(lat,long)
         var shopLocation = new google.maps.LatLng(lat, long);
         var myStyles = [
             {
@@ -191,7 +192,13 @@
         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         searchBox();
-        homeButton(datauser.picture_profile);
+        console.log(datauser);
+        if (datauser){
+            homeButton(datauser.picture_profile);
+        }else{
+            homeButton("http://img1.wikia.nocookie.net/__cb20140310212142/plantsvszombies/images/1/1d/Iron_Man_face.png");
+        }
+
         google.maps.event.addDomListener($('[role=zoom-in]')[0], 'click', function () {
             map.setZoom(map.getZoom() + 1);
         });

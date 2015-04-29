@@ -23,7 +23,6 @@
 
         userService.getUser($routeParams.userId)
             .success(function (data) {
-                console.log(data);
                 $scope.loginUserId = $routeParams.userId;
                 $scope.following = [];
                 $scope.follower = [];
@@ -46,7 +45,7 @@
 
                             });
 
-                            $scope.folowingUser = function(user_id){
+                            $scope.followingUser = function(user_id){
                                 data = {
                                     user_id: user_id,
                                     follower_id: $scope.loginUserId
@@ -59,8 +58,15 @@
                                         }).success(function(k){
                                             $scope.itemToItemFollow = [];
                                             $scope.itemToItemFollow = k.suggests;
-                                            $scope.user.following.length++;
-                                            $scope.following.push($scope.user);
+                                            if ($scope.loginUserId == $routeParams.userId){
+                                                userService.getUser(user_id)
+                                                    .success(function(data){
+                                                        $scope.user.following.length++;
+                                                        $scope.following.push(data.user);
+                                                    }).error();
+
+                                            }
+
                                         }).error(function(data){
 
                                         });

@@ -207,15 +207,7 @@
                                                     'user_id': $scope.loginUser.id
                                                 };
                                                 this.comment = null;
-                                                $scope.post.comments.push({
-                                                    'content': data.content,
-                                                    'created_at': 'Just now',
-                                                    'user': {
-                                                        'username': $scope.loginUser.username,
-                                                        'id': $scope.loginUser.id,
-                                                        'picture_profile': $scope.loginUser.picture_profile
-                                                    }
-                                                });
+
                                                 postService.saveComment(data)
                                                     .success(function (data) {
                                                     })
