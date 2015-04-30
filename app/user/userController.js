@@ -354,6 +354,7 @@
                 controller: ['$scope', function ($scope) {
                     $scope.albPicture = album.album_detail[0].image_url_editor;
                     $scope.updtAlbName = album.album_name;
+
                     $scope.deleteAlbum = function () {
                         if (userId == null) {
                             headerService.openLogin();
@@ -389,10 +390,12 @@
                             event.stopPropagation();
                             event.preventDefault();
                         } else {
+
                             data = {
                                 'id': album.id,
-                                'album_name': $scope.updtAlbName
-                            }
+                                'album_name': $scope.updtAlbName,
+                                'old_name': album.album_name
+                            };
                             postService.editAlbumName(data)
                                 .success(function (data) {
                                     ngDialog.open({

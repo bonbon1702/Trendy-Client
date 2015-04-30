@@ -46,7 +46,8 @@
                     method: 'PUT',
                     url: $rootScope.url + 'album/editAlbumById/' + data.id,
                     data: {
-                        album_name: data['album_name']
+                        album_name: data['album_name'],
+                        old_name: data['old_name']
                     }
                 });
             },
