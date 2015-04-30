@@ -366,26 +366,25 @@
                                 };
 
                                 $scope.deletePostInside = function () {
-                                    //ngDialog.open({
-                                    //    template: 'app/post/templates/confirmDeletePost.html',
-                                    //    className: 'ngdialog-theme-plain-custom',
-                                    //
-                                    //    controller: ['$scope', 'postService', function ($scope, postService) {
-                                    //        $scope.close = function () {
-                                    //            ngDialog.close();
-                                    //        };
-                                    //        $scope.confirm = function () {
-                                    //
-                                    //        }
-                                    //    }]
-                                    //});
-                                    postService.delete({
-                                        id: id
-                                    }).success(function (data) {
-                                        $location.path("/");
-                                        ngDialog.close();
-                                    }).error(function(data){
-                                        console.log(data);
+                                    ngDialog.open({
+                                        template: 'app/post/templates/confirmDeletePost.html',
+                                        className: 'ngdialog-theme-plain-custom',
+
+                                        controller: ['$scope', 'postService', function ($scope, postService) {
+                                            $scope.close = function () {
+                                                ngDialog.close();
+                                            };
+                                            $scope.confirm = function () {
+                                                postService.delete({
+                                                    id: id
+                                                }).success(function (data) {
+                                                    $location.path("/");
+                                                    ngDialog.close();
+                                                }).error(function(data){
+                                                    console.log(data);
+                                                });
+                                            }
+                                        }]
                                     });
                                 };
 
