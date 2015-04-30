@@ -31,7 +31,7 @@
             },
             delete: function (data) {
                 return $http({
-                    method: 'DELETE',
+                    method: 'GET',
                     url: $rootScope.url + 'post/deletePostById/' + data.id
                 });
             },
