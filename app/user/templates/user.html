@@ -7,7 +7,7 @@
                         <div class="timeline-cover">
                             <div class="cover image">
                                 <div class="top" >
-                                    <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
+                                    <img ng-src="{{ cover }}" ng-show="coverFlag == true" style="width: 100%;"/>
                                     <!--<div class="cropArea" ng-show="coverFlag == false">-->
                                         <!--<img-crop image="cover"-->
                                                    <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
@@ -23,17 +23,17 @@
                                         <!--</image-crop>-->
                                     <!--</div>-->
                                 </div>
-                                <!--<div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"-->
-                                     <!--data-ft="{&quot;tn&quot;:&quot;*|&quot;}">-->
-                                    <!--<div class="fileupload fileupload-new margin-none" data-provides="fileupload">-->
-                                            <!--<span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">-->
-                                                <!--<span class="fileupload-new"></span>-->
-                                                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)"-->
-                                                        <!--class="cover-img">-->
-                                                <!--</button>-->
-                                            <!--</span>-->
-                                    <!--</div>-->
-                                <!--</div>-->
+                                <div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"
+                                     data-ft="{&quot;tn&quot;:&quot;*|&quot;}" ng-show="showChangeCover">
+                                    <div class="fileupload fileupload-new margin-none" data-provides="fileupload">
+                                            <span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">
+                                                <span class="fileupload-new"></span>
+                                                <button ng-file-select ng-file-change="imageSelected($files, $event)"
+                                                        class="cover-img">
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
 
                                 <ul class="list-unstyled">
                                     <li class="active">
@@ -164,7 +164,7 @@
                                             </a>
                                             <div class="description  meta" style="background: none;top: 160px;left: 18px;">
                                                 <div class="hover-blue">
-                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album,user.id)" ng-if="loginUserID == post.user_id">
+                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="editAlbum(album,user.id)" ng-if="loginUserID == album.user_id">
                                                         <i class="fa fa-edit" style="color: #626366;"></i>
                                                     </button>
                                                 </div>
@@ -205,7 +205,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default"  style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
+                                                                    <button class="btn btn-circle btn-default"  style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == user.id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -229,7 +229,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == user.id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -252,7 +252,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == user.id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>
@@ -275,7 +275,7 @@
 
                                                             <div class="description  meta" style="background: none;">
                                                                 <div class="hover-blue">
-                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == post.user_id">
+                                                                    <button class="btn btn-circle btn-default" style="margin: -10px 150px;" ng-click="deletePostInAlbumDetail(post)" ng-if="loginUserID == user.id">
                                                                         <i class="fa fa-trash-o" style="color: #626366;"></i>
                                                                     </button>
                                                                 </div>

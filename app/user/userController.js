@@ -18,7 +18,7 @@
         $scope.itemToItemFollow = [];
         $scope.pageUserId = $routeParams.userId;
         $scope.flwBtnStatus = true;
-
+        $scope.showChangeCover = false;
 
 
         userService.getUser($routeParams.userId)
@@ -36,6 +36,7 @@
                     .success(function (r) {
                         $scope.loginUserID=r.user.id;
                         if (r.user) {
+                            if (r.user.id == $routeParams.userId) $scope.showChangeCover = true;
                             userService.suggestITI({
                                 'loginId': r.user.id,
                                 'user_id': $routeParams.userId
@@ -423,15 +424,12 @@
             headerService.upload($files[0])
                 .success(function (data) {
                     $scope.flagCoverBtn = true;
-                    $scope.coverFlag = false;
                     $scope.cover = data.upload.image_url;
 
                     $scope.saveCoverImg = function () {
-                        //headerService.upload($scope.myCroppedImage)
-                        //    .success(function (data) {
                         var coverImg = {
                             user_id: parseInt($routeParams.userId),
-                            image_cover: $scope.myCroppedImage
+                            image_cover: $scope.cover
                         };
                         userService.updateCover(coverImg)
                             .success(function () {
@@ -441,8 +439,6 @@
                             .error(function (coverImg) {
                                 console.log(coverImg);
                             });
-                        //})
-                        //.error()
                     };
                     $scope.cancelCoverImg = function () {
                         $scope.cover = $scope.user.image_cover;

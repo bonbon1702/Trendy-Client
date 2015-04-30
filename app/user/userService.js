@@ -25,8 +25,8 @@
 
             updateCover : function(data){
                 return $http({
-                    method: 'PUT',
-                    url: $rootScope.url + 'user/' +data.user_id,
+                    method: 'POST',
+                    url: $rootScope.url + 'user/updateCover',
                     data: {
                         id:data['user_id'],
                         image_cover:data['image_cover']
