@@ -102,8 +102,8 @@
                             image.onload = function () {
                                 var s = this.naturalHeight / 500,
                                     newWidth, widthTotal, modelImage;
-                                newWidth = this.naturalWidth / s;
-                                if (newWidth < 700){
+                                if (this.naturalWidth < 700) {
+                                    newWidth = this.naturalWidth / s;
                                     widthTotal = 700 + 327;
                                     modelImage = 700;
                                 } else {
@@ -122,7 +122,6 @@
 
 
                         });
-
 
 
                         postService.getPost(id)
@@ -320,7 +319,9 @@
                                                 })
                                                     .success(function (data) {
                                                     })
-                                                    .error();
+                                                    .error(function(data){
+                                                        console.log(data);
+                                                    });
                                                 comments.splice(index, 1);
                                             }
                                         }]
