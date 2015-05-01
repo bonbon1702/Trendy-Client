@@ -14,7 +14,7 @@
                         <strong><a ng-href="/user/{{ post.user.id }}" style="color: #0B0B0B;" ng-click="closeThisDialog()">{{ post.user.username}}</a></strong>
                         <span>{{ post.created_at }}</span>
                         <i class="fa fa-pencil" ng-click="editPost(post.caption)" style="cursor:pointer;" ng-if="loginUser.id == post.user.id"></i>
-                        <i style="padding-left: 15px;cursor: pointer" class="fa fa-trash-o" ng-click="deletePostInside()" ng-if="loginUser.id == post.user.id"></i>
+                        <i style="padding-left: 15px;cursor: pointer" class="fa fa-trash-o" ng-click="us()" ng-if="loginUser.id == post.user.id"></i>
                     </div>
                     <div ng-if="editing == true">
                         <form ng-submit="submitCaption(editCaption)" class="form-inline">
