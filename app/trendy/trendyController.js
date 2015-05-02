@@ -206,12 +206,18 @@
                                 for (var j =0; j < data.posts.length; j++){
                                     $scope.posts.push(data.posts[j]);
                                 }
-                            } else {
-                                for (var i =0; i < 3; i++){
-                                    $scope.postsTop3.push(data.posts[i]);
-                                }
-                                for (var j =3; j < data.posts.length; j++){
-                                    $scope.posts.push(data.posts[j]);
+                            }else {
+                                if(data.posts.length < 4){
+                                    for (var j =0; j < data.posts.length; j++){
+                                        $scope.postsTop3.push(data.posts[j]);
+                                    }
+                                } else {
+                                    for (var i =0; i < 3; i++){
+                                        $scope.postsTop3.push(data.posts[i]);
+                                    }
+                                    for (var j =3; j < data.posts.length; j++){
+                                        $scope.posts.push(data.posts[j]);
+                                    }
                                 }
                             }
 

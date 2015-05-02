@@ -55,7 +55,7 @@
                                         <img ng-src="{{ user.picture_profile }}" class="img-circle" width="100px" height="100px"/>
                                     </div>
                                     <div class="innerAll border-right pull-left" style="margin-top: 12px">
-                                        <h3 class="margin-none">{{ user.username }} - <span ng-if="user.sw_id != ''"><a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
+                                        <h3 class="margin-none">{{ user.username }}<span ng-if="user.sw_id.length == 15"> - <a ng-href="https://www.facebook.com/app_scoped_user_id/{{ user.sw_id }}/"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/F_icon.svg/2000px-F_icon.svg.png" width="30" style="padding-bottom: 2px"></a></span></h3>
 
                                     </div>
                                     <div class="innerAll pull-left">
@@ -64,7 +64,7 @@
                                                data-nav="tweets" ng-href="/following/{{user.id}}"
                                                data-original-title="" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Following</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">{{ user.following.length }}</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{ following.length }}</span>
                                             </a>
                                         </li>
                                         <li class="ProfileNav-item ProfileNav-item--followers">
@@ -72,7 +72,7 @@
                                                data-nav="followers" ng-href="/follower/{{user.id}}"
                                                data-original-title="2 Followers" style="color: #0084B4;">
                                                 <span class="ProfileNav-label">Followers</span>
-                                                <span class="ProfileNav-value" data-is-compact="false">{{ user.follower.length }}</span>
+                                                <span class="ProfileNav-value" data-is-compact="false">{{ follower.length }}</span>
                                             </a>
                                         </li>
 
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3" ng-if="flw.LoginUserInLstFlw == false">
                                 <div class="innerAll text-right">
                                     <div class="btn-group-vertical btn-group-sm">
                                         <button ng-hide="flw.status == 'none'" ng-click="followingBtnClick(flw)"  class="btn btn-primary">

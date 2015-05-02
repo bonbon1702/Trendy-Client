@@ -91,37 +91,30 @@
                         $scope.editingComment = false;
 
                         $location.path('/post/' + id, false);
-                        $rootScope.$on('ngDialog.closing', function (e, $dialog) {
-                            $rootScope.$apply(function () {
-
-                                $location.path('/' + currentUrl, false);
-                            });
-
-                        });
                         $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                             var image = $dialog.find('.has-magiccard img')[0];
-                            image.onload = function () {
-                                var s = this.naturalHeight / 500,
-                                    newWidth, widthTotal, modelImage;
-                                if (this.naturalWidth < 700) {
-                                    newWidth = this.naturalWidth / s;
-                                    widthTotal = 700 + 327;
-                                    modelImage = 700;
-                                } else {
-                                    newWidth = this.naturalWidth / s;
-                                    widthTotal = newWidth + 327;
-                                    modelImage = newWidth;
-                                }
+                            if(image){
+                                image.onload  = function () {
+                                    var s = this.naturalHeight / 500,
+                                        newWidth, widthTotal, modelImage;
+                                    if (this.naturalWidth < 700) {
+                                        newWidth = this.naturalWidth / s;
+                                        widthTotal = 700 + 327;
+                                        modelImage = 700;
+                                    } else {
+                                        newWidth = this.naturalWidth / s;
+                                        widthTotal = newWidth + 327;
+                                        modelImage = newWidth;
+                                    }
 
-                                $dialog.find('.ngdialog-content').css('width', widthTotal);
+                                    $dialog.find('.ngdialog-content').css('width', widthTotal);
 
-                                $dialog.find('.has-magiccard img').css('width', newWidth);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width', modelImage - 2);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding', 0);
-                                $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width', '327');
-                            };
-
-
+                                    $dialog.find('.has-magiccard img').css('width', newWidth);
+                                    $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('width', modelImage - 2);
+                                    $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-image').css('padding', 0);
+                                    $dialog.find('.ngdialog-content .img-modal .modal-body .row .modal-meta').css('width', '327');
+                                };
+                            }
                         });
 
 

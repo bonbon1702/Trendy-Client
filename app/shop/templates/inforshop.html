@@ -41,19 +41,19 @@
             <p class="guide para">
                 From
                 <span>
-                    <input type="textbox" class="four text"  ng-model="time_open"/>
+                    <input type="time"  class="four text"  ng-model="time_open"/>
                 </span>
                 To
-                    <input type="textbox" class="four text"  ng-model="time_close"/>
+                    <input type="time" class="four text"  ng-model="time_close"/>
             </p>
             <p class="guide para">Price Amount</p>
             <p class="guide para">
                 From
                 <span>
-                    <input type="textbox" class="four text" style="width: 50px;"  ng-model="price_from"/>.000đ&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="number" min="1" step="1" class="four text"  ng-model="price_from"/>.000đ&nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
                 To
-                    <input type="textbox" class="four text" style="width: 50px;" ng-model="price_to" />.000đ
+                    <input type="number" min="1" step="1"  class="four text" ng-model="price_to" />.000đ
             </p>
             <a href="" ng-click="saveInfoShop()" class="a">Save</a>
         </div>
@@ -271,10 +271,16 @@
             </div>
         </div>
         <div class="fieldset">
-            <p class="pos para">Telephone<span><input type="textbox" class="six text" ng-model="phone"/></span></p>
-            <p class="pos para">Website&nbsp;&nbsp;&nbsp;<span><input type="textbox" class="six text" ng-model="website"/></span></p>
-            <p class="pos para">Facebook<span><input type="textbox" class="six text" ng-model="facebook_page"/></span></p>
-            <a href="" ng-click="saveContactShop()" class="a">Save</a>
+            <p class="pos para">Telephone<span>
+                <input type="number" min="0" class="six text" ng-model="phone"></span>
+            </p>
+            <p class="pos para">Website&nbsp;&nbsp;&nbsp;<span>
+                <input type="text" class="six text" ng-model="website"/></span>
+            </p>
+            <p class="pos para">Facebook<span>
+                <input type="text" class="six text" ng-model="facebook_page"/></span>
+            </p>
+            <a href="" ng-click="saveContactShop()" class="a" type="submit">Save</a>
         </div>
     </div>
     <a type="button" class="btn btn-primary" ng-click="saveShopDetail()" style="margin-left: 430px;">
