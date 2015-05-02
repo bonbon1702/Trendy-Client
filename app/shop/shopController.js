@@ -84,8 +84,7 @@
                     $scope.likeShop = function (id) {
                         shopService.likeOrDislike({
                             'id': id,
-                            'type': 1,
-                            'user': data.user.id
+                            'type': 1
                         })
                             .success(function (data) {
                                 var r = {
@@ -218,11 +217,11 @@
                                 'picture_profile': $scope.loginUser.picture_profile
                             }
                         });
-                        shopService.save(data)
+                        postService.saveComment(data)
                             .success(function (data) {
                             })
                             .error(function (data) {
-
+                                console.log(data);
                             });
                     }
                 }

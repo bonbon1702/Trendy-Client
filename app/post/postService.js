@@ -52,18 +52,59 @@
                 });
             },
             saveComment: function (data) {
-                return $http({
-                    method: 'POST',
-                    url: $rootScope.url + 'comment/saveComment',
-                    data: data,
-                    ignoreLoadingBar: true
-                });
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'POST',
+                        url: $rootScope.url + 'comment/saveComment',
+                        data: data,
+                        ignoreLoadingBar: true
+                    });
+                }
+
             },
             likeOrDislike: function (data) {
-                return $http.get($rootScope.url + 'like/likePost/' + data.id + '/type/' + data.type + '/user/' + data.user);
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'POST',
+                        url: $rootScope.url + 'like/likePost',
+                        data: data,
+                        ignoreLoadingBar: true
+                    });
+                }
             },
             favoritePost: function (data) {
-                return $http.get($rootScope.url + 'favorite/userId/' + data.user_id + '/postId/' + data.post_id + '/type/' + data.type);
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'POST',
+                        url: $rootScope.url + 'favorite/fvPost',
+                        data: data,
+                        ignoreLoadingBar: true
+                    });
+                }
             },
             getPost: function (id) {
                 return $http.get($rootScope.url + 'post/getPostById/' + id);
@@ -91,6 +132,14 @@
                         $scope.editingComment = false;
 
                         $location.path('/post/' + id, false);
+
+                        $rootScope.$on('ngDialog.closing', function (e, $dialog) {
+                            $rootScope.$apply(function () {
+
+                                $location.path('/' + currentUrl, false);
+                            });
+
+                        });
                         $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                             var image = $dialog.find('.has-magiccard img')[0];
                             if(image){
