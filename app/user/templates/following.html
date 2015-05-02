@@ -9,25 +9,7 @@
                             <div class="cover image">
                                 <div class="top" >
                                     <img ng-src="{{ user.image_cover }}" ng-show="coverFlag == true"  style="width: 100%;"/>
-                                    <!--<div class="cropArea" ng-show="coverFlag == false">-->
-                                    <!--<img-crop image="cover"  area-min-size="100"-->
-                                    <!--area-type="square" result-image="myCroppedImage" ></img-crop>-->
-
-                                    <!--</div>-->
                                 </div>
-                                <!--<div class="_6a uiPopover _30vx _5v-0" id="fbProfileCoverPhotoSelector"-->
-                                     <!--data-ft="{&quot;tn&quot;:&quot;*|&quot;}">-->
-                                    <!--<div class="fileupload fileupload-new margin-none" data-provides="fileupload">-->
-                                            <!--<span class="btn btn-file _30vz img sp_qcED-f6xcm7 sx_80b32b">-->
-                                                <!--<span class="fileupload-new"></span>-->
-                                                <!--<button ng-file-select ng-file-change="imageSelected($files, $event)"-->
-                                                        <!--class="cover-img">-->
-                                                <!--</button>-->
-                                            <!--</span>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--{{ myCroppedImage }}-->
-                                <!--<div><img ng-src="{{ myCroppedImage }}" /></div>-->
                                 <ul class="list-unstyled">
                                     <li class="active">
                                         <a ng-href="/user/{{pageUserId}}">
@@ -77,7 +59,7 @@
                                         </li>
 
                                     </div>
-                                    <button ng-click="flwBtnClick()" ng-hide="flwBtnStatus"
+                                    <button ng-click="followBtnClick()" ng-hide="flwBtnStatus"
                                             class="btn btn-primary ng-binding" style="margin: 23px 41px;float: right;">
                                         <i class="fa fa-user" style="margin: 3px 6px 3px -1px;"></i>{{flwBtnLbl}}
                                     </button>

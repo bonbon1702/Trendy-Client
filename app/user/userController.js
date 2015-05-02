@@ -220,6 +220,7 @@
             }
         };
 
+
         $scope.showTabAlbum = function (data) {
             $scope.show = false;
             $scope.index = data;
@@ -228,34 +229,43 @@
         $scope.setShowInitValue = function () {
             $scope.show = true;
         }
-
-        $scope.followBtnClick = function (user) {
+        $scope.followBtnClick = function () {
             var data;
-            if (user.status == 'Follow') {
-                data = {
-                    user_id: user.follower_id,
-                    follower_id: $scope.loginUser.id
-                };
-                userService.addFollow(data)
-                    .success(function () {
-                        user.status = 'Following';
-                    })
-                    .error(function (data) {
-                        console.log(data);
-                    })
-            } else if (user.status == 'Following') {
-                data = {
-                    user_id: $scope.loginUser.id,
-                    follower_id: user.follower_id
-                };
+            if (!$scope.loginUserId) {
+                headerService.openLogin();
+                event.stopPropagation();
+                event.preventDefault();
+            } else {
 
-                userService.removeFollow(data)
-                    .success(function () {
-                        user.status = 'Follow';
-                    })
-                    .error(function () {
-                        console.log(data);
-                    })
+                if ($scope.flwBtnLbl== 'Follow') {
+                    data = {
+                        user_id: $routeParams.userId,
+                        follower_id: $scope.loginUserId
+                    };
+                    userService.addFollow(data)
+                        .success(function () {
+                            $scope.flwBtnLbl = 'Following';
+                            $scope.following.push(flwer);
+                            //$scope.following.length++;
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        })
+                } else if ($scope.flwBtnLbl == 'Following') {
+                    data = {
+                        user_id: $scope.loginUserId,
+                        follower_id: $routeParams.userId
+                    };
+                    userService.removeFollow(data)
+                        .success(function () {
+                            $scope.flwBtnLbl= 'Follow';
+                            $scope.following.splice(flwer,0);
+                            $scope.following.length--;
+                        })
+                        .error(function () {
+                            console.log(data);
+                        })
+                }
             }
         };
 
