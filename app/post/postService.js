@@ -31,7 +31,7 @@
             },
             delete: function (data) {
                 return $http({
-                    method: 'DELETE',
+                    method: 'GET',
                     url: $rootScope.url + 'post/deletePostById/' + data.id
                 });
             },
@@ -46,7 +46,8 @@
                     method: 'PUT',
                     url: $rootScope.url + 'album/editAlbumById/' + data.id,
                     data: {
-                        album_name: data['album_name']
+                        album_name: data['album_name'],
+                        old_name: data['old_name']
                     }
                 });
             },
@@ -312,7 +313,9 @@
                                                 })
                                                     .success(function (data) {
                                                     })
-                                                    .error();
+                                                    .error(function(data){
+                                                        console.log(data);
+                                                    });
                                                 comments.splice(index, 1);
                                             }
                                         }]
@@ -371,7 +374,9 @@
                                                 }).success(function (data) {
                                                     $location.path("/");
                                                     ngDialog.close();
-                                                }).error();
+                                                }).error(function(data){
+                                                    console.log(data);
+                                                });
                                             }
                                         }]
                                     });
