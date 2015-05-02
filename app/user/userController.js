@@ -147,8 +147,6 @@
                                                                     if (data.user.following[j].user_id == e.user.following[l].user_id) {
                                                                         $scope.following[j].LoginUserInLstFlw = false;
                                                                         $scope.following[j].status = 'Following';
-                                                                        console.log(data.user.following[j].user_id);
-                                                                        console.log(e.user.following[l].user_id);
                                                                         break;
                                                                     } else {
                                                                         $scope.following[j].LoginUserInLstFlw = false;
@@ -191,7 +189,6 @@
                                             }
                                         }
                                         if (data.user.following.length > 0) {
-                                            console.log(e.user.following.length);
                                             for (var j = 0; j < data.user.following.length; j += 1) {
                                                 $scope.following.push(data.user.following[j]);
                                                 if ($scope.loginUser.following.length > 0) {
@@ -240,8 +237,6 @@
                                     if (data.user.follower[i] != null) {
                                         for (var k = 0; k < data.user.following.length; k +=1) {
                                             if(data.user.follower[i].follower_id == data.user.following[k].user_id){
-                                                console.log(data.user.follower[i].follower_id );
-                                                console.log(data.user.following[k].user_id );
                                                 $scope.follower[i].LoginUserInLstFlw = false;
                                                 $scope.follower[i].status = 'Following';
                                                 break;
@@ -279,7 +274,6 @@
                         .success(function () {
                             flwer.status = 'Following';
                             $scope.following.push(flwer);
-                            //$scope.following.length++;
                         })
                         .error(function (data) {
                             console.log(data);
@@ -327,8 +321,6 @@
                     userService.addFollow(data)
                         .success(function () {
                             $scope.flwBtnLbl = 'Following';
-                            //$scope.following.push(flwer);
-                            //$scope.following.length++;
                         })
                         .error(function (data) {
                             console.log(data);
@@ -341,7 +333,6 @@
                     userService.removeFollow(data)
                         .success(function () {
                             $scope.flwBtnLbl = 'Follow';
-                            //$scope.following.splice(flwer, 0);
                             $scope.following.length--;
                         })
                         .error(function () {
