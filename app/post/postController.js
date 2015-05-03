@@ -156,6 +156,7 @@
                     });
                 } else {
                     $scope.isDisabled=true;
+
                     var data;
                     if ($scope.image.editor != 'false') {
                         data = {
