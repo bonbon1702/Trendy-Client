@@ -343,31 +343,37 @@
         };
 
         $scope.followingBtnClick = function (user) {
-            if (user.status == 'Follow') {
-                var data = {
-                    user_id: user.user_id,
-                    follower_id: $scope.loginUser.id
-                };
-                userService.addFollow(data)
-                    .success(function () {
-                        user.status = 'Following';
-                    })
-                    .error(function (data) {
-                        console.log(data);
-                    })
-            } else if (user.status == 'Following') {
-                var data = {
-                    user_id: $scope.loginUser.id,
-                    follower_id: user.user_id
-                };
+            if ($scope.loginUserId == null) {
+                headerService.openLogin();
+                event.stopPropagation();
+                event.preventDefault();
+            } else {
+                if (user.status == 'Follow') {
+                    var data = {
+                        user_id: user.user_id,
+                        follower_id: $scope.loginUser.id
+                    };
+                    userService.addFollow(data)
+                        .success(function () {
+                            user.status = 'Following';
+                        })
+                        .error(function (data) {
+                            console.log(data);
+                        })
+                } else if (user.status == 'Following') {
+                    var data = {
+                        user_id: $scope.loginUser.id,
+                        follower_id: user.user_id
+                    };
 
-                userService.removeFollow(data)
-                    .success(function () {
-                        user.status = 'Follow';
-                    })
-                    .error(function () {
-                        console.log(data);
-                    })
+                    userService.removeFollow(data)
+                        .success(function () {
+                            user.status = 'Follow';
+                        })
+                        .error(function () {
+                            console.log(data);
+                        })
+                }
             }
         };
 
