@@ -100,7 +100,7 @@
                 }
                 return original.apply($location, [path]);
             };
-            $rootScope.url = 'http://103.7.40.222:8081/api/';
-            //$rootScope.url = 'http://trendy-server.dev/api/';
+            //$rootScope.url = 'http://103.7.40.222:8081/api/';
+            $rootScope.url = 'http://trendy-server.dev/api/';
         });
 })(angular);
