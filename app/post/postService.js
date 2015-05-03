@@ -152,8 +152,13 @@
                                         modelImage = 700;
                                     } else {
                                         newWidth = this.naturalWidth / s;
-                                        widthTotal = newWidth + 327;
-                                        modelImage = newWidth;
+                                        if (newWidth < 700){
+                                            widthTotal = 700 + 327;
+                                            modelImage = 700;
+                                        } else {
+                                            widthTotal = newWidth + 327;
+                                            modelImage = newWidth;
+                                        }
                                     }
 
                                     $dialog.find('.ngdialog-content').css('width', widthTotal);
