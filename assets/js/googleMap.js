@@ -12,7 +12,7 @@
     var map, markers = [];
     //------------------------------------------Map init--------------------------------------------------------------
     googleMap.init = function (data, shop) {
-        //console.log(data);
+        console.log(shop);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
             {
@@ -395,8 +395,8 @@
 						new google.maps.LatLng(data[i].lat, data[i].long),
 						map,
 						{	marker_id:data[i].id,
-							name:data[i].name,
-							address:data[i].address,
+							name: data[i].shop_details ? data[i].shop_details.name : data[i].name,
+							address:data[i].shop_details ? data[i].shop_details.street + ' '+ data[i].shop_details.district + ' ' + data[i].shop_details.city : data[i].address,
 							img:data[i].image_url
 						});
 		}
