@@ -156,16 +156,10 @@
                     });
                 } else {
                     $scope.isDisabled=true;
-                    $scope.captionCustom = $scope.caption.substr(0, 24) + "\n";
-                    for (var i = 0; i < 10; i++) {
-                        $scope.captionCustom = $scope.captionCustom + $scope.caption.substr(0, 24) + "\n";
-                    }
-                    $scope.captionCustom = $scope.captionCustom + $scope.caption.substr(240, $scope.caption.length - 240);
-
                     var data;
                     if ($scope.image.editor != 'false') {
                         data = {
-                            caption: $scope.captionCustom,
+                            caption: $scope.caption,
                             points: $scope.points,
                             name: $scope.image.name,
                             album: $scope.album != null ? $scope.album : "Untitled Album",
