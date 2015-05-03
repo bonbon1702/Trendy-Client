@@ -111,12 +111,13 @@
                                         if (data.user.follower.length > 0) {
                                             for (var i = 0; i < data.user.follower.length; i += 1) {
                                                 $scope.follower.push(data.user.follower[i]);
-                                                for (var k = 0; k < $scope.loginUser.follower.length; k++) {
-                                                    if (data.user.follower[i] != null) {
+                                                //for (var k = 0; k < $scope.loginUser.follower.length; k++) {
+                                                if (data.user.follower[i] != null) {
 
-                                                        if ($scope.loginUser.id == data.user.follower[i].follower_id) {
-                                                            $scope.follower[i].LoginUserInLstFlw = true;
-                                                        } else {
+                                                    if ($scope.loginUser.id == data.user.follower[i].follower_id) {
+                                                        $scope.follower[i].LoginUserInLstFlw = true;
+                                                    } else {
+                                                        if (e.user.following.length > 0) {
                                                             for (var l = 0; l < e.user.following.length; l++) {
                                                                 if (data.user.follower[i].follower_id == e.user.following[l].user_id) {
                                                                     $scope.follower[i].LoginUserInLstFlw = false;
@@ -127,10 +128,13 @@
                                                                     $scope.follower[i].status = 'Follow';
                                                                 }
                                                             }
+                                                        } else {
+                                                            $scope.follower[i].LoginUserInLstFlw = false;
+                                                            $scope.follower[i].status = 'Follow';
                                                         }
-
-
                                                     }
+
+
                                                 }
                                             }
                                         }
@@ -138,26 +142,25 @@
                                             for (var j = 0; j < data.user.following.length; j += 1) {
                                                 $scope.following.push(data.user.following[j]);
                                                 if ($scope.loginUser.following.length > 0) {
-                                                    for (var k = 0; k < $scope.loginUser.following.length; k++) {
-                                                        if (data.user.following[j] != null) {
-                                                            if ($scope.loginUser.id == data.user.following[j].user_id) {
-                                                                $scope.following[j].LoginUserInLstFlw = true;
-                                                            } else {
-                                                                for (var l = 0; l < e.user.following.length; l++) {
-                                                                    if (data.user.following[j].user_id == e.user.following[l].user_id) {
-                                                                        $scope.following[j].LoginUserInLstFlw = false;
-                                                                        $scope.following[j].status = 'Following';
-                                                                        break;
-                                                                    } else {
-                                                                        $scope.following[j].LoginUserInLstFlw = false;
-                                                                        $scope.following[j].status = 'Follow';
-                                                                    }
+                                                    if ($scope.loginUser.following.length > 0) {
+                                                        if ($scope.loginUser.id == data.user.following[j].user_id) {
+                                                            $scope.following[j].LoginUserInLstFlw = false;
+                                                        } else {
+                                                            for (var l = 0; l < e.user.following.length; l++) {
+                                                                if (data.user.following[j].user_id == e.user.following[l].user_id) {
+                                                                    $scope.following[j].LoginUserInLstFlw = false;
+                                                                    $scope.following[j].status = 'Following';
+                                                                    break;
+                                                                } else {
+                                                                    $scope.following[j].LoginUserInLstFlw = false;
+                                                                    $scope.following[j].status = 'Follow';
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 } else {
                                                     $scope.following[j].status = 'Follow';
+                                                    $scope.following[j].LoginUserInLstFlw = false;
                                                 }
                                             }
                                         }
@@ -171,19 +174,23 @@
                                                         if ($scope.loginUser.id == data.user.follower[i].follower_id) {
                                                             $scope.follower[i].LoginUserInLstFlw = false;
                                                         } else {
-                                                            for (var l = 0; l < e.user.following.length; l++) {
-                                                                if (data.user.follower[i].follower_id == e.user.following[l].user_id) {
-                                                                    $scope.follower[i].LoginUserInLstFlw = false;
-                                                                    $scope.follower[i].status = 'Following';
-                                                                    break;
-                                                                } else {
-                                                                    $scope.follower[i].LoginUserInLstFlw = false;
-                                                                    $scope.follower[i].status = 'Follow';
+                                                            if (e.user.following.length > 0) {
+                                                                for (var l = 0; l < e.user.following.length; l++) {
+                                                                    if (data.user.follower[i].follower_id == e.user.following[l].user_id) {
+                                                                        $scope.follower[i].LoginUserInLstFlw = false;
+                                                                        $scope.follower[i].status = 'Following';
+                                                                        break;
+                                                                    } else {
+                                                                        $scope.follower[i].LoginUserInLstFlw = false;
+                                                                        $scope.follower[i].status = 'Follow';
+                                                                    }
                                                                 }
+                                                            } else {
+                                                                $scope.follower[i].LoginUserInLstFlw = false;
+                                                                $scope.follower[i].status = 'Follow';
                                                             }
+
                                                         }
-
-
                                                     }
                                                 }
                                             }
@@ -192,27 +199,26 @@
                                             for (var j = 0; j < data.user.following.length; j += 1) {
                                                 $scope.following.push(data.user.following[j]);
                                                 if ($scope.loginUser.following.length > 0) {
-                                                    for (var k = 0; k < $scope.loginUser.following.length; k++) {
-                                                        if (data.user.following[j] != null) {
-                                                            if ($scope.loginUser.id == data.user.following[j].user_id) {
-                                                                $scope.following[j].LoginUserInLstFlw = false;
-                                                            } else {
-                                                                $scope.following[j].status = 'Follow';
-                                                                for (var l = 0; l < e.user.following.length; l++) {
-                                                                    if (data.user.following[j].user_id == e.user.following[l].user_id) {
-                                                                        $scope.following[j].LoginUserInLstFlw = false;
-                                                                        $scope.following[j].status = 'Following';
-                                                                        break;
-                                                                    } else {
-                                                                        $scope.following[j].LoginUserInLstFlw = false;
-                                                                        $scope.following[j].status = 'Follow';
-                                                                    }
+                                                    if (data.user.following[j] != null) {
+                                                        if ($scope.loginUser.id == data.user.following[j].user_id) {
+                                                            $scope.following[j].LoginUserInLstFlw = false;
+                                                        } else {
+                                                            $scope.following[j].status = 'Follow';
+                                                            for (var l = 0; l < e.user.following.length; l++) {
+                                                                if (data.user.following[j].user_id == e.user.following[l].user_id) {
+                                                                    $scope.following[j].LoginUserInLstFlw = false;
+                                                                    $scope.following[j].status = 'Following';
+                                                                    break;
+                                                                } else {
+                                                                    $scope.following[j].LoginUserInLstFlw = false;
+                                                                    $scope.following[j].status = 'Follow';
                                                                 }
                                                             }
                                                         }
                                                     }
                                                 } else {
                                                     $scope.following[j].status = 'Follow';
+                                                    $scope.following[j].LoginUserInLstFlw = false;
                                                 }
                                             }
                                         }
@@ -235,12 +241,12 @@
                                 for (var i = 0; i < data.user.follower.length; i += 1) {
                                     $scope.follower.push(data.user.follower[i]);
                                     if (data.user.follower[i] != null) {
-                                        for (var k = 0; k < data.user.following.length; k +=1) {
-                                            if(data.user.follower[i].follower_id == data.user.following[k].user_id){
+                                        for (var k = 0; k < data.user.following.length; k += 1) {
+                                            if (data.user.follower[i].follower_id == data.user.following[k].user_id) {
                                                 $scope.follower[i].LoginUserInLstFlw = false;
                                                 $scope.follower[i].status = 'Following';
                                                 break;
-                                            }else{
+                                            } else {
                                                 $scope.follower[i].LoginUserInLstFlw = false;
                                                 $scope.follower[i].status = 'Follow';
                                             }
