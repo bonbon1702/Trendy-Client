@@ -36,20 +36,39 @@
                 });
             },
             deleteAlbum: function (data) {
-                return $http({
-                    method: 'DELETE',
-                    url: $rootScope.url + 'album/deleteAlbumByName/' + data.albName
-                });
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'POST',
+                        url: $rootScope.url + 'album/deleteAlbumByName',
+                        data: data
+                    });
+                }
             },
             editAlbumName: function (data) {
-                return $http({
-                    method: 'PUT',
-                    url: $rootScope.url + 'album/editAlbumById/' + data.id,
-                    data: {
-                        album_name: data['album_name'],
-                        old_name: data['old_name']
-                    }
-                });
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'PUT',
+                        url: $rootScope.url + 'album/editAlbumById/' + data.id,
+                        data: data
+                    });
+                }
             },
             saveComment: function (data) {
                 if (hello("google").getAuthResponse() != null) {
