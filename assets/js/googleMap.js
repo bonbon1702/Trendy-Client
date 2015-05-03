@@ -12,7 +12,6 @@
     var map, markers = [];
     //------------------------------------------Map init--------------------------------------------------------------
     googleMap.init = function (data, shop) {
-        console.log(shop);
         var haNoiLocation = new google.maps.LatLng(21.0249399, 105.8457613);
         var myStyles = [
             {
