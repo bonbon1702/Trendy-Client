@@ -9,11 +9,22 @@
     function postService($http, $rootScope, ngDialog) {
         return {
             save: function (data) {
-                return $http({
-                    method: 'POST',
-                    url: $rootScope.url + 'post/createPost',
-                    data: data
-                });
+                if (hello("google").getAuthResponse() != null) {
+                    var nw = hello("google").getAuthResponse();
+                } else if (hello("facebook").getAuthResponse() != null) {
+                    var nw = hello("facebook").getAuthResponse();
+                } else if (hello("twitter").getAuthResponse() != null) {
+                    var nw = hello("twitter").getAuthResponse();
+                }
+                if (nw){
+                    data['token'] = nw.access_token;
+                    return $http({
+                        method: 'POST',
+                        url: $rootScope.url + 'post/createPost',
+                        data: data
+                    });
+                }
+
             },
             update: function (data) {
                 return $http({
